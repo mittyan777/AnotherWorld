@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
+    /*
     //移動先の目標を設定する
     public Transform goal;
     private NavMeshAgent agent;
@@ -15,13 +16,43 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
-        //NavMeshAgentコンポーネントを取得
-        agent = GetComponent<NavMeshAgent>();
+        ////NavMeshAgentコンポーネントを取得
+        //agent = GetComponent<NavMeshAgent>();
 
-        //移動先の位置を設定
-        if (goal != null)
+        ////移動先の位置を設定
+        //if (goal != null)
+        //{
+        //    agent.destination = goal.position;
+        //}
+    }*/
+    private NavMeshAgent agent;
+    
+    [SerializeField]private float stayDuration;
+    private float timer;
+    private bool isWaiting = false;
+
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        NextDestination();
+    }
+
+    private void NextDestination()
+    {
+        var randomPos = new Vector3(Random.Range(0, 20), 0, Random.Range(0, 20));
+        agent.destination = randomPos;
+    }
+
+    private void Update()
+    {
+        if (agent.remainingDistance < 0.5f)
         {
-            agent.destination = goal.position;
+            timer += Time.deltaTime;
+            if (timer >= stayDuration)
+            { 
+                NextDestination();
+                timer = 0;
+            }
         }
     }
 }
