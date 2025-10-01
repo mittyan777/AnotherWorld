@@ -49,12 +49,15 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
-        float disutanceX = playerTransform.position.x - transform.position.x;
-        float disutanceZ = playerTransform.position.z - transform.position.z;
-
-        if (visibilityDistance < disutanceX || visibilityDistance < disutanceZ)
+        if (playerTransform != null)
         {
-            agent.destination = playerTransform.position;
+            float disutanceX = playerTransform.position.x - transform.position.x;
+            float disutanceZ = playerTransform.position.z - transform.position.z;
+
+            if (visibilityDistance < disutanceX || visibilityDistance < disutanceZ)
+            {
+                agent.destination = playerTransform.position;
+            }
         }
         else
         {
