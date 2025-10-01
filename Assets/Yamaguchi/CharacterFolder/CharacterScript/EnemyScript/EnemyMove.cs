@@ -26,11 +26,15 @@ public class EnemyMove : MonoBehaviour
         //}
     }*/
     private NavMeshAgent agent;
-    
+    //================待機用変数================
     [SerializeField]private float stayDuration;
     private float timer;
     private bool isWaiting = false;
 
+    //================移動先変更(プレイヤー)================
+    //プレイヤーを視認できる距離
+    [SerializeField] private float visibilityDistance;
+    [SerializeField] private Transform playerTransform;
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,13 +49,23 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
-        if (agent.remainingDistance < 0.5f)
+        float disutanceX = playerTransform.position.x - transform.position.x;
+        float disutanceZ = playerTransform.position.z - transform.position.z;
+
+        if (visibilityDistance < disutanceX || visibilityDistance < disutanceZ)
         {
-            timer += Time.deltaTime;
-            if (timer >= stayDuration)
-            { 
-                NextDestination();
-                timer = 0;
+            agent.destination = playerTransform.position;
+        }
+        else
+        {
+            if (agent.remainingDistance < 0.5f)
+            {
+                timer += Time.deltaTime;
+                if (timer >= stayDuration)
+                {
+                    NextDestination();
+                    timer = 0;
+                }
             }
         }
     }
