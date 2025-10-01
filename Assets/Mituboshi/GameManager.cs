@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject []Player;
+    [SerializeField]private float Coin;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
        {
             Player = GameObject.FindGameObjectsWithTag("Player");
        }
+       Coin = Player[0].GetComponent<Player>().coin;
         
     }
 }

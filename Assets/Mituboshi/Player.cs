@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator animator;  
+    public float coin = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,5 +45,13 @@ public class Player : MonoBehaviour
         else { animator.SetBool("right", false); }
 
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "coin")
+        {
+            coin += 1;
+            Destroy(other.gameObject);
+        }
     }
 }
