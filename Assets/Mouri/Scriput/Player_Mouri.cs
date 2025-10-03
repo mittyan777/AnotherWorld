@@ -24,9 +24,8 @@ public class Player_Mouri : MonoBehaviour
         Move();
         Rotate();
 
-        // 「E」キーでルーレットを調べる
-        if (Input.GetKeyDown(KeyCode.E))
-        {
+       
+        
             // 前方にRayを飛ばして、ルーレット台に当たったら
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             RaycastHit hit;
@@ -37,12 +36,17 @@ public class Player_Mouri : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Roulette")) // ルーレット台のタグを"Roulette"にする
                 {
-                    Debug.Log("ルーレットを調べた！シーン切り替え");
-                    //RouletteUIManager.Instance.OpenRouletteUI(this);
+                   // 「E」キーでルーレットを調べる
+                   if (Input.GetKeyDown(KeyCode.E))
+                   {
+                      Debug.Log("ルーレットを調べた！シーン切り替え");
+                      RouletteUIManager.Instance.OpenRouletteUI(this);
+                   }
                     
                 }
             }
-        }
+            Debug.DrawRay(ray.origin, ray.direction * 2f, Color.red);
+        
     }
 
     void Move()

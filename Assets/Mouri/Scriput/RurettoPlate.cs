@@ -5,7 +5,7 @@ using UnityEngine;
 public class RurettoPlate : MonoBehaviour
 {
     public GameObject rouletteUI; // ルーレットUI
-    public Player player; // プレイヤー操作スクリプト
+    public Player_Mouri player; // プレイヤー操作スクリプト
     private bool isInRange = false;
     private bool isActive = false;
 
