@@ -1178,9 +1178,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5577896113425745450}
   - component: {fileID: 4659926201394080264}
-  - component: {fileID: 5842880451009822606}
   - component: {fileID: 2892121493981069130}
   - component: {fileID: 1824595626881709925}
+  - component: {fileID: 4843335401357833794}
   m_Layer: 0
   m_Name: BasicMotionsDummy (1)
   m_TagString: Player
@@ -1226,20 +1226,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5842880451009822606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4482639997862421502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd73db259f16873449e23ab1bce6236c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coin: 0
-  canControl: 1
 --- !u!54 &2892121493981069130
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1290,6 +1276,23 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4843335401357833794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4482639997862421502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea69fb770892e8409ec9961d77224ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: 0
+  canControl: 1
+  rayobj: {fileID: 0}
+  slot: {fileID: 0}
+  Direction: 0
 --- !u!1 &4516342218438045177
 GameObject:
   m_ObjectHideFlags: 0
