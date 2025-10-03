@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Enemy‚Ì‹ß‹——£UŒ‚‚ğ’Ç‰Á
+    //lŒ^‚¾‚¯
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //[SerializeField] private Transform transform;
+
 }

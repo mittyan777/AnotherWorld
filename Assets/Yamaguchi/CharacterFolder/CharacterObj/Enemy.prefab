@@ -189,7 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinObj: {fileID: 8086908597899287270, guid: a8a90c1a1cdc5ae479d3c6d1a78ce5ca, type: 3}
-  dropChance: 20
+  moneyObj: {fileID: 6239400968715035659, guid: 72c483fb47e4ce64ebb1ee843562badc, type: 3}
+  coinDrop: 25
 --- !u!114 &4806959618561326275
 MonoBehaviour:
   m_ObjectHideFlags: 0
