@@ -27,47 +27,97 @@ public class EnemyMove : MonoBehaviour
     }*/
     private NavMeshAgent agent;
     //================待機用変数================
-    [SerializeField]private float stayDuration;
+    [SerializeField] private float stayDuration;
     private float timer;
-    private bool isWaiting = false;
 
     //================移動先変更(プレイヤー)================
     //プレイヤーを視認できる距離
     [SerializeField] private float visibilityDistance;
     [SerializeField] private Transform playerTransform;
+    
+    private bool isStoppedByAttack = false;
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        if (agent == null) return;
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        { 
+            playerTransform = player.transform;
+        }
         NextDestination();
     }
 
     private void NextDestination()
     {
-        var randomPos = new Vector3(Random.Range(0, 20), 0, Random.Range(0, 20));
-        agent.destination = randomPos;
+        if (agent.enabled && !agent.isStopped)
+        {
+            var randomPos = new Vector3(Random.Range(0, 20), 0, Random.Range(0, 20));
+            agent.destination = randomPos;
+        }        
     }
 
     private void Update()
     {
+        if (isStoppedByAttack) return;
+
         if (playerTransform != null)
         {
-            float disutanceX = playerTransform.position.x - transform.position.x;
-            float disutanceZ = playerTransform.position.z - transform.position.z;
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-            if (visibilityDistance < disutanceX || visibilityDistance < disutanceZ)
+            if (distanceToPlayer <= visibilityDistance) // 指定範囲内に入っているか
             {
+                // プレイヤーを追跡
                 agent.destination = playerTransform.position;
+            }
+            else
+            {
+                // プレイヤーが見えない、または遠すぎる場合は巡回ロジックへ
+                PatrolLogic();
             }
         }
         else
         {
-            if (agent.remainingDistance < 0.5f)
+            // プレイヤーTransformが設定されていない場合も巡回ロジックへ
+            PatrolLogic();
+        }
+    }
+
+    private void PatrolLogic()
+    {
+        // 目的地に到達したかチェック (NavMeshAgentがまだ計算中(pathPending)でないことを確認)
+        if (agent.remainingDistance < 0.5f && !agent.pathPending)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= stayDuration)
             {
-                timer += Time.deltaTime;
-                if (timer >= stayDuration)
+                NextDestination();
+                timer = 0;
+            }
+        }
+    }
+
+    public void SetIsAttacking(bool isAttacking)
+    {
+        isStoppedByAttack = isAttacking;
+
+        if (agent != null && agent.enabled)
+        {
+            agent.isStopped = isAttacking;
+
+            // 再開時 (isAttackingがfalseになったとき) のみ、すぐに目的地を更新
+            if (!isAttacking)
+            {
+                // プレイヤーが見えていれば追跡、見えていなければ巡回を再開
+                if (playerTransform != null && Vector3.Distance(transform.position, playerTransform.position) <= visibilityDistance)
+                {
+                    agent.SetDestination(playerTransform.position);
+                }
+                else
                 {
                     NextDestination();
-                    timer = 0;
                 }
             }
         }
