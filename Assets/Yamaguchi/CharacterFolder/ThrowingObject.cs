@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ThrowingObject : MonoBehaviour
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [SerializeField] private float throwingPower;
     private void Start()
     {
