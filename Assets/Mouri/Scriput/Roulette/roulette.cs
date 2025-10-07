@@ -14,7 +14,7 @@ public class roulette : MonoBehaviour
 
     [SerializeField] GameObject slotUI;
 
-    [SerializeField] float tienn;
+    [SerializeField] float tienn;   //ルーレット画面が消えるまでの時間
     // Start is called before the first frame update
     void Start()
     {
@@ -39,17 +39,16 @@ public class roulette : MonoBehaviour
        
         powerslot_text.text = ($"{power}");
     }
-    public void stopslot()
+    public void stopslot()  //スロットをストップするプログラム
     {
         powerslot = false;
 
-        StartCoroutine(CloseSlotAfterDelay(tienn));
+        StartCoroutine(CloseSlotAfterDelay(tienn));     //「StartCoroutine」この関数で時間を数え始める関数（タイマーのスタートボタン？）みたいな役割
     }
 
-    IEnumerator CloseSlotAfterDelay(float delay)
+    IEnumerator CloseSlotAfterDelay(float delay)        //スタートしている間に、コルーチン（時間を使ったり秒速を数えたりするプログラム）どんな時間のプログラムの中の処理をするかが書いてあり、一時停止や時間のプログラムを再開できるIEn...時間をまたぐ関数
     {
-        yield return new WaitForSeconds(delay);
-        
+        yield return new WaitForSeconds(delay);     //一時停止をしてもらうプログラム指示       
         slotUI.SetActive(false);
         player.Slotstop();
     }

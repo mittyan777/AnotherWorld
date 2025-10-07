@@ -965,7 +965,7 @@ MonoBehaviour:
   powerslot_text: {fileID: 3636560474237932465}
   player: {fileID: 1198575753}
   slotUI: {fileID: 8542116485410698073}
-  tienn: 2
+  tienn: 0.8
 --- !u!1 &1405113692
 GameObject:
   m_ObjectHideFlags: 0
