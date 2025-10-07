@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+public class MainCamera : MonoBehaviour //三星のPlayerCameraをコピペしたもの
 {
     [SerializeField] GameObject player;
 

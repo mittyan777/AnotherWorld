@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewPlayer : MonoBehaviour
+public class NewPlayer : MonoBehaviour  //プレイヤーの視界の限界値や、Rayの視覚化 //プレイヤーが操作できるかできないかを判断する部分
 {
 
     //Animator animator;
@@ -37,7 +37,7 @@ public class NewPlayer : MonoBehaviour
 
 
 
-        if (Physics.Raycast(ray, out hit, Direction)) // 2m以内を調べる
+        if (Physics.Raycast(ray, out hit, Direction)) //（Direction）でRayの距離を設定できる
         {
             if (hit.collider.CompareTag("Roulette")) // ルーレット台のタグを"Roulette"にする
             {
@@ -46,7 +46,7 @@ public class NewPlayer : MonoBehaviour
                 {
                     Debug.Log("ルーレットを調べた！シーン切り替え");
                     slot.SetActive(true);
-                    RouletteUIManager.Instance.OpenRouletteUI(this);
+                    //RouletteUIManager.Instance.OpenRouletteUI(this);
 
                     canControl = false; //追加（操作停止をさせるかさせないかを判断する）
 
@@ -114,7 +114,7 @@ public class NewPlayer : MonoBehaviour
         }
     }
 
-    public void Slotstop()      //追加部分スロット側でプログラムを呼び出す
+    public void Slotstop()      //追加部分　スロット側でプログラムを呼び出す
     {
         canControl = true;
         slot.SetActive(false);
