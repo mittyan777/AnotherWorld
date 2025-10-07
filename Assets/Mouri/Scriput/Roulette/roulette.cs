@@ -26,7 +26,7 @@ public class roulette : MonoBehaviour
     {
         if (powerslot)
         {
-            power = Random.Range(1, 100);
+            power = Random.Range(1, 101);
 
         }
 

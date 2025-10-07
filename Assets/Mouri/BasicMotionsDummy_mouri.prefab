@@ -1182,7 +1182,7 @@ GameObject:
   - component: {fileID: 1824595626881709925}
   - component: {fileID: 4843335401357833794}
   m_Layer: 0
-  m_Name: BasicMotionsDummy (1)
+  m_Name: BasicMotionsDummy_mouri
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
