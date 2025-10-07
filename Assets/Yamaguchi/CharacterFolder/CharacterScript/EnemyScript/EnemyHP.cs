@@ -34,4 +34,14 @@ public class EnemyHP : MonoBehaviour
         dropManager.DropItem();
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ThrowingObject throwing = other.GetComponent<ThrowingObject>();
+        if (other.CompareTag("Finish"))
+        {
+            Debug.Log(throwing.stonePower + "É_ÉÅÅ[ÉW");
+            enemyCurrentHP -= throwing.stonePower;
+        }
+    }
 }

@@ -73,7 +73,7 @@ public class EnemyMove : MonoBehaviour
             }
             else
             {
-                // プレイヤーが見えない、または遠すぎる場合は巡回ロジックへ
+                //プレイヤーが見えない、または遠すぎる場合は巡回ロジックへ
                 PatrolLogic();
             }
         }
@@ -86,7 +86,7 @@ public class EnemyMove : MonoBehaviour
 
     private void PatrolLogic()
     {
-        // 目的地に到達したかチェック (NavMeshAgentがまだ計算中(pathPending)でないことを確認)
+        // 目的地に到達したかチェック
         if (agent.remainingDistance < 0.5f && !agent.pathPending)
         {
             timer += Time.deltaTime;
@@ -107,10 +107,10 @@ public class EnemyMove : MonoBehaviour
         {
             agent.isStopped = isAttacking;
 
-            // 再開時 (isAttackingがfalseになったとき) のみ、すぐに目的地を更新
+            //再開時 (isAttackingがfalseになったとき) のみ、すぐに目的地を更新
             if (!isAttacking)
             {
-                // プレイヤーが見えていれば追跡、見えていなければ巡回を再開
+                //プレイヤーが見えていれば追跡、見えていなければ巡回を再開
                 if (playerTransform != null && Vector3.Distance(transform.position, playerTransform.position) <= visibilityDistance)
                 {
                     agent.SetDestination(playerTransform.position);
