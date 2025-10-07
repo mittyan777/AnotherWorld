@@ -1182,7 +1182,7 @@ GameObject:
   - component: {fileID: 2892121493981069130}
   - component: {fileID: 1824595626881709925}
   m_Layer: 0
-  m_Name: BasicMotionsDummy (1)
+  m_Name: BasicMotionsDummy_mituboshi
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
