@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39ccb725e6213a41a150a684d744b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engageRange: 5
-  attackRate: 1.5
+  attackRange: 2
+  attackInterval: 1.5
   attackHitbox: {fileID: 6197914774115287058}
   hitboxDuration: 0.2
 --- !u!1 &6197914774115287058

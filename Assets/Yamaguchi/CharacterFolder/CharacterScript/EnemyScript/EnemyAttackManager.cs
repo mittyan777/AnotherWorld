@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class EnemyAttackManager : MonoBehaviour
 {
-    [SerializeField] protected float engageRange = 5f;
-    [SerializeField] protected float attackRate = 1.5f;
+    [SerializeField] protected float attackRange = 5f;
+    [SerializeField] protected float attackInterval = 1.5f;
     protected Transform playerTransform;
     protected EnemyMove enemyMovement;
     protected float attackTimer;
@@ -25,7 +25,7 @@ public abstract class EnemyAttackManager : MonoBehaviour
 
         enemyMovement = GetComponent<EnemyMove>();
 
-        attackTimer = attackRate;
+        attackTimer = attackInterval;
 
         // 子クラスの初期化メソッドを呼び出す
         OnInit();
@@ -39,7 +39,7 @@ public abstract class EnemyAttackManager : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         bool wasPlayerInRange = isPlayerInRange;
-        isPlayerInRange = distanceToPlayer <= engageRange;
+        isPlayerInRange = distanceToPlayer <= attackRange;
 
         // 範囲内に入ったか、外に出たかを判定
         if (isPlayerInRange && !wasPlayerInRange)
@@ -63,7 +63,7 @@ public abstract class EnemyAttackManager : MonoBehaviour
     private void AttackCheck()
     {
         attackTimer += Time.deltaTime;
-        if (attackTimer >= attackRate)
+        if (attackTimer >= attackInterval)
         {
             StartCoroutine(AttackSequence());
             attackTimer = 0f;

@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stayDuration: 2
-  visibilityDistance: 10
+  visibilityDistance: 15
   playerTransform: {fileID: 0}
 --- !u!114 &495347469576875949
 MonoBehaviour:
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db11b99dbeae694c85e586cc9734175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engageRange: 5
-  attackRate: 5
+  attackRange: 10
+  attackInterval: 1.5
   projectilePrefab: {fileID: 7555427716517911455, guid: 7c803678c7e122c4083cbef002c59fd8, type: 3}
   firePoint: {fileID: 720252476327184910}
 --- !u!1 &4667061531292445612

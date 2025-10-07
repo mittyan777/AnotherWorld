@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMeleeAttack : EnemyAttackManager
 {
     [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private float hitboxDuration = 0.5f; // 0.5•bŒÅ’è
+    [SerializeField] private float hitboxDuration = 0.5f;
 
     protected override void OnInit()
     {
