@@ -7,7 +7,7 @@ public class RouletteUIManager : MonoBehaviour
     public static RouletteUIManager Instance;
     public GameObject rouletteUI;
 
-    private Player_Mouri currentPlayer;
+    private NewPlayer currentPlayer;
 
     void Awake()
     {
@@ -22,7 +22,7 @@ public class RouletteUIManager : MonoBehaviour
     }
 
     // ルーレットUIを開く
-    public void OpenRouletteUI(Player_Mouri player)
+    public void OpenRouletteUI(NewPlayer player)
     {
         currentPlayer = player;
         rouletteUI.SetActive(true);
@@ -41,7 +41,8 @@ public class RouletteUIManager : MonoBehaviour
         }
 
         rouletteUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+    //    Cursor.lockState = CursorLockMode.Locked;
+    //    Cursor.visible = false;
+    //
     }
 }
