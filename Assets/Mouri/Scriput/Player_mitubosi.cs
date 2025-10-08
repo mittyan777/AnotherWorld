@@ -2,24 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player_mitubosi : MonoBehaviour
 {
     Animator animator;  
     public float coin = 0;
-    public float HP;
-    public float MP;
-    public float AttackStatus;
-    public float DefenseStatus;
-    public bool canControl = true;  // ← 追加！
+    public bool canControl = true;  // ← 追加！(プレイヤーが操作をするかしないかの判断場所）
     [SerializeField] GameObject rayobj;
     [SerializeField] GameObject slot;
     [SerializeField] float Direction;
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0f;
         animator = GetComponent<Animator>();
-       // Cursor.lockState = CursorLockMode.Locked;   //追加
+       // Cursor.lockState = CursorLockMode.Locked;   //追加（escを押すとマウスカーソルを呼び出す）
         //Cursor.visible = false;     //追加
     }
 
@@ -48,7 +43,15 @@ public class Player : MonoBehaviour
                     {
                         Debug.Log("ルーレットを調べた！シーン切り替え");
                         slot.SetActive(true);
+
+                        canControl = false; //追加（操作停止をさせるかさせないかを判断する）
+
                         //RouletteUIManager.Instance.OpenRouletteUI(this);
+                        var cameraController = Camera.main.GetComponent<PlayerCamera>();
+                        if (cameraController != null)
+                        {
+                            cameraController.enabled = false;
+                        }
                     }
 
                 }
@@ -58,6 +61,8 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (!canControl) return;        //追加（操作禁止時を判断している）
+
         if(Input.GetKey("w"))
         {
             transform.position += transform.forward * 5 * Time.deltaTime;
@@ -91,6 +96,18 @@ public class Player : MonoBehaviour
         {
             coin += 1;
             Destroy(other.gameObject);
+        }
+    }
+
+    public void Slotstop()      //追加部分スロット側でプログラムを呼び出す
+    {
+        canControl = true;
+        slot.SetActive(false);
+
+        var cameraController = Camera.main.GetComponent<PlayerCamera>();
+        if (cameraController != null)
+        {
+            cameraController.enabled = true;
         }
     }
 }

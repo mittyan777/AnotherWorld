@@ -385,6 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2549c93b64d7e8649a9c78d4e07e22cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+=======
   player: {fileID: 870427501}
   minVertical: -30
   maxVertical: 30
@@ -394,6 +396,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 586287180851980072, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
   m_PrefabInstance: {fileID: 1390571906}
   m_PrefabAsset: {fileID: 0}
+
 --- !u!1 &902972305
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +476,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902972305}
   m_CullTransparentMesh: 1
---- !u!1 &1014598089
+
+
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
