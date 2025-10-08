@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyAnimationManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator animator = null;
+    private void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GolemIdol() 
     {
-        
+        animator.SetBool("Idol",true);
+        animator.SetBool("Walk", false);
     }
 }
