@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class roulette : MonoBehaviour
 {
+
+    //ルーレットのシステム状プログラム     //スロットの数字をランダムで出し、変数に応じた数などを制御している   //ボタンを押した際に画面を消す
     [SerializeField]int power = 0;
     bool powerslot = true;
 
     [SerializeField] Text powerslot_text;
 
-    [SerializeField] Player_mitubosi player;
+    [SerializeField] NewPlayer player;
 
     [SerializeField] GameObject slotUI;
+
+    [SerializeField] int PMIN_Text;
+
+    [SerializeField] int PMAX_Text;
 
     [SerializeField] float tienn;   //ルーレット画面が消えるまでの時間
     // Start is called before the first frame update
@@ -26,7 +32,7 @@ public class roulette : MonoBehaviour
     {
         if (powerslot)
         {
-            power = Random.Range(1, 101);
+            power = Random.Range(PMIN_Text, PMAX_Text);
 
         }
 
@@ -35,7 +41,7 @@ public class roulette : MonoBehaviour
     private void FixedUpdate()
     {
        
-        if (powerslot == true) { power = Random.Range(1, 100); }
+        if (powerslot == true) { power = Random.Range(PMIN_Text, PMAX_Text); }
        
         powerslot_text.text = ($"{power}");
     }

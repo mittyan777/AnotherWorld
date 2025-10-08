@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotManejer : MonoBehaviour
+public class SloatManejar : MonoBehaviour
 {
-    [SerializeField] Player_mitubosi player;
+    [SerializeField] NewPlayer player;
 
     // ‚±‚ê‚Í”š‚ªŒˆ‚Ü‚Á‚½uŠÔ‚ÉŒÄ‚Î‚ê‚é‘z’è
     public void OnSlotFinished()
