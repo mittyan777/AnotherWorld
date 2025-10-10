@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.SceneManagement;
 
 public class MenuManejer : MonoBehaviour
 {
@@ -13,9 +14,11 @@ public class MenuManejer : MonoBehaviour
     // ポーズ中かどうかを管理
     public bool isPaused = false;
 
-    //public AudioSource Audio;//追加
+    public AudioSource Audio;//追加
 
-    //public AudioSource Audio2;
+    public AudioSource Audio2;
+
+
 
     void Start()
     {
@@ -39,13 +42,13 @@ public class MenuManejer : MonoBehaviour
             {
                 ResumeGame();
 
-                //PauseAudio();//追加
+                PauseAudio();//追加
             }
             else
             {
                 PauseGame();
 
-                //PauseAudio();//追加
+                PauseAudio();//追加
             }
 
         }
@@ -62,7 +65,7 @@ public class MenuManejer : MonoBehaviour
         Time.timeScale = 0f; // ゲームを停止
         isPaused = true;
     }
-    /*public void PauseAudio()  //PauseAudioの中の意味//追加
+    public void PauseAudio()  //PauseAudioの中の意味//追加
     {
         if (Audio != null)//もしも
         {
@@ -76,7 +79,7 @@ public class MenuManejer : MonoBehaviour
 
 
     }
-    */
+    
     public void ResumeGame()
     {
         if (menuUI != null)
