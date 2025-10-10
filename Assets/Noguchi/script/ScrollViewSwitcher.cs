@@ -2,68 +2,52 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class ScrollViewSwitcher : MonoBehaviour
+public class ScrollViewController : MonoBehaviour
 {
-    // UnityエディタでScroll Viewオブジェクトをアサインするためのリスト
-    [SerializeField]
-    private List<GameObject> scrollViews = new List<GameObject>();
+    [Header("Buttons")]
+    public Button button1;
+    public Button button2;
+    public Button button3;
+    public Button button4;
 
-    // 現在表示されているScroll Viewのインデックス
-    private int currentIndex = 0;
+    [Header("ScrollViews")]
+    public GameObject scrollView1;
+    public GameObject scrollView2;
+    public GameObject scrollView3;
+    public GameObject scrollView4;
 
     void Start()
     {
-        // 初期設定: すべてのScroll Viewを非表示にし、最初のものだけを表示する
-        InitializeScrollViews();
+        // 各ボタンのクリックイベント設定
+        button1.onClick.AddListener(() => ShowScrollView(1));
+        button2.onClick.AddListener(() => ShowScrollView(2));
+        button3.onClick.AddListener(() => ShowScrollView(3));
+        button4.onClick.AddListener(() => ShowScrollView(4));
+
+        // 起動時は全て非表示
+        HideAllScrollViews();
     }
 
-    // すべてのScroll Viewを非表示にし、最初のScroll Viewを表示する
-    private void InitializeScrollViews()
+    private void ShowScrollView(int index)
     {
-        if (scrollViews.Count == 0)
-        {
-            Debug.LogError("Scroll Viewsが設定されていません。エディタでリストにオブジェクトをドラッグ＆ドロップしてください。");
-            return;
-        }
+        // まず全て非表示
+        HideAllScrollViews();
 
-        // 全て非アクティブにする
-        foreach (GameObject scrollView in scrollViews)
+        // 指定した番号のScrollViewを表示
+        switch (index)
         {
-            if (scrollView != null)
-            {
-                scrollView.SetActive(false);
-            }
-        }
-
-        // 最初のScroll Viewをアクティブにする
-        if (scrollViews[0] != null)
-        {
-            scrollViews[0].SetActive(true);
-            currentIndex = 0; // インデックスをリセット
+            case 1: scrollView1.SetActive(true); break;
+            case 2: scrollView2.SetActive(true); break;
+            case 3: scrollView3.SetActive(true); break;
+            case 4: scrollView4.SetActive(true); break;
         }
     }
 
-    // ButtonのOnClickイベントに設定するメソッド
-    public void SwitchScrollView()
+    private void HideAllScrollViews()
     {
-        if (scrollViews.Count == 0) return;
-
-        // 1. 現在のScroll Viewを非表示にする
-        if (scrollViews[currentIndex] != null)
-        {
-            scrollViews[currentIndex].SetActive(false);
-        }
-
-        // 2. インデックスを更新する (0 -> 1 -> 2 -> 3 -> 0 のように循環させる)
-        currentIndex = (currentIndex + 1) % scrollViews.Count;
-
-        // 3. 次のScroll Viewを表示する
-        if (scrollViews[currentIndex] != null)
-        {
-            scrollViews[currentIndex].SetActive(true);
-            
-            // ログで現在の表示を確認
-            Debug.Log($"Scroll Viewを切り替えました。現在表示: {scrollViews[currentIndex].name}");
-        }
+        scrollView1.SetActive(false);
+        scrollView2.SetActive(false);
+        scrollView3.SetActive(false);
+        scrollView4.SetActive(false);
     }
 }
