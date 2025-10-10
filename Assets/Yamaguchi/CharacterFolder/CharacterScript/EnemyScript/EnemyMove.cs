@@ -34,11 +34,25 @@ public class EnemyMove : MonoBehaviour
     //プレイヤーを視認できる距離
     [SerializeField] private float visibilityDistance;
     [SerializeField] private Transform playerTransform;
-    
+
+    //=========敵の状態を表すフラグ(アニメーション用)=========
+    public enum EnemyState { Idle, Walk, Attack, None }
+    public EnemyState currentState = EnemyState.Idle;
+
+    [SerializeField] EnemyAnimationManager animationManager;
+
     private bool isStoppedByAttack = false;
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animationManager = GetComponent<EnemyAnimationManager>();
+
+        
+        if (animationManager == null)
+        {
+            animationManager = GetComponentInChildren<EnemyAnimationManager>();
+            Debug.LogError("EnemyAnimationManagerがアタッチされていません。");
+        }
         if (agent == null) return;
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -60,12 +74,28 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
-        if (isStoppedByAttack) return;
+        if (animationManager == null)
+        {
+
+        }
+        else
+        {
+            // Managerがあれば99行目の処理を実行
+            animationManager.UpdateAnimation(currentState);
+        }
+
+        if (isStoppedByAttack) 
+        {
+            //アニメーション遷移用のフラグ変更
+            currentState = EnemyState.Attack;
+            return;
+        } 
 
         if (playerTransform != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
+            currentState = EnemyState.Walk;
+            //アニメーション遷移用のフラグ変更
             if (distanceToPlayer <= visibilityDistance) // 指定範囲内に入っているか
             {
                 // プレイヤーを追跡
@@ -81,6 +111,12 @@ public class EnemyMove : MonoBehaviour
         {
             // プレイヤーTransformが設定されていない場合も巡回ロジックへ
             PatrolLogic();
+            currentState = EnemyState.Walk;
+        }
+
+        if (animationManager != null)
+        {
+            animationManager.UpdateAnimation(currentState);
         }
     }
 
@@ -89,13 +125,20 @@ public class EnemyMove : MonoBehaviour
         // 目的地に到達したかチェック (NavMeshAgentがまだ計算中(pathPending)でないことを確認)
         if (agent.remainingDistance < 0.5f && !agent.pathPending)
         {
+            currentState = EnemyState.Idle;
             timer += Time.deltaTime;
-
+            //アニメーション遷移用のフラグ変更
             if (timer >= stayDuration)
             {
                 NextDestination();
                 timer = 0;
+                currentState = EnemyState.Walk;
             }
+        }
+        else if (agent.hasPath)
+        {
+            // 目的地に向かっている途中の場合
+            currentState = EnemyState.Walk;
         }
     }
 
