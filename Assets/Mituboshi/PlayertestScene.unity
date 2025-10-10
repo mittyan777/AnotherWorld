@@ -386,7 +386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-=======
   player: {fileID: 870427501}
   minVertical: -30
   maxVertical: 30
@@ -476,8 +475,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902972305}
   m_CullTransparentMesh: 1
-
-
+--- !u!1&1014598089
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
