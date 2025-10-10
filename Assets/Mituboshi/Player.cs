@@ -6,6 +6,10 @@ public class Player : MonoBehaviour
 {
     Animator animator;  
     public float coin = 0;
+    public float HP;
+    public float MP;
+    public float AttackStatus;
+    public float DefenseStatus;
     public bool canControl = true;  // Å© í«â¡ÅI
     [SerializeField] GameObject rayobj;
     [SerializeField] GameObject slot;
@@ -13,6 +17,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 0f;
         animator = GetComponent<Animator>();
        // Cursor.lockState = CursorLockMode.Locked;   //í«â¡
         //Cursor.visible = false;     //í«â¡
