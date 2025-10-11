@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMeleeAttack : EnemyAttackManager
 {
     [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private float hitboxDuration = 0.5f;
+    [SerializeField] private float hitboxDuration = 0.3f; // 攻撃判定の持続時間
 
     protected override void OnInit()
     {
@@ -16,18 +15,19 @@ public class EnemyMeleeAttack : EnemyAttackManager
         }
     }
 
-    protected override IEnumerator PerformAttack()
+    // 攻撃判定の発生と終了のみを制御
+    protected override IEnumerator PerformAttackLogic()
     {
-        //攻撃オブジェクトを有効にする (攻撃判定発生)
+        // 攻撃判定を有効にする
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(true);
         }
 
-        //攻撃判定を一定時間維持 (0.5秒)
+        // 攻撃判定を一定時間維持
         yield return new WaitForSeconds(hitboxDuration);
 
-        //攻撃オブジェクトを無効にする (攻撃判定終了)
+        // 攻撃判定を無効にする
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(false);

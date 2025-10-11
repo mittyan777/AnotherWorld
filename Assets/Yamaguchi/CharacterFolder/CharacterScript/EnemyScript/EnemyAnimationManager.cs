@@ -6,63 +6,71 @@ public class EnemyAnimationManager : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    // 現在のアニメーション状態を保持 (重複呼び出し防止用)
+    //現在のアニメーション状態を記憶し、SetBoolの重複呼び出しを防ぐための変数
     private EnemyMove.EnemyState currentAnimState;
 
-    // Start関数でAnimatorコンポーネントを取得することもできます
+    //Animatorのパラメーター名
+    private const string PARAM_IS_WALK = "isWalk";
+    private const string PARAM_IS_IDLE = "isIdle";
+    private const string PARAM_IS_L_ATTACK = "isLongDistanceAttack";
+    private const string PARAM_IS_C_ATTACK = "isCloseDistanceAttack";
+
     void Start()
     {
+        // Inspectorで割り当てられていない場合、子オブジェクトも含めて取得を試みる
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
         }
+
         if (animator == null)
         {
-            Debug.LogError("Animatorコンポーネントが見つかりません。アニメーションは動きません。", this);
-            this.enabled = false; // アニメーションができないのでスクリプトを無効化
+            Debug.LogError(gameObject.name + ": Animatorコンポーネントが見つかりません。アニメーションは動きません。", this);
+            this.enabled = false;
             return;
         }
-        // 初期状態を設定
+
+        //初期状態はIdleに設定
         currentAnimState = EnemyMove.EnemyState.Idle;
-        SetAllBoolsFalse(); // 初期化時に全てFalseにしておくのが安全
-        animator.SetBool("isIdol", true);
+        SetAllBoolsFalse();
+        animator.SetBool(PARAM_IS_IDLE, true);
     }
 
     public void UpdateAnimation(EnemyMove.EnemyState newState)
     {
-        // 状態が変わっていなければ何もしない（毎フレームSetBoolを呼ぶのを避ける）
+        //状態が変わっていなければ、無駄なSetBool呼び出しを避けて終了
         if (currentAnimState == newState)
         {
             return;
         }
 
-        // 状態が変わった場合: 全てのBoolをリセット
         SetAllBoolsFalse();
 
-        // 新しい状態に応じてBoolを設定
         switch (newState)
         {
             case EnemyMove.EnemyState.Idle:
-                animator.SetBool("isIdol", true);
+                animator.SetBool(PARAM_IS_IDLE, true);
                 break;
             case EnemyMove.EnemyState.Walk:
-                animator.SetBool("isWalk", true);
+                animator.SetBool(PARAM_IS_WALK, true);
                 break;
             case EnemyMove.EnemyState.Attack:
-                animator.SetBool("isCloseDistanceAttack", true);
+                animator.SetBool(PARAM_IS_C_ATTACK, true);
+                break;
+            case EnemyMove.EnemyState.None:
                 break;
         }
 
-        // 状態を更新
         currentAnimState = newState;
     }
 
-    // 全てのアニメーションBoolをfalseにするヘルパー関数
     private void SetAllBoolsFalse()
     {
-        animator.SetBool("isWalk", false);
-        animator.SetBool("isIdol", false);
-        animator.SetBool("isCloseDistanceAttack", false);
-        animator.SetBool("isLongDistanceAttack", false); 
+        if (animator == null) return;
+
+        animator.SetBool(PARAM_IS_WALK, false);
+        animator.SetBool(PARAM_IS_IDLE, false);
+        animator.SetBool(PARAM_IS_C_ATTACK, false);
+        animator.SetBool(PARAM_IS_L_ATTACK, false);
     }
 }

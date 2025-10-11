@@ -178,6 +178,9 @@ MonoBehaviour:
   stayDuration: 1.5
   visibilityDistance: 10
   playerTransform: {fileID: 0}
+  distance: 3
+  currentState: 0
+  animationManager: {fileID: 0}
 --- !u!114 &7445138080294985037
 MonoBehaviour:
   m_ObjectHideFlags: 0
