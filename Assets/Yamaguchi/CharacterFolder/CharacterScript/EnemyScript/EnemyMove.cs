@@ -17,7 +17,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float stopDistance = 1.5f; // プレイヤーから停止したい距離
 
-    public enum EnemyState { Idle, Walk, Attack, None }
+    public enum EnemyState { Idle, Walk, CloseAttack, RangedAttack, None }
     public EnemyState currentState = EnemyState.Idle;
 
     [SerializeField] EnemyAnimationManager animationManager;
@@ -63,7 +63,7 @@ public class EnemyMove : MonoBehaviour
         // 攻撃などで停止中の場合、移動ロジックをスキップ
         if (isStoppedByAttack)
         {
-            currentState = EnemyState.Attack;
+            currentState = EnemyState.RangedAttack;
             // 攻撃中は回転も移動もしないので、ここで終了
             if (animationManager != null) animationManager.UpdateAnimation(currentState);
             return;

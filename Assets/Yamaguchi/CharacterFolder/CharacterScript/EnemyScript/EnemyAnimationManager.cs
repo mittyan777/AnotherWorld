@@ -12,8 +12,8 @@ public class EnemyAnimationManager : MonoBehaviour
     //Animatorのパラメーター名
     private const string PARAM_IS_WALK = "isWalk";
     private const string PARAM_IS_IDLE = "isIdle";
-    private const string PARAM_IS_L_ATTACK = "isLongDistanceAttack";
-    private const string PARAM_IS_C_ATTACK = "isCloseDistanceAttack";
+    private const string PARAM_IS_LONG_ATTACK = "isLongDistanceAttack";
+    private const string PARAM_IS_CLOSE_ATTACK = "isCloseDistanceAttack";
 
     void Start()
     {
@@ -54,8 +54,11 @@ public class EnemyAnimationManager : MonoBehaviour
             case EnemyMove.EnemyState.Walk:
                 animator.SetBool(PARAM_IS_WALK, true);
                 break;
-            case EnemyMove.EnemyState.Attack:
-                animator.SetBool(PARAM_IS_C_ATTACK, true);
+            case EnemyMove.EnemyState.CloseAttack:
+                animator.SetBool(PARAM_IS_CLOSE_ATTACK, true);
+                break;
+            case EnemyMove.EnemyState.RangedAttack:
+                animator.SetBool(PARAM_IS_LONG_ATTACK, true);
                 break;
             case EnemyMove.EnemyState.None:
                 break;
@@ -70,7 +73,7 @@ public class EnemyAnimationManager : MonoBehaviour
 
         animator.SetBool(PARAM_IS_WALK, false);
         animator.SetBool(PARAM_IS_IDLE, false);
-        animator.SetBool(PARAM_IS_C_ATTACK, false);
-        animator.SetBool(PARAM_IS_L_ATTACK, false);
+        animator.SetBool(PARAM_IS_CLOSE_ATTACK, false);
+        animator.SetBool(PARAM_IS_LONG_ATTACK, false);
     }
 }

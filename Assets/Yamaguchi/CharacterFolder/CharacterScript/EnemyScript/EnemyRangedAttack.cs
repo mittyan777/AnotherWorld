@@ -22,4 +22,19 @@ public class EnemyRangedAttack : EnemyAttackManager
         // 遠距離攻撃は生成したらすぐに次の処理へ移る
         yield return null;
     }
+
+    //遠距離攻撃のアニメーション状態を設定
+    protected override void SetAttackAnimation()
+    {
+        if (enemyMovement != null)
+        {
+            enemyMovement.currentState = EnemyMove.EnemyState.RangedAttack;
+        }
+    }
+
+    //アニメーション状態をリセット
+    protected override void ResetAttackAnimation()
+    {
+        // 攻撃終了時にアニメーション状態をリセット
+    }
 }

@@ -13,11 +13,14 @@ public abstract class EnemyAttackManager : MonoBehaviour
 
     protected float attackTimer;
     protected bool isPlayerInRange = false;
-    protected bool isAttackSequenceRunning = false; // 攻撃コルーチンが実行中か
+    protected bool isAttackSequenceRunning = false;
 
-    // 抽象メソッド：子クラスで具体的な攻撃ロジックを実装させる (ヒットボックスON/OFFなど)
-    // このコルーチンは攻撃判定の実行部分のみを担当する
+    //抽象メソッド：子クラスで具体的な攻撃ロジックを実装させる
+    //このコルーチンは攻撃判定の実行部分のみを担当する
     protected abstract IEnumerator PerformAttackLogic();
+    //子クラスに実装させる：アニメーションの状態設定 
+    protected abstract void SetAttackAnimation();
+    protected abstract void ResetAttackAnimation();
 
     void Start()
     {
@@ -27,7 +30,7 @@ public abstract class EnemyAttackManager : MonoBehaviour
             playerTransform = player.transform;
         }
 
-        enemyMovement = GetComponentInParent<EnemyMove>(); // 親からも取得できるよう修正
+        enemyMovement = GetComponentInParent<EnemyMove>();
         if (enemyMovement == null)
         {
             Debug.LogError(gameObject.name + ": EnemyMoveが見つかりません。", this);
@@ -79,32 +82,35 @@ public abstract class EnemyAttackManager : MonoBehaviour
     private void RotateTowardsPlayer()
     {
         Vector3 direction = (playerTransform.position - transform.position).normalized;
-        direction.y = 0; // Y軸回転のみに制限
+        direction.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         float rotationSpeed = 10f;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
-    // 攻撃の実行・待機・移動制御をラップするコルーチン (全てをここで制御)
+    //攻撃の実行・待機・移動制御をラップするコルーチン
     protected IEnumerator AttackSequence()
     {
         isAttackSequenceRunning = true;
 
-        // 1. 移動を停止させる
+        //移動を停止させる
         enemyMovement.SetIsStoppedByAttack(true);
-
-        // 2. 攻撃アニメーションの開始まで少し待つ (例: 攻撃開始モーションの半分)
+        
+        //子クラスを通じて、この攻撃のアニメーション状態を設定 ★★★
+        SetAttackAnimation();
+        
+        //攻撃アニメーションの開始まで少し待つ(例: 攻撃開始モーションの半分)
         yield return new WaitForSeconds(0.1f);
 
-        // 3. 子クラスの具体的な攻撃ロジック（ヒットボックスON/OFF、弾生成など）を実行
-        // ここでPerformAttackLogicが終了するのを待つ
+        //PerformAttackLogicが終了するのを待つ
         yield return StartCoroutine(PerformAttackLogic());
 
-        // 4. アニメーションのリカバリー時間待機
-        yield return new WaitForSeconds(0.5f); // 共通の硬直時間
+        //アニメーションのリカバリー時間待機
+        yield return new WaitForSeconds(0.5f); //共通の硬直時間
 
-        // 5. 攻撃終了: 移動を再開させる
+        //攻撃終了+移動を再開させる
+        ResetAttackAnimation();
         enemyMovement.SetIsStoppedByAttack(false);
 
         isAttackSequenceRunning = false;
