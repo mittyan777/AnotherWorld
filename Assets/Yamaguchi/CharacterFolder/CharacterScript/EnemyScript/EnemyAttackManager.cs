@@ -1,12 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// MonoBehaviour‚ğŒp³‚³‚¹‚é‚±‚Æ‚ÅAqƒNƒ‰ƒX‚àƒRƒ‹[ƒ`ƒ“‚ğÀs‰Â”\‚É‚È‚é
+// MonoBehaviourã‚’ç¶™æ‰¿ã•ã›ã‚‹ã“ã¨ã§ã€å­ã‚¯ãƒ©ã‚¹ã‚‚ã‚³ãƒ«ãƒ¼ãƒãƒ³ã‚’å®Ÿè¡Œå¯èƒ½ã«ãªã‚‹
 public abstract class EnemyAttackManager : MonoBehaviour
 {
-    [SerializeField] protected float attackRange = 2.0f; // UŒ‚‚Å‚«‚é‹——£
-    [SerializeField] protected float attackInterval = 1.5f; // UŒ‚‚ÌƒN[ƒ‹ƒ^ƒCƒ€
+    [SerializeField] protected float attackRange = 2.0f; // æ”»æ’ƒã§ãã‚‹è·é›¢
+    [SerializeField] protected float attackInterval = 1.5f; // æ”»æ’ƒã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ 
+    [SerializeField] protected float animationlatency = 0.25f;//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿã¾ã§ã®å¾…ã¡æ™‚é–“
+    [SerializeField] protected float animationRecoveryTime = 0.75f;//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒçµ‚ã‚ã‚‹ã¾ã§ã®æ™‚é–“
 
     protected Transform playerTransform;
     protected EnemyMove enemyMovement;
@@ -15,10 +17,10 @@ public abstract class EnemyAttackManager : MonoBehaviour
     protected bool isPlayerInRange = false;
     protected bool isAttackSequenceRunning = false;
 
-    //’ŠÛƒƒ\ƒbƒhFqƒNƒ‰ƒX‚Å‹ï‘Ì“I‚ÈUŒ‚ƒƒWƒbƒN‚ğÀ‘•‚³‚¹‚é
-    //‚±‚ÌƒRƒ‹[ƒ`ƒ“‚ÍUŒ‚”»’è‚ÌÀs•”•ª‚Ì‚İ‚ğ’S“–‚·‚é
+    //æŠ½è±¡ãƒ¡ã‚½ãƒƒãƒ‰ï¼šå­ã‚¯ãƒ©ã‚¹ã§å…·ä½“çš„ãªæ”»æ’ƒãƒ­ã‚¸ãƒƒã‚¯ã‚’å®Ÿè£…ã•ã›ã‚‹
+    //ã“ã®ã‚³ãƒ«ãƒ¼ãƒãƒ³ã¯æ”»æ’ƒåˆ¤å®šã®å®Ÿè¡Œéƒ¨åˆ†ã®ã¿ã‚’æ‹…å½“ã™ã‚‹
     protected abstract IEnumerator PerformAttackLogic();
-    //qƒNƒ‰ƒX‚ÉÀ‘•‚³‚¹‚éFƒAƒjƒ[ƒVƒ‡ƒ“‚Ìó‘Ôİ’è 
+    //å­ã‚¯ãƒ©ã‚¹ã«å®Ÿè£…ã•ã›ã‚‹ï¼šã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®çŠ¶æ…‹è¨­å®š 
     protected abstract void SetAttackAnimation();
     protected abstract void ResetAttackAnimation();
 
@@ -33,14 +35,14 @@ public abstract class EnemyAttackManager : MonoBehaviour
         enemyMovement = GetComponentInParent<EnemyMove>();
         if (enemyMovement == null)
         {
-            Debug.LogError(gameObject.name + ": EnemyMove‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", this);
+            Debug.LogError(gameObject.name + ": EnemyMoveãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", this);
             this.enabled = false;
             return;
         }
 
         attackTimer = attackInterval;
 
-        // qƒNƒ‰ƒX‚Ì‰Šú‰»ƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·
+        //å­ã‚¯ãƒ©ã‚¹ã®åˆæœŸåŒ–ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™
         OnInit();
     }
 
@@ -48,21 +50,22 @@ public abstract class EnemyAttackManager : MonoBehaviour
 
     void Update()
     {
+        if (!this.enabled) return;
+
         if (playerTransform == null || enemyMovement == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        // UŒ‚”ÍˆÍ“à‚©‚Ç‚¤‚©‚ğ”»’è (‹——£‚ª stopDistance ‚Æ attackRange ‚ÌŠÔ‚Å‚ ‚é‚×‚«)
-        // enemyMovement.stopDistance < distanceToPlayer < attackRange ‚Ì”ÍˆÍ‚ÅUŒ‚
+        //æ”»æ’ƒç¯„å›²å†…ã‹ã©ã†ã‹ã‚’åˆ¤å®š
         isPlayerInRange = distanceToPlayer <= attackRange;
 
-        // UŒ‚ÀsƒƒWƒbƒN
+        //æ”»æ’ƒå®Ÿè¡Œãƒ­ã‚¸ãƒƒã‚¯
         if (isPlayerInRange && !isAttackSequenceRunning)
         {
             AttackCheck();
         }
 
-        // “G‚ÌŒü‚«‚ğƒvƒŒƒCƒ„[‚É‡‚í‚¹‚éiUŒ‚‘Ò‹@/Às’†‚Ì‚İj
+        //æ•µã®å‘ãã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«åˆã‚ã›ã‚‹ï¼ˆæ”»æ’ƒå¾…æ©Ÿ/å®Ÿè¡Œä¸­ã®ã¿ï¼‰
         if (isPlayerInRange)
         {
             RotateTowardsPlayer();
@@ -89,30 +92,54 @@ public abstract class EnemyAttackManager : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 
-    //UŒ‚‚ÌÀsE‘Ò‹@EˆÚ“®§Œä‚ğƒ‰ƒbƒv‚·‚éƒRƒ‹[ƒ`ƒ“
+    //æ”»æ’ƒã®å®Ÿè¡Œãƒ»å¾…æ©Ÿãƒ»ç§»å‹•åˆ¶å¾¡ã‚’ãƒ©ãƒƒãƒ—ã™ã‚‹ã‚³ãƒ«ãƒ¼ãƒãƒ³
     protected IEnumerator AttackSequence()
     {
+        /*
         isAttackSequenceRunning = true;
 
-        //ˆÚ“®‚ğ’â~‚³‚¹‚é
+        //ç§»å‹•ã‚’åœæ­¢ã•ã›ã‚‹
         enemyMovement.SetIsStoppedByAttack(true);
         
-        //qƒNƒ‰ƒX‚ğ’Ê‚¶‚ÄA‚±‚ÌUŒ‚‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô‚ğİ’è ššš
+        //å­ã‚¯ãƒ©ã‚¹ã‚’é€šã˜ã¦ã€ã“ã®æ”»æ’ƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚’è¨­å®š
         SetAttackAnimation();
         
-        //UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌŠJn‚Ü‚Å­‚µ‘Ò‚Â(—á: UŒ‚ŠJnƒ‚[ƒVƒ‡ƒ“‚Ì”¼•ª)
-        yield return new WaitForSeconds(0.1f);
+        //æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®é–‹å§‹ã¾ã§å°‘ã—å¾…ã¤
+        yield return new WaitForSeconds(animationlatency);
 
-        //PerformAttackLogic‚ªI—¹‚·‚é‚Ì‚ğ‘Ò‚Â
+        //PerformAttackLogicãŒçµ‚äº†ã™ã‚‹ã®ã‚’å¾…ã¤
         yield return StartCoroutine(PerformAttackLogic());
 
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒŠƒJƒoƒŠ[ŠÔ‘Ò‹@
-        yield return new WaitForSeconds(0.5f); //‹¤’Ê‚Ìd’¼ŠÔ
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒªã‚«ãƒãƒªãƒ¼æ™‚é–“å¾…æ©Ÿ
+        yield return new WaitForSeconds(animationRecoveryTime); //å…±é€šã®ç¡¬ç›´æ™‚é–“
 
-        //UŒ‚I—¹+ˆÚ“®‚ğÄŠJ‚³‚¹‚é
+        //æ”»æ’ƒçµ‚äº†+ç§»å‹•ã‚’å†é–‹ã•ã›ã‚‹
         ResetAttackAnimation();
         enemyMovement.SetIsStoppedByAttack(false);
 
         isAttackSequenceRunning = false;
+        */
+        isAttackSequenceRunning = true;
+
+Â  Â  Â  Â  //ç§»å‹•ã‚’åœæ­¢ã•ã›ã‚‹
+Â  Â  Â  Â  enemyMovement.SetIsStoppedByAttack(true);
+
+        //å­ã‚¯ãƒ©ã‚¹ã‚’é€šã˜ã¦ã€ã“ã®æ”»æ’ƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚’è¨­å®š
+        SetAttackAnimation();
+
+Â  Â  Â  Â  //PerformAttackLogicãŒçµ‚äº†ã™ã‚‹ã®ã‚’å¾…ã¤
+Â  Â  Â  Â  yield return StartCoroutine(PerformAttackLogic());
+
+        //æ”»æ’ƒåˆ¤å®šãŒçµ‚ã‚ã£ãŸã‚‰ã€ã™ãã«IdleçŠ¶æ…‹ã«æˆ»ã™å‘½ä»¤ã‚’å‡ºã™
+        enemyMovement.currentState = EnemyMove.EnemyState.Idle;
+
+        //isStoppedByAttackã¯ã€ã‚²ãƒ¼ãƒ ãƒ‡ã‚¶ã‚¤ãƒ³ä¸Šã®ç¡¬ç›´ãŒãªã‘ã‚Œã°ã€ã“ã“ã§ false ã«ã™ã‚‹
+        enemyMovement.SetIsStoppedByAttack(false); 
+
+        ResetAttackAnimation();
+
+Â  Â  Â  Â  isAttackSequenceRunning = false;
+
+        yield return null;
     }
 }

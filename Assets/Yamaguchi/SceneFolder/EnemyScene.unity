@@ -787,9 +787,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackInterval: 5
+  attackInterval: 3
+  animationlatency: 0
+  animationRecoveryTime: 0.75
   attackHitbox: {fileID: 1218135983}
   hitboxDuration: 0.5
+  displaylatency: 0
 --- !u!114 &937330851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,6 +807,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 5
   attackInterval: 5
+  animationlatency: 0.25
+  animationRecoveryTime: 0.75
   projectilePrefab: {fileID: 7555427716517911455, guid: 7c803678c7e122c4083cbef002c59fd8, type: 3}
   firePoint: {fileID: 283701876}
 --- !u!1 &994487063

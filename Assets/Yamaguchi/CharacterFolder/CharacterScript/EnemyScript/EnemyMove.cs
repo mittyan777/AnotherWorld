@@ -63,7 +63,6 @@ public class EnemyMove : MonoBehaviour
         // 攻撃などで停止中の場合、移動ロジックをスキップ
         if (isStoppedByAttack)
         {
-            currentState = EnemyState.RangedAttack;
             // 攻撃中は回転も移動もしないので、ここで終了
             if (animationManager != null) animationManager.UpdateAnimation(currentState);
             return;

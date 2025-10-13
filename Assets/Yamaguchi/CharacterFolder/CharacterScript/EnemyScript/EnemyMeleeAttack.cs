@@ -1,40 +1,42 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class EnemyMeleeAttack : EnemyAttackManager
 {
     [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private float hitboxDuration = 0.3f; //UŒ‚”»’è‚Ì‘±ŠÔ
-
+    [SerializeField] private float hitboxDuration = 0.3f; //æ”»æ’ƒåˆ¤å®šã®æŒç¶šæ™‚é–“
+    [SerializeField]private float displaylatency = 0.0f;//æ”»æ’ƒã®å½“ãŸã‚Šåˆ¤å®šã®è¡¨ç¤ºå¾…ã¡æ™‚é–“
     protected override void OnInit()
     {
-        // UŒ‚ƒIƒuƒWƒFƒNƒg‚Í‰Šúó‘Ô‚Å–³Œø‚É‚µ‚Ä‚¨‚­
+        // æ”»æ’ƒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯åˆæœŸçŠ¶æ…‹ã§ç„¡åŠ¹ã«ã—ã¦ãŠã
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(false);
         }
     }
 
-    // UŒ‚”»’è‚Ì”­¶‚ÆI—¹‚Ì‚İ‚ğ§Œä
+    // æ”»æ’ƒåˆ¤å®šã®ç™ºç”Ÿã¨çµ‚äº†ã®ã¿ã‚’åˆ¶å¾¡
     protected override IEnumerator PerformAttackLogic()
     {
-        // UŒ‚”»’è‚ğ—LŒø‚É‚·‚é
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®æŒ¯ã‚Šã‹ã¶ã‚Šæ™‚é–“ã«åˆã‚ã›ã¦å°‘ã—å¾…ã¤ (ä¾‹: 0.15ç§’)
+Â  Â  Â  Â  yield return new WaitForSeconds(displaylatency);
+        // æ”»æ’ƒåˆ¤å®šã‚’æœ‰åŠ¹ã«ã™ã‚‹
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(true);
         }
 
-        // UŒ‚”»’è‚ğˆê’èŠÔˆÛ
+        // æ”»æ’ƒåˆ¤å®šã‚’ä¸€å®šæ™‚é–“ç¶­æŒ
         yield return new WaitForSeconds(hitboxDuration);
 
-        // UŒ‚”»’è‚ğ–³Œø‚É‚·‚é
+        // æ”»æ’ƒåˆ¤å®šã‚’ç„¡åŠ¹ã«ã™ã‚‹
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(false);
         }
     }
 
-    //‹ßÚUŒ‚‚ÌƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô‚ğİ’è
+    //è¿‘æ¥æ”»æ’ƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚’è¨­å®š
     protected override void SetAttackAnimation()
     {
         if (enemyMovement != null)
@@ -43,9 +45,9 @@ public class EnemyMeleeAttack : EnemyAttackManager
         }
     }
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô‚ğƒŠƒZƒbƒg
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆ
     protected override void ResetAttackAnimation()
     {
-        // UŒ‚I—¹‚ÉƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô‚ğƒŠƒZƒbƒgiIdle‚É–ß‚·‚Ì‚ÍAttackSequence‚ªs‚¤‚½‚ßA‚±‚±‚Å‚Í‰½‚à‚µ‚È‚­‚Ä—Ç‚¢j
+        // æ”»æ’ƒçµ‚äº†æ™‚ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆï¼ˆIdleã«æˆ»ã™ã®ã¯AttackSequenceãŒè¡Œã†ãŸã‚ã€ã“ã“ã§ã¯ä½•ã‚‚ã—ãªãã¦è‰¯ã„ï¼‰
     }
 }
