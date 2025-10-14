@@ -1,36 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class EnemyMeleeAttack : EnemyAttackManager
 {
     [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private float hitboxDuration = 0.5f;
-
+    [SerializeField] private float hitboxDuration = 0.3f; //攻撃判定の持続時間
+    [SerializeField]private float displaylatency = 0.0f;//攻撃の当たり判定の表示待ち時間
     protected override void OnInit()
     {
-        // �U���I�u�W�F�N�g�͏�����ԂŖ����ɂ��Ă���
+        // 攻撃オブジェクトは初期状態で無効にしておく
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(false);
         }
     }
 
-    protected override IEnumerator PerformAttack()
+    // 攻撃判定の発生と終了のみを制御
+    protected override IEnumerator PerformAttackLogic()
     {
-        //�U���I�u�W�F�N�g��L���ɂ��� (�U�����蔭��)
+        // アニメーションの振りかぶり時間に合わせて少し待つ (例: 0.15秒)
+        yield return new WaitForSeconds(displaylatency);
+        // 攻撃判定を有効にする
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(true);
         }
 
-        //�U���������莞�Ԉێ� (0.5�b)
+        // 攻撃判定を一定時間維持
         yield return new WaitForSeconds(hitboxDuration);
 
-        //�U���I�u�W�F�N�g�𖳌��ɂ��� (�U������I��)
+        // 攻撃判定を無効にする
         if (attackHitbox != null)
         {
             attackHitbox.SetActive(false);
         }
+    }
+
+    //近接攻撃のアニメーション状態を設定
+    protected override void SetAttackAnimation()
+    {
+        if (enemyMovement != null)
+        {
+            enemyMovement.currentState = EnemyMove.EnemyState.CloseAttack;
+        }
+    }
+
+    //アニメーション状態をリセット
+    protected override void ResetAttackAnimation()
+    {
+        // 攻撃終了時にアニメーション状態をリセット（Idleに戻すのはAttackSequenceが行うため、ここでは何もしなくて良い）
     }
 }
