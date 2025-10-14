@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: -20
   m_Viewport: {fileID: 1703884045}
   m_HorizontalScrollbar: {fileID: 1451463321}
   m_VerticalScrollbar: {fileID: 949829777}
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: -20
   m_Viewport: {fileID: 1808268820}
   m_HorizontalScrollbar: {fileID: 1040022614}
   m_VerticalScrollbar: {fileID: 2073957887}
@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: -20
   m_Viewport: {fileID: 1085354089}
   m_HorizontalScrollbar: {fileID: 162759823}
   m_VerticalScrollbar: {fileID: 1993547401}
@@ -5242,7 +5242,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 0.89799523, b: 0.3226415, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.86415094, g: 0.38316125, b: 0.38316125, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -5262,7 +5262,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2083094103}
   m_HandleRect: {fileID: 2083094102}
   m_Direction: 2
-  m_Value: 0.5332757
+  m_Value: 1
   m_Size: 0.47882882
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7372,7 +7372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 540}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -543, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1884583450
@@ -7509,10 +7509,10 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.1
+  m_Elasticity: 0.3
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: -20
   m_Viewport: {fileID: 1198322177}
   m_HorizontalScrollbar: {fileID: 824224194}
   m_VerticalScrollbar: {fileID: 1406028089}
