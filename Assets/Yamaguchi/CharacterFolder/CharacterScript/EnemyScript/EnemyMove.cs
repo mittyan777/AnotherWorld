@@ -71,7 +71,7 @@ public class EnemyMove : MonoBehaviour
         // 追跡・巡回ロジック
         UpdateMovementState();
 
-        // 向きの更新 (移動している場合のみ)
+        //向きの更新 (移動している場合のみ)
         UpdateRotation();
 
         // アニメーション更新
@@ -190,7 +190,7 @@ public class EnemyMove : MonoBehaviour
             if (!isAttacking)
             {
                 // 移動ロジックに戻り、UpdateMovementState()で自動的に追跡 or 巡回が再開される
-                // ここでdestinationを再設定する必要はない
+                //UpdateMovementState();
             }
         }
     }

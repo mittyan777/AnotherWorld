@@ -1,10 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyRangedAttack : EnemyAttackManager
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private float throwWaitingTime;
 
     protected override IEnumerator PerformAttackLogic()
     {
@@ -14,7 +16,7 @@ public class EnemyRangedAttack : EnemyAttackManager
         }
 
         // 攻撃アニメーションの前に少し待つ (発射のタイミング調整)
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(throwWaitingTime);
 
         // オブジェクトを生成し、発射
         Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -35,6 +37,7 @@ public class EnemyRangedAttack : EnemyAttackManager
     //アニメーション状態をリセット
     protected override void ResetAttackAnimation()
     {
-        // 攻撃終了時にアニメーション状態をリセット
+        //攻撃終了時にアニメーション状態をリセット
+        //enemyMovement.currentState = EnemyMove.EnemyState.Idle;
     }
 }
