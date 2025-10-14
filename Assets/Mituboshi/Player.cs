@@ -6,15 +6,54 @@ public class Player : MonoBehaviour
 {
     Animator animator;  
     public float coin = 0;
+    public float HP;
+    public float MP;
+    public float AttackStatus;
+    public float DefenseStatus;
+    public bool canControl = true;  // ← 追加！
+    [SerializeField] GameObject rayobj;
+    [SerializeField] GameObject slot;
+    [SerializeField] float Direction;
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 0f;
         animator = GetComponent<Animator>();
+       // Cursor.lockState = CursorLockMode.Locked;   //追加
+        //Cursor.visible = false;     //追加
     }
 
     // Update is called once per frame
     void Update()
     {
+       rayobj.transform.eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
+
+        if (!canControl) return; // ここで操作全部止まる
+
+
+      
+        
+            // 前方にRayを飛ばして、ルーレット台に当たったら
+            Ray ray = new Ray(new Vector3(rayobj.transform.position.x, rayobj.transform.position.y, rayobj.transform.position.z ), rayobj.transform.forward);
+            RaycastHit hit;
+
+
+
+            if (Physics.Raycast(ray, out hit, Direction)) // 2m以内を調べる
+            {
+                if (hit.collider.CompareTag("Roulette")) // ルーレット台のタグを"Roulette"にする
+                {
+                    // 「E」キーでルーレットを調べる
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        Debug.Log("ルーレットを調べた！シーン切り替え");
+                        slot.SetActive(true);
+                        //RouletteUIManager.Instance.OpenRouletteUI(this);
+                    }
+
+                }
+            }
+            Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
         
     }
     private void FixedUpdate()

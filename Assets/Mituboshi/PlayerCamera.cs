@@ -6,49 +6,53 @@ public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
-    Vector3 currentPos;//現在のカメラ位置
-    Vector3 pastPos;//過去のカメラ位置
+    Vector3 currentPos; // 現在のカメラ位置
+    Vector3 pastPos;    // 過去のカメラ位置
+    Vector3 diff;       // 移動距離
 
-    Vector3 diff;//移動距離
+    // カメラ回転用
+    float verticalAngle = 0f; // 縦回転角度を保持（自分で管理する）
+    [SerializeField] float minVertical = -30f; // 下を向ける最小角度
+    [SerializeField] float maxVertical = 30f;  // 上を向ける最大角度
+    [SerializeField] float sensitivity = 1f;   // マウス感度
 
     private void Start()
     {
-        //最初のプレイヤーの位置の取得
+        // 最初のプレイヤーの位置を記録
         pastPos = player.transform.position;
     }
+
     void Update()
     {
-        //------カメラの移動------
-
-        //プレイヤーの現在地の取得
+        // ------ カメラの移動 ------
         currentPos = player.transform.position;
-
         diff = currentPos - pastPos;
-
-        transform.position = Vector3.Lerp(transform.position, transform.position + diff, 1.0f);//カメラをプレイヤーの移動差分だけうごかすよ
-
+        transform.position = Vector3.Lerp(transform.position, transform.position + diff, 1.0f);
         pastPos = currentPos;
 
+        // ------ カメラの回転 ------
+        float mx = Input.GetAxis("Mouse X") * sensitivity;
+        float my = Input.GetAxis("Mouse Y") * sensitivity;
 
-        //------カメラの回転------
-
-        // マウスの移動量を取得
-        float mx = Input.GetAxis("Mouse X");
-        float my = Input.GetAxis("Mouse Y");
-
-        // X方向に一定量移動していれば横回転
+        // 横回転（プレイヤーの周囲を回転）
         if (Mathf.Abs(mx) > 0.01f)
         {
-            // 回転軸はワールド座標のY軸
             transform.RotateAround(player.transform.position, Vector3.up, mx);
         }
 
-        // Y方向に一定量移動していれば縦回転
+        // 縦回転（角度制限あり）
         if (Mathf.Abs(my) > 0.01f)
         {
-            // 回転軸はカメラ自身のX軸
-            transform.RotateAround(player.transform.position, transform.right, -my);
+            verticalAngle += -my; // 上下は逆なのでマイナスを付ける
+            verticalAngle = Mathf.Clamp(verticalAngle, minVertical, maxVertical);
+
+            // 現在のカメラの角度から、制御したいX軸回転だけ設定
+            Vector3 euler = transform.eulerAngles;
+            euler.x = verticalAngle;
+            transform.eulerAngles = new Vector3(euler.x, transform.eulerAngles.y, 0);
         }
-        player.transform.eulerAngles = new Vector3 (0, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        // プレイヤーの向きはカメラのYだけ反映
+        player.transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
     }
 }
