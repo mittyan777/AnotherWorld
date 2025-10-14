@@ -14,10 +14,13 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject rayobj;
     [SerializeField] GameObject slot;
     [SerializeField] float Direction;
+    [SerializeField] GameObject shootposition;
+    [SerializeField] GameObject fireball;
+    [SerializeField] GameObject []manager;
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         animator = GetComponent<Animator>();
        // Cursor.lockState = CursorLockMode.Locked;   //í«â¡
         //Cursor.visible = false;     //í«â¡
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (manager != null) { manager = GameObject.FindGameObjectsWithTag("GameManager"); }
        rayobj.transform.eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
 
         if (!canControl) return; // Ç±Ç±Ç≈ëÄçÏëSïîé~Ç‹ÇÈ
@@ -54,7 +58,14 @@ public class Player : MonoBehaviour
                 }
             }
             Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
-        
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (manager[0].GetComponent<GameManager>().Status[4] == 4 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(fireball, shootposition.transform.position, Quaternion.identity); }
+            
+
+        }
+
     }
     private void FixedUpdate()
     {
@@ -83,7 +94,8 @@ public class Player : MonoBehaviour
         }
         else { animator.SetBool("right", false); }
 
-        
+       
+
     }
     private void OnTriggerEnter(Collider other)
     {
