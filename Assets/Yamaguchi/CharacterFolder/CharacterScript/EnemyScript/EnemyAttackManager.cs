@@ -127,6 +127,11 @@ public abstract class EnemyAttackManager : MonoBehaviour
         //子クラスを通じて、この攻撃のアニメーション状態を設定
         SetAttackAnimation();
 
+        if (enemyMovement != null)
+        {
+            enemyMovement.ForceUpdateAnimation();
+        }
+
         //PerformAttackLogicが終了するのを待つ
         yield return StartCoroutine(PerformAttackLogic());
 

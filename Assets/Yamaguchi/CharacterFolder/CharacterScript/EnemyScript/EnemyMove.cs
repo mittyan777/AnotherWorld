@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,21 +8,21 @@ public class EnemyMove : MonoBehaviour
     // NavMesh Agent
     private NavMeshAgent agent;
 
-    // ================ „‰ñ•Ï” ================
-    [SerializeField] private float stayDuration = 3f; // ‘Ò‹@ŠÔ
+    // ================ å·¡å›å¤‰æ•° ================
+    [SerializeField] private float stayDuration = 3f; // å¾…æ©Ÿæ™‚é–“
     private float timer;
 
-    // ================ ’ÇÕEó‘Ô•Ï” ================
-    [SerializeField] private float visibilityDistance = 15f; // ƒvƒŒƒCƒ„[‹”F‹——£
+    // ================ è¿½è·¡ãƒ»çŠ¶æ…‹å¤‰æ•° ================
+    [SerializeField] private float visibilityDistance = 15f; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼è¦–èªè·é›¢
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float stopDistance = 1.5f; // ƒvƒŒƒCƒ„[‚©‚ç’â~‚µ‚½‚¢‹——£
+    [SerializeField] private float stopDistance = 1.5f; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰åœæ­¢ã—ãŸã„è·é›¢
 
     public enum EnemyState { Idle, Walk, CloseAttack, RangedAttack, None }
     public EnemyState currentState = EnemyState.Idle;
 
     [SerializeField] EnemyAnimationManager animationManager;
 
-    // UŒ‚‚É‚æ‚Á‚ÄˆÚ“®‚ª’â~‚³‚ê‚Ä‚¢‚éó‘Ô
+    // æ”»æ’ƒã«ã‚ˆã£ã¦ç§»å‹•ãŒåœæ­¢ã•ã‚Œã¦ã„ã‚‹çŠ¶æ…‹
     private bool isStoppedByAttack = false;
 
     // =========================================================
@@ -31,17 +31,17 @@ public class EnemyMove : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        // EnemyAnimationManager‚Ìæ“¾
+        // EnemyAnimationManagerã®å–å¾—
         animationManager = GetComponent<EnemyAnimationManager>();
         if (animationManager == null) animationManager = GetComponentInChildren<EnemyAnimationManager>();
         if (animationManager == null)
         {
-            Debug.LogError(gameObject.name + ": EnemyAnimationManager‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñBƒAƒjƒ[ƒVƒ‡ƒ“‚Í“®‚«‚Ü‚¹‚ñB", this);
+            Debug.LogError(gameObject.name + ": EnemyAnimationManagerãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã¯å‹•ãã¾ã›ã‚“ã€‚", this);
         }
 
         if (agent == null)
         {
-            Debug.LogError(gameObject.name + ": NavMeshAgent‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB", this);
+            Debug.LogError(gameObject.name + ": NavMeshAgentãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚", this);
             return;
         }
 
@@ -51,51 +51,51 @@ public class EnemyMove : MonoBehaviour
             playerTransform = player.transform;
         }
 
-        // Agent‚É‚æ‚é‰ñ“]§Œä‚ğè“®‚É‚·‚é
+        // Agentã«ã‚ˆã‚‹å›è»¢åˆ¶å¾¡ã‚’æ‰‹å‹•ã«ã™ã‚‹
         if (agent != null) agent.updateRotation = false;
 
-        // Å‰‚Ì–Ú“I’n‚ğİ’è
+        // æœ€åˆã®ç›®çš„åœ°ã‚’è¨­å®š
         NextDestination();
     }
 
     private void Update()
     {
-        // UŒ‚‚È‚Ç‚Å’â~’†‚Ìê‡AˆÚ“®ƒƒWƒbƒN‚ğƒXƒLƒbƒv
+        // æ”»æ’ƒãªã©ã§åœæ­¢ä¸­ã®å ´åˆã€ç§»å‹•ãƒ­ã‚¸ãƒƒã‚¯ã‚’ã‚¹ã‚­ãƒƒãƒ—
         if (isStoppedByAttack)
         {
-            // UŒ‚’†‚Í‰ñ“]‚àˆÚ“®‚à‚µ‚È‚¢‚Ì‚ÅA‚±‚±‚ÅI—¹
+            // æ”»æ’ƒä¸­ã¯å›è»¢ã‚‚ç§»å‹•ã‚‚ã—ãªã„ã®ã§ã€ã“ã“ã§çµ‚äº†
             if (animationManager != null) animationManager.UpdateAnimation(currentState);
             return;
         }
 
-        // ’ÇÕE„‰ñƒƒWƒbƒN
+        // è¿½è·¡ãƒ»å·¡å›ãƒ­ã‚¸ãƒƒã‚¯
         UpdateMovementState();
 
-        //Œü‚«‚ÌXV (ˆÚ“®‚µ‚Ä‚¢‚éê‡‚Ì‚İ)
+        //å‘ãã®æ›´æ–° (ç§»å‹•ã—ã¦ã„ã‚‹å ´åˆã®ã¿)
         UpdateRotation();
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“XV
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ›´æ–°
         if (animationManager != null)
         {
             animationManager.UpdateAnimation(currentState);
         }
     }
 
-    // ================ ˆÚ“®Eó‘ÔƒƒWƒbƒN ================
+    // ================ ç§»å‹•ãƒ»çŠ¶æ…‹ãƒ­ã‚¸ãƒƒã‚¯ ================
 
     private void UpdateMovementState()
     {
-        // ƒvƒŒƒCƒ„[‚Ì‹”F‚Æ’ÇÕƒƒWƒbƒN
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è¦–èªã¨è¿½è·¡ãƒ­ã‚¸ãƒƒã‚¯
         if (playerTransform != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
             if (distanceToPlayer <= visibilityDistance)
             {
-                // ’ÇÕ‹——£“à‚É“ü‚Á‚½ê‡
+                // è¿½è·¡è·é›¢å†…ã«å…¥ã£ãŸå ´åˆ
                 if (distanceToPlayer > stopDistance)
                 {
-                    // ’ÇÕ: ƒvƒŒƒCƒ„[‚©‚çstopDistance•ª—£‚ê‚½’n“_‚ğ–Ú“I’n‚É‚·‚é
+                    // è¿½è·¡:ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰stopDistanceåˆ†é›¢ã‚ŒãŸåœ°ç‚¹ã‚’ç›®çš„åœ°ã«ã™ã‚‹
                     Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
                     Vector3 targetPosition = playerTransform.position - directionToPlayer * stopDistance;
 
@@ -104,25 +104,27 @@ public class EnemyMove : MonoBehaviour
                 }
                 else
                 {
-                    // ’â~–Ú•W‹——£‚É“’B‚µ‚½ê‡
-                    currentState = EnemyState.Idle; // UŒ‚”ÍˆÍ“à‚È‚çIdle‚Å‘Ò‹@
+                    // åœæ­¢ç›®æ¨™è·é›¢ã«åˆ°é”ã—ãŸå ´åˆ
+                    currentState = EnemyState.Idle; // æ”»æ’ƒç¯„å›²å†…ãªã‚‰Idleã§å¾…æ©Ÿ
                 }
                 return;
             }
         }
-
-        // ƒvƒŒƒCƒ„[‚ªŒ©‚¦‚È‚¢A‚Ü‚½‚Í‚¢‚È‚¢ê‡‚Í„‰ñƒƒWƒbƒN‚Ö
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ãˆãªã„ã€ã¾ãŸã¯ã„ãªã„å ´åˆã¯å·¡å›ãƒ­ã‚¸ãƒƒã‚¯ã¸
         PatrolLogic();
     }
 
     private void PatrolLogic()
     {
+        /*
+        currentState=EnemyState.Walk;
         if (agent == null || !agent.enabled) return;
 
-        // –Ú“I’n‚É“’B‚µ‚½‚©ƒ`ƒFƒbƒN (remainingDistance < stopDistance‚ğg—p)
-        if (agent.remainingDistance < stopDistance && !agent.pathPending)
+        // ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‹ãƒã‚§ãƒƒã‚¯ (remainingDistance < stopDistanceã‚’ä½¿ç”¨)
+        if (agent.remainingDistance < stopDistance && 
+            !agent.pathPending)
         {
-            // “’…‚µ‚½‚çIdle‚Å‘Ò‹@
+            // åˆ°ç€ã—ãŸã‚‰Idleã§å¾…æ©Ÿ
             currentState = EnemyState.Idle;
             timer += Time.deltaTime;
 
@@ -135,19 +137,70 @@ public class EnemyMove : MonoBehaviour
         }
         else if (agent.hasPath)
         {
-            // –Ú“I’n‚ÉŒü‚©‚Á‚Ä‚¢‚é“r’†‚Ìê‡
+            // ç›®çš„åœ°ã«å‘ã‹ã£ã¦ã„ã‚‹é€”ä¸­ã®å ´åˆ
             currentState = EnemyState.Walk;
+        }
+        */
+        if (agent == null || !agent.enabled) return;
+
+        // PatrolLogicã®å…ˆé ­ã§ currentStateã‚’ Walkã«å¼·åˆ¶çš„ã«è¨­å®šã™ã‚‹ã®ã¯å‰Šé™¤
+        // currentState=EnemyState.Walk; // â† ã“ã‚Œã‚’å‰Šé™¤
+
+        // ç›®çš„åœ°ã«åˆ°é”ã—ãŸã‹ã®åˆ¤å®šã€‚éå¸¸ã«å°ã•ãªé–¾å€¤ã‚’ä½¿ã† (ä¾‹: 0.5f)
+        float arrivalThreshold = 0.5f;
+
+        bool destinationReached =
+            agent.hasPath &&
+            agent.remainingDistance <= arrivalThreshold && //åˆ°é”é–¾å€¤ã‚’å³ã—ãã™ã‚‹
+            !agent.pathPending;
+
+        if (destinationReached)
+        {
+            // ç›®çš„åœ°ã«åˆ°é”ã—ãŸå ´åˆ
+
+            // ã¾ã Idleã§ãªã„å ´åˆã€Idleã«åˆ‡ã‚Šæ›¿ãˆã€ã‚¿ã‚¤ãƒãƒ¼ã‚’ãƒªã‚»ãƒƒãƒˆ
+            if (currentState != EnemyState.Idle)
+            {
+                currentState = EnemyState.Idle;
+                timer = 0f;
+                // åˆ°é”ã—ãŸã‚‰NavMeshAgentã‚’åœæ­¢ã•ã›ã‚‹ï¼ˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒIdleã«ãªã£ãŸã“ã¨ã‚’ä¿è¨¼ï¼‰
+                agent.isStopped = true;
+            }
+
+            // IdleçŠ¶æ…‹ã®å ´åˆã®ã¿ã‚¿ã‚¤ãƒãƒ¼ã‚’é€²ã‚ã‚‹
+            if (currentState == EnemyState.Idle)
+            {
+                timer += Time.deltaTime;
+
+                if (timer >= stayDuration)
+                {
+                    agent.isStopped = false; // ç§»å‹•ã‚’å†é–‹ã—ã¦ã‹ã‚‰NextDestinationã‚’å‘¼ã¶
+                    NextDestination();
+                    timer = 0;
+                    currentState = EnemyState.Walk;
+                }
+            }
+        }
+        else // ç›®çš„åœ°ã«å‘ã‹ã£ã¦ã„ã‚‹é€”ä¸­ã€ã¾ãŸã¯æ–°ã—ã„ç›®çš„åœ°ã‚’è¨­å®šã—ãŸç›´å¾Œ
+        {
+            if (agent.isStopped) agent.isStopped = false; // åœæ­¢çŠ¶æ…‹ã‹ã‚‰å¾©å¸°
+
+            // æœ‰åŠ¹ãªãƒ‘ã‚¹ãŒã‚ã‚‹å ´åˆã€WalkçŠ¶æ…‹ã«ã™ã‚‹
+            if (agent.hasPath || (agent.destination - transform.position).sqrMagnitude > arrivalThreshold * arrivalThreshold)
+            {
+                currentState = EnemyState.Walk;
+            }
         }
     }
 
-    // ================ Helper ŠÖ” ================
+    // ================ Helper é–¢æ•° ================
 
     private void NextDestination()
     {
         if (agent != null && agent.enabled && !agent.isStopped)
         {
             NavMeshHit hit;
-            // NavMeshã‚Ì—LŒø‚ÈêŠ‚ğ’T‚·
+            // NavMeshä¸Šã®æœ‰åŠ¹ãªå ´æ‰€ã‚’æ¢ã™
             if (NavMesh.SamplePosition(
                     new Vector3(Random.Range(0, 20), 0, Random.Range(0, 20)),
                     out hit,
@@ -158,25 +211,32 @@ public class EnemyMove : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("NavMeshã‚É—LŒø‚Èƒ‰ƒ“ƒ_ƒ€–Ú“I’n‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                Debug.LogWarning("NavMeshä¸Šã«æœ‰åŠ¹ãªãƒ©ãƒ³ãƒ€ãƒ ç›®çš„åœ°ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
             }
         }
     }
 
     private void UpdateRotation()
     {
-        if (agent.velocity.sqrMagnitude > 0.01f) // ˆÚ“®‚µ‚Ä‚¢‚é‚©Šm”F
+        if (agent.velocity.sqrMagnitude > 0.01f) //ç§»å‹•ã—ã¦ã„ã‚‹ã‹ç¢ºèª
         {
-            // –Ú•W‚Ì‰ñ“] (ˆÚ“®•ûŒü‚É Quaternion ‚ğì¬)
+            // ç›®æ¨™ã®å›è»¢ (ç§»å‹•æ–¹å‘ã« Quaternion ã‚’ä½œæˆ)
             Quaternion targetRotation = Quaternion.LookRotation(agent.velocity.normalized);
 
-            // ƒXƒ€[ƒY‚É•âŠÔ
+            // ã‚¹ãƒ ãƒ¼ã‚ºã«è£œé–“
             float rotationSpeed = 10f;
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
-    // ================ ŠO•”‚©‚ç‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX ================
+    // ================ å¤–éƒ¨ã‹ã‚‰ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ ================
+    public void ForceUpdateAnimation()
+    {
+        if (animationManager != null)
+        {
+            animationManager.UpdateAnimation(currentState);
+        }
+    }
 
     public void SetIsStoppedByAttack(bool isAttacking)
     {
@@ -186,11 +246,16 @@ public class EnemyMove : MonoBehaviour
         {
             agent.isStopped = isAttacking;
 
-            // UŒ‚I—¹ (isAttacking‚ªfalse‚É‚È‚Á‚½‚Æ‚«) ‚Ì‚İA–Ú“I’n‚ğÄİ’è
+            //æ”»æ’ƒçµ‚äº†æ™‚
             if (!isAttacking)
             {
-                // ˆÚ“®ƒƒWƒbƒN‚É–ß‚èAUpdateMovementState()‚Å©“®“I‚É’ÇÕ or „‰ñ‚ªÄŠJ‚³‚ê‚é
-                //UpdateMovementState();
+                //PlayerãŒè¦–èªç¯„å›²å¤–ã«ã„ã‚‹å ´åˆã€ç¾åœ¨ã®ç›®çš„åœ°ã‚’ç„¡åŠ¹åŒ–ã—ã€å·¡å›ãƒ­ã‚¸ãƒƒã‚¯ã§æ–°ã—ã„ãƒ©ãƒ³ãƒ€ãƒ ãªç›®çš„åœ°ã‚’å¼·åˆ¶çš„ã«å–å¾—ã•ã›ã‚‹
+                if (playerTransform == null || Vector3.Distance(transform.position, playerTransform.position) > visibilityDistance)
+                {
+                    //ç¾åœ¨ã®ç›®çš„åœ°ã‚’ç„¡åŠ¹åŒ–ï¼ˆæ–°ã—ã„ãƒ‘ã‚¹ã‚’å¼·åˆ¶çš„ã«è¨ˆç®—ã•ã›ã‚‹ï¼‰
+                    agent.ResetPath();
+                    NextDestination(); 
+                }
             }
         }
     }

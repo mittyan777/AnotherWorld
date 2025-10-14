@@ -38,6 +38,6 @@ public class EnemyRangedAttack : EnemyAttackManager
     protected override void ResetAttackAnimation()
     {
         //攻撃終了時にアニメーション状態をリセット
-        //enemyMovement.currentState = EnemyMove.EnemyState.Idle;
+        //enemyMovement.currentState = EnemyMove.EnemyState.Walk;
     }
 }

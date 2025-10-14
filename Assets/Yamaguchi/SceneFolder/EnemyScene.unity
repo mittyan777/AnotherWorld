@@ -293,13 +293,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283701875}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2937780}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!1 &575312907
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,10 +755,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9163e7c8450ba92429404bbeb0a756d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stayDuration: 3
-  visibilityDistance: 10
-  playerTransform: {fileID: 0}
-  stopDistance: 1.5
+  stayDuration: 5
+  visibilityDistance: 15
+  playerTransform: {fileID: 1973056563}
+  stopDistance: 10
   currentState: 0
   animationManager: {fileID: 937330849}
 --- !u!114 &937330849
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937330846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c39ccb725e6213a41a150a684d744b99, type: 3}
   m_Name: 
@@ -789,7 +789,7 @@ MonoBehaviour:
   attackRange: 2
   attackInterval: 3
   animationlatency: 0
-  animationRecoveryTime: 0.75
+  animationRecoveryTime: 0
   attackHitbox: {fileID: 1218135983}
   hitboxDuration: 0.5
   displaylatency: 0
@@ -800,17 +800,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937330846}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2db11b99dbeae694c85e586cc9734175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 5
+  attackRange: 10
   attackInterval: 5
-  animationlatency: 0.25
-  animationRecoveryTime: 0.75
+  animationlatency: 0
+  animationRecoveryTime: 0
   projectilePrefab: {fileID: 7555427716517911455, guid: 7c803678c7e122c4083cbef002c59fd8, type: 3}
   firePoint: {fileID: 283701876}
+  throwWaitingTime: 0
 --- !u!1 &994487063
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,8 +1548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 2784115769277353971, guid: 0a9c4ac53ec21cf4badd85876d2e93eb, type: 3}
-  - {fileID: 1915882010957330476, guid: 8d502b08f6626f343aa047cb0b0b74c1, type: 3}
+  - {fileID: 937330846}
   maxAttempts: 10
   spawnInterval: 2
 --- !u!4 &1534878187
@@ -1990,7 +1990,7 @@ Transform:
   m_GameObject: {fileID: 1973056559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0.34, z: 3}
+  m_LocalPosition: {x: 8, y: 0.34, z: 9.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
