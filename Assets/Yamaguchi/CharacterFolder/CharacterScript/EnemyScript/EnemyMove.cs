@@ -143,51 +143,52 @@ public class EnemyMove : MonoBehaviour
         */
         if (agent == null || !agent.enabled) return;
 
-        // PatrolLogicの先頭で currentStateを Walkに強制的に設定するのは削除
-        // currentState=EnemyState.Walk; // ← これを削除
-
-        // 目的地に到達したかの判定。非常に小さな閾値を使う (例: 0.5f)
         float arrivalThreshold = 0.5f;
 
         bool destinationReached =
             agent.hasPath &&
-            agent.remainingDistance <= arrivalThreshold && //到達閾値を厳しくする
+            agent.remainingDistance <= arrivalThreshold &&
             !agent.pathPending;
 
         if (destinationReached)
         {
             // 目的地に到達した場合
-
-            // まだIdleでない場合、Idleに切り替え、タイマーをリセット
             if (currentState != EnemyState.Idle)
             {
                 currentState = EnemyState.Idle;
                 timer = 0f;
-                // 到達したらNavMeshAgentを停止させる（アニメーションがIdleになったことを保証）
-                agent.isStopped = true;
+                agent.isStopped = true; // 確実に停止
             }
 
-            // Idle状態の場合のみタイマーを進める
             if (currentState == EnemyState.Idle)
             {
                 timer += Time.deltaTime;
 
                 if (timer >= stayDuration)
                 {
-                    agent.isStopped = false; // 移動を再開してからNextDestinationを呼ぶ
+                    //待機時間終了後の処理を保証
+                    agent.isStopped = false; 
                     NextDestination();
-                    timer = 0;
                     currentState = EnemyState.Walk;
+                    timer = 0;
                 }
             }
         }
-        else // 目的地に向かっている途中、または新しい目的地を設定した直後
+        else
         {
-            if (agent.isStopped) agent.isStopped = false; // 停止状態から復帰
+            // 移動中にNavMeshAgentが停止させられていたら解除
+            if (agent.isStopped) agent.isStopped = false;
 
-            // 有効なパスがある場合、Walk状態にする
+            // パスがある、または目的地が設定されていればWalk
             if (agent.hasPath || (agent.destination - transform.position).sqrMagnitude > arrivalThreshold * arrivalThreshold)
             {
+                currentState = EnemyState.Walk;
+            }
+            else if (currentState == EnemyState.Idle && timer == 0)
+            {
+                // パスがなく、Idle状態でタイマーが0（初期状態またはResetPath直後）の場合
+                // 強制的に最初の目的地を設定し、巡回を開始させる
+                NextDestination();
                 currentState = EnemyState.Walk;
             }
         }
@@ -202,7 +203,7 @@ public class EnemyMove : MonoBehaviour
             NavMeshHit hit;
             // NavMesh上の有効な場所を探す
             if (NavMesh.SamplePosition(
-                    new Vector3(Random.Range(0, 20), 0, Random.Range(0, 20)),
+                    new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)),
                     out hit,
                     5.0f,
                     NavMesh.AllAreas))
