@@ -1001,12 +1001,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9163e7c8450ba92429404bbeb0a756d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stayDuration: 5
-  visibilityDistance: 15
-  playerTransform: {fileID: 0}
-  stopDistance: 10
   currentState: 0
   animationManager: {fileID: 118150241995367604}
+  stayDuration: 2
+  patrolRandomRange: 10
+  visibilityDistance: 15
+  stopDistance: 2
 --- !u!114 &6430258840467161286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,6 +1023,7 @@ MonoBehaviour:
   attackInterval: 5
   animationlatency: 0
   animationRecoveryTime: 0
+  isAttackSequenceRunning: 0
   projectilePrefab: {fileID: 7555427716517911455, guid: 7c803678c7e122c4083cbef002c59fd8, type: 3}
   firePoint: {fileID: 8566415343759127182}
   throwWaitingTime: 0
@@ -1070,6 +1071,7 @@ MonoBehaviour:
   attackInterval: 1.5
   animationlatency: 0
   animationRecoveryTime: 0
+  isAttackSequenceRunning: 0
   attackHitbox: {fileID: 5504604919781763495}
   hitboxDuration: 0.3
   displaylatency: 0
