@@ -7,7 +7,7 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Muddy_Cracked_Sand_6
-  m_DiffuseTexture: {fileID: 2800000, guid: 61d8b2642351fc04781e358c08d8c0c9, type: 3}
+  m_DiffuseTexture: {fileID: 0}
   m_NormalMapTexture: {fileID: 2800000, guid: 43a8f93c093f6da49808abc2079a9817, type: 3}
   m_MaskMapTexture: {fileID: 2800000, guid: a000296a66c131f4da14c0dd185b9b18, type: 3}
   m_TileSize: {x: 2, y: 2}
