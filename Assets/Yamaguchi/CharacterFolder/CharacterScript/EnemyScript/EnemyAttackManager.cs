@@ -15,7 +15,7 @@ public abstract class EnemyAttackManager : MonoBehaviour
 
     protected float attackTimer;
     protected bool isPlayerInRange = false;
-    protected bool isAttackSequenceRunning = false;
+    public bool isAttackSequenceRunning = false;
 
     //抽象メソッド：子クラスで具体的な攻撃ロジックを実装させる
     //このコルーチンは攻撃判定の実行部分のみを担当する
