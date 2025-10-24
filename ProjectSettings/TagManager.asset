@@ -8,6 +8,7 @@ TagManager:
   - Roulette
   - GameManager
   - Enemy
+  - Floor
   - syounin
   layers:
   - Default

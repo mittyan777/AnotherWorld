@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] float Direction;
     [SerializeField] GameObject shootposition;
     [SerializeField] GameObject fireball;
+    [SerializeField] GameObject Electric_ball;
     [SerializeField] GameObject []manager;
     // Start is called before the first frame update
     void Start()
@@ -63,6 +64,12 @@ public class Player : MonoBehaviour
         {
             if (manager[0].GetComponent<GameManager>().Status[4] == 4 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(fireball, shootposition.transform.position, Quaternion.identity); }
             
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (manager[0].GetComponent<GameManager>().Status[4] == 4 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Electric_ball, shootposition.transform.position, Quaternion.identity); }
+
 
         }
 
