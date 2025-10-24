@@ -62,13 +62,13 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 4 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(fireball, shootposition.transform.position, Quaternion.identity); }
+            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(fireball, shootposition.transform.position, Quaternion.identity); }
             
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 4 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Electric_ball, shootposition.transform.position, Quaternion.identity); }
+            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Electric_ball, shootposition.transform.position, Quaternion.identity); }
 
 
         }
