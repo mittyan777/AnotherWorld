@@ -1224,9 +1224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 5083626846474918921, guid: 0ab04d1c93c894044aede02615729898, type: 3}
-  - {fileID: 4826820184562870493, guid: f88e5f043c7d7d643b5e8d71f8430bef, type: 3}
-  - {fileID: 5794265710748220757, guid: 5f04f3e736878ab4e8f1849da5285752, type: 3}
+  - {fileID: 746263171458399349, guid: f5038673333b3964a97d7fca68efb0ba, type: 3}
+  - {fileID: 2318509184685728293, guid: c7875631332fafe4389e6184e14ad458, type: 3}
+  - {fileID: 8347550238792126041, guid: 9f0fac3c73f11864595cdcfdc047d26c, type: 3}
   maxAttempts: 10
   spawnInterval: 2
 --- !u!4 &1534878187
