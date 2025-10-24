@@ -6,12 +6,12 @@ public class DorScripu : MonoBehaviour
 {
     [SerializeField] private Transform player;      // プレイヤーのTransform
     [SerializeField] private Animator doorAnimator; // ドアのAnimator
-    [SerializeField] private float openDistance = 2f; // 開く距離
+    [SerializeField] private float openDistance ; // 開く距離
     [SerializeField] private Transform DistancePointer;//ドアのポジションで計算してしまうとずれが生じるため空のオブジェクトを利用してドアの計算を正しく処理するための部分
 
     [SerializeField] float distance;
     private bool isLocked = false;
-    private bool isPlayerRange = false;
+   // private bool isPlayerRange = false;
 
 
     private void Start()
@@ -43,7 +43,7 @@ public class DorScripu : MonoBehaviour
             doorAnimator.SetBool("open", true);
             Debug.Log("ドアを開く");
         }
-        else if (distance >= openDistance)
+        else 
         {
             doorAnimator.SetBool("open", false);
             
