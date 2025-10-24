@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public float AttackStatus;
     public float DefenseStatus;
     public bool canControl = true;  // Å© í«â¡ÅI
+    [SerializeField] GameObject hand_R;
+    [SerializeField] GameObject hand_L;
+
     [SerializeField] GameObject rayobj;
     [SerializeField] GameObject slot;
     [SerializeField] float Direction;

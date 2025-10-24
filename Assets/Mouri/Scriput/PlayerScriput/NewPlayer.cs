@@ -26,6 +26,7 @@ public class NewPlayer : MonoBehaviour  //ƒvƒŒƒCƒ„[‚Ì‹ŠE‚ÌŒÀŠE’l‚âARay‚Ì‹Šo‰
     {
         RayPointer.transform.eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
 
+
         if (!canControl) return; // ‚±‚±‚Å‘€ì‘S•”~‚Ü‚é
 
 

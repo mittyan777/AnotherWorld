@@ -1239,7 +1239,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coin: 0
+  HP: 0
+  MP: 0
+  AttackStatus: 0
+  DefenseStatus: 0
   canControl: 1
+  hand_R: {fileID: 0}
+  hand_L: {fileID: 0}
+  rayobj: {fileID: 0}
+  slot: {fileID: 0}
+  Direction: 0
+  shootposition: {fileID: 0}
+  fireball: {fileID: 0}
+  manager: []
 --- !u!54 &2892121493981069130
 Rigidbody:
   m_ObjectHideFlags: 0
