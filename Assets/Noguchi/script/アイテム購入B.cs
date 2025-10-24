@@ -1,36 +1,45 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraApproach : MonoBehaviour
 {
-    [Header("アイテム欄UI")]
-    [SerializeField] private GameObject inventoryUI;
+     [Header("プレイヤーのコイン管理オブジェクト")]
+    [SerializeField] private CoinManager coinManager;
 
-    private bool isOpen = false; // 開いているかどうかのフラグ
+    [Header("購入するアイテムの情報")]
+    [SerializeField] private Item itemData;
+
+    [Header("購入ボタン")]
+    [SerializeField] private Button purchaseButton;
+
+    [Header("UI表示")]
+    [SerializeField] private Text resultText;
 
     void Start()
     {
-        // 開始時は非表示
-        if (inventoryUI != null)
-            inventoryUI.SetActive(false);
-    }
-
-    void Update()
-    {
-        // Bキーで開閉
-        if (Input.GetKeyDown(KeyCode.B))
+        if (purchaseButton != null)
         {
-            ToggleInventory();
+            purchaseButton.onClick.AddListener(OnPurchaseButtonClicked);
         }
     }
 
-    void ToggleInventory()
+    void OnPurchaseButtonClicked()
     {
-        isOpen = !isOpen; // 状態を反転
-        inventoryUI.SetActive(isOpen);
+        int playerCoins = coinManager.GetCoinCount();
+        int itemPrice = itemData.price;
 
-        if (isOpen)
-            Debug.Log("アイテム欄を開きました。");
+        if (playerCoins >= itemPrice)
+        {
+            // 購入成功
+            coinManager.UseCoins(itemPrice);
+            resultText.text = $"{itemData.itemName} を購入しました！";
+            Debug.Log($"購入成功：{itemData.itemName}");
+        }
         else
-            Debug.Log("アイテム欄を閉じました。");
+        {
+            // コイン不足
+            resultText.text = "コインが足りません！";
+            Debug.Log("購入失敗：コイン不足");
+        }
     }
 }

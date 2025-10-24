@@ -45,7 +45,7 @@ public class ScrollViewController : MonoBehaviour
 
     private void HideAllScrollViews()
     {
-        scrollView1.SetActive(false);
+        scrollView1.SetActive(true);
         scrollView2.SetActive(false);
         scrollView3.SetActive(false);
         scrollView4.SetActive(false);
