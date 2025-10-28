@@ -1,0 +1,21 @@
+・竜巻を長くする
+「Gravity Modifier」の値を小さく(負)すると、竜巻が長くなります。反映されなければシーンビューから「Tornado Particle」を「Restart」してください。
+
+
+・竜巻の色を変えたい
+「Start Color」から任意の色に変更可能です。反映されなければシーンビューから「Tornado Particle」を「Restart」してください。
+
+
+
+・竜巻の密度を変えたい
+「Emisson」>「Rate over Time」の値を大きくすると、竜巻の密度が大きくなります。反映されなければシーンビューから「Tornado Particle」を「Restart」してください。
+
+
+
+・竜巻を細くする
+「Velocity over Lifetime」>「Radial」の値を小さくすると、竜巻が細くなります。反映されなければシーンビューから「Tornado Particle」を「Restart」してください。
+
+
+
+・竜巻の軌跡を太くしたい
+「Trails」>「Width over Trail」の値を大きくすると、竜巻の軌跡が太くなります。反映されなければシーンビューから「Tornado Particle」を「Restart」してください。

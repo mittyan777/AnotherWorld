@@ -19708,6 +19708,7 @@ GameObject:
   - component: {fileID: 1767904761600580905}
   - component: {fileID: 4162084888321882184}
   - component: {fileID: -8157188630399716048}
+  - component: {fileID: 420568464030294590}
   m_Layer: 0
   m_Name: Freeze circle 1
   m_TagString: Untagged
@@ -24609,6 +24610,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 601d0b8f68fd86c47b5745d5e0a2d161, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &420568464030294590
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974064995495309594}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0.34, z: -0.00000008940697}
 --- !u!1001 &883907501299862669
 PrefabInstance:
   m_ObjectHideFlags: 0
