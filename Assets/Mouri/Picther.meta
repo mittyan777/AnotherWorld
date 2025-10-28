@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Mouri/Picther.meta
 guid: 220f6188b902d6b4e9e4687d22654c5b
+========
+guid: 5939edb6029f24a4caf33a71b43ca5c1
+>>>>>>>> main:Assets/Material/Mituboshi/Hovl Studio.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

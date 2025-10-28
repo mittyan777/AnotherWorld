@@ -60,8 +60,7 @@ public class GameManger_Mouri : MonoBehaviour
         defense_text.text = ($"{Status[3]}");
         if (Status[4] == 1) { job_text.text = ($"剣士"); }
         if (Status[4] == 2) { job_text.text = ($"アーチャー"); }
-        if (Status[4] == 3) { job_text.text = ($"格闘家 "); }
-        if (Status[4] == 4) { job_text.text = ($"マジシャン "); }
+        if (Status[4] == 3) { job_text.text = ($"マジシャン "); }
 
 
 
@@ -101,7 +100,7 @@ public class GameManger_Mouri : MonoBehaviour
         else if (Status[4] == 3) jobName = "魔法";
 
         // Chang に画像切替を伝える
-        FindObjectOfType<Chang>().jobName(jobName);
+        FindObjectOfType<Changimage>().jobName(jobName);
 
 
     }
