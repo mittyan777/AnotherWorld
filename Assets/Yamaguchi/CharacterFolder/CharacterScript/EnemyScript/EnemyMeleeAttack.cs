@@ -4,8 +4,8 @@ using UnityEngine;
 public class EnemyMeleeAttack : EnemyAttackManager
 {
     [SerializeField] private GameObject attackHitbox;
-    [SerializeField] private float hitboxDuration = 0.3f; //攻撃判定の持続時間
-    [SerializeField]private float displaylatency = 0.0f;//攻撃の当たり判定の表示待ち時間
+    [SerializeField] private float hitboxDuration; //攻撃判定の持続時間
+    [SerializeField]private float displaylatency;//攻撃の当たり判定の表示待ち時間
     protected override void OnInit()
     {
         // 攻撃オブジェクトは初期状態で無効にしておく

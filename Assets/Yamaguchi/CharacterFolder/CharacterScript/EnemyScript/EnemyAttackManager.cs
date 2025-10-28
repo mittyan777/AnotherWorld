@@ -5,10 +5,10 @@ using UnityEngine;
 // MonoBehaviourを継承させることで、子クラスもコルーチンを実行可能になる
 public abstract class EnemyAttackManager : MonoBehaviour
 {
-    [SerializeField] protected float attackRange = 2.0f; // 攻撃できる距離
-    [SerializeField] protected float attackInterval = 1.5f; // 攻撃のクールタイム
-    [SerializeField] protected float animationlatency = 0.25f;//アニメーション再生までの待ち時間
-    [SerializeField] protected float animationRecoveryTime = 0.75f;//アニメーションが終わるまでの時間
+    [SerializeField] protected float attackRange; // 攻撃できる距離
+    [SerializeField] protected float attackInterval; // 攻撃のクールタイム
+    [SerializeField] protected float animationlatency;//アニメーション再生までの待ち時間
+    [SerializeField] protected float animationRecoveryTime;//アニメーションが終わるまでの時間
 
     protected Transform playerTransform;
     protected EnemyMove enemyMovement;

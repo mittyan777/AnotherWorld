@@ -106,13 +106,13 @@ public class EnemyMove : MonoBehaviour
     {
         if (agent == null || !agent.enabled) return;
 
-        // 目的地に到達したかの判定
+        //目的地に到達したかの判定
         bool destinationReached =
             agent.hasPath &&
             agent.remainingDistance <= ARRIVAL_THRESHOLD &&
             !agent.pathPending;
 
-        // 停止中ではないが、目的地もない（初期状態やパス失敗）
+        //停止中ではないが、目的地もない（初期状態やパス失敗）
         bool noPathOrStationary = !agent.hasPath && !agent.pathPending && !agent.isStopped;
 
         if (destinationReached || noPathOrStationary)
@@ -201,7 +201,7 @@ public class EnemyMove : MonoBehaviour
 
         if (distanceToPlayer > stopDistance)
         {
-            // 追跡: プレイヤーから指定距離離れた地点を目的地にする
+            //プレイヤーから指定距離離れた地点を目的地にする
             Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
             Vector3 targetPosition = playerTransform.position - directionToPlayer * stopDistance;
 
