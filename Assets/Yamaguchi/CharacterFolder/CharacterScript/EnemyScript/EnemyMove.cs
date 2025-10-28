@@ -21,7 +21,7 @@ public class EnemyMove : MonoBehaviour
 
     [SerializeField] private float visibilityDistance = 15f;    // プレイヤー視認距離
     [SerializeField] private float stopDistance = 1.5f;         // プレイヤーから離れて停止したい距離 (追跡時)
-
+    //
     private Transform playerTransform;
     private float patrolTimer;                                  // 巡回待機用のタイマー
     private bool isStoppedByAttack = false;                     // 攻撃スクリプトによって移動が停止されているか
