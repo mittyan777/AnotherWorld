@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SloatManejert : MonoBehaviour
 {
-    [Header("MenuManejer をここにドラッグ")]
+    //他のメニューを管理しているスクリプト
     public MenuManejer menuManager;
+
+    //このスクリプトが入っているオブジェクトが
 
     void OnEnable()
     {

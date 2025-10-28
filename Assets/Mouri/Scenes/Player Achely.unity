@@ -881,6 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 695116753}
   - component: {fileID: 695116754}
+  - component: {fileID: 695116755}
   m_Layer: 0
   m_Name: GameMan
   m_TagString: Untagged
@@ -938,6 +939,19 @@ MonoBehaviour:
   power_slot_Min: 100
   Defense_slot_Max: 1000
   Defense_slot_Min: 100
+--- !u!114 &695116755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695116751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afe24fa35b4d2b4f8e3e78b2c3cac70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuManager: {fileID: 0}
 --- !u!1 &742241568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,6 +1690,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343981299}
   m_CullTransparentMesh: 1
+--- !u!1 &1355133968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1355133970}
+  - component: {fileID: 1355133969}
+  m_Layer: 0
+  m_Name: MenuManajar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1355133969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355133968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1612611846f7ce44aba0435b7342c5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuUI: {fileID: 271857952}
+  startMenuHidden: 1
+  isPaused: 0
+  Audio: {fileID: 0}
+  Audio2: {fileID: 0}
+--- !u!4 &1355133970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355133968}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 356.9466, y: 153.55212, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1796942037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,3 +2308,4 @@ SceneRoots:
   - {fileID: 1032654797}
   - {fileID: 271857956}
   - {fileID: 695116753}
+  - {fileID: 1355133970}
