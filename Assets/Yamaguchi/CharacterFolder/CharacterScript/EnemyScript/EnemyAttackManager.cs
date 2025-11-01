@@ -127,21 +127,20 @@ public abstract class EnemyAttackManager : MonoBehaviour
         //子クラスを通じて、この攻撃のアニメーション状態を設定
         SetAttackAnimation();
 
-        if (enemyMovement != null)
-        {
-            enemyMovement.ForceUpdateAnimation();
-        }
+        enemyMovement.ForceSetState(enemyMovement.currentState);
+        enemyMovement.SetIsStoppedByAttack(true);
 
         //PerformAttackLogicが終了するのを待つ
         yield return StartCoroutine(PerformAttackLogic());
+        yield return new WaitForSeconds(animationRecoveryTime);
+        
+        ResetAttackAnimation();
 
         //攻撃判定が終わったら、すぐにIdle状態に戻す命令を出す
-        enemyMovement.currentState = EnemyMove.EnemyState.Idle;
+        enemyMovement.ForceSetState(EnemyMove.EnemyState.Idle);
 
         //isStoppedByAttackは、ゲームデザイン上の硬直がなければ、ここで false にする
         enemyMovement.SetIsStoppedByAttack(false); 
-
-        ResetAttackAnimation();
 
         isAttackSequenceRunning = false;
 

@@ -10,10 +10,12 @@ public class EnemyAnimationManager : MonoBehaviour
     private EnemyMove.EnemyState currentAnimState;
 
     //Animatorのパラメーター名
-    private const string PARAM_IS_WALK = "isWalk";
-    private const string PARAM_IS_IDLE = "isIdle";
-    private const string PARAM_IS_LONG_ATTACK = "isLongDistanceAttack";
-    private const string PARAM_IS_CLOSE_ATTACK = "isCloseDistanceAttack";
+    private const string PARAM_IS_WALK          = "isWalk";
+    private const string PARAM_IS_IDLE          = "isIdle";
+    private const string PARAM_IS_LONG_ATTACK   = "isLongDistanceAttack";
+    private const string PARAM_IS_CLOSE_ATTACK  = "isCloseDistanceAttack";
+    private const string PARAM_IS_DIE           = "isDie";
+    private const string PARAM_IS_DAMAGE        = "isDamage";
 
     void Start()
     {
@@ -39,9 +41,13 @@ public class EnemyAnimationManager : MonoBehaviour
     public void UpdateAnimation(EnemyMove.EnemyState newState)
     {
         //状態が変わっていなければ、無駄なSetBool呼び出しを避けて終了
-        if (currentAnimState == newState)
+        if (newState != EnemyMove.EnemyState.damage && newState != EnemyMove.EnemyState.death)
         {
-            return;
+            // 状態が変わっていなければ、無駄なSetBool呼び出しを避けて終了
+            if (currentAnimState == newState)
+            {
+                return;
+            }
         }
 
         SetAllBoolsFalse();
@@ -60,6 +66,12 @@ public class EnemyAnimationManager : MonoBehaviour
             case EnemyMove.EnemyState.RangedAttack:
                 animator.SetBool(PARAM_IS_LONG_ATTACK, true);
                 break;
+            case EnemyMove.EnemyState.damage:
+                animator.SetBool(PARAM_IS_DAMAGE, true);
+                break;
+            case EnemyMove.EnemyState.death:
+                animator.SetBool(PARAM_IS_DIE, true);
+                break;
             case EnemyMove.EnemyState.None:
                 break;
         }
@@ -75,5 +87,7 @@ public class EnemyAnimationManager : MonoBehaviour
         animator.SetBool(PARAM_IS_IDLE, false);
         animator.SetBool(PARAM_IS_CLOSE_ATTACK, false);
         animator.SetBool(PARAM_IS_LONG_ATTACK, false);
+        animator.SetBool(PARAM_IS_DAMAGE, false);
+        animator.SetBool(PARAM_IS_DIE, false);
     }
 }
