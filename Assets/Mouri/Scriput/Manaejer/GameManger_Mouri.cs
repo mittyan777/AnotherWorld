@@ -100,7 +100,7 @@ public class GameManger_Mouri : MonoBehaviour
         else if (Status[4] == 3) jobName = "–‚–@";
 
         // Chang ‚É‰æ‘œØ‘Ö‚ğ“`‚¦‚é
-        FindObjectOfType<Changimage>().jobName(jobName);
+        FindObjectOfType<Changimage>().jobName(jobName);//Eí‚²‚Æ‚É”wŒi‚ğ•Ï‚¦‚é‚±‚Æ‚ªo—ˆ‚é
 
 
     }

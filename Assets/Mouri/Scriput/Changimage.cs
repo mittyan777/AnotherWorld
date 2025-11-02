@@ -11,37 +11,33 @@ public class Changimage : MonoBehaviour
     [SerializeField] private Sprite mageSprite;
     [SerializeField] private Sprite archerSprite;
 
+    public void HideJobImage()  //job‚Ì”wŒi•”•ª‚ğ”ñ•\¦
+    {
+        if (targetImage != null)
+        {
+            {
+                targetImage.gameObject.SetActive(false);
+            }
+        }
+    }
+
     // ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ÉŒÄ‚ÔŠÖ”
-    public void ChangeToWarrior()
-    {
-        targetImage.sprite = warriorSprite;
-    }
 
-    public void ChangeToMage()
-    {
-        targetImage.sprite = mageSprite;
-    }
-
-    public void ChangeToArcher()
-    {
-        targetImage.sprite = archerSprite;
-    }
     public void jobName(string jobName)
     {
-        switch (jobName)
+
+        if(jobName == "Œ•m")
         {
-            case "Œ•m":
-                targetImage.sprite = warriorSprite;
-                break;
-            case "–‚–@":
-                targetImage.sprite = mageSprite;
-                break;
-            case "‹|g‚¢":
-                targetImage.sprite = archerSprite;
-                break;
-            default:
-                Debug.LogWarning("" + jobName);
-                break;
+            targetImage.sprite = warriorSprite;
         }
+        else if (jobName == "–‚–@")
+        {
+            targetImage.sprite = mageSprite;
+        }
+        else if (jobName == "‹|g‚¢")
+        {
+            targetImage.sprite = archerSprite;
+        }
+        Debug.Log("ó‚¯æ‚Á‚½E‹Æ" + jobName);
     }
 }
