@@ -1,70 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    [Header("選択ボタン4つ")]
-    [SerializeField] private Button buttonA;
-    [SerializeField] private Button buttonB;
-    [SerializeField] private Button buttonC;
-    [SerializeField] private Button buttonD;
+    [System.Serializable]
+    public class ScrollViewGroup
+    {
+        public string groupName; 
+        public Button[] itemButtons; // 4つのボタン
+        public int[] itemPrices;     // 各ボタンに対応した価格
+    }
 
-    [Header("購入UIのボタン")]
-    [SerializeField] private Button yesButton;
-    [SerializeField] private Button noButton;
+    [Header("スクロールビューごとの商品情報")]
+    [SerializeField] private ScrollViewGroup[] scrollViewGroups; // 全4スクロールビューを登録
 
     [Header("UI参照")]
-    [SerializeField] private GameObject mainUI;
-    [SerializeField] private GameObject purchaseUI;
+    [SerializeField] private Text coinText;
+    [SerializeField] private Text messageText;
 
-    // 現在選択されている商品名を保持
-    private string currentItemName;
+    private int playerCoins = 1000;
+    private List<string> inventory = new List<string>();
 
     void Start()
     {
-        // 各ボタンのクリックイベント登録
-        buttonA.onClick.AddListener(() => OnItemSelected("A"));
-        buttonB.onClick.AddListener(() => OnItemSelected("B"));
-        buttonC.onClick.AddListener(() => OnItemSelected("C"));
-        buttonD.onClick.AddListener(() => OnItemSelected("D"));
+        // 各スクロールビューのボタンにイベント登録
+        foreach (var group in scrollViewGroups)
+        {
+            for (int i = 0; i < group.itemButtons.Length; i++)
+            {
+                int index = i; // ローカル変数に退避（ラムダ式用）
+                string itemName = $"{group.groupName}_{index + 1}";
+                int price = group.itemPrices[index];
 
-        yesButton.onClick.AddListener(OnPurchaseConfirmed);
-        noButton.onClick.AddListener(OnPurchaseCancelled);
+                group.itemButtons[i].onClick.AddListener(() => TryPurchase(itemName, price));
+            }
+        }
 
-        // 最初は購入UIを非表示
-        purchaseUI.SetActive(false);
+        UpdateCoinUI();
+        messageText.text = "";
     }
 
-    // 商品が選択されたとき
-    void OnItemSelected(string itemName)
+    // 購入処理
+    void TryPurchase(string itemName, int price)
     {
-        currentItemName = itemName;
-        Debug.Log($"{itemName} が選択されました。購入UIに移行します。");
+        if (playerCoins >= price)
+        {
+            playerCoins -= price;
+            inventory.Add(itemName);
+            messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
+            Debug.Log($"{itemName} の購入完了。残りコイン: {playerCoins}");
+        }
+        else
+        {
+            messageText.text = $"コインが足りません！（必要: {price}）";
+            Debug.Log($"購入失敗：{itemName} の価格 {price} に対して残高不足");
+        }
 
-        // UI切り替え
-        mainUI.SetActive(false);
-        purchaseUI.SetActive(true);
+        UpdateCoinUI();
     }
 
-    // 「はい」ボタンが押されたとき
-    void OnPurchaseConfirmed()
+    void UpdateCoinUI()
     {
-        Debug.Log($"{currentItemName} の購入が完了しました！");
-        ReturnToMainUI();
+        if (coinText != null)
+            coinText.text = $"所持コイン: {playerCoins}";
     }
 
-    // 「いいえ」ボタンが押されたとき
-    void OnPurchaseCancelled()
+    public void ShowInventory()
     {
-        Debug.Log("購入をキャンセルしました。");
-        ReturnToMainUI();
-    }
-
-    // メインUIに戻る
-    void ReturnToMainUI()
-    {
-        purchaseUI.SetActive(false);
-        mainUI.SetActive(true);
-        currentItemName = null;
+        Debug.Log("=== インベントリ ===");
+        foreach (var item in inventory)
+        {
+            Debug.Log(item);
+        }
     }
 }
