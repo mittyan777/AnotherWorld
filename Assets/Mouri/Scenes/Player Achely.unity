@@ -1365,7 +1365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &695116753
 Transform:
   m_ObjectHideFlags: 0
@@ -1400,22 +1400,8 @@ MonoBehaviour:
   MP: 0
   AttackStatus: 0
   DefenseStatus: 0
-  job: 0
   Status: 0000000000000000000000000000000000000000
   slot: 1
-  powerslot_text: {fileID: 742241571}
-  defense_text: {fileID: 1931912585}
-  HP_text: {fileID: 1882483591}
-  MP_text: {fileID: 2093717647}
-  job_text: {fileID: 667075014}
-  HP_slot_Max: 192
-  HP_slot_Min: 43
-  MP_slot_Max: 104
-  MP_slot_Min: 27
-  power_slot_Max: 198
-  power_slot_Min: 49
-  Defense_slot_Max: 45
-  Defense_slot_Min: 15
 --- !u!1 &742241568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,7 +1601,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 753414152}
-  - component: {fileID: 753414151}
   - component: {fileID: 753414153}
   m_Layer: 0
   m_Name: Rouret_Manejer
@@ -1624,45 +1609,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &753414151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 753414150}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a655d8fbb511bd245be9b0d5013e867d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player:
-  - {fileID: 0}
-  Coin: 0
-  HP: 0
-  MP: 0
-  AttackStatus: 0
-  DefenseStatus: 0
-  job: 0
-  Status: 0000000000000000000000000000000000000000
-  slot: 1
-  powerslot_text: {fileID: 742241571}
-  defense_text: {fileID: 1931912585}
-  HP_text: {fileID: 1882483591}
-  MP_text: {fileID: 2093717647}
-  job_text: {fileID: 667075014}
-  HP_slot_Max: 193
-  HP_slot_Min: 24
-  MP_slot_Max: 54
-  MP_slot_Min: 8
-  power_slot_Max: 58
-  power_slot_Min: 13
-  Defense_slot_Max: 56
-  Defense_slot_Min: 22
-  RourettoUI: {fileID: 271857952}
-  jobText: {fileID: 667075014}
-  weponPrice: 1000
-  roulettoUI: {fileID: 271857952}
 --- !u!4 &753414152
 Transform:
   m_ObjectHideFlags: 0
@@ -1717,6 +1663,7 @@ MonoBehaviour:
   Defense_slot_Max: 50
   Defense_slot_Min: 12
   RouletteUI: {fileID: 271857952}
+  StartButton: {fileID: 580763926}
   WeponCost: 0
   coin: 0
   jobName:

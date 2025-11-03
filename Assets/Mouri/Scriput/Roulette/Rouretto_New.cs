@@ -9,7 +9,7 @@ public class Rouretto_New : MonoBehaviour
 {
     public GameObject StatusUIOnly;
 
-
+    Changimage changimage;
 
     //内部ステータス（ルーレットの繁栄を行うため)
 
@@ -62,7 +62,7 @@ public class Rouretto_New : MonoBehaviour
     //[SerializeField] private Text jobText;    同じようなものが二回呼ばれている？
 
 
-    //[SerializeField] private Button StartButton;
+    [SerializeField] private Button StartButton;
     //[SerializeField] private Button StopButton;
 
 
@@ -94,14 +94,17 @@ public class Rouretto_New : MonoBehaviour
 
 
 
-        //StartButton.onClick.AddListener(StartRoulette);
+        StartButton.onClick.AddListener(StartRoulette);
         //StopButton.onClick.AddListener(StopRoulette);
+
+        changimage=FindObjectOfType<Changimage>();
 
         //初期UIは非表示
         RouletteUI.SetActive(false);
 
         DontDestroyOnLoad(gameObject);
 
+        
         //RoulettoCost=GmaeM
     }
 
@@ -136,6 +139,12 @@ public class Rouretto_New : MonoBehaviour
         //player.canControl = false;
         //Cursor.lockState= CursorLockMode.None;
         //Cursor.visible = true;
+
+        if(spinCoroutine != null)
+        {
+            StopCoroutine(spinCoroutine);
+            Spining = false;
+        }
 
         //初回かどうかで表示が変わる
         if (FirstRoulette)
@@ -185,7 +194,15 @@ public class Rouretto_New : MonoBehaviour
         Attack_text.text = Status[2].ToString();
         defense_text.text = Status[3].ToString();
 
-        FindObjectOfType<Changimage>().HideJobImage();
+        if(changimage != null)
+        {
+            changimage.HideJobImage();
+
+        }
+
+        //FindObjectOfType<Changimage>().HideJobImage();
+
+        
 
 
 
@@ -211,16 +228,8 @@ public class Rouretto_New : MonoBehaviour
         MP += Status[1];
         Attack += Status[2];
         Defense += Status[3];
-
-
-        // 職種名を作る
-        string jobName = "";
-        if (Status[4] == 1) jobName = "剣士";
-        else if (Status[4] == 2) jobName = "弓使い";
-        else if (Status[4] == 3) jobName = "魔法";
-
         // Chang に画像切替を伝える
-        FindObjectOfType<Changimage>().jobName(jobName);//職種ごとに背景を変えることが出来る
+        FindObjectOfType<Changimage>().jobName(jobName[Status[4]]);//職種ごとに背景を変えることが出来る
 
     }
 
