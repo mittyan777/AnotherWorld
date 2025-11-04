@@ -11,6 +11,7 @@ public class PlayerAtackBase : MonoBehaviour
     bool bAvoidance = false;
 
     /// <summary> /// レンジ構造体 /// </summary>
+    /// いらないかも
     struct PlayerRange
     {
         [SerializeField] int mangicMaxRange;
@@ -24,27 +25,30 @@ public class PlayerAtackBase : MonoBehaviour
 
     void Update()
     {
+        //回避
         Avoidance();
+
+        //通常攻撃
+        Atack_Normal();
     }
 
     /// <summary> /// 各職種の特殊攻撃 /// </summary>
     protected virtual void Special_Attack()
     {
-        //各職種の特殊攻撃
+        //各職種の特殊攻撃 -> 継承先で使用(剣士)
     }
 
     /// <summary> s/// 全職種共通の攻撃処理 /// </summary>
     protected virtual void Atack_Normal()
     {
-        //TODO:マウス左クリックで通常攻撃
-        if (Input.GetMouseButtonDown(0))
+        //TODO:通常攻撃の処理(全職種共通の処理)
+        bool _inputAtk = Input.GetMouseButtonDown(0);
+        if (_inputAtk)
         {
-            //攻撃のダメージ処理
-            
-            //TODO：攻撃アニメーション
-
+            //TODO:ダメージ処理(全職種共通の処理)
+            //->与えるダメージは獲得ステータスの攻撃力分を与える。
         }
-        
+
     }
 
     /// <summary> /// 全職種共通の回避 /// </summary>

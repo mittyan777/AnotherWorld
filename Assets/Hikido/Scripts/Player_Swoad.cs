@@ -7,50 +7,75 @@ public class Player_Swoad : PlayerAtackBase
     //攻撃カウントの定数
     private const float ATTACKCOUNT = 10.0f;
 
-    [SerializeField] float inputwaitTime = 0.0f;
+    [Header("コンボ用")]
+    [SerializeField] float inputwaitTime = 0.5f;
+    [SerializeField] int maxComboCount = 3;
+
+    private float _comboTime = 0.0f;
+
     bool isAttack = false;
     bool isAttackEnd = false;
- 
-     
 
-    // Start is called before the first frame update
     void Start()
     {
         inputwaitTime = ATTACKCOUNT;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //TODO:攻撃開始時->Attackがtrueになった時にカウントを減らしていく
-        if (isAttack) 
-        { 
-            inputwaitTime -= 1.0f;
-            if(inputwaitTime < 0.0f) 
-            {
-                isAttackEnd = true; 
-            }
-        }
+        //コンボ時間減算
+        ComboTime();
 
-        
+        //剣士特殊攻撃
+        Special_Attack();
+    }
+
+    protected override void Special_Attack()
+    {
+        //剣士だった場合のみ + 攻撃中で判断
+        isAttack = true;  
+        SwordSkill();
     }
 
     private void SwordSkill()
     {
-        //左クリック入力状況
+        //左クリック入力状況を保持
         bool _bisAttack = Input.GetMouseButton(0);
-        float _inputTime = 0.0f;
 
-        if (_bisAttack) { _inputTime += Time.deltaTime; }
+        if(_bisAttack) { StartCombo(); }
+        else if(_comboTime > 0.0f) { NextCombo(); }
+    }
 
-        if(isAttack && _inputTime >= inputwaitTime)
+
+    private void StartCombo()
+    {
+        //TODO：実際の攻撃処理 -> 攻撃アニメーションは別クラスでまとめて行うので後に
+
+        
+    }
+
+    private void NextCombo() 
+    {
+        //TODO:次のコンボ
+    }
+
+    //コンボ攻撃時のタイマー
+    private void ComboTime()
+    { 
+        if(_comboTime < 0.0f) 
         {
-            _inputTime = 0;
-
-            //TODO:多段攻撃の処理
+            _comboTime -= Time.deltaTime;
         }
+        if(_comboTime <= 0.0f) 
+        {
+            ComboReset();
+        }
+    }
 
-
+    //コンボリセット
+    private void ComboReset()
+    {
+        //TODO:コンボのリセット処理
     }
 
 }
