@@ -7,29 +7,32 @@ public class UIManager : MonoBehaviour
     [System.Serializable]
     public class ScrollViewGroup
     {
-        public string groupName; 
-        public Button[] itemButtons; // 4つのボタン
-        public int[] itemPrices;     // 各ボタンに対応した価格
+        public string groupName;
+        public Button[] itemButtons;
+        public int[] itemPrices;
     }
 
     [Header("スクロールビューごとの商品情報")]
-    [SerializeField] private ScrollViewGroup[] scrollViewGroups; // 全4スクロールビューを登録
+    [SerializeField] private ScrollViewGroup[] scrollViewGroups;
 
     [Header("UI参照")]
     [SerializeField] private Text coinText;
     [SerializeField] private Text messageText;
 
+    [Header("ショップ全体のUIオブジェクト")]
+    [SerializeField] private GameObject shopUI; // ← ここをCanvasまたは親Panelに設定！
+
     private int playerCoins = 1000;
     private List<string> inventory = new List<string>();
+    private bool isShopOpen = false;
 
     void Start()
     {
-        // 各スクロールビューのボタンにイベント登録
         foreach (var group in scrollViewGroups)
         {
             for (int i = 0; i < group.itemButtons.Length; i++)
             {
-                int index = i; // ローカル変数に退避（ラムダ式用）
+                int index = i;
                 string itemName = $"{group.groupName}_{index + 1}";
                 int price = group.itemPrices[index];
 
@@ -39,9 +42,22 @@ public class UIManager : MonoBehaviour
 
         UpdateCoinUI();
         messageText.text = "";
+
+        if (shopUI != null)
+            shopUI.SetActive(false); // 起動時は非表示
     }
 
-    // 購入処理
+    void Update()
+    {
+        // Bキー入力でショップUIの表示切り替え
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            isShopOpen = !isShopOpen;
+            if (shopUI != null)
+                shopUI.SetActive(isShopOpen);
+        }
+    }
+
     void TryPurchase(string itemName, int price)
     {
         if (playerCoins >= price)

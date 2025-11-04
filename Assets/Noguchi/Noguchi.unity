@@ -247,6 +247,7 @@ MonoBehaviour:
   scrollViewGroups: []
   coinText: {fileID: 0}
   messageText: {fileID: 0}
+  shopUI: {fileID: 0}
 --- !u!1 &31339859
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +963,7 @@ MonoBehaviour:
   scrollViewGroups: []
   coinText: {fileID: 0}
   messageText: {fileID: 0}
+  shopUI: {fileID: 0}
 --- !u!1 &355271225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1113,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u5263\u58EB"
 --- !u!222 &361169532
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1322,7 +1324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &425904054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1340,7 +1342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: -470}
+  m_AnchoredPosition: {x: 180, y: -90}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &425904055
@@ -1550,6 +1552,7 @@ MonoBehaviour:
   scrollViewGroups: []
   coinText: {fileID: 0}
   messageText: {fileID: 0}
+  shopUI: {fileID: 0}
 --- !u!1 &531501718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2061,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &687395707
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2481,7 +2484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &797011729
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2692,7 +2695,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822396221}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
@@ -3278,8 +3281,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1564329545}
   m_HandleRect: {fileID: 1564329544}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.47882882
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3841,7 +3844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u30A2\u30FC\u30C1\u30E3\u30FC"
 --- !u!222 &1144781155
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3989,7 +3992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1165047071
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4007,7 +4010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: -280}
+  m_AnchoredPosition: {x: 180, y: -90}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1165047072
@@ -4270,7 +4273,7 @@ GameObject:
   - component: {fileID: 1213936869}
   - component: {fileID: 1213936868}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button1-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4315,7 +4318,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4391,7 +4394,7 @@ GameObject:
   - component: {fileID: 1239787350}
   - component: {fileID: 1239787349}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Button1-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4436,7 +4439,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4835,7 +4838,7 @@ GameObject:
   - component: {fileID: 1361133000}
   - component: {fileID: 1361132999}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Button1-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4880,7 +4883,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5270,7 +5273,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.000022638706}
-  m_SizeDelta: {x: -543, y: 740}
+  m_SizeDelta: {x: -543, y: 10}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1497871406
 MonoBehaviour:
@@ -5493,7 +5496,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1457536339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5211712}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -5606,7 +5609,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\u9B54\u8853\u5E2B"
 --- !u!222 &1602859897
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6254,7 +6257,7 @@ GameObject:
   - component: {fileID: 1727944270}
   - component: {fileID: 1727944269}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button1-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6299,7 +6302,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6338,7 +6341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6726,7 +6729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1821399003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6744,7 +6747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: -660}
+  m_AnchoredPosition: {x: 180, y: -90}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1821399004
@@ -7158,7 +7161,6 @@ GameObject:
   - component: {fileID: 1932930440}
   - component: {fileID: 1932930439}
   - component: {fileID: 1932930438}
-  - component: {fileID: 1932930441}
   m_Layer: 5
   m_Name: Scroll View1
   m_TagString: Untagged
@@ -7256,45 +7258,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932930436}
   m_CullTransparentMesh: 1
---- !u!114 &1932930441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932930436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab6393767cda56468b923695af93e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollViewGroups:
-  - groupName: Scroll View1
-    itemButtons:
-    - {fileID: 1727944269}
-    - {fileID: 1213936868}
-    - {fileID: 1361132999}
-    - {fileID: 1239787349}
-    itemPrices: 00000000000000000000000000000000
-  - groupName: 
-    itemButtons:
-    - {fileID: 1847309171}
-    - {fileID: 571458414}
-    - {fileID: 1658771819}
-    - {fileID: 1724997250}
-    itemPrices: 
-  - groupName: 
-    itemButtons:
-    - {fileID: 1650724093}
-    - {fileID: 774668544}
-    - {fileID: 1244887302}
-    - {fileID: 1145810470}
-    itemPrices: 
-  - groupName: 
-    itemButtons: []
-    itemPrices: 
-  coinText: {fileID: 0}
-  messageText: {fileID: 0}
 --- !u!1 &1987483900
 GameObject:
   m_ObjectHideFlags: 0
@@ -7590,7 +7553,7 @@ GameObject:
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -7637,6 +7600,7 @@ MonoBehaviour:
     itemPrices: 64000000780000002c010000f4010000
   coinText: {fileID: 0}
   messageText: {fileID: 0}
+  shopUI: {fileID: 2102558500}
 --- !u!4 &2050923160
 Transform:
   m_ObjectHideFlags: 0
