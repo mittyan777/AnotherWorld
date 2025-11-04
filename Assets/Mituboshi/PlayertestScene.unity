@@ -147,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 98127597}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.722, z: 0.439}
+  m_LocalPosition: {x: 0, y: 0.39, z: 1.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1246,6 +1246,10 @@ PrefabInstance:
       propertyPath: manager.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7422341850155170648, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
+      propertyPath: TornadoParticleposition
+      value: 
+      objectReference: {fileID: 98127597}
     - target: {fileID: 8823637778808577510, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1263,7 +1267,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8899054246058918652, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
       insertIndex: -1
       addedObject: {fileID: 98127598}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 586287180851980072, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2047519241}
   m_SourcePrefab: {fileID: 100100000, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
 --- !u!1 &1402393764
 GameObject:
@@ -2070,6 +2077,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027141127}
   m_CullTransparentMesh: 1
+--- !u!1 &2047519236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 586287180851980072, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
+  m_PrefabInstance: {fileID: 1390571906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2047519241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047519236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e1d77e0797e2449ae4dd1d2b3153e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootposition: {fileID: 1503327214}
+  TornadoParticleposition: {fileID: 98127597}
+  fireball: {fileID: 4168647540438853292, guid: f9cf156685a51e84f8d0e877250ac5c9, type: 3}
+  Electric_ball: {fileID: 4168647540438853292, guid: c4092737a0b8a9442a905bc13982c34b, type: 3}
+  Tornado: {fileID: 5790199995407584834, guid: a2d447519516e6d4a8fb1460c78e158b, type: 3}
 --- !u!1 &2050043420
 GameObject:
   m_ObjectHideFlags: 0
