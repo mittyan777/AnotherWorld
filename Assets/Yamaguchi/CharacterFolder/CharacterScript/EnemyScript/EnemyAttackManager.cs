@@ -5,10 +5,10 @@ using UnityEngine;
 // MonoBehaviourを継承させることで、子クラスもコルーチンを実行可能になる
 public abstract class EnemyAttackManager : MonoBehaviour
 {
-    [SerializeField] protected float attackRange = 2.0f; // 攻撃できる距離
-    [SerializeField] protected float attackInterval = 1.5f; // 攻撃のクールタイム
-    [SerializeField] protected float animationlatency = 0.25f;//アニメーション再生までの待ち時間
-    [SerializeField] protected float animationRecoveryTime = 0.75f;//アニメーションが終わるまでの時間
+    [SerializeField] protected float attackRange; // 攻撃できる距離
+    [SerializeField] protected float attackInterval; // 攻撃のクールタイム
+    [SerializeField] protected float animationlatency;//アニメーション再生までの待ち時間
+    [SerializeField] protected float animationRecoveryTime;//アニメーションが終わるまでの時間
 
     protected Transform playerTransform;
     protected EnemyMove enemyMovement;
@@ -127,21 +127,20 @@ public abstract class EnemyAttackManager : MonoBehaviour
         //子クラスを通じて、この攻撃のアニメーション状態を設定
         SetAttackAnimation();
 
-        if (enemyMovement != null)
-        {
-            enemyMovement.ForceUpdateAnimation();
-        }
+        enemyMovement.ForceSetState(enemyMovement.currentState);
+        enemyMovement.SetIsStoppedByAttack(true);
 
         //PerformAttackLogicが終了するのを待つ
         yield return StartCoroutine(PerformAttackLogic());
+        yield return new WaitForSeconds(animationRecoveryTime);
+        
+        ResetAttackAnimation();
 
         //攻撃判定が終わったら、すぐにIdle状態に戻す命令を出す
-        enemyMovement.currentState = EnemyMove.EnemyState.Idle;
+        enemyMovement.ForceSetState(EnemyMove.EnemyState.Idle);
 
         //isStoppedByAttackは、ゲームデザイン上の硬直がなければ、ここで false にする
         enemyMovement.SetIsStoppedByAttack(false); 
-
-        ResetAttackAnimation();
 
         isAttackSequenceRunning = false;
 

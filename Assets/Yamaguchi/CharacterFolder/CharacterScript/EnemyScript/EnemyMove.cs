@@ -7,7 +7,16 @@ public class EnemyMove : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    public enum EnemyState { Idle, Walk, CloseAttack, RangedAttack, None }
+    public enum EnemyState { 
+        Idle,
+        Walk, 
+        CloseAttack,
+        RangedAttack,
+        damage,
+        death,
+        None 
+    }
+
     [HideInInspector] public EnemyState currentState = EnemyState.Idle; // 外部（攻撃スクリプト）から変更されることを考慮し、HideInInspector
 
     [SerializeField] EnemyAnimationManager animationManager;
@@ -16,15 +25,15 @@ public class EnemyMove : MonoBehaviour
     private const float ARRIVAL_THRESHOLD = 0.5f;
 
 
-    [SerializeField] private float stayDuration = 3f;           // 目的地到着後の待機時間 (秒)
-    [SerializeField] private float patrolRandomRange = 10f;     // ランダムな目的地を探す自分の位置からの半径
+    [SerializeField] private float stayDuration = 3f;           //目的地到着後の待機時間 (秒)
+    [SerializeField] private float patrolRandomRange = 10f;     //ランダムな目的地を探す自分の位置からの半径
 
-    [SerializeField] private float visibilityDistance = 15f;    // プレイヤー視認距離
-    [SerializeField] private float stopDistance = 1.5f;         // プレイヤーから離れて停止したい距離 (追跡時)
+    [SerializeField] private float visibilityDistance = 15f;    //プレイヤー視認距離
+    [SerializeField] private float stopDistance = 1.5f;         //プレイヤーから離れて停止したい距離 (追跡時)
     //
     private Transform playerTransform;
-    private float patrolTimer;                                  // 巡回待機用のタイマー
-    private bool isStoppedByAttack = false;                     // 攻撃スクリプトによって移動が停止されているか
+    private float patrolTimer;                                  //巡回待機用のタイマー
+    private bool isStoppedByAttack = false;                     //攻撃スクリプトによって移動が停止されているか
 
     private void Start()
     {
@@ -42,10 +51,16 @@ public class EnemyMove : MonoBehaviour
 
     private void Update()
     {
-        // 攻撃による強制停止中の場合は、移動・回転ロジックをスキップ
-        if (isStoppedByAttack)
+        EnemyState previousState = currentState;
+        if (currentState == EnemyState.death)
         {
-            UpdateAnimationState(true); // 攻撃アニメーションを継続
+            return;
+        }
+        //ダメージ中、もしくは攻撃中なら移動などの処理をスキップする
+        if (currentState == EnemyState.damage || isStoppedByAttack)
+        {
+            //アニメーションは更新する
+            UpdateAnimationState(true);
             return;
         }
 
@@ -106,13 +121,13 @@ public class EnemyMove : MonoBehaviour
     {
         if (agent == null || !agent.enabled) return;
 
-        // 目的地に到達したかの判定
+        //目的地に到達したかの判定
         bool destinationReached =
             agent.hasPath &&
             agent.remainingDistance <= ARRIVAL_THRESHOLD &&
             !agent.pathPending;
 
-        // 停止中ではないが、目的地もない（初期状態やパス失敗）
+        //停止中ではないが、目的地もない（初期状態やパス失敗）
         bool noPathOrStationary = !agent.hasPath && !agent.pathPending && !agent.isStopped;
 
         if (destinationReached || noPathOrStationary)
@@ -201,7 +216,7 @@ public class EnemyMove : MonoBehaviour
 
         if (distanceToPlayer > stopDistance)
         {
-            // 追跡: プレイヤーから指定距離離れた地点を目的地にする
+            //プレイヤーから指定距離離れた地点を目的地にする
             Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
             Vector3 targetPosition = playerTransform.position - directionToPlayer * stopDistance;
 
@@ -232,10 +247,20 @@ public class EnemyMove : MonoBehaviour
     {
         if (animationManager == null) return;
 
+        //ダメージと死は何よりも優先されるアニメーション
+        if (currentState == EnemyState.damage || 
+            currentState == EnemyState.death)
+        {
+            animationManager.UpdateAnimation(currentState);
+            return;
+        }
+
         EnemyState finalState = EnemyState.Idle;
 
         //攻撃による上書き
-        if (isAttackOverride || currentState == EnemyState.CloseAttack || currentState == EnemyState.RangedAttack)
+        if (isAttackOverride || 
+            currentState == EnemyState.CloseAttack || 
+            currentState == EnemyState.RangedAttack)
         {
             finalState = currentState;
         }
@@ -283,10 +308,19 @@ public class EnemyMove : MonoBehaviour
             }
         }
     }
+    
+    //状態を強制的に設定し、アニメーションを即座に更新する
+    public void ForceSetState(EnemyState newState)
+    { 
+        currentState = newState;
+        UpdateAnimationState(true);
+    }
 
+    /*
     // 攻撃アニメーションを強制的に更新（AttackSequenceの冒頭などで使用）
     public void ForceUpdateAnimation()
     {
         UpdateAnimationState(true);
     }
+    */
 }

@@ -160,7 +160,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 247c80268b595f74aad500096f912a45, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 60cd557b29387ba439d8aa87ffa7d776, type: 2}
+      objectReference: {fileID: 9100000, guid: 129d402d557d2c54a96f652d5d781e1b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -186,6 +186,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 247c80268b595f74aad500096f912a45, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2971449830317261356}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 247c80268b595f74aad500096f912a45, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5500515663337858570}
   m_SourcePrefab: {fileID: 100100000, guid: 247c80268b595f74aad500096f912a45, type: 3}
 --- !u!95 &474622512487718181 stripped
 Animator:
@@ -212,7 +215,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -271,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   animationManager: {fileID: 5089600437140058052}
-  stayDuration: 2
+  stayDuration: 5
   patrolRandomRange: 10
   visibilityDistance: 15
   stopDistance: 1.5
@@ -287,7 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4f1b495192cbb4dafa013bfbcf671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHP: 100
+  enemyMaxHP: 10
+  damageTime: 0
+  breakTime: 0
 --- !u!114 &2971449830317261356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +305,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8822aac848c4546b526f70d42fa56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinObj: {fileID: 8086908597899287270, guid: a8a90c1a1cdc5ae479d3c6d1a78ce5ca, type: 3}
-  moneyObj: {fileID: 6239400968715035659, guid: 72c483fb47e4ce64ebb1ee843562badc, type: 3}
-  coinDrop: 10
+  moneyObj: {fileID: 8395968631224569226, guid: 3a481f2a44b54d44cbb5ed362e34f4c3, type: 3}
+--- !u!65 &-5500515663337858570
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6574638428291751397}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 0.75, z: 0}
