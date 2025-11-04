@@ -24,6 +24,7 @@ public abstract class EnemyAttackManager : MonoBehaviour
     protected abstract void SetAttackAnimation();
     protected abstract void ResetAttackAnimation();
 
+
     void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -50,6 +51,8 @@ public abstract class EnemyAttackManager : MonoBehaviour
 
     void Update()
     {
+        if (enemyMovement.currentState == EnemyMove.EnemyState.death) return;
+
         if (!this.enabled) return;
 
         if (playerTransform == null || enemyMovement == null) return;

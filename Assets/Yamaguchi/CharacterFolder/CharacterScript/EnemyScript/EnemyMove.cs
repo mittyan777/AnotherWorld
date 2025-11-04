@@ -17,7 +17,7 @@ public class EnemyMove : MonoBehaviour
         None 
     }
 
-    [HideInInspector] public EnemyState currentState = EnemyState.Idle; // 外部（攻撃スクリプト）から変更されることを考慮し、HideInInspector
+    [HideInInspector] public EnemyState currentState = EnemyState.Idle; //外部（攻撃スクリプト）から変更されることを考慮し、HideInInspector
 
     [SerializeField] EnemyAnimationManager animationManager;
 
