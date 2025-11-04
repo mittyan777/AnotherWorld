@@ -25,7 +25,7 @@ public class WeaponManager : MonoBehaviour
             sword.gameObject.transform.parent = Hand.gameObject.transform;
             sword.transform.position = Hand.transform.position;
         }
-        if (manager.GetComponent<GameManager>().Status[4] == 4 && manager.GetComponent<GameManager>().slot == false)
+        if (manager.GetComponent<GameManager>().Status[4] == 3 && manager.GetComponent<GameManager>().slot == false)
         {
             stick.gameObject.transform.parent = Hand.gameObject.transform;
             stick.transform.position = Hand.transform.position;

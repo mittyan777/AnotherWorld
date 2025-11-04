@@ -17,11 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject rayobj;
     [SerializeField] GameObject slot;
     [SerializeField] float Direction;
-    [SerializeField] GameObject shootposition;
-    [SerializeField] GameObject TornadoParticleposition;
-    [SerializeField] GameObject fireball;
-    [SerializeField] GameObject Electric_ball;
-    [SerializeField] GameObject Tornado;
     [SerializeField] GameObject []manager;
     // Start is called before the first frame update
     void Start()
@@ -67,19 +62,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(fireball, shootposition.transform.position, Quaternion.identity); }
+            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { GetComponent<Magician_Skills>().FireBall();  }
             
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Electric_ball, shootposition.transform.position, Quaternion.identity); }
+            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { GetComponent<Magician_Skills>().ElectricBall(); }
 
 
         }
         if(Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Tornado, TornadoParticleposition.transform.position, Quaternion.identity); }
+            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { GetComponent<Magician_Skills>().TornadoAttack(); }
         }
 
     }
