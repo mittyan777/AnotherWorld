@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player_Swoad : PlayerAtackBase
 {
@@ -9,8 +10,13 @@ public class Player_Swoad : PlayerAtackBase
     private const float ATTACKCOUNT = 0.5f;
 
     [Header("コンボ用")]
-    [SerializeField] float inputwaitTime = 0.5f;
-    [SerializeField] int maxComboCount = 3;
+    [SerializeField] private float inputwaitTime = 0.5f;
+    [SerializeField] private int maxComboCount = 3;
+
+    //斬撃エフェクト
+    [SerializeField] private GameObject SlashEffect;
+    //斬撃を飛ばすポイント
+    [SerializeField] private Transform SlashPoint;
 
     private float _comboTime = 0.0f;
     private int _comboCount = 0;
@@ -19,7 +25,6 @@ public class Player_Swoad : PlayerAtackBase
     void Start()
     {
         inputwaitTime = ATTACKCOUNT;
-       
     }
 
     protected override void Update()
@@ -34,7 +39,6 @@ public class Player_Swoad : PlayerAtackBase
             //剣士特殊攻撃
             Special_Attack();
         }
-      
 
     }
 
@@ -57,7 +61,6 @@ public class Player_Swoad : PlayerAtackBase
         }
       
     }
-
 
     private void StartCombo()
     {
@@ -97,6 +100,7 @@ public class Player_Swoad : PlayerAtackBase
             _comboTime = inputwaitTime;
             ComboAnimation(_comboCount);
             Debug.Log("2コンボ目の確認");
+
         }
     }
 
@@ -114,6 +118,12 @@ public class Player_Swoad : PlayerAtackBase
     //コンボのアニメーション
     private void ComboAnimation(int _comboCount) 
     {
+        //斬撃波を生み出す処理 -> 3コンボ目のみ
+        if(_comboCount == 3)
+        {
+            TryAttackCombo();
+        }
+
         Debug.Log("アニメーション処理確認");
         //TODO;アニメーションクラスの処理を呼び出す。
 
@@ -125,6 +135,16 @@ public class Player_Swoad : PlayerAtackBase
 
     }
 
+    /// <summary> /// 三コンボ目で斬撃波を生成する /// </summary>
+    private void TryAttackCombo()
+    {
+        //斬撃エフェクト生成
+        //仮でトランスフォームのポジションから
+        var slashEffectprefa = Instantiate<GameObject>(SlashEffect,SlashPoint.transform);
+        
+    }
+
+
     //攻撃アニメーション間隔
     IEnumerator AttackDuration(float _combo)
     {
@@ -133,4 +153,6 @@ public class Player_Swoad : PlayerAtackBase
         //isAttack = false;
 
     }
+
+    
 }
