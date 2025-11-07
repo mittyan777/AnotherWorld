@@ -2,11 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class UIManager : MonoBehaviour
+
+public class Purchase : MonoBehaviour
 {
+
+    private koin Koin;
+    private int getcoin;
+
     [System.Serializable]
+
     public class ScrollViewGroup
     {
+        
         public string groupName;
         public Button[] itemButtons;
         public int[] itemPrices;
@@ -22,12 +29,22 @@ public class UIManager : MonoBehaviour
     [Header("ショップ全体のUIオブジェクト")]
     [SerializeField] private GameObject shopUI; // ← ここをCanvasまたは親Panelに設定！
 
-    private int playerCoins = 1000;
+    //private int playerCoins = 1000;
     private List<string> inventory = new List<string>();
     private bool isShopOpen = false;
 
     void Start()
     {
+          // 🔹 koin オブジェクトをシーンから自動取得
+        Koin = FindObjectOfType<koin>();
+        if (Koin == null)
+        {
+            Debug.LogError("koin オブジェクトがシーンに見つかりません。");
+            return;
+        }
+
+        getcoin = Koin.playerCoin;//プレイヤーのコインを取得
+
         foreach (var group in scrollViewGroups)
         {
             for (int i = 0; i < group.itemButtons.Length; i++)
@@ -60,12 +77,13 @@ public class UIManager : MonoBehaviour
 
     void TryPurchase(string itemName, int price)
     {
-        if (playerCoins >= price)
+        if (getcoin >= price)
         {
-            playerCoins -= price;
+            getcoin -= price;
+            Koin.playerCoin = getcoin;
             inventory.Add(itemName);
             messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
-            Debug.Log($"{itemName} の購入完了。残りコイン: {playerCoins}");
+            Debug.Log($"{itemName} の購入完了。残りコイン: {getcoin}");
         }
         else
         {
@@ -79,7 +97,7 @@ public class UIManager : MonoBehaviour
     void UpdateCoinUI()
     {
         if (coinText != null)
-            coinText.text = $"所持コイン: {playerCoins}";
+            coinText.text = $"所持コイン: {getcoin}";
     }
 
     public void ShowInventory()

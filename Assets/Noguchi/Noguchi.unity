@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 25581244}
   - component: {fileID: 25581243}
   - component: {fileID: 25581242}
-  - component: {fileID: 25581245}
   m_Layer: 5
   m_Name: Scroll View4
   m_TagString: Untagged
@@ -232,22 +231,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25581240}
   m_CullTransparentMesh: 1
---- !u!114 &25581245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25581240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab6393767cda56468b923695af93e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollViewGroups: []
-  coinText: {fileID: 0}
-  messageText: {fileID: 0}
-  shopUI: {fileID: 0}
 --- !u!1 &31339859
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,7 +833,6 @@ GameObject:
   - component: {fileID: 335620169}
   - component: {fileID: 335620168}
   - component: {fileID: 335620167}
-  - component: {fileID: 335620170}
   m_Layer: 5
   m_Name: Scroll View3
   m_TagString: Untagged
@@ -948,22 +930,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335620165}
   m_CullTransparentMesh: 1
---- !u!114 &335620170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335620165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab6393767cda56468b923695af93e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollViewGroups: []
-  coinText: {fileID: 0}
-  messageText: {fileID: 0}
-  shopUI: {fileID: 0}
 --- !u!1 &355271225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,6 +1193,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &364404797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 364404799}
+  - component: {fileID: 364404798}
+  m_Layer: 0
+  m_Name: GameObject2
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &364404798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364404797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57736cef6ef4c144ae237025fcaf9b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aa: 1000
+  playerCoin: 1000
+--- !u!4 &364404799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364404797}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -84, y: 810, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &413121363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,7 +1451,6 @@ GameObject:
   - component: {fileID: 495718753}
   - component: {fileID: 495718752}
   - component: {fileID: 495718751}
-  - component: {fileID: 495718754}
   m_Layer: 5
   m_Name: Scroll View2
   m_TagString: Untagged
@@ -1485,7 +1496,7 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.1
+  m_Elasticity: 0.3
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: -20
@@ -1537,22 +1548,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495718749}
   m_CullTransparentMesh: 1
---- !u!114 &495718754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495718749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab6393767cda56468b923695af93e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollViewGroups: []
-  coinText: {fileID: 0}
-  messageText: {fileID: 0}
-  shopUI: {fileID: 0}
 --- !u!1 &531501718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,7 +1842,7 @@ GameObject:
   - component: {fileID: 571458415}
   - component: {fileID: 571458414}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5925,7 +5920,7 @@ GameObject:
   - component: {fileID: 1658771820}
   - component: {fileID: 1658771819}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Button3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6136,7 +6131,7 @@ GameObject:
   - component: {fileID: 1724997251}
   - component: {fileID: 1724997250}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Button4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7592,12 +7587,8 @@ MonoBehaviour:
     - {fileID: 1145810470}
     itemPrices: 64000000780000002c010000f4010000
   - groupName: Scroll View4
-    itemButtons:
-    - {fileID: 797011730}
-    - {fileID: 1165047072}
-    - {fileID: 425904055}
-    - {fileID: 1821399004}
-    itemPrices: 64000000780000002c010000f4010000
+    itemButtons: []
+    itemPrices: 
   coinText: {fileID: 0}
   messageText: {fileID: 0}
   shopUI: {fileID: 2102558500}
@@ -7958,3 +7949,4 @@ SceneRoots:
   - {fileID: 909831952}
   - {fileID: 364363854}
   - {fileID: 2050923160}
+  - {fileID: 364404799}
