@@ -6,38 +6,60 @@ using UnityEngine.UI;
 
 public class Changimage : MonoBehaviour
 {
-    [SerializeField] private Image targetImage; // •Ï‚¦‚éImage
-    [SerializeField] private Sprite warriorSprite; // Eí‚²‚Æ‚Ì‰æ‘œ
-    [SerializeField] private Sprite mageSprite;
-    [SerializeField] private Sprite archerSprite;
 
-    public void HideJobImage()  //job‚Ì”wŒi•”•ª‚ğ”ñ•\¦
+    [SerializeField] private Image targetImage; // Eí‰æ‘œ‚ğ•\¦‚·‚éImage
+
+    [Header("Eí‚²‚Æ‚Ì‰æ‘œ")]
+    [SerializeField] private Sprite swordsman;
+    [SerializeField] private Sprite Magishan;
+    [SerializeField] private Sprite Aceher;
+
+    private bool isFirstRoulette = true;
+
+    // ‰‰ñƒ‹[ƒŒƒbƒg‚ÉŒÄ‚Ô
+    public void ShowJob(string jobName)
     {
-        if (targetImage != null)
+        if (targetImage == null) return;
+
+        if (jobName == "Œ•m")
         {
-            {
-                targetImage.gameObject.SetActive(false);
-            }
+            targetImage.sprite = swordsman;
         }
-    }
-
-    // ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ÉŒÄ‚ÔŠÖ”
-
-    public void jobName(string jobName)
-    {
-
-        if(jobName == "Œ•m")
+        else if (jobName == "–‚–@g‚¢")
         {
-            targetImage.sprite = warriorSprite;
-        }
-        else if (jobName == "–‚–@")
-        {
-            targetImage.sprite = mageSprite;
+            targetImage.sprite = Magishan;
         }
         else if (jobName == "‹|g‚¢")
         {
-            targetImage.sprite = archerSprite;
+            targetImage.sprite = Aceher;
         }
-        Debug.Log("ó‚¯æ‚Á‚½E‹Æ" + jobName);
+
+        targetImage.gameObject.SetActive(true);
+        isFirstRoulette = false;
+
+        Debug.Log("‰‰ñƒ‹[ƒŒƒbƒg‚Å•\¦‚·‚éE‹Æ: " + jobName);
+    }
+
+    // “ñ‰ñ–ÚˆÈ~‚ÍEí‰æ‘œ‚ğ”ñ•\¦‚É‚·‚é
+    public void HideJobImage()
+    {
+        if (targetImage != null)
+        {
+            targetImage.gameObject.SetActive(false);
+            Debug.Log("2‰ñ–ÚˆÈ~‚ÍE‹Æ‰æ‘œ”ñ•\¦");
+        }
+    }
+
+    // Rouletto_New ‚©‚çŒÄ‚Ô‹¤’Êˆ—
+    public void UpdateJobImage(string jobName, bool firstRoulette)
+    {
+        if (firstRoulette)
+        {
+            ShowJob(jobName);
+        }
+        else
+        {
+            HideJobImage();
+        }
     }
 }
