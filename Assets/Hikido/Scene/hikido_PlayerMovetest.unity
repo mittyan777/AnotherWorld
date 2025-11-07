@@ -479,11 +479,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 586287180851980072, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
   m_PrefabInstance: {fileID: 1513618388}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1639461695 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8555716100311035614, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
-  m_PrefabInstance: {fileID: 1513618388}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1639461696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8899054246058918652, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
@@ -498,10 +493,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1639461691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 508ff80a620d6c64c84d639c4d290018, type: 3}
+  m_Script: {fileID: 11500000, guid: 386521aee55d16a4baf34b649ebe1a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 1639461695}
+  inputwaitTime: 0.5
+  maxComboCount: 3
 --- !u!1 &1894389876
 GameObject:
   m_ObjectHideFlags: 0

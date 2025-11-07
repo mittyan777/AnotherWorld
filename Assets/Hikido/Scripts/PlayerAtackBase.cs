@@ -9,6 +9,7 @@ public class PlayerAtackBase : MonoBehaviour
 {
     Animator _animator;
     bool bAvoidance = false;
+    protected  bool bNormalAttack = false;
 
     /// <summary> /// レンジ構造体 /// </summary>
     /// いらないかも
@@ -20,10 +21,10 @@ public class PlayerAtackBase : MonoBehaviour
 
     void Start()
     {
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         //回避
         Avoidance();
@@ -47,6 +48,7 @@ public class PlayerAtackBase : MonoBehaviour
         {
             //TODO:ダメージ処理(全職種共通の処理)
             //->与えるダメージは獲得ステータスの攻撃力分を与える。
+            bNormalAttack = true;
         }
 
     }
@@ -59,8 +61,8 @@ public class PlayerAtackBase : MonoBehaviour
         float _inputVertical = Input.GetAxisRaw("Vertical");
 
         //shiftキー入力判定
-        bool _isShiftKey = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        bool _isSpaceKey = Input.GetKey(KeyCode.Space);
+        bool _isShiftKey = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
+        bool _isSpaceKey = Input.GetKeyDown(KeyCode.Space);
 
         UnityEngine.Vector3 _inputDirection = new UnityEngine.Vector3(_inputHorizontal, 0f, _inputVertical).normalized;
 
@@ -76,14 +78,14 @@ public class PlayerAtackBase : MonoBehaviour
             bAvoidance = false;
         }
 
-        if (!bAvoidance)
+        if (bAvoidance)
         {
-            _animator.SetBool("avoidance", true);
+            //_animator.SetBool("avoidance", true);
             Debug.Log("回避方向");
         }
         else
         {
-            _animator.SetBool("avoidance", false);
+            //_animator.SetBool("avoidance", false);
         }
     }
     public bool GetbAvoindance()
