@@ -30,7 +30,7 @@ public class Rouretto_New : MonoBehaviour
     public bool slot = true;
     private bool isActive = false;  //UIが開いているかを判断する
 
-    private Player player; 
+    private Player player;
 
     [Header("UIを使用したステータス表示")]
     [SerializeField] Text Attack_text;
@@ -63,7 +63,7 @@ public class Rouretto_New : MonoBehaviour
 
 
     [SerializeField] private Button StartButton;
-    //[SerializeField] private Button StopButton;
+    [SerializeField] private Button StopButton;
 
 
     [Header("ルーレット設定")]
@@ -79,32 +79,36 @@ public class Rouretto_New : MonoBehaviour
     private bool Spining = false;
     private Coroutine spinCoroutine;
 
+    private int[] FirstStatus = new int[4];
+    private int[] UpdateStatus = new int[4];
+
+    [Header("職種ごとの画像設定")]
+    [SerializeField] private Sprite swordsman;
+    [SerializeField] private Sprite Magishan;
+    [SerializeField] private Sprite Aceher;
+
+
+
     //[Header("所持金")]
     //public int WeponPrice;
     //private int RoulettoCost;
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
     {
         //RouletteCost = WeponCost;     //武器屋の人と話し合い    コスト計算
 
-
-
         StartButton.onClick.AddListener(StartRoulette);
-        //StopButton.onClick.AddListener(StopRoulette);
+        StopButton.onClick.AddListener(StopRoulette);
 
-        changimage=FindObjectOfType<Changimage>();
+        changimage = FindObjectOfType<Changimage>();
 
         //初期UIは非表示
         RouletteUI.SetActive(false);
 
         DontDestroyOnLoad(gameObject);
 
-        
+
         //RoulettoCost=GmaeM
     }
 
@@ -115,6 +119,17 @@ public class Rouretto_New : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            //if (slot == true)
+            //{
+            //    Status[0] = Random.Range(HP_slot_Min, HP_slot_Max);
+            //    Status[1] = Random.Range(MP_slot_Min, MP_slot_Max);
+            //    Status[2] = Random.Range(power_slot_Min, power_slot_Max);
+            //    Status[3] = Random.Range(Defense_slot_Min, Defense_slot_Max);
+            //    Status[4] = Random.Range(1, 4);
+
+
+            //}
+
             if (isActive)
             {
                 CloseRouletto();    //UIが開いていればTabキーを押して閉じる
@@ -124,13 +139,12 @@ public class Rouretto_New : MonoBehaviour
                 OpenRouletto();
                 PlayerStatus();
             }
-            
+
         }
 
-
-
-
     }
+
+
     void OpenRouletto()
     {
         //UIを開く
@@ -140,24 +154,27 @@ public class Rouretto_New : MonoBehaviour
         //Cursor.lockState= CursorLockMode.None;
         //Cursor.visible = true;
 
-        if(spinCoroutine != null)
+        if (spinCoroutine != null)
         {
             StopCoroutine(spinCoroutine);
             Spining = false;
         }
 
-        //初回かどうかで表示が変わる
-        if (FirstRoulette)
-        {
-            DisplayInitialRouletto();
-            FirstRoulette = false;
-        }
+        ////初回かどうかで表示が変わる
+        //if (FirstRoulette)
+        //{
+        //    DisplayInitialRouletto();
+        //    FirstRoulette = false;
+        //}
         else
         {
             DisplayStatusOnly();
         }
 
+        StartRoulette();
+
     }
+
     void CloseRouletto()
     {
         isActive = false;
@@ -168,7 +185,7 @@ public class Rouretto_New : MonoBehaviour
 
     }
 
-    void DisplayInitialRouletto()
+    void DisplayInitialRouletto()   //一番最初のステータスUIの表示
     {
         job_text.gameObject.SetActive(true);
         HP_text.gameObject.SetActive(true);
@@ -183,7 +200,6 @@ public class Rouretto_New : MonoBehaviour
         job_text.text = Status[4].ToString();
     }
 
-
     void DisplayStatusOnly()//二回目以降はステータスだけの表示
     {
         job_text.gameObject.SetActive(false);   //SetActiveでjob部分をfalseにした。}
@@ -194,16 +210,13 @@ public class Rouretto_New : MonoBehaviour
         Attack_text.text = Status[2].ToString();
         defense_text.text = Status[3].ToString();
 
-        if(changimage != null)
+        if (changimage != null)
         {
             changimage.HideJobImage();
 
         }
 
         //FindObjectOfType<Changimage>().HideJobImage();
-
-        
-
 
 
     }
@@ -220,18 +233,7 @@ public class Rouretto_New : MonoBehaviour
         Player[0].GetComponent<Player>().AttackStatus = Attack;
         Player[0].GetComponent<Player>().DefenseStatus = Defense;
     }
- 
-    public void stopslot()
-    {
-        slot = false;
-        HP += Status[0];
-        MP += Status[1];
-        Attack += Status[2];
-        Defense += Status[3];
-        // Chang に画像切替を伝える
-        FindObjectOfType<Changimage>().jobName(jobName[Status[4]]);//職種ごとに背景を変えることが出来る
 
-    }
 
     void StartRoulette()
     {
@@ -260,12 +262,29 @@ public class Rouretto_New : MonoBehaviour
             StopCoroutine(spinCoroutine);
 
         }
-        if (FirstRoulette)
+        if (!FirstRoulette)
         {
+
+            UpdateStatus[0] += Status[0];
+            UpdateStatus[1] += Status[1];
+            UpdateStatus[2] += Status[2];
+            UpdateStatus[3] += Status[3];
+
             FirstRoulette = false;
 
             Debug.Log("1stルーレット");
         }
+
+        HP = UpdateStatus[0];
+        MP = UpdateStatus[1];
+        Attack = UpdateStatus[2];
+        Defense = UpdateStatus[3];
+
+        slot = false;
+        FirstRoulette = false;
+
+        
+
 
         //結果を確定
         HP = Mathf.Round(HP);
@@ -279,40 +298,74 @@ public class Rouretto_New : MonoBehaviour
         Attack += Status[2];
         Defense += Status[3];
 
-
-
-
     }
 
     IEnumerator SpinRoulette()
     {
         while (Spining)
         {
+            // 各ステータスを個別にランダム化
+             HP = Random.Range(HP_slot_Min, HP_slot_Max + 1);
+             MP = Random.Range(MP_slot_Min, MP_slot_Max + 1);
+             Attack = Random.Range(power_slot_Min, power_slot_Max + 1);
+             Defense = Random.Range(Defense_slot_Min, Defense_slot_Max + 1);
+
             // 職種は初回のみランダム決定
             if (FirstRoulette)
             {
-                job = jobName[Random.Range(0, jobName.Length)];
+                FirstStatus[0] = (int)HP;
+                FirstStatus[1] = (int)MP;
+                FirstStatus[2] = (int)Attack;
+                FirstStatus[3] = (int)Defense;
+
+                UpdateStatus[0] = FirstStatus[0];
+                UpdateStatus[1] = FirstStatus[1];
+                UpdateStatus[2] = FirstStatus[2];
+                UpdateStatus[3] = FirstStatus[3];
+
+                Status[4] = Random.Range(0, jobName.Length);
+
+                job = jobName[Status[4]];
+
+                //職種ごとの画像変更
+                if (job == "剣士")
+                {
+                    jobimage.sprite = swordsman;
+                }
+                else if(job == "魔法使い")
+                {
+                    jobimage.sprite = Magishan;
+                }
+
+                else if( job == "弓使い")
+                {
+                    jobimage.sprite = Aceher;
+                }
+
+                jobimage.gameObject.SetActive(true);
+
+                FirstRoulette = false;
+
+                //    if(job=="剣士")Image.sprite=
+                //};
+
+                //if(jobName==剣士")Image.sprit
+
+                
             }
-            // 各ステータスを個別にランダム化
-            HP = Random.Range(HP_slot_Min, HP_slot_Max + 1);
-            MP = Random.Range(MP_slot_Min, MP_slot_Max + 1);
-            Attack = Random.Range(power_slot_Min, power_slot_Max + 1);
-            Defense = Random.Range(Defense_slot_Min, Defense_slot_Max + 1);
-
-            Status[4]=Random.Range(0,jobName.Length);
-            job = jobName[Status[4]];
-
             UpdateStatusText();
+
             yield return new WaitForSeconds(0.05f);
 
-        }
-        void UpdateStatusText()
-        {
-            HP_text.text = "HP：" + Mathf.RoundToInt(HP).ToString();
-            MP_text.text = "MP：" + Mathf.RoundToInt(MP).ToString();
-            Attack_text.text = "攻撃：" + Mathf.RoundToInt(Attack).ToString();
-            defense_text.text = "防御：" + Mathf.RoundToInt(Defense).ToString();
-            job_text.text = "職業：" + job;
+            void UpdateStatusText()
+            {
+                HP_text.text = "HP：" + Mathf.RoundToInt(HP).ToString();
+                MP_text.text = "MP：" + Mathf.RoundToInt(MP).ToString();
+                Attack_text.text = "攻撃：" + Mathf.RoundToInt(Attack).ToString();
+                defense_text.text = "防御：" + Mathf.RoundToInt(Defense).ToString();
+                job_text.text = "職業：" + job;
+            }
         }
     }
 }
+
