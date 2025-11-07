@@ -93,13 +93,13 @@ ModelImporter:
     serializedVersion: 3
     human: []
     skeleton:
-    - name: Goblin(Clone)
+    - name: Goblin01(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Group
-      parentName: Goblin(Clone)
+      parentName: Goblin01(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -5034,7 +5034,7 @@ ModelImporter:
       rotation: {x: 0, y: -0.29906467, z: -0, w: 0.9542329}
       scale: {x: 1, y: 1, z: 1}
     - name: MainSword
-      parentName: Goblin(Clone)
+      parentName: Goblin01(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -5054,7 +5054,7 @@ ModelImporter:
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: MainShield
-      parentName: Goblin(Clone)
+      parentName: Goblin01(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}

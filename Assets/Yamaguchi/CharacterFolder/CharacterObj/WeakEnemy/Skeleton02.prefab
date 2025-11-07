@@ -193,7 +193,7 @@ MonoBehaviour:
   isAttackSequenceRunning: 0
   projectilePrefab: {fileID: 7555427716517911455, guid: 7c803678c7e122c4083cbef002c59fd8, type: 3}
   firePoint: {fileID: 5642959302857339379}
-  throwWaitingTime: 0
+  throwWaitingTime: 0.25
 --- !u!114 &4232694820562097266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMaxHP: 20
-  damageTime: 0
-  breakTime: 0
+  damageTime: 1.5
+  breakTime: 2
 --- !u!114 &6979565314515131775
 MonoBehaviour:
   m_ObjectHideFlags: 0
