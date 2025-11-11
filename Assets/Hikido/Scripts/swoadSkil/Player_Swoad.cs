@@ -15,8 +15,8 @@ public class Player_Swoad : PlayerAtackBase
 
     //斬撃エフェクト
     [SerializeField] private GameObject SlashEffect;
-    //斬撃を飛ばすポイント
-    [SerializeField] private Transform SlashPoint;
+    //斬撃の発生箇所
+    [SerializeField] private Transform SlasshPoint;
 
     private float _comboTime = 0.0f;
     private int _comboCount = 0;
@@ -138,9 +138,13 @@ public class Player_Swoad : PlayerAtackBase
     /// <summary> /// 三コンボ目で斬撃波を生成する /// </summary>
     private void TryAttackCombo()
     {
+        //発生ポイントの座標を取得
+        Quaternion _rotation = SlasshPoint.rotation;
+
         //斬撃エフェクト生成
         //仮でトランスフォームのポジションから
-        var slashEffectprefa = Instantiate<GameObject>(SlashEffect,SlashPoint.transform);
+        Debug.Log("三コンボ目");
+        var slashEffectprefa = Instantiate<GameObject>(SlashEffect,SlasshPoint.position,_rotation);
         
     }
 
@@ -150,8 +154,6 @@ public class Player_Swoad : PlayerAtackBase
     {
         //アニメーションクラスでアニメーションのクリップ時間を取得する。
         yield return new WaitForSeconds(_combo);
-        //isAttack = false;
-
     }
 
     

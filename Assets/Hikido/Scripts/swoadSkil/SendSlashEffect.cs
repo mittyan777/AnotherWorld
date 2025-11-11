@@ -16,7 +16,7 @@ public class SendSlashEffect : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = this.transform.position * slashspeed * Time.deltaTime ;
+        transform.position += transform.forward * slashspeed * Time.deltaTime ;
     }
 
     /// <summary> /// 斬撃は貫通なのでトリガー使用 /// </summary>
@@ -30,7 +30,6 @@ public class SendSlashEffect : MonoBehaviour
             //ダメージ処理未作成のためデバッグログ
             UnityEngine.Debug.Log("接触判定");
         }
-        Destroy(this.gameObject);
     }
 
 

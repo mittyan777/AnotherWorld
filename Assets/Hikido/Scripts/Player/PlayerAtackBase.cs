@@ -80,7 +80,7 @@ public class PlayerAtackBase : MonoBehaviour
 
         if (bAvoidance)
         {
-            //_animator.SetBool("avoidance", true);
+            //TODO:アニメーションフラグで管理
             Debug.Log("回避方向");
         }
         else
