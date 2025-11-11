@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Canvas : MonoBehaviour
+public class Canvascont : MonoBehaviour
 {
     [SerializeField] private Button buttonA;
     [SerializeField] private Button buttonB;
