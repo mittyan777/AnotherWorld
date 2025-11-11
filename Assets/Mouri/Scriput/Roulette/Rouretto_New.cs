@@ -7,30 +7,29 @@ using UnityEngine.UI;
 
 public class Rouretto_New : MonoBehaviour
 {
-    public GameObject StatusUIOnly;
 
-    Changimage changimage;
 
     //内部ステータス（ルーレットの繁栄を行うため)
 
     [SerializeField] private GameObject[] Player;
-    [SerializeField] private float Coin;
-    [SerializeField] float HP;
-    [SerializeField] float MP;
-    [SerializeField] private float Attack;
-    [SerializeField] private float Defense;
-    [SerializeField] private string job;
-    [SerializeField] private Image jobimage;
+    private Player player;
 
+    [SerializeField] private float Coin;
+    [SerializeField] int HP;
+    [SerializeField] int MP;
+    [SerializeField] private int Attack;
+    [SerializeField] private int Defense;
+    [SerializeField] private string job;
+    
 
 
     [Header("ルーレット内部システム")]
     [SerializeField] public int[] Status;   //プレイヤーの配列ごとのステータスを探すための役割
     [SerializeField] private bool FirstRoulette = true;//初回かどうかの判断をするための関数
-    public bool slot = true;
+    
     private bool isActive = false;  //UIが開いているかを判断する
 
-    private Player player; 
+    
 
     [Header("UIを使用したステータス表示")]
     [SerializeField] Text Attack_text;
@@ -38,6 +37,7 @@ public class Rouretto_New : MonoBehaviour
     [SerializeField] Text HP_text;
     [SerializeField] Text MP_text;
     [SerializeField] Text job_text;
+    [SerializeField] Text Coin_Text;
 
     //[SerializeField] Text Player_Coin;
 
@@ -56,65 +56,65 @@ public class Rouretto_New : MonoBehaviour
     [SerializeField] int Defense_slot_Min;
 
 
+    //ルーレットUI要素
     [SerializeField] private GameObject RouletteUI;
+    [SerializeField] private Image Rouret_back; //半透明
 
 
     //[SerializeField] private Text jobText;    同じようなものが二回呼ばれている？
 
 
     [SerializeField] private Button StartButton;
-    //[SerializeField] private Button StopButton;
+    [SerializeField] private Button StopButton;
 
 
     [Header("ルーレット設定")]
     [SerializeField] private float WeponCost;   //武器の価格
-    private int RouletteCost;
-    [SerializeField] private int coin;  //所持しているお金
+    [SerializeField] private int RouletteCost=100;  //ルーレットを回す際に必要なコスト
+    //[SerializeField] private int coin;  //所持しているお金
 
 
     [Header("職種設定")]
-    [SerializeField] private string[] jobName = { "剣士", "魔法使い", "弓使い" };
+    [SerializeField] private string[] jobName = { "剣士", "魔法使い", "弓使い" };    //文字を配列化し関数として認識させている
 
     [Header("状態管理")]
-    private bool Spining = false;
-    private Coroutine spinCoroutine;
+    private bool Spining = false;  //回転中華を判断する
+    private Coroutine spinCoroutine;    //ルーレットの一時停止を行うのに適しているプログラムであり、変数として書いている
 
-    //[Header("所持金")]
-    //public int WeponPrice;
-    //private int RoulettoCost;
+    private int[] FirstStatus = new int[4];
+    private int[] UpdateStatus = new int[4];
 
+    [Header("職種ごとの画像設定")]
+    [SerializeField] private Changimage changimage;
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        //RouletteCost = WeponCost;     //武器屋の人と話し合い    コスト計算
-
-
-
-        StartButton.onClick.AddListener(StartRoulette);
-        //StopButton.onClick.AddListener(StopRoulette);
-
-        changimage=FindObjectOfType<Changimage>();
-
         //初期UIは非表示
-        RouletteUI.SetActive(false);
+        RouletteUI.SetActive(false);    //ルーレットUIや背景などが「RouletteUI」に格納されておりこのルーレットUIを表示/非表示にさせるか否か
 
-        DontDestroyOnLoad(gameObject);
+        if (Rouret_back != null)
+        {
+            Rouret_back.gameObject.SetActive(false);
+        }
+
+        StartButton.onClick.AddListener(StartRoulette);     
+        StopButton.onClick.AddListener(StopRoulette);
 
         
-        //RoulettoCost=GmaeM
-    }
+        DontDestroyOnLoad(gameObject);
 
-    // Update is called once per frame
+        if (changimage == null)
+        {
+            changimage = FindAnyObjectByType<Changimage>();//職種ごとに画像を変えるための部分
+        }
+    }
     void Update()
     {
         PlayerStatus();
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))  //もしもTabキーを押すと下のプログラムを呼び出す
         {
+
             if (isActive)
             {
                 CloseRouletto();    //UIが開いていればTabキーを押して閉じる
@@ -124,11 +124,17 @@ public class Rouretto_New : MonoBehaviour
                 OpenRouletto();
                 PlayerStatus();
             }
-            
+
         }
 
-
-
+    }
+    void UpdateCoinUI()
+    {
+        if (Coin < 0)
+        {
+            Coin = 0;
+        }
+        Coin_Text.text = "所持金:" + Coin.ToString();
 
     }
     void OpenRouletto()
@@ -136,11 +142,12 @@ public class Rouretto_New : MonoBehaviour
         //UIを開く
         isActive = true;
         RouletteUI.SetActive(true);
-        //player.canControl = false;
-        //Cursor.lockState= CursorLockMode.None;
-        //Cursor.visible = true;
+        if (Rouret_back != null)
+        {
+            Rouret_back.gameObject.SetActive(true);
+        }
 
-        if(spinCoroutine != null)
+        if (spinCoroutine != null)
         {
             StopCoroutine(spinCoroutine);
             Spining = false;
@@ -149,28 +156,31 @@ public class Rouretto_New : MonoBehaviour
         //初回かどうかで表示が変わる
         if (FirstRoulette)
         {
+
             DisplayInitialRouletto();
-            FirstRoulette = false;
+
         }
         else
         {
             DisplayStatusOnly();
+
         }
 
+        UpdateCoinUI();
     }
+
     void CloseRouletto()
     {
         isActive = false;
         RouletteUI.SetActive(false);
-        //player.canControl = false;
-        //Cursor.lockState=CursorLockMode.Locked;
-        //Cursor.visible = false;
 
+        if(Rouret_back != null)
+        {
+            Rouret_back.gameObject.SetActive(false);
+        }
     }
-
-    void DisplayInitialRouletto()
+    void DisplayInitialRouletto()   //一番最初のステータスUIの表示
     {
-        job_text.gameObject.SetActive(true);
         HP_text.gameObject.SetActive(true);
         MP_text.gameObject.SetActive(true);
         defense_text.gameObject.SetActive(true);
@@ -180,32 +190,24 @@ public class Rouretto_New : MonoBehaviour
         MP_text.text = Status[1].ToString();
         Attack_text.text = Status[2].ToString();
         defense_text.text = Status[3].ToString();
-        job_text.text = Status[4].ToString();
-    }
 
+        job_text.gameObject.SetActive(true) ;
+        job_text.text = "職業"+job;
+    }
 
     void DisplayStatusOnly()//二回目以降はステータスだけの表示
     {
-        job_text.gameObject.SetActive(false);   //SetActiveでjob部分をfalseにした。}
-
 
         HP_text.text = Status[0].ToString();
         MP_text.text = Status[1].ToString();
         Attack_text.text = Status[2].ToString();
         defense_text.text = Status[3].ToString();
 
-        if(changimage != null)
+        job_text.gameObject.SetActive(false);
+        if (changimage != null)
         {
             changimage.HideJobImage();
-
         }
-
-        //FindObjectOfType<Changimage>().HideJobImage();
-
-        
-
-
-
     }
     private void PlayerStatus()
     {
@@ -214,35 +216,41 @@ public class Rouretto_New : MonoBehaviour
             Player = GameObject.FindGameObjectsWithTag("Player");
         }
 
-        Coin = Player[0].GetComponent<Player>().coin;
         Player[0].GetComponent<Player>().HP = HP;
         Player[0].GetComponent<Player>().MP = MP;
         Player[0].GetComponent<Player>().AttackStatus = Attack;
         Player[0].GetComponent<Player>().DefenseStatus = Defense;
     }
- 
-    public void stopslot()
-    {
-        slot = false;
-        HP += Status[0];
-        MP += Status[1];
-        Attack += Status[2];
-        Defense += Status[3];
-        // Chang に画像切替を伝える
-        FindObjectOfType<Changimage>().jobName(jobName[Status[4]]);//職種ごとに背景を変えることが出来る
 
-    }
 
     void StartRoulette()
     {
         if (Spining) return;
-        if (coin < RouletteCost)
+
+        if(!FirstRoulette)
         {
-            Debug.Log("お金がない");
-            return;
+
+            if (Coin <RouletteCost)
+            {
+                
+                UpdateCoinUI();
+                Debug.Log("お金がない");
+                return;
+            }
+
+            Debug.Log("coinBe" + Coin);
+
+            Coin -= RouletteCost;//ルーレット使用コスト
+
+            Debug.Log("coinAf" + Coin);
+
+
+            Player[0].GetComponent<Player>().coin = Coin;
+
+            UpdateCoinUI();
+
         }
 
-        coin -= RouletteCost;//ルーレット使用コスト
         Spining = true;
 
         spinCoroutine = StartCoroutine(SpinRoulette());
@@ -260,27 +268,23 @@ public class Rouretto_New : MonoBehaviour
             StopCoroutine(spinCoroutine);
 
         }
-        if (FirstRoulette)
-        {
-            FirstRoulette = false;
 
-            Debug.Log("1stルーレット");
-        }
+        HP = UpdateStatus[0];
+        MP = UpdateStatus[1];
+        Attack = UpdateStatus[2];
+        Defense = UpdateStatus[3];
 
-        //結果を確定
-        HP = Mathf.Round(HP);
-        MP = Mathf.Round(MP);
-        Attack = Mathf.Round(Attack);
-        Defense = Mathf.Round(Defense);
 
-        slot = false;
+        if (changimage != null && FirstRoulette) 
+            changimage.UpdateJobImage(job, FirstRoulette);
+
+        ////結果を確定
+
         HP += Status[0];
         MP += Status[1];
         Attack += Status[2];
         Defense += Status[3];
-
-
-
+        FirstRoulette = false;
 
     }
 
@@ -288,31 +292,47 @@ public class Rouretto_New : MonoBehaviour
     {
         while (Spining)
         {
+            // 各ステータスを個別にランダム化
+             HP = Random.Range(HP_slot_Min, HP_slot_Max + 1);
+             MP = Random.Range(MP_slot_Min, MP_slot_Max + 1);
+             Attack = Random.Range(power_slot_Min, power_slot_Max + 1);
+             Defense = Random.Range(Defense_slot_Min, Defense_slot_Max + 1);
+
             // 職種は初回のみランダム決定
             if (FirstRoulette)
             {
-                job = jobName[Random.Range(0, jobName.Length)];
-            }
-            // 各ステータスを個別にランダム化
-            HP = Random.Range(HP_slot_Min, HP_slot_Max + 1);
-            MP = Random.Range(MP_slot_Min, MP_slot_Max + 1);
-            Attack = Random.Range(power_slot_Min, power_slot_Max + 1);
-            Defense = Random.Range(Defense_slot_Min, Defense_slot_Max + 1);
+                Status[4]=Random.Range(0,jobName.Length);
+                job=jobName[Status[4]];
 
-            Status[4]=Random.Range(0,jobName.Length);
-            job = jobName[Status[4]];
+                FirstStatus[0] = (int)HP;
+                FirstStatus[1] = (int)MP;
+                FirstStatus[2] = (int)Attack;
+                FirstStatus[3] = (int)Defense;
+
+                UpdateStatus[0] = FirstStatus[0];
+                UpdateStatus[1] = FirstStatus[1];
+                UpdateStatus[2] = FirstStatus[2];
+                UpdateStatus[3] = FirstStatus[3];
+
+                Status[4] = Random.Range(0, jobName.Length);
+
+                job = jobName[Status[4]];
+
+            }
 
             UpdateStatusText();
+
             yield return new WaitForSeconds(0.05f);
 
-        }
-        void UpdateStatusText()
-        {
-            HP_text.text = "HP：" + Mathf.RoundToInt(HP).ToString();
-            MP_text.text = "MP：" + Mathf.RoundToInt(MP).ToString();
-            Attack_text.text = "攻撃：" + Mathf.RoundToInt(Attack).ToString();
-            defense_text.text = "防御：" + Mathf.RoundToInt(Defense).ToString();
-            job_text.text = "職業：" + job;
+            void UpdateStatusText()
+            {
+                HP_text.text = "HP：" + Mathf.RoundToInt(HP).ToString();
+                MP_text.text = "MP：" + Mathf.RoundToInt(MP).ToString();
+                Attack_text.text = "攻撃：" + Mathf.RoundToInt(Attack).ToString();
+                defense_text.text = "防御：" + Mathf.RoundToInt(Defense).ToString();
+                job_text.text = "職業：" + job;
+                //Coin_Text.text = "所持金";
+            }
         }
     }
 }
