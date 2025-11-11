@@ -29,7 +29,7 @@ public class BossMove01 : MonoBehaviour
     //Bossの行動と、その行動確率を設定するデータリスト
     [SerializeField] private List<ActionWeightData> actionWeightsList;
 
-    public Boss01ActionType currentState = Boss01ActionType.Idle;
+    [HideInInspector] public Boss01ActionType currentState = Boss01ActionType.Idle;
 
     private BossAnimationManager animationManager;
 
@@ -41,6 +41,8 @@ public class BossMove01 : MonoBehaviour
     [SerializeField] private float tackleSpeed;
     [SerializeField] private float tackleTime; 
     private float currentTime;
+
+    [SerializeField] private GameObject strongAttackArea;
 
     int TestCount=0;
     private void Start()
@@ -139,6 +141,7 @@ public class BossMove01 : MonoBehaviour
                 break;
             case Boss01ActionType.StrongAttack:
                 //攻撃アニメーションを開始し、攻撃中のロジックをコルーチンで実行
+                StartCoroutine(StrongAttack());
                 break;
             case Boss01ActionType.Tackle:
                 //Tackle固有のロジックを実行
@@ -150,9 +153,14 @@ public class BossMove01 : MonoBehaviour
         }
     }
 
+    private void QuickAttack() 
+    { 
+        
+    }
+
     //Bossの位置からプレイヤーがいる方向を取得し、その方向に向かって高速移動させる
     //壁に当たれば移動を辞める
-    private void BossTackle() 
+    private void BossTackle()
     {
         ChangeState(Boss01ActionType.Tackle);
         currentTime += Time.deltaTime;
@@ -163,6 +171,21 @@ public class BossMove01 : MonoBehaviour
             ChangeState(Boss01ActionType.Idle);
             currentTime = 0;
         }
+    }
+
+    //強攻撃状態からidol状態に戻すのを待つ処理
+    private IEnumerator StrongAttack()
+    {
+        //状態を戻すまでの時間指定
+        float attackDuration = 1.5f;
+        yield return new WaitForSeconds(attackDuration);
+        ChangeState(Boss01ActionType.Idle);
+    }
+
+    public void ExecuteStrongAttackHit()
+    {
+        //アニメーションのタイミングで生成する
+        Instantiate(strongAttackArea, transform.position, Quaternion.identity);
     }
 
     private void OnCollisionEnter(Collision collision)
