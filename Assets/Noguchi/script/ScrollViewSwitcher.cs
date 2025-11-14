@@ -16,25 +16,25 @@ public class ScrollViewController : MonoBehaviour
     public GameObject scrollView3;
     public GameObject scrollView4;
 
-    // ボタンが表示されているかどうかを管理
+    [Header("Text")]
+    public Text text_1;
+
     private bool buttonsVisible = false;
 
     void Start()
     {
-        // 各ボタンのクリックイベント設定
         button1.onClick.AddListener(() => ShowScrollView(1));
         button2.onClick.AddListener(() => ShowScrollView(2));
         button3.onClick.AddListener(() => ShowScrollView(3));
         button4.onClick.AddListener(() => ShowScrollView(4));
 
-        // 起動時は全て非表示
         HideAllScrollViews();
         HideAllButtons();
+        text_1.gameObject.SetActive(false);   // 起動時は非表示
     }
 
     void Update()
     {
-        // Bキーで表示・非表示を切り替え
         if (Input.GetKeyDown(KeyCode.B))
         {
             buttonsVisible = !buttonsVisible;
@@ -42,11 +42,13 @@ public class ScrollViewController : MonoBehaviour
             if (buttonsVisible)
             {
                 ShowAllButtons();
+                text_1.gameObject.SetActive(true); // ▼ 表示
             }
             else
             {
                 HideAllButtons();
                 HideAllScrollViews();
+                text_1.gameObject.SetActive(false); // ▼ 非表示
             }
         }
     }
@@ -59,7 +61,7 @@ public class ScrollViewController : MonoBehaviour
         //scrollView4.SetActive(false);
     }
 
-     private void HideAllButtons()
+    private void HideAllButtons()
     {
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
@@ -69,10 +71,8 @@ public class ScrollViewController : MonoBehaviour
 
     private void ShowScrollView(int index)
     {
-        // まず全て非表示
         HideAllScrollViews();
 
-        // 指定した番号のScrollViewを表示
         switch (index)
         {
             case 1: scrollView1.SetActive(true); break;
@@ -81,11 +81,12 @@ public class ScrollViewController : MonoBehaviour
             //case 4: scrollView4.SetActive(true); break;
         }
     }
-      private void ShowAllButtons()
+
+    private void ShowAllButtons()
     {
         button1.gameObject.SetActive(true);
         button2.gameObject.SetActive(true);
         button3.gameObject.SetActive(true);
-        //button4.gameObject.SetActive(true);
-    }   
+        //button4.SetActive(true);
+    }
 }
