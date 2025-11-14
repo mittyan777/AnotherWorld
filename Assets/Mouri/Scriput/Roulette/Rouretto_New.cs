@@ -130,12 +130,12 @@ public class Rouretto_New : MonoBehaviour
     }
     void UpdateCoinUI()
     {
-        if (Coin < 0)
-        {
-            Coin = 0;
-        }
-        Coin_Text.text = "ŠŽ‹à:" + Coin.ToString();
-
+        //if (Coin < 0)
+        //{
+        //    Coin = 0;
+        //}
+        //Coin_Text.text = "ŠŽ‹à:" + Coin.ToString();
+        
     }
     void OpenRouletto()
     {
@@ -230,7 +230,7 @@ public class Rouretto_New : MonoBehaviour
         if(!FirstRoulette)
         {
 
-            if (Coin <RouletteCost)
+            if (Coin <RouletteCost)     //ŽŸ‰ñ‚Ìƒvƒ‹ƒŠƒN‚Åíœ
             {
                 
                 UpdateCoinUI();
@@ -248,6 +248,8 @@ public class Rouretto_New : MonoBehaviour
             Player[0].GetComponent<Player>().coin = Coin;
 
             UpdateCoinUI();
+
+            //GameManager.GetComponent<GameManager>().Coin -= 10;
 
         }
 
