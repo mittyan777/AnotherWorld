@@ -2,34 +2,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class UIManager : MonoBehaviour
+
+public class Purchase : MonoBehaviour
 {
+
+    private koin Koin;
+    private int getcoin;
+
     [System.Serializable]
+
     public class ScrollViewGroup
     {
-        public string groupName; 
-        public Button[] itemButtons; // 4つのボタン
-        public int[] itemPrices;     // 各ボタンに対応した価格
+        
+        public string groupName;
+        public Button[] itemButtons;
+        public int[] itemPrices;
     }
 
     [Header("スクロールビューごとの商品情報")]
-    [SerializeField] private ScrollViewGroup[] scrollViewGroups; // 全4スクロールビューを登録
+    [SerializeField] private ScrollViewGroup[] scrollViewGroups;
 
     [Header("UI参照")]
     [SerializeField] private Text coinText;
     [SerializeField] private Text messageText;
 
-    private int playerCoins = 1000;
+    [Header("ショップ全体のUIオブジェクト")]
+    [SerializeField] private GameObject shopUI; // ← ここをCanvasまたは親Panelに設定！
+
+    //private int playerCoins = 1000;
     private List<string> inventory = new List<string>();
+    private bool isShopOpen = false;
 
     void Start()
     {
-        // 各スクロールビューのボタンにイベント登録
+          // 🔹 koin オブジェクトをシーンから自動取得
+        Koin = FindObjectOfType<koin>();
+        if (Koin == null)
+        {
+            Debug.LogError("koin オブジェクトがシーンに見つかりません。");
+            return;
+        }
+
+        getcoin = Koin.playerCoin;//プレイヤーのコインを取得
+
         foreach (var group in scrollViewGroups)
         {
             for (int i = 0; i < group.itemButtons.Length; i++)
             {
-                int index = i; // ローカル変数に退避（ラムダ式用）
+                int index = i;
                 string itemName = $"{group.groupName}_{index + 1}";
                 int price = group.itemPrices[index];
 
@@ -39,17 +59,31 @@ public class UIManager : MonoBehaviour
 
         UpdateCoinUI();
         messageText.text = "";
+
+        if (shopUI != null)
+            shopUI.SetActive(false); // 起動時は非表示
     }
 
-    // 購入処理
+    void Update()
+    {
+        // Bキー入力でショップUIの表示切り替え
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            isShopOpen = !isShopOpen;
+            if (shopUI != null)
+                shopUI.SetActive(isShopOpen);
+        }
+    }
+
     void TryPurchase(string itemName, int price)
     {
-        if (playerCoins >= price)
+        if (getcoin >= price)
         {
-            playerCoins -= price;
+            getcoin -= price;
+            Koin.playerCoin = getcoin;
             inventory.Add(itemName);
             messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
-            Debug.Log($"{itemName} の購入完了。残りコイン: {playerCoins}");
+            Debug.Log($"{itemName} の購入完了。残りコイン: {getcoin}");
         }
         else
         {
@@ -63,7 +97,7 @@ public class UIManager : MonoBehaviour
     void UpdateCoinUI()
     {
         if (coinText != null)
-            coinText.text = $"所持コイン: {playerCoins}";
+            coinText.text = $"所持コイン: {getcoin}";
     }
 
     public void ShowInventory()
