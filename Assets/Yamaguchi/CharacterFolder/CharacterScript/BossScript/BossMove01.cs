@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 //行動と確率をセットで保持
 [System.Serializable]
@@ -16,7 +17,7 @@ public class ActionWeightData
 public class BossMove01 : MonoBehaviour
 {
     public enum Boss01ActionType
-    { 
+    {
         Idle,
         QuickAttack,
         StrongAttack,
@@ -37,18 +38,26 @@ public class BossMove01 : MonoBehaviour
     [SerializeField] private float thinkingTime;
     private float currentThinkingTime;
 
+    //タックルに必要な変数
     [SerializeField] private GameObject playerObj;
     [SerializeField] private float tackleSpeed;
-    [SerializeField] private float tackleTime; 
+    [SerializeField] private float tackleTime;
+    private Vector3 tackleDirection;
     private float currentTime;
 
+    //強攻撃と弱攻撃に必要なオブジェクト
     [SerializeField] private GameObject strongAttackArea;
+    [SerializeField] private GameObject quickAttackArea;
+    [SerializeField] private float quickAttackRange;
+    [SerializeField] private float strongAttacRange;
 
-    int TestCount=0;
+    //追尾速度
+    [SerializeField] private float chaseSpeed;
+
     private void Start()
     {
         animationManager = GetComponent<BossAnimationManager>();
-        DetermineNextAction();
+        quickAttackArea.SetActive(false);
     }
     private void Update()
     {
@@ -57,8 +66,15 @@ public class BossMove01 : MonoBehaviour
             BossTackle();
         }
 
+        if (currentState == Boss01ActionType.QuickAttack ||
+            currentState == Boss01ActionType.StrongAttack)
+        {
+            
+        }
+
         if (currentState == Boss01ActionType.Idle)
         {
+            quickAttackArea.SetActive(false);
             currentThinkingTime += Time.deltaTime; // 考える時間を計測
 
             if (currentThinkingTime >= thinkingTime)
@@ -114,7 +130,7 @@ public class BossMove01 : MonoBehaviour
                 Boss01ActionType nextAction = actionWeightsList[i].ActionType;
 
                 ChangeState(nextAction);
-                return; // 行動が決まったら関数を終了
+                return; //行動が決まったら関数を終了
             }
         }
 
@@ -138,6 +154,7 @@ public class BossMove01 : MonoBehaviour
                 break;
             case Boss01ActionType.QuickAttack:
                 //NavMeshAgentを起動し、プレイヤーを追跡する処理を実行
+                StartCoroutine(QuickAttack());
                 break;
             case Boss01ActionType.StrongAttack:
                 //攻撃アニメーションを開始し、攻撃中のロジックをコルーチンで実行
@@ -145,7 +162,9 @@ public class BossMove01 : MonoBehaviour
                 break;
             case Boss01ActionType.Tackle:
                 //Tackle固有のロジックを実行
+                currentTime = 0;
                 transform.LookAt(playerObj.transform);
+                tackleDirection = transform.forward;
                 break;
             case Boss01ActionType.Walking:
                 //Walking固有のロジックを実行
@@ -153,18 +172,23 @@ public class BossMove01 : MonoBehaviour
         }
     }
 
-    private void QuickAttack() 
-    { 
-        
+    private IEnumerator QuickAttack()
+    {
+        float quickAttackDuration = 0.5f;
+        float waitTime = 0.2f;
+        yield return new WaitForSeconds(waitTime);
+        quickAttackArea.SetActive(true);
+        yield return new WaitForSeconds(quickAttackDuration);
+        ChangeState(Boss01ActionType.Idle);
     }
 
     //Bossの位置からプレイヤーがいる方向を取得し、その方向に向かって高速移動させる
     //壁に当たれば移動を辞める
     private void BossTackle()
     {
-        ChangeState(Boss01ActionType.Tackle);
+        //ChangeState(Boss01ActionType.Tackle);
         currentTime += Time.deltaTime;
-        transform.position += transform.forward * tackleSpeed * Time.deltaTime;
+        transform.position += tackleDirection * tackleSpeed * Time.deltaTime;
 
         if (currentTime >= tackleTime)
         {
@@ -177,8 +201,8 @@ public class BossMove01 : MonoBehaviour
     private IEnumerator StrongAttack()
     {
         //状態を戻すまでの時間指定
-        float attackDuration = 1.5f;
-        yield return new WaitForSeconds(attackDuration);
+        float strongAttackDuration = 1.5f;
+        yield return new WaitForSeconds(strongAttackDuration);
         ChangeState(Boss01ActionType.Idle);
     }
 
@@ -188,10 +212,54 @@ public class BossMove01 : MonoBehaviour
         Instantiate(strongAttackArea, transform.position, Quaternion.identity);
     }
 
+    private void Walking() 
+    { 
+    
+    }
+
+    /*
+    //タックル以外の攻撃が出た場合プレイヤーを追尾し、攻撃範囲内に入れば攻撃を行う
+    private void Chase()
+    {
+        //プレイヤーとの距離を計算
+        float distance = Vector3.Distance(transform.position, playerObj.transform.position);
+
+        if (currentState == Boss01ActionType.QuickAttack)
+        {
+            //攻撃範囲内に入ったかチェック
+            if (distance <= quickAttackRange)
+            {
+                return;
+            }
+            //範囲外ならプレイヤーに向き、移動する
+            transform.LookAt(playerObj.transform.position);
+            transform.position += transform.forward * chaseSpeed * Time.deltaTime;
+        }
+        else if (currentState == Boss01ActionType.StrongAttack) 
+        {
+            if (distance <= strongAttacRange)
+            {
+                return;
+            }
+            transform.LookAt(playerObj.transform.position);
+            transform.position += transform.forward * chaseSpeed * Time.deltaTime;
+        }
+
+    }
+    */
+
+
     private void OnCollisionEnter(Collision collision)
     {
         //壁に当たったら攻撃を中断(主にタックル)
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("syounin"))
+        {
+            ChangeState(Boss01ActionType.Idle);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("syounin"))
         {
             ChangeState(Boss01ActionType.Idle);
         }

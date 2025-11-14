@@ -10,7 +10,7 @@ public class StrongAttackAreaDelete : MonoBehaviour
     {
         StartCoroutine(Delete());
     }
-
+    //当たり判定を消してからオブジェクト事態を消すようにした。
     private IEnumerator Delete() 
     { 
         yield return new WaitForSeconds(collisiondelete);
