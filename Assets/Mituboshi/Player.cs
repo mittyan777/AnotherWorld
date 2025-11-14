@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float clampAngle = 80f;
     bool ADS = false;
 
-    [SerializeField]float a = 0.5f;
+    [SerializeField]float a = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,27 +61,33 @@ public class Player : MonoBehaviour
 
 
 
-            if (Physics.Raycast(ray, out hit, Direction)) // 2m以内を調べる
-            {
-              
-            }
+          
             Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown("p"))
+        {
+            manager.GetComponent<GameManager>().HP -= 10;
+        }
+        if(manager.GetComponent<GameManager>().HP <= 0 && manager.GetComponent<GameManager>().slot == false)
+        {
+            Destroy(gameObject);
+        }
+            
+        if (Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager>().MP >= 10)
         {
             if (manager.GetComponent<GameManager>().Status[4] == 3 && manager.GetComponent<GameManager>().slot == false) { GetComponent<Magician_Skills>().FireBall();  }
-            
 
+            manager.GetComponent<GameManager>().MP -= 10;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager>().MP >= 10)
         {
             if (manager.GetComponent<GameManager>().Status[4] == 3 && manager.GetComponent<GameManager>().slot == false) { GetComponent<Magician_Skills>().ElectricBall(); }
-
+            manager.GetComponent<GameManager>().MP -= 10;
 
         }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
+        if(Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager>().MP >= 10)
         {
             if (manager.GetComponent<GameManager>().Status[4] == 3 && manager.GetComponent<GameManager>().slot == false) { GetComponent<Magician_Skills>().TornadoAttack(); }
+            manager.GetComponent<GameManager>().MP -= 10;
         }
 
         if(manager.GetComponent<GameManager>().Status[4] == 2 && manager.GetComponent<GameManager>().slot == false)
@@ -215,7 +221,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            a = 0.5f;
+            a = 0.01f;
         }
     }
 }

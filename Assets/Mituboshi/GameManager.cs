@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject []Player;
-    [SerializeField]private float Coin;
-    [SerializeField] float HP;
-    [SerializeField] float MP;
+    [SerializeField]public float Coin;
+    [SerializeField]public float HP;
+    [SerializeField]public float MP;
     [SerializeField] float AttackStatus;
     [SerializeField] float DefenseStatus;
     [SerializeField] public float job;
@@ -92,4 +92,5 @@ public class GameManager : MonoBehaviour
         DefenseStatus += Status[3];
 
     }
+   
 }
