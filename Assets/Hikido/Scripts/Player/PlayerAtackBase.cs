@@ -11,6 +11,9 @@ public class PlayerAtackBase : MonoBehaviour
     bool bAvoidance = false;
     protected  bool bNormalAttack = false;
 
+    //ゲームマネージャー
+    [SerializeField] GameObject[] manager;
+
     /// <summary> /// レンジ構造体 /// </summary>
     /// いらないかも
     struct PlayerRange

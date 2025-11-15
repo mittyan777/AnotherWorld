@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "AnimationSO", menuName = "AnimationSO")]
+
 public class AnimationFlagManagerSO : ScriptableObject
 {
     [Header("管理用アニメーションフラグ")]
@@ -12,11 +13,21 @@ public class AnimationFlagManagerSO : ScriptableObject
     public bool avoidanceFlg = false;
 
     /// <summary> /// 攻撃時のイベント /// </summary>
-    Action Attackevents;
+    public Action Attackevents;
 
     /// <summary> /// 歩行時のイベント /// </summary>
-    Action WalkEvents;
+    public Action WalkEvents;
 
     /// <summary> /// 回避時のイベント /// </summary>
-    Action AvoidanceEvents;
+    public Action AvoidanceEvents;
+
+    /// <summary> /// 通常攻撃のイベント /// </summary>
+    public Action AttackNormal;
+
+    /// <summary> /// マジシャンスキル /// </summary>
+    public Action AttackMagicianSkills;
+
+    /// <summary> /// アーチャースキル /// </summary>
+    public Action AttackArcherSkills;
+
 }
