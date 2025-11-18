@@ -30,27 +30,30 @@ public class ScrollViewController : MonoBehaviour
 
         HideAllScrollViews();
         HideAllButtons();
-        text_1.gameObject.SetActive(false);   // 起動時は非表示
+    
+
+        ShowAllButtons();
+        text_1.gameObject.SetActive(true);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            buttonsVisible = !buttonsVisible;
-
-            if (buttonsVisible)
-            {
-                ShowAllButtons();
-                text_1.gameObject.SetActive(true); // ▼ 表示
-            }
-            else
-            {
-                HideAllButtons();
-                HideAllScrollViews();
-                text_1.gameObject.SetActive(false); // ▼ 非表示
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    buttonsVisible = !buttonsVisible;
+        //
+        //    if (buttonsVisible)
+        //    {
+        //        ShowAllButtons();
+        //        text_1.gameObject.SetActive(true); // ▼ 表示
+        //    }
+        //    else
+        //    {
+        //        HideAllButtons();
+        //        HideAllScrollViews();
+        //        text_1.gameObject.SetActive(false); // ▼ 非表示
+        //    }
+        //}
     }
 
     private void HideAllScrollViews()

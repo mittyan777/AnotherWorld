@@ -36,7 +36,7 @@ public class GameManger_Mouri : MonoBehaviour
         {
             Player = GameObject.FindGameObjectsWithTag("Player");
         }
-        Coin = Player[0].GetComponent<Player>().coin;
+     
 
 
         Player[0].GetComponent<Player>().HP = HP;

@@ -2,18 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-
 public class Purchase : MonoBehaviour
 {
-
-    private koin Koin;
-    private int getcoin;
+    [Header("コイン管理")]
+    
+    private float getCoin;
 
     [System.Serializable]
-
     public class ScrollViewGroup
     {
-        
         public string groupName;
         public Button[] itemButtons;
         public int[] itemPrices;
@@ -27,79 +24,96 @@ public class Purchase : MonoBehaviour
     [SerializeField] private Text messageText;
 
     [Header("ショップ全体のUIオブジェクト")]
-    [SerializeField] private GameObject shopUI; // ← ここをCanvasまたは親Panelに設定！
+    [SerializeField] private GameObject shopUI;
 
-    //private int playerCoins = 1000;
     private List<string> inventory = new List<string>();
-    private bool isShopOpen = false;
+
+    GameObject gm;
 
     void Start()
     {
-          // 🔹 koin オブジェクトをシーンから自動取得
-        Koin = FindObjectOfType<koin>();
-        if (Koin == null)
+     
+       
+
+        // プレイヤーの所持コイン取得
+         gm = GameObject.FindWithTag("GameManager");
+        if (gm == null)
         {
-            Debug.LogError("koin オブジェクトがシーンに見つかりません。");
+            Debug.LogError("GameManager が見つかりません。");
             return;
         }
 
-        getcoin = Koin.playerCoin;//プレイヤーのコインを取得
+     
 
+        // 商品ボタンにイベント登録
+        InitializeButtons();
+
+        // UI 初期化
+        UpdateCoinUI();
+        if (messageText != null) messageText.text = "";
+        if (shopUI != null) shopUI.SetActive(false);
+    }
+
+    /// <summary>
+    /// スクロールビュー内ボタンに購入処理を設定
+    /// </summary>
+    private void InitializeButtons()
+    {
         foreach (var group in scrollViewGroups)
         {
             for (int i = 0; i < group.itemButtons.Length; i++)
             {
                 int index = i;
+
                 string itemName = $"{group.groupName}_{index + 1}";
                 int price = group.itemPrices[index];
 
-                group.itemButtons[i].onClick.AddListener(() => TryPurchase(itemName, price));
+                group.itemButtons[i].onClick.AddListener(() =>
+                {
+                    TryPurchase(itemName, price);
+                });
             }
         }
-
-        UpdateCoinUI();
-        messageText.text = "";
-
-        if (shopUI != null)
-            shopUI.SetActive(false); // 起動時は非表示
     }
 
-    void Update()
+    /// <summary>
+    /// 商品購入処理
+    /// </summary>
+    private void TryPurchase(string itemName, float price)
     {
-        // Bキー入力でショップUIの表示切り替え
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            isShopOpen = !isShopOpen;
-            if (shopUI != null)
-                shopUI.SetActive(isShopOpen);
-        }
-    }
 
-    void TryPurchase(string itemName, int price)
-    {
-        if (getcoin >= price)
+        
+        if (getCoin >= price)
         {
-            getcoin -= price;
-            Koin.playerCoin = getcoin;
+            gm.GetComponent<GameManager>().Coin -= price;
+           
             inventory.Add(itemName);
+
             messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
-            Debug.Log($"{itemName} の購入完了。残りコイン: {getcoin}");
+            Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager>().Coin}");
         }
         else
         {
             messageText.text = $"コインが足りません！（必要: {price}）";
-            Debug.Log($"購入失敗：{itemName} の価格 {price} に対して残高不足");
+            Debug.Log($"購入失敗：価格 {price} に対して残高不足");
         }
+        
 
         UpdateCoinUI();
     }
 
-    void UpdateCoinUI()
+    /// <summary>
+    /// コイン表示を更新
+    /// </summary>
+    private void UpdateCoinUI()
     {
         if (coinText != null)
-            coinText.text = $"所持コイン: {getcoin}";
+            coinText.text = $"所持コイン: {getCoin}";
     }
 
+    /// <summary>
+    /// 現在のインベントリをログに表示
+    /// </summary>
     public void ShowInventory()
     {
         Debug.Log("=== インベントリ ===");
@@ -107,5 +121,10 @@ public class Purchase : MonoBehaviour
         {
             Debug.Log(item);
         }
+    }
+    private void Update()
+    {
+        UpdateCoinUI();
+        getCoin = gm.GetComponent<GameManager>().Coin;
     }
 }

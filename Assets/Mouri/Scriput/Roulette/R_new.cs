@@ -155,7 +155,7 @@ public class R_new : MonoBehaviour
         if (Player[0] == null)
             Player = GameObject.FindGameObjectsWithTag("Player");
 
-        Coin = Player[0].GetComponent<Player>().coin;
+   
         Player[0].GetComponent<Player>().HP = HP;
         Player[0].GetComponent<Player>().MP = MP;
         Player[0].GetComponent<Player>().AttackStatus = Attack;
