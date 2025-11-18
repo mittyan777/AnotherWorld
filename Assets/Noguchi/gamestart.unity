@@ -8762,10 +8762,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 446167161}
-  rotationSpeed: 10
+  rotationSpeed: 5
   distance: 10
   maxAngle: 360
-  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAxis: {x: 0, y: 0.5, z: 0}
 --- !u!4 &1505479221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5291959691871055534, guid: 4f6122b02aea27540b60ee221b7415e5, type: 3}
