@@ -9,7 +9,7 @@ public class Rouretto_New : MonoBehaviour
 {
 
 
-    //“à•”ƒXƒe[ƒ^ƒXiƒ‹[ƒŒƒbƒg‚Ì”É‰h‚ğs‚¤‚½‚ß)
+    //å†…éƒ¨ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ï¼ˆãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®ç¹æ „ã‚’è¡Œã†ãŸã‚)
 
     [SerializeField] private GameObject[] Player;
     private Player player;
@@ -22,15 +22,15 @@ public class Rouretto_New : MonoBehaviour
     [SerializeField] GameObject GameManager;
 
 
-    [Header("ƒ‹[ƒŒƒbƒg“à•”ƒVƒXƒeƒ€")]
-    [SerializeField] public int[] Status;   //ƒvƒŒƒCƒ„[‚Ì”z—ñ‚²‚Æ‚ÌƒXƒe[ƒ^ƒX‚ğ’T‚·‚½‚ß‚Ì–ğŠ„
-    [SerializeField] private bool FirstRoulette = true;//‰‰ñ‚©‚Ç‚¤‚©‚Ì”»’f‚ğ‚·‚é‚½‚ß‚ÌŠÖ”
+    [Header("ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆå†…éƒ¨ã‚·ã‚¹ãƒ†ãƒ ")]
+    [SerializeField] public int[] Status;   //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®é…åˆ—ã”ã¨ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æ¢ã™ãŸã‚ã®å½¹å‰²
+    [SerializeField] private bool FirstRoulette = true;//åˆå›ã‹ã©ã†ã‹ã®åˆ¤æ–­ã‚’ã™ã‚‹ãŸã‚ã®é–¢æ•°
     
-    private bool isActive = false;  //UI‚ªŠJ‚¢‚Ä‚¢‚é‚©‚ğ”»’f‚·‚é
+    private bool isActive = false;  //UIãŒé–‹ã„ã¦ã„ã‚‹ã‹ã‚’åˆ¤æ–­ã™ã‚‹
 
     
 
-    [Header("UI‚ğg—p‚µ‚½ƒXƒe[ƒ^ƒX•\¦")]
+    [Header("UIã‚’ä½¿ç”¨ã—ãŸã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º")]
     [SerializeField] Text Attack_text;
     [SerializeField] Text defense_text;
     [SerializeField] Text HP_text;
@@ -40,7 +40,7 @@ public class Rouretto_New : MonoBehaviour
 
     //[SerializeField] Text Player_Coin;
 
-    [Header("ƒXƒe[ƒ^ƒX‚»‚ê‚¼‚ê‚ÌÅ¬EÅ‘å(ƒ‹[ƒŒƒbƒgj")]
+    [Header("ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãã‚Œãã‚Œã®æœ€å°ãƒ»æœ€å¤§(ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆæ™‚ï¼‰")]
 
     [SerializeField] int HP_slot_Max;
     [SerializeField] int HP_slot_Min;
@@ -55,41 +55,41 @@ public class Rouretto_New : MonoBehaviour
     [SerializeField] int Defense_slot_Min;
 
 
-    //ƒ‹[ƒŒƒbƒgUI—v‘f
+    //ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆUIè¦ç´ 
     [SerializeField] private GameObject RouletteUI;
-    [SerializeField] private Image Rouret_back; //”¼“§–¾
+    [SerializeField] private Image Rouret_back; //åŠé€æ˜
 
 
-    //[SerializeField] private Text jobText;    “¯‚¶‚æ‚¤‚È‚à‚Ì‚ª“ñ‰ñŒÄ‚Î‚ê‚Ä‚¢‚éH
+    //[SerializeField] private Text jobText;    åŒã˜ã‚ˆã†ãªã‚‚ã®ãŒäºŒå›å‘¼ã°ã‚Œã¦ã„ã‚‹ï¼Ÿ
 
 
     [SerializeField] private Button StartButton;
     [SerializeField] private Button StopButton;
 
 
-    [Header("ƒ‹[ƒŒƒbƒgİ’è")]
-    [SerializeField] private float WeponCost;   //•Ší‚Ì‰¿Ši
-    [SerializeField] private int RouletteCost=100;  //ƒ‹[ƒŒƒbƒg‚ğ‰ñ‚·Û‚É•K—v‚ÈƒRƒXƒg
-    //[SerializeField] private int coin;  //Š‚µ‚Ä‚¢‚é‚¨‹à
+    [Header("ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆè¨­å®š")]
+    [SerializeField] private float WeponCost;   //æ­¦å™¨ã®ä¾¡æ ¼
+    [SerializeField] private int RouletteCost=100;  //ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã‚’å›ã™éš›ã«å¿…è¦ãªã‚³ã‚¹ãƒˆ
+    //[SerializeField] private int coin;  //æ‰€æŒã—ã¦ã„ã‚‹ãŠé‡‘
 
 
-    [Header("Eíİ’è")]
-    [SerializeField] private string[] jobName = { "Œ•m", "–‚–@g‚¢", "‹|g‚¢" };    //•¶š‚ğ”z—ñ‰»‚µŠÖ”‚Æ‚µ‚Ä”F¯‚³‚¹‚Ä‚¢‚é
+    [Header("è·ç¨®è¨­å®š")]
+    [SerializeField] private string[] jobName = { "å‰£å£«", "é­”æ³•ä½¿ã„", "å¼“ä½¿ã„" };    //æ–‡å­—ã‚’é…åˆ—åŒ–ã—é–¢æ•°ã¨ã—ã¦èªè­˜ã•ã›ã¦ã„ã‚‹
 
-    [Header("ó‘ÔŠÇ—")]
-    private bool Spining = false;  //‰ñ“]’†‰Ø‚ğ”»’f‚·‚é
-    private Coroutine spinCoroutine;    //ƒ‹[ƒŒƒbƒg‚Ìˆê’â~‚ğs‚¤‚Ì‚É“K‚µ‚Ä‚¢‚éƒvƒƒOƒ‰ƒ€‚Å‚ ‚èA•Ï”‚Æ‚µ‚Ä‘‚¢‚Ä‚¢‚é
+    [Header("çŠ¶æ…‹ç®¡ç†")]
+    private bool Spining = false;  //å›è»¢ä¸­è¯ã‚’åˆ¤æ–­ã™ã‚‹
+    private Coroutine spinCoroutine;    //ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆã®ä¸€æ™‚åœæ­¢ã‚’è¡Œã†ã®ã«é©ã—ã¦ã„ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã§ã‚ã‚Šã€å¤‰æ•°ã¨ã—ã¦æ›¸ã„ã¦ã„ã‚‹
 
     private int[] FirstStatus = new int[4];
     private int[] UpdateStatus = new int[4];
 
-    [Header("Eí‚²‚Æ‚Ì‰æ‘œİ’è")]
-    [SerializeField] private Changimage changimage;
+    [Header("è·ç¨®ã”ã¨ã®ç”»åƒè¨­å®š")]
+    [SerializeField] private Rouletto_CG rouletto_CG;
 
     void Start()
     {
-        //‰ŠúUI‚Í”ñ•\¦
-        RouletteUI.SetActive(false);    //ƒ‹[ƒŒƒbƒgUI‚â”wŒi‚È‚Ç‚ªuRouletteUIv‚ÉŠi”[‚³‚ê‚Ä‚¨‚è‚±‚Ìƒ‹[ƒŒƒbƒgUI‚ğ•\¦/”ñ•\¦‚É‚³‚¹‚é‚©”Û‚©
+        //åˆæœŸUIã¯éè¡¨ç¤º
+        RouletteUI.SetActive(false);    //ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆUIã‚„èƒŒæ™¯ãªã©ãŒã€ŒRouletteUIã€ã«æ ¼ç´ã•ã‚Œã¦ãŠã‚Šã“ã®ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆUIã‚’è¡¨ç¤º/éè¡¨ç¤ºã«ã•ã›ã‚‹ã‹å¦ã‹
 
         
 
@@ -99,9 +99,9 @@ public class Rouretto_New : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
 
-        if (changimage == null)
+        if (rouletto_CG == null)
         {
-            changimage = FindAnyObjectByType<Changimage>();//Eí‚²‚Æ‚É‰æ‘œ‚ğ•Ï‚¦‚é‚½‚ß‚Ì•”•ª
+            rouletto_CG = FindAnyObjectByType<Rouletto_CG>();//è·ç¨®ã”ã¨ã«ç”»åƒã‚’å¤‰ãˆã‚‹ãŸã‚ã®éƒ¨åˆ†
         }
 
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
@@ -111,7 +111,7 @@ public class Rouretto_New : MonoBehaviour
     {
         PlayerStatus();
 
-        if (Input.GetKeyDown(KeyCode.Tab))  //‚à‚µ‚àTabƒL[‚ğ‰Ÿ‚·‚Æ‰º‚ÌƒvƒƒOƒ‰ƒ€‚ğŒÄ‚Ño‚·
+        if (Input.GetKeyDown(KeyCode.Tab))  //ã‚‚ã—ã‚‚Tabã‚­ãƒ¼ã‚’æŠ¼ã™ã¨ä¸‹ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’å‘¼ã³å‡ºã™
         {
            
         }
@@ -121,15 +121,15 @@ public class Rouretto_New : MonoBehaviour
     {
         if(job == 0)
         {
-            job_text.text = "Œ•m";
+            job_text.text = "å‰£å£«";
         }
         else if(job == 1)
         {
-            job_text.text = "ƒA[ƒ`ƒƒ[";
+            job_text.text = "ã‚¢ãƒ¼ãƒãƒ£ãƒ¼";
         }
         else if(job == 2)
         {
-            job_text.text = "–‚–@g‚¢";
+            job_text.text = "é­”æ³•ä½¿ã„";
         }
     }
     void UpdateCoinUI()
@@ -139,7 +139,7 @@ public class Rouretto_New : MonoBehaviour
     }
     //void OpenRouletto()
     //{
-    //    //UI‚ğŠJ‚­
+    //    //UIã‚’é–‹ã
     //    isActive = true;
     //    RouletteUI.SetActive(true);
     //    if (Rouret_back != null)
@@ -153,7 +153,7 @@ public class Rouretto_New : MonoBehaviour
     //        Spining = false;
     //    }
     //
-    //    //‰‰ñ‚©‚Ç‚¤‚©‚Å•\¦‚ª•Ï‚í‚é
+    //    //åˆå›ã‹ã©ã†ã‹ã§è¡¨ç¤ºãŒå¤‰ã‚ã‚‹
     //    if (FirstRoulette)
     //    {
     //
@@ -179,7 +179,7 @@ public class Rouretto_New : MonoBehaviour
     //        Rouret_back.gameObject.SetActive(false);
     //    }
     //}
-    void DisplayInitialRouletto()   //ˆê”ÔÅ‰‚ÌƒXƒe[ƒ^ƒXUI‚Ì•\¦
+    void DisplayInitialRouletto()   //ä¸€ç•ªæœ€åˆã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹UIã®è¡¨ç¤º
     {
         HP_text.gameObject.SetActive(true);
         MP_text.gameObject.SetActive(true);
@@ -192,10 +192,10 @@ public class Rouretto_New : MonoBehaviour
         defense_text.text = Status[3].ToString();
 
         job_text.gameObject.SetActive(true) ;
-        job_text.text = "E‹Æ";
+        job_text.text = "è·æ¥­";
     }
 
-    void DisplayStatusOnly()//“ñ‰ñ–ÚˆÈ~‚ÍƒXƒe[ƒ^ƒX‚¾‚¯‚Ì•\¦
+    void DisplayStatusOnly()//äºŒå›ç›®ä»¥é™ã¯ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã ã‘ã®è¡¨ç¤º
     {
 
         HP_text.text = Status[0].ToString();
@@ -204,9 +204,9 @@ public class Rouretto_New : MonoBehaviour
         defense_text.text = Status[3].ToString();
 
         job_text.gameObject.SetActive(false);
-        if (changimage != null)
-        {
-            changimage.HideJobImage();
+        if (rouletto_CG != null)
+        {   
+            rouletto_CG.HideJobImage();
         }
     }
     private void PlayerStatus()
@@ -243,7 +243,24 @@ public class Rouretto_New : MonoBehaviour
                 GameManager.GetComponent<GameManager>().Coin -= RouletteCost;
              
             }
+
+            Debug.Log("coinBe" + Coin);
+
+            Coin -= RouletteCost;//ãƒ«ãƒ¼ãƒ¬ãƒƒãƒˆä½¿ç”¨ã‚³ã‚¹ãƒˆ
+
+            Debug.Log("coinAf" + Coin);
+
+
+            Player[0].GetComponent<Player>().coin = Coin;
+
+            UpdateCoinUI();
+
+            if (rouletto_CG != null)
+            {
+                rouletto_CG.UseCoin(RouletteCost);  //Roulett_CGã®ä¸­ã®äºŒå›ç›®ä»¥é™ã«ã‚³ã‚¤ãƒ³ã‚’æ¶ˆè²»ã™ã‚‹ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆéƒ¨åˆ†
+            }
         }
+
 
 
     }
@@ -275,10 +292,11 @@ public class Rouretto_New : MonoBehaviour
         Attack = UpdateStatus[2];
         Defense = UpdateStatus[3];
 
+        if (rouletto_CG != null && FirstRoulette)
+            rouletto_CG.UpdateJobImage(job, FirstRoulette);
 
-       
 
-        ////Œ‹‰Ê‚ğŠm’è
+        ////çµæœã‚’ç¢ºå®š
 
         HP += Status[0];
         MP += Status[1];
@@ -292,14 +310,14 @@ public class Rouretto_New : MonoBehaviour
     {
         while (Spining)
         {
-            // ŠeƒXƒe[ƒ^ƒX‚ğŒÂ•Ê‚Éƒ‰ƒ“ƒ_ƒ€‰»
+            // å„ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å€‹åˆ¥ã«ãƒ©ãƒ³ãƒ€ãƒ åŒ–
              HP = Random.Range(HP_slot_Min, HP_slot_Max + 1);
              MP = Random.Range(MP_slot_Min, MP_slot_Max + 1);
              Attack = Random.Range(power_slot_Min, power_slot_Max + 1);
              Defense = Random.Range(Defense_slot_Min, Defense_slot_Max + 1);
             
 
-            // Eí‚Í‰‰ñ‚Ì‚İƒ‰ƒ“ƒ_ƒ€Œˆ’è
+            // è·ç¨®ã¯åˆå›ã®ã¿ãƒ©ãƒ³ãƒ€ãƒ æ±ºå®š
             if (FirstRoulette)
             {
                 job = Random.Range(0, 3);
@@ -312,12 +330,12 @@ public class Rouretto_New : MonoBehaviour
 
             void UpdateStatusText()
             {
-                HP_text.text = "HPF" + Mathf.RoundToInt(HP).ToString();
-                MP_text.text = "MPF" + Mathf.RoundToInt(MP).ToString();
-                Attack_text.text = "UŒ‚F" + Mathf.RoundToInt(Attack).ToString();
-                defense_text.text = "–hŒäF" + Mathf.RoundToInt(Defense).ToString();
+                HP_text.text = "HPï¼š" + Mathf.RoundToInt(HP).ToString();
+                MP_text.text = "MPï¼š" + Mathf.RoundToInt(MP).ToString();
+                Attack_text.text = "æ”»æ’ƒï¼š" + Mathf.RoundToInt(Attack).ToString();
+                defense_text.text = "é˜²å¾¡ï¼š" + Mathf.RoundToInt(Defense).ToString();
                 
-                //Coin_Text.text = "Š‹à";
+                //Coin_Text.text = "æ‰€æŒé‡‘";
             }
         }
     }
