@@ -14,8 +14,11 @@ public enum JobType
 
 public class PlayerAnimation : MonoBehaviour
 {
+    
     [SerializeField] private CommandoConfigSO _comconSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
+
+    AnimationBaseSO cmd; //各コマンド(exsecuteのため)
     Animator animator;
 
     //ジョブタイプ
@@ -51,7 +54,8 @@ public class PlayerAnimation : MonoBehaviour
         //チェック
         if (_animFlgSO) 
         {
-            //_animFlgSO.AttackNormal += AttackAnimation_Normal()
+            //各アニメーションの処理をActionに登録
+            _animFlgSO.AttackNormal += AttackAnimation_Normal;
         }
         else 
         {
@@ -64,18 +68,28 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_animFlgSO) 
         {
+            //各アニメーション処理をActionから削除
+            _animFlgSO.AttackNormal -= AttackAnimation_Normal;
+        }
+    }
 
-        }
-        else 
-        {
-            Debug.LogError("_animFlgSOが存在しない", this);
-            return;
-        }
+    /// <summary> /// ジョブ設定(アニメーション用) /// </summary>
+    /// <param name="_newJob"></param>
+    public void SetJobType(JobType _newJob) 
+    {
+        jobType = _newJob;
     }
 
     private void AttackAnimation_Normal() 
     {
-
+        //攻撃のアニメーション発火
+        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        {
+            cmd = commandSet.normalAttackCd;
+            if (!cmd) { cmd.Execute(animator); }
+            else { Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+        }
+        else { Debug.LogError("ジョブ設定ミス"); }
     }
 
 }

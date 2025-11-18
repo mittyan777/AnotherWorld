@@ -12,8 +12,12 @@ public class CommandoConfigSO : ScriptableObject
         public JobType JobType;
 
         //各アニメーションごとのコマンドデータ
-        //[Header("イベント別のコマンド")]
-            
+        [Header("イベント別のコマンド")]
+        //通常攻撃コマンド
+        public AnimationBaseSO normalAttackCd;
+        //回避コマンド
+        public AnimationBaseSO avoidCd;
+        
     }
 
     //コマンド設定リスト

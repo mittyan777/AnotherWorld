@@ -52,8 +52,6 @@ public class Player_Swoad : PlayerAtackBase
     {
         //¶ƒNƒŠƒbƒN“ü—Íó‹µ‚ğ•Û
         bool _bisAttack = Input.GetMouseButtonDown(0);
-        
-
         if (_bisAttack ) 
         {
             if (_comboCount == 0) { StartCombo(); }

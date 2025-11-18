@@ -7,27 +7,29 @@ using UnityEngine;
 public class AnimationFlagManagerSO : ScriptableObject
 {
     [Header("管理用アニメーションフラグ")]
-    public bool attackNormalFlg = false;
-    public bool attackSkilFlag = false;
-    public bool walkanimFlg = false;
-    public bool avoidanceFlg = false;
+    [SerializeField] private bool attackNormalFlg = false; 
+    [SerializeField] private bool attackSkilFlag = false;
+    [SerializeField] private bool walkanimFlg = false;
+    [SerializeField] private bool avoidanceFlg = false;
 
-    /// <summary> /// 攻撃時のイベント /// </summary>
+    [Header("各通知イベント")]
     public Action Attackevents;
-
-    /// <summary> /// 歩行時のイベント /// </summary>
     public Action WalkEvents;
-
-    /// <summary> /// 回避時のイベント /// </summary>
     public Action AvoidanceEvents;
-
-    /// <summary> /// 通常攻撃のイベント /// </summary>
     public Action AttackNormal;
-
-    /// <summary> /// マジシャンスキル /// </summary>
     public Action AttackMagicianSkills;
-
-    /// <summary> /// アーチャースキル /// </summary>
     public Action AttackArcherSkills;
+    
+    //攻撃のイベント
+    public bool AttackNormalflg 
+    {
+        get { return attackNormalFlg; }
+        set 
+        {
+            if(attackNormalFlg == value || value == false) { return; }
+            attackNormalFlg = value;
+            AttackNormal?.Invoke();  //登録したイベントを発火
+        }
+    }
 
 }
