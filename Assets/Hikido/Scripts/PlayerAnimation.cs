@@ -15,11 +15,10 @@ public enum JobType
 public class PlayerAnimation : MonoBehaviour
 {
     
-    [SerializeField] private CommandoConfigSO _comconSO;
+    [SerializeField] private CommandoConfigSO _cmdCofigSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
 
-    AnimationBaseSO cmd; //各コマンド(exsecuteのため)
-    Animator animator;
+    [SerializeField] private  Animator animator;
 
     //ジョブタイプ
     public JobType jobType { get; private set; } = JobType.NONE;
@@ -32,32 +31,30 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         if (!animator)
         {
             Debug.LogError("Animatorコンポーネントが見つかりません。", this);
             return;
         }
 
-        if (!_comconSO) 
+        if (!_cmdCofigSO) 
         {
             Debug.LogError("コマンドコンフィグが設定されていない", this);            
             return;
         }
 
-        CommandMap = _comconSO.commandSets.ToDictionary(set => set.JobType, set => set);
+        CommandMap = _cmdCofigSO.commandSets.ToDictionary(set => set.JobType, set => set);
 
     }
-
     private void OnEnable()
     {
         //チェック
-        if (_animFlgSO) 
+        if (_animFlgSO)
         {
             //各アニメーションの処理をActionに登録
             _animFlgSO.AttackNormal += AttackAnimation_Normal;
         }
-        else 
+        else
         {
             Debug.LogError("_animFlgSOが存在しない", this);
             return;
@@ -66,7 +63,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnDisable()
     {
-        if (_animFlgSO) 
+        if (_animFlgSO)
         {
             //各アニメーション処理をActionから削除
             _animFlgSO.AttackNormal -= AttackAnimation_Normal;
@@ -80,16 +77,17 @@ public class PlayerAnimation : MonoBehaviour
         jobType = _newJob;
     }
 
+    /// <summary> /// 通常攻撃アニメーション /// </summary>
     private void AttackAnimation_Normal() 
     {
         //攻撃のアニメーション発火
         if(CommandMap.TryGetValue(jobType,out var commandSet)) 
         {
-            cmd = commandSet.normalAttackCd;
-            if (!cmd) { cmd.Execute(animator); }
+            AnimationBaseSO _currentCmd = commandSet.normalAttackCd;
+            if (!_currentCmd) { _currentCmd.Execute(animator); }
             else { Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
         }
-        else { Debug.LogError("ジョブ設定ミス"); }
+        else { Debug.LogError($"ジョブ設定ミス{jobType}"); }
     }
 
 }
