@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-//s“®‚ÆŠm—¦‚ğƒZƒbƒg‚Å•Û
+//è¡Œå‹•ã¨ç¢ºç‡ã‚’ã‚»ãƒƒãƒˆã§ä¿æŒ
 [System.Serializable]
 public class ActionWeightData
 {
-    //‚Ç‚Ìs“®‚ğs‚¤‚©j
+    //ã©ã®è¡Œå‹•ã‚’è¡Œã†ã‹ï¼‰
     public BossMove01.Boss01ActionType ActionType;
-    //Šm—¦
+    //ç¢ºç‡
     public float ProbabilityWeight;
 }
 
@@ -27,31 +27,31 @@ public class BossMove01 : MonoBehaviour
         None
     }
 
-    //Boss‚Ìs“®‚ÆA‚»‚Ìs“®Šm—¦‚ğİ’è‚·‚éƒf[ƒ^ƒŠƒXƒg
-    [SerializeField] private List<ActionWeightData> actionWeightsList;
+    //Bossã®è¡Œå‹•ã¨ã€ãã®è¡Œå‹•ç¢ºç‡ã‚’è¨­å®šã™ã‚‹ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+    [SerializeField] private List<ActionWeightData> attackRangeActionList;
+    [SerializeField] private List<ActionWeightData> farRangeActionList;
 
     [HideInInspector] public Boss01ActionType currentState = Boss01ActionType.Idle;
 
     private BossAnimationManager animationManager;
 
-    //l‚¦‚éŠÔ(s“®‚ÌƒCƒ“ƒ^[ƒoƒ‹)
+    //è€ƒãˆã‚‹æ™‚é–“(è¡Œå‹•ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«)
     [SerializeField] private float thinkingTime;
     private float currentThinkingTime;
 
-    //ƒ^ƒbƒNƒ‹‚É•K—v‚È•Ï”
+    //ã‚¿ãƒƒã‚¯ãƒ«ã«å¿…è¦ãªå¤‰æ•°
     [SerializeField] private GameObject playerObj;
     [SerializeField] private float tackleSpeed;
     [SerializeField] private float tackleTime;
     private Vector3 tackleDirection;
     private float currentTime;
 
-    //‹­UŒ‚‚ÆãUŒ‚‚É•K—v‚ÈƒIƒuƒWƒFƒNƒg
+    //å¼·æ”»æ’ƒã¨å¼±æ”»æ’ƒã«å¿…è¦ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     [SerializeField] private GameObject strongAttackArea;
     [SerializeField] private GameObject quickAttackArea;
-    [SerializeField] private float quickAttackRange;
-    [SerializeField] private float strongAttacRange;
+    [SerializeField] private float attackRange;
 
-    //’Ç”ö‘¬“x
+    //è¿½å°¾é€Ÿåº¦
     [SerializeField] private float chaseSpeed;
 
     private void Start()
@@ -65,22 +65,20 @@ public class BossMove01 : MonoBehaviour
         {
             BossTackle();
         }
-
-        if (currentState == Boss01ActionType.QuickAttack ||
-            currentState == Boss01ActionType.StrongAttack)
+        else if (currentState == Boss01ActionType.Walking)
         {
-            
+            Walking();
         }
 
         if (currentState == Boss01ActionType.Idle)
         {
             quickAttackArea.SetActive(false);
-            currentThinkingTime += Time.deltaTime; // l‚¦‚éŠÔ‚ğŒv‘ª
+            currentThinkingTime += Time.deltaTime; // è€ƒãˆã‚‹æ™‚é–“ã‚’è¨ˆæ¸¬
 
             if (currentThinkingTime >= thinkingTime)
             {
-                currentThinkingTime = 0f; // ŠÔƒŠƒZƒbƒg
-                DetermineNextAction();  // s“®Œˆ’è‚ğŒÄ‚Ño‚·
+                currentThinkingTime = 0f; // æ™‚é–“ãƒªã‚»ãƒƒãƒˆ
+                DetermineNextAction();  // è¡Œå‹•æ±ºå®šã‚’å‘¼ã³å‡ºã™
             }
         }
     }
@@ -88,54 +86,111 @@ public class BossMove01 : MonoBehaviour
     public void DetermineNextAction()
     {
         /*
-        //actionWeightsList‚©‚çProbabilityWeight‚Ì’l‚¾‚¯”²‚«o‚µAV‚µ‚¢FlortŒ^‚ÌƒŠƒXƒg‚ğuToListv‚Åì¬‚·‚é
-        //Select(a=>a.ProbabilityWeight)FSelect‚Å”²‚«o‚·ƒf[ƒ^‚ğw’è‚·‚éB
-        //uav‚Í–á‚Á‚½ƒŠƒXƒg(actionWeightsList)‚Ì‰¼‚Ì–¼‘O‚ÅAuav‚ÌProbabilityWeight‚Ì’l‚ğ‘I‘ğ‚·‚éB
+        //actionWeightsListã‹ã‚‰ProbabilityWeightã®å€¤ã ã‘æŠœãå‡ºã—ã€æ–°ã—ã„Flortå‹ã®ãƒªã‚¹ãƒˆã‚’ã€ŒToListã€ã§ä½œæˆã™ã‚‹
+        //Select(a=>a.ProbabilityWeight)ï¼šSelectã§æŠœãå‡ºã™ãƒ‡ãƒ¼ã‚¿ã‚’æŒ‡å®šã™ã‚‹ã€‚
+        //ã€Œaã€ã¯è²°ã£ãŸãƒªã‚¹ãƒˆ(actionWeightsList)ã®ä»®ã®åå‰ã§ã€ã€Œaã€ã®ProbabilityWeightã®å€¤ã‚’é¸æŠã™ã‚‹ã€‚
         List<float> weights = actionWeightsList.Select(a=>a.ProbabilityWeight).ToList();
 
-        //BossManager‚ÌŠÖ”‚ğŒÄ‚Ño‚µAƒCƒ“ƒfƒbƒNƒXi‰½”Ô–Ú‚©j‚ğæ“¾
+        //BossManagerã®é–¢æ•°ã‚’å‘¼ã³å‡ºã—ã€ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ï¼ˆä½•ç•ªç›®ã‹ï¼‰ã‚’å–å¾—
         int actionIndex = BossManager.instance.GetActionIndex(weights);
 
         if (actionIndex != -1)
         {
-            //ó‚¯æ‚Á‚½ƒCƒ“ƒfƒbƒNƒX‚ğEnum‚É•ÏŠ·‚µAƒXƒe[ƒg‚ğ•ÏX
+            //å—ã‘å–ã£ãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’Enumã«å¤‰æ›ã—ã€ã‚¹ãƒ†ãƒ¼ãƒˆã‚’å¤‰æ›´
             Boss01ActionType nextAction = (Boss01ActionType)actionIndex;
 
             ChangeState(nextAction);
         }
         */
-        //Šes“®‚ÌŠm—¦‚ğ‡Z‚·‚é
-        float totalWeight = actionWeightsList.Sum(a => a.ProbabilityWeight);
-
-        if (totalWeight <= 0)
+        // ã€é‡è¦ã€‘BossManagerã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒnullã§ãªã„ã“ã¨ã‚’æœ€åˆã«ç¢ºèªã™ã‚‹
+        if (BossManager.instance == null)
         {
-            // d‚İ‚ª–³‚¢ê‡‚ÍIdle‚É–ß‚é‚©A‰½‚à‚µ‚È‚¢
+            Debug.LogError("BossManager.instance ãŒåˆæœŸåŒ–ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚Script Execution Order ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
             ChangeState(Boss01ActionType.Idle);
             return;
         }
 
-        //ƒ‰ƒ“ƒ_ƒ€‚Ås“®‚ğ‘I”²
+        // playerObjãŒæœªè¨­å®šã ã¨ã€ã“ã“ã§ã‚¨ãƒ©ãƒ¼ã«ãªã‚‹å¯èƒ½æ€§ã‚‚ã‚ã‚‹ãŸã‚ãƒã‚§ãƒƒã‚¯ï¼ˆä»»æ„ï¼‰
+        if (playerObj == null)
+        {
+            Debug.LogError("playerObj ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
+            ChangeState(Boss01ActionType.Idle);
+            return;
+        }
+
+        float distance = Vector3.Distance(transform.position, playerObj.transform.position);
+        List<ActionWeightData> targetAction;
+
+        // è·é›¢ã«å¿œã˜ã¦æŠ½é¸ã™ã‚‹ãƒªã‚¹ãƒˆã‚’å¤‰ãˆã‚‹
+        if (distance <= attackRange)
+        {
+            targetAction = attackRangeActionList;
+        }
+        else
+        {
+            targetAction = farRangeActionList;
+        }
+
+        //targetAction ãŒ null ã‹ Count ãŒ 0 ã®å ´åˆã‚’ãƒã‚§ãƒƒã‚¯
+        if (targetAction == null || targetAction.Count == 0)
+        {
+            // ã©ã¡ã‚‰ã‹ã®ãƒªã‚¹ãƒˆãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã‹ã€è¦ç´ ãŒãªã„å ´åˆ
+            Debug.LogWarning($"æŠ½é¸ãƒªã‚¹ãƒˆãŒç©ºã¾ãŸã¯æœªè¨­å®šã§ã™ã€‚è·é›¢: {distance}ã€‚Idleã«æˆ»ã‚Šã¾ã™ã€‚");
+            ChangeState(Boss01ActionType.Idle);
+            return;
+        }
+
+        List<float> weight = targetAction.Select(a => a.ProbabilityWeight).ToList();
+
+        // ã“ã“ã§ BossManager.instance ãŒ null ã®å ´åˆã€ã‚¨ãƒ©ãƒ¼ãŒå‡ºã‚‹
+        int actionIndex = BossManager.instance.GetActionIndex(weight);
+
+        if (actionIndex != -1)
+        {
+            // æŠ½é¸ã•ã‚ŒãŸActionWeightDataã‹ã‚‰ActionTypeã‚’å–å¾—
+            Boss01ActionType nextAction = targetAction[actionIndex].ActionType;
+
+            ChangeState(nextAction);
+            return;
+        }
+
+        // æŠ½é¸ã«å¤±æ•—ã—ãŸå ´åˆ
+        ChangeState(Boss01ActionType.Idle);
+
+        /*
+        //å„è¡Œå‹•ã®ç¢ºç‡ã‚’åˆç®—ã™ã‚‹
+        float totalWeight = actionWeightsList.Sum(a => a.ProbabilityWeight);
+
+        if (totalWeight <= 0)
+        {
+            // é‡ã¿ãŒç„¡ã„å ´åˆã¯Idleã«æˆ»ã‚‹ã‹ã€ä½•ã‚‚ã—ãªã„
+            ChangeState(Boss01ActionType.Idle);
+            return;
+        }
+
+        //ãƒ©ãƒ³ãƒ€ãƒ ã§è¡Œå‹•ã‚’é¸æŠœ
         float drawValue = Random.Range(0, totalWeight);
         float currentWeight = 0;
 
-        //actionWeightsList‚ğ’¼Úƒ‹[ƒv‚·‚é
+        //actionWeightsListã‚’ç›´æ¥ãƒ«ãƒ¼ãƒ—ã™ã‚‹
         for (int i = 0; i < actionWeightsList.Count; i++)
         {
-            //actionWeightsList‚ÌProbabilityWeight ‚ğg—p
+            //actionWeightsListã®ProbabilityWeight ã‚’ä½¿ç”¨
             currentWeight += actionWeightsList[i].ProbabilityWeight;
 
             if (drawValue < currentWeight)
             {
-                //’Š‘I‚³‚ê‚½ActionType‚ğæ“¾
+                //æŠ½é¸ã•ã‚ŒãŸActionTypeã‚’å–å¾—
                 Boss01ActionType nextAction = actionWeightsList[i].ActionType;
 
                 ChangeState(nextAction);
-                return; //s“®‚ªŒˆ‚Ü‚Á‚½‚çŠÖ”‚ğI—¹
+                return; //è¡Œå‹•ãŒæ±ºã¾ã£ãŸã‚‰é–¢æ•°ã‚’çµ‚äº†
             }
         }
 
-        // ‘S‚Ä‚Ìd‚İ‚ğƒ`ƒFƒbƒN‚µ‚Ä‚àŒˆ‚Ü‚ç‚È‚¢i’Êí‚Í‹N‚±‚ç‚È‚¢jê‡‚ÍAIdle‚É–ß‚·
+        // å…¨ã¦ã®é‡ã¿ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¦ã‚‚æ±ºã¾ã‚‰ãªã„ï¼ˆé€šå¸¸ã¯èµ·ã“ã‚‰ãªã„ï¼‰å ´åˆã¯ã€Idleã«æˆ»ã™
         ChangeState(Boss01ActionType.Idle);
+        */
     }
 
     private void ChangeState(Boss01ActionType newAction)
@@ -149,25 +204,27 @@ public class BossMove01 : MonoBehaviour
         switch (newAction)
         {
             case Boss01ActionType.Idle:
-                //ƒAƒjƒ[ƒ^[‚ÌisIdle‚ğTrue‚É‚·‚é
+                //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®isIdleã‚’Trueã«ã™ã‚‹
                 currentThinkingTime = 0;
                 break;
             case Boss01ActionType.QuickAttack:
-                //NavMeshAgent‚ğ‹N“®‚µAƒvƒŒƒCƒ„[‚ğ’ÇÕ‚·‚éˆ—‚ğÀs
+                //NavMeshAgentã‚’èµ·å‹•ã—ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¿½è·¡ã™ã‚‹å‡¦ç†ã‚’å®Ÿè¡Œ
+                transform.LookAt(playerObj.transform);
                 StartCoroutine(QuickAttack());
                 break;
             case Boss01ActionType.StrongAttack:
-                //UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ğŠJn‚µAUŒ‚’†‚ÌƒƒWƒbƒN‚ğƒRƒ‹[ƒ`ƒ“‚ÅÀs
+                //æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã—ã€æ”»æ’ƒä¸­ã®ãƒ­ã‚¸ãƒƒã‚¯ã‚’ã‚³ãƒ«ãƒ¼ãƒãƒ³ã§å®Ÿè¡Œ
+                transform.LookAt(playerObj.transform);
                 StartCoroutine(StrongAttack());
                 break;
             case Boss01ActionType.Tackle:
-                //TackleŒÅ—L‚ÌƒƒWƒbƒN‚ğÀs
+                //Tackleå›ºæœ‰ã®ãƒ­ã‚¸ãƒƒã‚¯ã‚’å®Ÿè¡Œ
                 currentTime = 0;
                 transform.LookAt(playerObj.transform);
                 tackleDirection = transform.forward;
                 break;
             case Boss01ActionType.Walking:
-                //WalkingŒÅ—L‚ÌƒƒWƒbƒN‚ğÀs
+                //Walkingå›ºæœ‰ã®ãƒ­ã‚¸ãƒƒã‚¯ã‚’å®Ÿè¡Œ
                 break;
         }
     }
@@ -182,8 +239,8 @@ public class BossMove01 : MonoBehaviour
         ChangeState(Boss01ActionType.Idle);
     }
 
-    //Boss‚ÌˆÊ’u‚©‚çƒvƒŒƒCƒ„[‚ª‚¢‚é•ûŒü‚ğæ“¾‚µA‚»‚Ì•ûŒü‚ÉŒü‚©‚Á‚Ä‚‘¬ˆÚ“®‚³‚¹‚é
-    //•Ç‚É“–‚½‚ê‚ÎˆÚ“®‚ğ«‚ß‚é
+    //Bossã®ä½ç½®ã‹ã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ã‚‹æ–¹å‘ã‚’å–å¾—ã—ã€ãã®æ–¹å‘ã«å‘ã‹ã£ã¦é«˜é€Ÿç§»å‹•ã•ã›ã‚‹
+    //å£ã«å½“ãŸã‚Œã°ç§»å‹•ã‚’è¾ã‚ã‚‹
     private void BossTackle()
     {
         //ChangeState(Boss01ActionType.Tackle);
@@ -197,10 +254,10 @@ public class BossMove01 : MonoBehaviour
         }
     }
 
-    //‹­UŒ‚ó‘Ô‚©‚çidoló‘Ô‚É–ß‚·‚Ì‚ğ‘Ò‚Âˆ—
+    //å¼·æ”»æ’ƒçŠ¶æ…‹ã‹ã‚‰idolçŠ¶æ…‹ã«æˆ»ã™ã®ã‚’å¾…ã¤å‡¦ç†
     private IEnumerator StrongAttack()
     {
-        //ó‘Ô‚ğ–ß‚·‚Ü‚Å‚ÌŠÔw’è
+        //çŠ¶æ…‹ã‚’æˆ»ã™ã¾ã§ã®æ™‚é–“æŒ‡å®š
         float strongAttackDuration = 1.5f;
         yield return new WaitForSeconds(strongAttackDuration);
         ChangeState(Boss01ActionType.Idle);
@@ -208,30 +265,42 @@ public class BossMove01 : MonoBehaviour
 
     public void ExecuteStrongAttackHit()
     {
-        //ƒAƒjƒ[ƒVƒ‡ƒ“‚Ìƒ^ƒCƒ~ƒ“ƒO‚Å¶¬‚·‚é
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ç”Ÿæˆã™ã‚‹
         Instantiate(strongAttackArea, transform.position, Quaternion.identity);
     }
 
     private void Walking() 
-    { 
-    
+    {
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ã
+        transform.LookAt(playerObj.transform.position);
+
+Â  Â  Â  Â  //è¨­å®šã•ã‚ŒãŸé€Ÿåº¦ã§ç§»å‹•
+Â  Â  Â  Â  transform.position += transform.forward * chaseSpeed * Time.deltaTime;
+
+        //æ”»æ’ƒç¯„å›²ã«å…¥ã£ãŸã‹ãƒã‚§ãƒƒã‚¯
+        float distance = Vector3.Distance(transform.position, playerObj.transform.position);
+        if (distance <= attackRange)
+        {
+Â  Â  Â  Â  Â  Â  // æ”»æ’ƒç¯„å›²å†…ã«å…¥ã£ãŸã‚‰Idleã«æˆ»ã‚Šã€æ¬¡ã®è¡Œå‹•æŠ½é¸ã‚’ä¿ƒã™
+Â  Â  Â  Â  Â  Â  ChangeState(Boss01ActionType.Idle);
+        }
     }
 
     /*
-    //ƒ^ƒbƒNƒ‹ˆÈŠO‚ÌUŒ‚‚ªo‚½ê‡ƒvƒŒƒCƒ„[‚ğ’Ç”ö‚µAUŒ‚”ÍˆÍ“à‚É“ü‚ê‚ÎUŒ‚‚ğs‚¤
+    //ã‚¿ãƒƒã‚¯ãƒ«ä»¥å¤–ã®æ”»æ’ƒãŒå‡ºãŸå ´åˆãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¿½å°¾ã—ã€æ”»æ’ƒç¯„å›²å†…ã«å…¥ã‚Œã°æ”»æ’ƒã‚’è¡Œã†
     private void Chase()
     {
-        //ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚ğŒvZ
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã®è·é›¢ã‚’è¨ˆç®—
         float distance = Vector3.Distance(transform.position, playerObj.transform.position);
 
         if (currentState == Boss01ActionType.QuickAttack)
         {
-            //UŒ‚”ÍˆÍ“à‚É“ü‚Á‚½‚©ƒ`ƒFƒbƒN
+            //æ”»æ’ƒç¯„å›²å†…ã«å…¥ã£ãŸã‹ãƒã‚§ãƒƒã‚¯
             if (distance <= quickAttackRange)
             {
                 return;
             }
-            //”ÍˆÍŠO‚È‚çƒvƒŒƒCƒ„[‚ÉŒü‚«AˆÚ“®‚·‚é
+            //ç¯„å›²å¤–ãªã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å‘ãã€ç§»å‹•ã™ã‚‹
             transform.LookAt(playerObj.transform.position);
             transform.position += transform.forward * chaseSpeed * Time.deltaTime;
         }
@@ -251,7 +320,7 @@ public class BossMove01 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //•Ç‚É“–‚½‚Á‚½‚çUŒ‚‚ğ’†’f(å‚Éƒ^ƒbƒNƒ‹)
+        //å£ã«å½“ãŸã£ãŸã‚‰æ”»æ’ƒã‚’ä¸­æ–­(ä¸»ã«ã‚¿ãƒƒã‚¯ãƒ«)
         if (collision.gameObject.CompareTag("syounin"))
         {
             ChangeState(Boss01ActionType.Idle);
