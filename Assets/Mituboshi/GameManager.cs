@@ -6,61 +6,74 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject []Player;
-    [SerializeField]private float Coin;
-    [SerializeField] float HP;
-    [SerializeField] float MP;
-    [SerializeField] float AttackStatus;
-    [SerializeField] float DefenseStatus;
+    [SerializeField]public float Coin;
+    [SerializeField]public float HP;
+    [SerializeField]public float MP;
+    [SerializeField]public float AttackStatus;
+    [SerializeField]public float DefenseStatus;
     [SerializeField] public float job;
+    [SerializeField] public bool FirstRoulette = true;
 
     [SerializeField] public int []Status;
-    public bool slot = true;
-    [SerializeField] Text powerslot_text;
-    [SerializeField] Text defense_text;
-    [SerializeField] Text HP_text;
-    [SerializeField] Text MP_text;
-    [SerializeField] Text job_text;
 
-    [SerializeField] int HP_slot_Max;
-    [SerializeField] int HP_slot_Min;
+    [SerializeField] GameObject rouletteUI;
+    [SerializeField] GameObject Weapon_UI;
+    [SerializeField] GameObject jobroulette;
+    [SerializeField] GameObject Canvas;
 
-    [SerializeField] int MP_slot_Max;
-    [SerializeField] int MP_slot_Min;
+    public bool slot = false;
 
-    [SerializeField] int power_slot_Max;
-    [SerializeField] int power_slot_Min;
+ 
+   
 
-    [SerializeField] int Defense_slot_Max;
-    [SerializeField] int Defense_slot_Min;
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(Canvas);
+      
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerStatus();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (FirstRoulette == true)
+            {
+                if (rouletteUI.activeSelf == false && Weapon_UI.activeSelf == false)
+                {
+                    rouletteUI.SetActive(true);
+                }
+                else if (Weapon_UI.activeSelf == false)
+                {
+                    rouletteUI.SetActive(false);
 
-        if (slot == true) 
-        { 
-            Status[0] = Random.Range(HP_slot_Min, HP_slot_Max);
-            Status[1] = Random.Range(MP_slot_Min, MP_slot_Max);
-            Status[2] = Random.Range(power_slot_Min, power_slot_Max);
-            Status[3] = Random.Range(Defense_slot_Min, Defense_slot_Max);
-            Status[4] = Random.Range(1, 4);
+                }
+            }
+            else
+            {
+                if (rouletteUI.activeSelf == false && Weapon_UI.activeSelf == false)
+                {
+                    rouletteUI.SetActive(true);
+                    jobroulette.SetActive(false);
+                }
+                else if (Weapon_UI.activeSelf == false)
+                {
+                    rouletteUI.SetActive(false);
+
+                }
+            }
         }
-
-        HP_text.text = ($"{Status[0]}");
-        MP_text.text = ($"{Status[1]}");
-        powerslot_text.text = ($"{Status[2]}");
-        defense_text.text = ($"{Status[3]}");
-        if(Status[4] == 1) { job_text.text = ($"剣士"); }
-        if (Status[4] == 2) { job_text.text = ($"アーチャー"); }
-        if (Status[4] == 3) { job_text.text = ($"マジシャン "); }
-
-
+        if (rouletteUI.activeSelf == true || Weapon_UI.activeSelf == true)
+        {
+            Player[0].GetComponent<Player>().enabled = false;
+        }
+        else
+        {
+            Player[0].GetComponent<Player>().enabled = true;
+        }
 
     }
     private void PlayerStatus()
@@ -69,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             Player = GameObject.FindGameObjectsWithTag("Player");
         }
-        Coin = Player[0].GetComponent<Player>().coin;
+       
      
        
         Player[0].GetComponent<Player>().HP = HP;
@@ -83,13 +96,24 @@ public class GameManager : MonoBehaviour
      
         Player[0].GetComponent<Player>().DefenseStatus = DefenseStatus;
     }
-    public void stopslot()
+   
+    public void UIchange()
     {
-        slot = false;
-        HP += Status[0];
-        MP += Status[1];
-        AttackStatus += Status[2];
-        DefenseStatus += Status[3];
-
+        if(rouletteUI.activeSelf == true)
+        {
+            rouletteUI.SetActive(false);
+            Weapon_UI.SetActive(true);
+        }
+        
     }
+    public void UIchange2()
+    {
+        
+        if(rouletteUI.activeSelf == false)
+        {
+            rouletteUI.SetActive(true);
+            Weapon_UI.SetActive(false);
+        }
+    }
+
 }
