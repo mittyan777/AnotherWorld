@@ -263,6 +263,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2363386347749121852, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
   m_PrefabInstance: {fileID: 1513618388}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1310774611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1310774613}
+  - component: {fileID: 1310774612}
+  m_Layer: 0
+  m_Name: PlayerAnimationMane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1310774612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310774611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11ff43e7e590ef4cbf8e631f11eb6f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cmdCofigSO: {fileID: 11400000, guid: c3a3be59d201ee74582f41f3d73d5aef, type: 2}
+  _animFlgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
+  animator: {fileID: 1513618389}
+--- !u!4 &1310774613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310774611}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -114.40941, y: -35.21415, z: -31.17392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1513618388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,6 +371,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
+--- !u!95 &1513618389 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8555716100311035614, guid: 87097a941bccb0f4199d1c0a7c582516, type: 3}
+  m_PrefabInstance: {fileID: 1513618388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521374165
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,3 +571,4 @@ SceneRoots:
   - {fileID: 13685167}
   - {fileID: 308491134}
   - {fileID: 1513618388}
+  - {fileID: 1310774613}
