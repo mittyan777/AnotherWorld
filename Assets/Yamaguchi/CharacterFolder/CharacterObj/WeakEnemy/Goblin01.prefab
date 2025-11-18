@@ -291,8 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMaxHP: 10
-  damageTime: 0
-  breakTime: 0
+  damageTime: 1
+  breakTime: 2
 --- !u!114 &2971449830317261356
 MonoBehaviour:
   m_ObjectHideFlags: 0

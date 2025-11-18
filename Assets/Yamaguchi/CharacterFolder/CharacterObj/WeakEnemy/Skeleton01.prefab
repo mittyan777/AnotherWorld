@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2850986727542879587}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -158,9 +158,17 @@ PrefabInstance:
       value: Skeleton01
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+    - target: {fileID: 5866666021909216657, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 60cd557b29387ba439d8aa87ffa7d776, type: 2}
+      objectReference: {fileID: 9100000, guid: bb3b453f75e8de14b8f75c31128729f4, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -210,7 +218,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -252,7 +260,7 @@ MonoBehaviour:
   stayDuration: 3
   patrolRandomRange: 10
   visibilityDistance: 15
-  stopDistance: 1.5
+  stopDistance: 2
 --- !u!114 &3163480365174730902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,13 +274,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackInterval: 1.5
+  attackInterval: 2
   animationlatency: 0
   animationRecoveryTime: 0
   isAttackSequenceRunning: 0
   attackHitbox: {fileID: 2850986727542879587}
   hitboxDuration: 0.3
-  displaylatency: 0.25
+  displaylatency: 1
 --- !u!114 &6095987544355249198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,9 +293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4f1b495192cbb4dafa013bfbcf671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHP: 50
-  damageTime: 1.5
-  breakTime: 0
+  enemyMaxHP: 10
+  damageTime: 1
+  breakTime: 2
 --- !u!114 &3818931981815851374
 MonoBehaviour:
   m_ObjectHideFlags: 0
