@@ -10,6 +10,12 @@ public class BossManager : MonoBehaviour
     public static BossManager instance { get; private set; }
 
     [SerializeField] private GameObject playerObj;
+    [SerializeField] private int BossHP;
+
+
+    //ダメージ処理を行うための変数(テスト用)
+    [SerializeField] private int testDamege;
+    public int currentBossHP { get; private set; }
 
 
     private void Awake()
@@ -24,10 +30,18 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    LookPlayer();
-    //}
+    private void Start()
+    {
+        currentBossHP = BossHP;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.P))
+        {
+            TakeDamage();
+        }
+    }
 
     //この関数を呼び出したScriptのリストにあるfloat型のデータをリストで取得
     public int GetActionIndex(List<float> weights)
@@ -67,8 +81,19 @@ public class BossManager : MonoBehaviour
         return 0;
     }
 
-    //private void LookPlayer() 
-    //{
-    //    transform.LookAt(playerObj.transform);
-    //}
+    private void TakeDamage()
+    {
+        currentBossHP -= testDamege;
+    }
+
+    //当たったオブジェクトにPlayerが含まれていたらダメージをくらうようにする
+    private void OnTriggerEnter(Collider other)
+    {
+        string hitTag = other.gameObject.tag;
+        if (hitTag.Contains("Player"))
+        {
+            //TakeDamage();
+        }
+        
+    }
 }

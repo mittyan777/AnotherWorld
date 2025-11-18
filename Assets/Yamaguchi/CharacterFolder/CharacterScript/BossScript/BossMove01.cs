@@ -61,6 +61,12 @@ public class BossMove01 : MonoBehaviour
     }
     private void Update()
     {
+        if (BossManager.instance.currentBossHP <= 0)
+        {
+            ChangeState(Boss01ActionType.Death);
+            return;
+        }
+
         if (currentState == Boss01ActionType.Tackle)
         {
             BossTackle();
