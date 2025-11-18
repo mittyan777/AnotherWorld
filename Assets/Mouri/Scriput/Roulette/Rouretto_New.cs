@@ -18,7 +18,7 @@ public class Rouretto_New : MonoBehaviour
     [SerializeField] int MP;
     [SerializeField] private int Attack;
     [SerializeField] private int Defense;
-    [SerializeField] private float job;
+    [SerializeField] private float  job;
     [SerializeField] GameObject GameManager;
 
 
@@ -244,6 +244,8 @@ public class Rouretto_New : MonoBehaviour
              
             }
 
+            //わけわからんから一旦コメントアウト->hikido
+            /*
             Debug.Log("coinBe" + Coin);
 
             Coin -= RouletteCost;//ルーレット使用コスト
@@ -252,6 +254,7 @@ public class Rouretto_New : MonoBehaviour
 
 
             Player[0].GetComponent<Player>().coin = Coin;
+            */
 
             UpdateCoinUI();
 
@@ -293,7 +296,7 @@ public class Rouretto_New : MonoBehaviour
         Defense = UpdateStatus[3];
 
         if (rouletto_CG != null && FirstRoulette)
-            rouletto_CG.UpdateJobImage(job, FirstRoulette);
+            rouletto_CG.UpdateJobImage(job.ToString(), FirstRoulette);
 
 
         ////結果を確定
