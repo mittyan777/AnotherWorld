@@ -85,7 +85,7 @@ public class Rouretto_New : MonoBehaviour
     private int[] UpdateStatus = new int[4];
 
     [Header("職種ごとの画像設定")]
-    [SerializeField] private Changimage changimage;
+    [SerializeField] private Rouletto_CG rouletto_CG;
 
     void Start()
     {
@@ -103,9 +103,9 @@ public class Rouretto_New : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
 
-        if (changimage == null)
+        if (rouletto_CG == null)
         {
-            changimage = FindAnyObjectByType<Changimage>();//職種ごとに画像を変えるための部分
+            rouletto_CG = FindAnyObjectByType<Rouletto_CG>();//職種ごとに画像を変えるための部分
         }
     }
     void Update()
@@ -204,9 +204,9 @@ public class Rouretto_New : MonoBehaviour
         defense_text.text = Status[3].ToString();
 
         job_text.gameObject.SetActive(false);
-        if (changimage != null)
-        {
-            changimage.HideJobImage();
+        if (rouletto_CG != null)
+        {   
+            rouletto_CG.HideJobImage();
         }
     }
     private void PlayerStatus()
@@ -249,11 +249,18 @@ public class Rouretto_New : MonoBehaviour
 
             UpdateCoinUI();
 
+            if (rouletto_CG != null)
+            {
+                rouletto_CG.UseCoin(RouletteCost);  //Roulett_CGの中の二回目以降にコインを消費するフェードアウト部分
+            }
+
+
         }
 
         Spining = true;
 
         spinCoroutine = StartCoroutine(SpinRoulette());
+
 
     }
 
@@ -275,8 +282,8 @@ public class Rouretto_New : MonoBehaviour
         Defense = UpdateStatus[3];
 
 
-        if (changimage != null && FirstRoulette) 
-            changimage.UpdateJobImage(job, FirstRoulette);
+        if (rouletto_CG != null && FirstRoulette)
+            rouletto_CG.UpdateJobImage(job, FirstRoulette);
 
         ////結果を確定
 
