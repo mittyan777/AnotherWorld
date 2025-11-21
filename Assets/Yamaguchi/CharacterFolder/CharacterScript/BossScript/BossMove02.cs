@@ -35,15 +35,13 @@ public class BossMove02 : MonoBehaviour
     [SerializeField] private float thinkingTime;
     private float currentThinkingTime;
 
-    // JumpAttack関連の変数 (Tackleから変更)
-    // [SerializeField] private GameObject playerObj; // 既存のplayerObjを使用
-    [SerializeField] private float jumpAttackTime = 1.0f; // 例: ジャンプ攻撃の時間
     private float currentTime;
 
 
     //強攻撃と弱攻撃に必要なオブジェクト
-    [SerializeField] private GameObject strongAttackArea;
+    [SerializeField] private GameObject slashAttackArea;
     [SerializeField] private GameObject quickAttackArea;
+    [SerializeField]private GameObject jumpAttackArea;
     [SerializeField] private float attackRange;
 
     //追尾速度
@@ -78,7 +76,7 @@ public class BossMove02 : MonoBehaviour
         // JumpAttackの処理を追加する場合はここに記述
         if (currentState == Boss02ActionType.JumpAttack)
         {
- 
+            JumpAttack();
         }
         else if (currentState == Boss02ActionType.Walking)
         {
@@ -199,15 +197,8 @@ public class BossMove02 : MonoBehaviour
     // JumpAttackのロジック (Tackleの代わりに新規作成)
     private IEnumerator JumpAttack()
     {
-        currentTime = 0;
-        // 例: ジャンプアニメーションの開始、上方向への移動など
-        Debug.Log("Jump Attack Start");
-
+        float jumpAttackTime = 2.0f;
         yield return new WaitForSeconds(jumpAttackTime);
-
-        // 例: 着地アニメーション、攻撃判定の実行など
-        Debug.Log("Jump Attack Finish");
-
         ChangeState(Boss02ActionType.Idle);
     }
 
@@ -218,9 +209,14 @@ public class BossMove02 : MonoBehaviour
         ChangeState(Boss02ActionType.Idle);
     }
 
-    public void ExecuteStrongAttackHit()
+    public void GenerateSlash() 
     {
-        Instantiate(strongAttackArea, transform.position, Quaternion.identity);
+        Instantiate(slashAttackArea, transform.position, Quaternion.identity);
+    }
+
+    public void GenerateJumpAttackArea()
+    {
+        Instantiate(jumpAttackArea, transform.position, Quaternion.identity);
     }
 
     private void Walking()
