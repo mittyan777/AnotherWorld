@@ -16,7 +16,7 @@ public class AnimationFlagManagerSO : ScriptableObject
     [Header("各通知イベント")]
     public Action Attackevents;         //攻撃イベント
     public Action WalkEvents;           //移動イベント
-    public Action AvoidanceEvents;
+    public Action AvoidanceEvents;      //回避イベント
     public Action AttackNormal;
     public Action AttackMagicianSkills;
     public Action AttackArcherSkills;
@@ -27,13 +27,11 @@ public class AnimationFlagManagerSO : ScriptableObject
         get { return attackNormalFlg; }
         set 
         {
-            if (attackNormalFlg != value) { return; }
-            attackNormalFlg = value;
             if (value) 
             {
                 UnityEngine.Debug.Log("イベント発火");
                 AttackNormal?.Invoke();  //登録したイベントを発火
-                attackNormalFlg = false;
+                //attackNormalFlg = false;
             }
         }
     }

@@ -34,13 +34,13 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (!animator)
         {
-            Debug.LogError("Animatorコンポーネントが見つかりません。", this);
+            UnityEngine.Debug.LogError("Animatorコンポーネントが見つかりません。", this);
             return;
         }
 
         if (!_cmdCofigSO)
         {
-            Debug.LogError("コマンドコンフィグが設定されていない", this);
+            UnityEngine.Debug.LogError("コマンドコンフィグが設定されていない", this);
             return;
         }
 
@@ -57,7 +57,7 @@ public class PlayerAnimation : MonoBehaviour
         }
         else
         {
-            Debug.LogError("_animFlgSOが存在しない", this);
+            UnityEngine.Debug.LogError("_animFlgSOが存在しない", this);
             return;
         }
     }
@@ -86,18 +86,19 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimationBaseSO _currentCmd = commandSet.normalAttackCd;
             if (_currentCmd != null) { _currentCmd.Execute(animator); }
-            else { Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
         }
-        else { Debug.LogError($"ジョブ設定ミス{jobType}"); }
+        else { UnityEngine.Debug.LogError($"ジョブ設定ミス{jobType}"); }
     }
 
-    private void AttackAnimation_NormalEnd() 
+    /// <summary> /// 攻撃アニメーション終了用関数 /// </summary>
+    public void AttackAnimation_NormalEnd() 
     {
         if(CommandMap.TryGetValue(jobType,out var commandSet)) 
         {
             AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
             if(_endCmd != null) { _endCmd.Execute(animator); }
-            else { Debug.LogError("失敗"); }
+            else { UnityEngine.Debug.LogError("失敗"); }
         }
     }
 

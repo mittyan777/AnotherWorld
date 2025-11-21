@@ -5,10 +5,10 @@ using UnityEngine;
 /// <summary> /// パラメータネーム管理列挙体 /// </summary>
 public enum ParaMatorName 
 {
-    NormalAttack,
-    Walk_UP,
+   NormalAttack,
+   Walk_UP,
    Walk_Down,
-   Attack_Normal,
+   NormalAttackEnd,
 
    NONE = 0
    

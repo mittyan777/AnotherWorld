@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6075e9580fe926f4094dc60aaeb47bca, type: 3}
   m_Name: CommandConfigSO
   m_EditorClassIdentifier: 
+  commandSets:
+  - JobType: 1
+    normalAttackCd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
+    avoidCd: {fileID: 0}
+    normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
+    walkanimEndCd: {fileID: 0}
