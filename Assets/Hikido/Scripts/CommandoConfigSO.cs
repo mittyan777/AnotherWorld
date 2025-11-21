@@ -18,6 +18,16 @@ public class CommandoConfigSO : ScriptableObject
         //回避コマンド
         public AnimationBaseSO avoidCd;
         
+        //移動コマンド
+        //上下左右移動用のアニメーションコマンド管理
+
+        [Header("終了用コマンド")]
+        //通常攻撃アニメーション終了用コマンド
+        public AnimationBaseSO normalAttackEndCd;
+
+        //移動アニメーション終了用コマンド  -> 不要の場合は削除するあとで
+        public AnimationBaseSO walkanimEndCd;    
+
     }
 
     //コマンド設定リスト

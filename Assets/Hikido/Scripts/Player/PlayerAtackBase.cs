@@ -13,6 +13,7 @@ public class PlayerAtackBase : MonoBehaviour
 
     //ゲームマネージャー
     [SerializeField] GameObject[] manager;
+    [SerializeField] AnimationFlagManagerSO _animflgSO;
 
     /// <summary> /// レンジ構造体 /// </summary>
     /// いらないかも
@@ -51,6 +52,7 @@ public class PlayerAtackBase : MonoBehaviour
         {
             //TODO:ダメージ処理(全職種共通の処理)
             //->与えるダメージは獲得ステータスの攻撃力分を与える。
+            _animflgSO.AttackNormalflg = true;
             bNormalAttack = true;
         }
 
@@ -84,6 +86,7 @@ public class PlayerAtackBase : MonoBehaviour
         if (bAvoidance)
         {
             //TODO:アニメーションフラグで管理
+
             Debug.Log("回避方向");
         }
         else

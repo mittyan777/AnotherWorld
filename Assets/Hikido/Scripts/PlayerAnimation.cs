@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
@@ -14,11 +15,11 @@ public enum JobType
 
 public class PlayerAnimation : MonoBehaviour
 {
-    
+
     [SerializeField] private CommandoConfigSO _cmdCofigSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
 
-    [SerializeField] private  Animator animator;
+    [SerializeField] private Animator animator;
 
     //ジョブタイプ
     public JobType jobType { get; private set; } = JobType.NONE;
@@ -37,9 +38,9 @@ public class PlayerAnimation : MonoBehaviour
             return;
         }
 
-        if (!_cmdCofigSO) 
+        if (!_cmdCofigSO)
         {
-            Debug.LogError("コマンドコンフィグが設定されていない", this);            
+            Debug.LogError("コマンドコンフィグが設定されていない", this);
             return;
         }
 
@@ -72,22 +73,32 @@ public class PlayerAnimation : MonoBehaviour
 
     /// <summary> /// ジョブ設定(アニメーション用) /// </summary>
     /// <param name="_newJob"></param>
-    public void SetJobType(JobType _newJob) 
+    public void SetJobType(JobType _newJob)
     {
         jobType = _newJob;
     }
 
     /// <summary> /// 通常攻撃アニメーション /// </summary>
-    private void AttackAnimation_Normal() 
+    private void AttackAnimation_Normal()
     {
         //攻撃のアニメーション発火
-        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.normalAttackCd;
-            if (!_currentCmd) { _currentCmd.Execute(animator); }
+            if (_currentCmd != null) { _currentCmd.Execute(animator); }
             else { Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
         }
         else { Debug.LogError($"ジョブ設定ミス{jobType}"); }
+    }
+
+    private void AttackAnimation_NormalEnd() 
+    {
+        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        {
+            AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
+            if(_endCmd != null) { _endCmd.Execute(animator); }
+            else { Debug.LogError("失敗"); }
+        }
     }
 
 }
