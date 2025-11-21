@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 
 //行動と確率をセットで保持
 [System.Serializable]
-public class ActionWeightData
+public class Boss01ActionWeightData
 {
     //どの行動を行うか）
     public BossMove01.Boss01ActionType ActionType;
@@ -28,8 +28,8 @@ public class BossMove01 : MonoBehaviour
     }
 
     //Bossの行動と、その行動確率を設定するデータリスト
-    [SerializeField] private List<ActionWeightData> attackRangeActionList;
-    [SerializeField] private List<ActionWeightData> farRangeActionList;
+    [SerializeField] private List<Boss01ActionWeightData> attackRangeActionList;
+    [SerializeField] private List<Boss01ActionWeightData> farRangeActionList;
 
     [HideInInspector] public Boss01ActionType currentState = Boss01ActionType.Idle;
 
@@ -50,19 +50,24 @@ public class BossMove01 : MonoBehaviour
     [SerializeField] private GameObject strongAttackArea;
     [SerializeField] private GameObject quickAttackArea;
     [SerializeField] private float attackRange;
-
     //追尾速度
     [SerializeField] private float chaseSpeed;
+
+
 
     private void Start()
     {
         animationManager = GetComponent<BossAnimationManager>();
         quickAttackArea.SetActive(false);
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
     private void Update()
     {
         if (BossManager.instance.currentBossHP <= 0)
         {
+            Rigidbody body = GetComponent<Rigidbody>();
+            Destroy(body);
             ChangeState(Boss01ActionType.Death);
             return;
         }
@@ -78,6 +83,8 @@ public class BossMove01 : MonoBehaviour
 
         if (currentState == Boss01ActionType.Idle)
         {
+            //傾きを修正
+            transform.localEulerAngles = new Vector3(0,transform.localEulerAngles.y,0);
             quickAttackArea.SetActive(false);
             currentThinkingTime += Time.deltaTime; // 考える時間を計測
 
@@ -91,24 +98,7 @@ public class BossMove01 : MonoBehaviour
 
     public void DetermineNextAction()
     {
-        /*
-        //actionWeightsListからProbabilityWeightの値だけ抜き出し、新しいFlort型のリストを「ToList」で作成する
-        //Select(a=>a.ProbabilityWeight)：Selectで抜き出すデータを指定する。
-        //「a」は貰ったリスト(actionWeightsList)の仮の名前で、「a」のProbabilityWeightの値を選択する。
-        List<float> weights = actionWeightsList.Select(a=>a.ProbabilityWeight).ToList();
-
-        //BossManagerの関数を呼び出し、インデックス（何番目か）を取得
-        int actionIndex = BossManager.instance.GetActionIndex(weights);
-
-        if (actionIndex != -1)
-        {
-            //受け取ったインデックスをEnumに変換し、ステートを変更
-            Boss01ActionType nextAction = (Boss01ActionType)actionIndex;
-
-            ChangeState(nextAction);
-        }
-        */
-        // 【重要】BossManagerのインスタンスがnullでないことを最初に確認する
+        //【重要】BossManagerのインスタンスがnullでないことを最初に確認する
         if (BossManager.instance == null)
         {
             Debug.LogError("BossManager.instance が初期化されていません。Script Execution Order を確認してください。");
@@ -125,7 +115,7 @@ public class BossMove01 : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, playerObj.transform.position);
-        List<ActionWeightData> targetAction;
+        List<Boss01ActionWeightData> targetAction;
 
         // 距離に応じて抽選するリストを変える
         if (distance <= attackRange)
@@ -204,7 +194,7 @@ public class BossMove01 : MonoBehaviour
         currentState = newAction;
         if (animationManager != null)
         {
-            animationManager.UpdateAnimation(currentState);
+            animationManager.Boss01UpdateAnimation(currentState);
         }
 
         switch (newAction)
@@ -215,18 +205,18 @@ public class BossMove01 : MonoBehaviour
                 break;
             case Boss01ActionType.QuickAttack:
                 //NavMeshAgentを起動し、プレイヤーを追跡する処理を実行
-                transform.LookAt(playerObj.transform);
+                LookAtPlayerHorizontal();
                 StartCoroutine(QuickAttack());
                 break;
             case Boss01ActionType.StrongAttack:
                 //攻撃アニメーションを開始し、攻撃中のロジックをコルーチンで実行
-                transform.LookAt(playerObj.transform);
+                LookAtPlayerHorizontal();
                 StartCoroutine(StrongAttack());
                 break;
             case Boss01ActionType.Tackle:
                 //Tackle固有のロジックを実行
                 currentTime = 0;
-                transform.LookAt(playerObj.transform);
+                LookAtPlayerHorizontal();
                 tackleDirection = transform.forward;
                 break;
             case Boss01ActionType.Walking:
@@ -278,7 +268,7 @@ public class BossMove01 : MonoBehaviour
     private void Walking() 
     {
         //プレイヤーの方向を向く
-        transform.LookAt(playerObj.transform.position);
+        LookAtPlayerHorizontal();
 
         //設定された速度で移動
         transform.position += transform.forward * chaseSpeed * Time.deltaTime;
@@ -323,6 +313,20 @@ public class BossMove01 : MonoBehaviour
     }
     */
 
+    private void LookAtPlayerHorizontal() 
+    {
+        if (playerObj == null) return;
+
+        //プレイヤーの水平位置を計算
+        Vector3 targetPosition = new Vector3(
+            playerObj.transform.position.x,
+            transform.position.y, //ボスのY座標を維持する
+            playerObj.transform.position.z
+        );
+
+        //その水平位置に向かって回転
+        transform.LookAt(targetPosition);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
