@@ -124,7 +124,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     /// <summary> /// 回避アニメーション終了コマンド /// </summary>
-    public void AvodAnimationEnd() 
+    public void AvoidAnimationEnd() 
     {
         if(CommandMap.TryGetValue(jobType,out var commandSet)) 
         {
