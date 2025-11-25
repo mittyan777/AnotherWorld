@@ -8,6 +8,7 @@ public class BossAnimationManager : MonoBehaviour
 
     //現在のアニメーション状態を記憶し、SetBoolの重複呼び出しを防ぐための変数
     private BossMove01.Boss01ActionType boss01Animation;
+    private BossMove02.Boss02ActionType boss02Animation;
 
     //Animatorのパラメーター名
     private const string PARAM_IS_WALK = "IsWalk";
@@ -35,9 +36,13 @@ public class BossAnimationManager : MonoBehaviour
         boss01Animation = BossMove01.Boss01ActionType.Idle;
         SetAllBoolsFalse();
         animator.SetBool(PARAM_IS_IDLE, true);
+
+        boss02Animation=BossMove02.Boss02ActionType.Idle;
+        SetAllBoolsFalse();
+        animator.SetBool(PARAM_IS_IDLE, true);
     }
 
-    public void UpdateAnimation(BossMove01.Boss01ActionType boss01State)
+    public void Boss01UpdateAnimation(BossMove01.Boss01ActionType boss01State)
     {
         //状態が変わっていなければ、無駄なSetBool呼び出しを避けて終了
         if (boss01State != BossMove01.Boss01ActionType.Death)
@@ -76,6 +81,47 @@ public class BossAnimationManager : MonoBehaviour
         }
 
         boss01Animation = boss01State;
+    }
+
+    public void Boss02UpdateAnimation(BossMove02.Boss02ActionType boss02State)
+    {
+        //状態が変わっていなければ、無駄なSetBool呼び出しを避けて終了
+        if (boss02State != BossMove02.Boss02ActionType.Death)
+        {
+            // 状態が変わっていなければ、無駄なSetBool呼び出しを避けて終了
+            if (boss02Animation == boss02State)
+            {
+                return;
+            }
+        }
+
+        SetAllBoolsFalse();
+
+        switch (boss02State)
+        {
+            case BossMove02.Boss02ActionType.Idle:
+                animator.SetBool(PARAM_IS_IDLE, true);
+                break;
+            case BossMove02.Boss02ActionType.Walking:
+                animator.SetBool(PARAM_IS_WALK, true);
+                break;
+            case BossMove02.Boss02ActionType.QuickAttack:
+                animator.SetBool(PARAM_IS_ATTACK01, true);
+                break;
+            case BossMove02.Boss02ActionType.StrongAttack:
+                animator.SetBool(PARAM_IS_ATTACK02, true);
+                break;
+            case BossMove02.Boss02ActionType.TwoStepAttack:
+                animator.SetBool(PARAM_IS_ATTACK03, true);
+                break;
+            case BossMove02.Boss02ActionType.Death:
+                animator.SetBool(PARAM_IS_Death, true);
+                break;
+            case BossMove02.Boss02ActionType.None:
+                break;
+        }
+
+        boss02Animation = boss02State;
     }
 
     private void SetAllBoolsFalse()
