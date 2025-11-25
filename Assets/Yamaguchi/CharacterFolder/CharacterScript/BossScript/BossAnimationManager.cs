@@ -111,7 +111,7 @@ public class BossAnimationManager : MonoBehaviour
             case BossMove02.Boss02ActionType.StrongAttack:
                 animator.SetBool(PARAM_IS_ATTACK02, true);
                 break;
-            case BossMove02.Boss02ActionType.JumpAttack:
+            case BossMove02.Boss02ActionType.TwoStepAttack:
                 animator.SetBool(PARAM_IS_ATTACK03, true);
                 break;
             case BossMove02.Boss02ActionType.Death:

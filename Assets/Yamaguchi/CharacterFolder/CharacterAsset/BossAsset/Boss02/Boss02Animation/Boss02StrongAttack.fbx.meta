@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.4781726
-        functionName: GenerateSlash
+        functionName: StrongSlash
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 7c10fca1b496f7e4cb93488f4ffffcb3, type: 3}
         floatParameter: 0

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class SlashingMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float breakTime;
+    private void Start()
     {
-        
+        StartCoroutine(Break());
+    }
+    private void Update()
+    {
+        transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private IEnumerator Break() 
+    { 
+        yield return new WaitForSeconds(breakTime);
+        Destroy(gameObject);
     }
 }

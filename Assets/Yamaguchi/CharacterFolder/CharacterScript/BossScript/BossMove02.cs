@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class Boss02ActionWeightData 
+public class Boss02ActionWeightData
 {
     public BossMove02.Boss02ActionType ActionType;
     public float ProbabilityWeight;
@@ -18,7 +18,7 @@ public class BossMove02 : MonoBehaviour
         Idle,
         QuickAttack,
         StrongAttack,
-        JumpAttack,
+        TwoStepAttack,
         Walking,
         Death,
         None
@@ -31,52 +31,51 @@ public class BossMove02 : MonoBehaviour
 
     private BossAnimationManager animationManager;
 
-    //l‚¦‚éŠÔ(s“®‚ÌƒCƒ“ƒ^[ƒoƒ‹)
+    //è€ƒãˆã‚‹æ™‚é–“(è¡Œå‹•ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«)
     [SerializeField] private float thinkingTime;
     private float currentThinkingTime;
 
-    private float currentTime;
+    //ä¸è¦ãªå¤‰æ•°ã‚’å‰Šé™¤: private float currentTime;
 
-
-    //‹­UŒ‚‚ÆãUŒ‚‚É•K—v‚ÈƒIƒuƒWƒFƒNƒg
-    [SerializeField] private GameObject slashAttackArea;
+    //å¼·æ”»æ’ƒã¨å¼±æ”»æ’ƒã«å¿…è¦ãªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    [SerializeField] private GameObject twoStepSlashAttackArea;
+    [SerializeField] private GameObject strongSlashAttackArea;
     [SerializeField] private GameObject quickAttackArea;
-    [SerializeField]private GameObject jumpAttackArea;
     [SerializeField] private float attackRange;
 
-    //’Ç”ö‘¬“x
+    //è¿½å°¾é€Ÿåº¦
     [SerializeField] private float chaseSpeed;
 
-    // ƒvƒŒƒCƒ„[ƒIƒuƒWƒFƒNƒg (BossMove01‚©‚çƒRƒs[)
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ (BossMove01ã‹ã‚‰ã‚³ãƒ”ãƒ¼)
     [SerializeField] private GameObject playerObj;
 
     private void Start()
     {
-        // BossAnimationManager‚ÍBossMove01‚©‚ç—¬—p‚µ‚Ä‚¢‚é‘O’ñ
+        // BossAnimationManagerã¯BossMove01ã‹ã‚‰æµç”¨ã—ã¦ã„ã‚‹å‰æ
         animationManager = GetComponent<BossAnimationManager>();
         quickAttackArea.SetActive(false);
-        // PlayerObj‚ÌŒŸõ
+        // PlayerObjã®æ¤œç´¢
         playerObj = GameObject.FindGameObjectWithTag("Player");
 
-        // ƒXƒP[ƒ‹İ’è (ˆÈ‘O‚ÌƒfƒBƒXƒJƒbƒVƒ‡ƒ“‚ÉŠî‚Ã‚«c‚·)
+        // ã‚¹ã‚±ãƒ¼ãƒ«è¨­å®š (ä»¥å‰ã®ãƒ‡ã‚£ã‚¹ã‚«ãƒƒã‚·ãƒ§ãƒ³ã«åŸºã¥ãæ®‹ã™)
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 
     private void Update()
     {
-        // BossManager.instance.currentBossHP‚ÍBossManager‚ªXV‚³‚ê‚Ä‚¢‚é‘O’ñ
+        // BossManager.instance.currentBossHPã¯BossManagerãŒæ›´æ–°ã•ã‚Œã¦ã„ã‚‹å‰æ
         if (BossManager.instance.currentBossHP <= 0)
         {
             Rigidbody body = GetComponent<Rigidbody>();
-            if (body != null) Destroy(body); // Rigidbody‚ª‘¶İ‚·‚éê‡‚Ì‚İDestroy
+            if (body != null) Destroy(body); // RigidbodyãŒå­˜åœ¨ã™ã‚‹å ´åˆã®ã¿Destroy
             ChangeState(Boss02ActionType.Death);
             return;
         }
 
-        // JumpAttack‚Ìˆ—‚ğ’Ç‰Á‚·‚éê‡‚Í‚±‚±‚É‹Lq
-        if (currentState == Boss02ActionType.JumpAttack)
+        // JumpAttackã®å‡¦ç†ã‚’è¿½åŠ ã™ã‚‹å ´åˆã¯ã“ã“ã«è¨˜è¿°
+        if (currentState == Boss02ActionType.TwoStepAttack)
         {
-            JumpAttack();
+            // TwoStepAttackã®å‡¦ç†ãŒã¾ã ç©º
         }
         else if (currentState == Boss02ActionType.Walking)
         {
@@ -85,15 +84,15 @@ public class BossMove02 : MonoBehaviour
 
         if (currentState == Boss02ActionType.Idle)
         {
-            //ŒX‚«‚ğC³
+            //å‚¾ãã‚’ä¿®æ­£
             transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
             quickAttackArea.SetActive(false);
-            currentThinkingTime += Time.deltaTime; // l‚¦‚éŠÔ‚ğŒv‘ª
+            currentThinkingTime += Time.deltaTime; // è€ƒãˆã‚‹æ™‚é–“ã‚’è¨ˆæ¸¬
 
             if (currentThinkingTime >= thinkingTime)
             {
-                currentThinkingTime = 0f; // ŠÔƒŠƒZƒbƒg
-                DetermineNextAction();  // s“®Œˆ’è‚ğŒÄ‚Ño‚·
+                currentThinkingTime = 0f; // æ™‚é–“ãƒªã‚»ãƒƒãƒˆ
+                DetermineNextAction();Â  // è¡Œå‹•æ±ºå®šã‚’å‘¼ã³å‡ºã™
             }
         }
     }
@@ -102,14 +101,14 @@ public class BossMove02 : MonoBehaviour
     {
         if (BossManager.instance == null)
         {
-            Debug.LogError("BossManager.instance ‚ª‰Šú‰»‚³‚ê‚Ä‚¢‚Ü‚¹‚ñBScript Execution Order ‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B");
+            Debug.LogError("BossManager.instance ãŒåˆæœŸåŒ–ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚Script Execution Order ã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚");
             ChangeState(Boss02ActionType.Idle);
             return;
         }
 
         if (playerObj == null)
         {
-            Debug.LogError("playerObj ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            Debug.LogError("playerObj ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
             ChangeState(Boss02ActionType.Idle);
             return;
         }
@@ -117,7 +116,7 @@ public class BossMove02 : MonoBehaviour
         float distance = Vector3.Distance(transform.position, playerObj.transform.position);
         List<Boss02ActionWeightData> targetAction;
 
-        // ‹——£‚É‰‚¶‚Ä’Š‘I‚·‚éƒŠƒXƒg‚ğ•Ï‚¦‚é
+        // è·é›¢ã«å¿œã˜ã¦æŠ½é¸ã™ã‚‹ãƒªã‚¹ãƒˆã‚’å¤‰ãˆã‚‹
         if (distance <= attackRange)
         {
             targetAction = attackRangeActionList;
@@ -129,26 +128,26 @@ public class BossMove02 : MonoBehaviour
 
         if (targetAction == null || targetAction.Count == 0)
         {
-            Debug.LogWarning($"’Š‘IƒŠƒXƒg‚ª‹ó‚Ü‚½‚Í–¢İ’è‚Å‚·B‹——£: {distance}BIdle‚É–ß‚è‚Ü‚·B");
+            Debug.LogWarning($"æŠ½é¸ãƒªã‚¹ãƒˆãŒç©ºã¾ãŸã¯æœªè¨­å®šã§ã™ã€‚è·é›¢: {distance}ã€‚Idleã«æˆ»ã‚Šã¾ã™ã€‚");
             ChangeState(Boss02ActionType.Idle);
             return;
         }
 
         List<float> weight = targetAction.Select(a => a.ProbabilityWeight).ToList();
 
-        // BossManager‚Ì’Š‘IŠÖ”‚ğg—p
+        // BossManagerã®æŠ½é¸é–¢æ•°ã‚’ä½¿ç”¨
         int actionIndex = BossManager.instance.GetActionIndex(weight);
 
         if (actionIndex != -1)
         {
-            // ’Š‘I‚³‚ê‚½ActionWeightData‚©‚çActionType‚ğæ“¾
+            // æŠ½é¸ã•ã‚ŒãŸActionWeightDataã‹ã‚‰ActionTypeã‚’å–å¾—
             Boss02ActionType nextAction = targetAction[actionIndex].ActionType;
 
             ChangeState(nextAction);
             return;
         }
 
-        // ’Š‘I‚É¸”s‚µ‚½ê‡
+        // æŠ½é¸ã«å¤±æ•—ã—ãŸå ´åˆ
         ChangeState(Boss02ActionType.Idle);
     }
 
@@ -156,7 +155,7 @@ public class BossMove02 : MonoBehaviour
     {
         currentState = newAction;
 
-        // BossAnimationManager‚ªBoss02ActionType‚É‘Î‰‚µ‚Ä‚¢‚é•K—v‚ª‚ ‚è‚Ü‚·
+        // BossAnimationManagerãŒBoss02ActionTypeã«å¯¾å¿œã—ã¦ã„ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™
         if (animationManager != null)
         {
             animationManager.Boss02UpdateAnimation((BossMove02.Boss02ActionType)(int)currentState);
@@ -175,9 +174,10 @@ public class BossMove02 : MonoBehaviour
                 LookAtPlayerHorizontal();
                 StartCoroutine(StrongAttack());
                 break;
-            case Boss02ActionType.JumpAttack:
+            case Boss02ActionType.TwoStepAttack:
                 LookAtPlayerHorizontal();
-                StartCoroutine(JumpAttack()); // JumpAttack‚ÌƒRƒ‹[ƒ`ƒ“‚ğŒÄ‚Ño‚·
+                StartCoroutine(TwoStepAttack());
+
                 break;
             case Boss02ActionType.Walking:
                 break;
@@ -194,44 +194,56 @@ public class BossMove02 : MonoBehaviour
         ChangeState(Boss02ActionType.Idle);
     }
 
-    // JumpAttack‚ÌƒƒWƒbƒN (Tackle‚Ì‘ã‚í‚è‚ÉV‹Kì¬)
-    private IEnumerator JumpAttack()
-    {
-        float jumpAttackTime = 2.0f;
-        yield return new WaitForSeconds(jumpAttackTime);
-        ChangeState(Boss02ActionType.Idle);
-    }
-
     private IEnumerator StrongAttack()
     {
+        //float strongAttackDuration = 1.5f;
         float strongAttackDuration = 1.5f;
         yield return new WaitForSeconds(strongAttackDuration);
         ChangeState(Boss02ActionType.Idle);
     }
 
-    public void GenerateSlash() 
+    private IEnumerator TwoStepAttack()
     {
-        Instantiate(slashAttackArea, transform.position, Quaternion.identity);
+        //float strongAttackDuration = 0.5f;
+        float strongAttackDuration = 2.0f;
+        yield return new WaitForSeconds(strongAttackDuration);
+        ChangeState(Boss02ActionType.Idle);
     }
 
-    public void GenerateJumpAttackArea()
+    public void TwoStepSlash()
     {
-        Instantiate(jumpAttackArea, transform.position, Quaternion.identity);
+        float yOffset = 1.5f;
+        float rotationZ = 30f;
+        Vector3 spawnPos = transform.position;
+        // æ³¨æ„: spawnPos.y = yOffset; ã¯ã€Yåº§æ¨™ã‚’yOffsetã®å€¤ã«ä¸Šæ›¸ãã—ã¦ã„ã¾ã™ã€‚
+        // ã‚ªãƒ•ã‚»ãƒƒãƒˆã¨ã—ã¦ä½¿ã„ãŸã„å ´åˆã¯ spawnPos.y += yOffset; ã«ä¿®æ­£ãŒå¿…è¦ã§ã™ã€‚
+        spawnPos.y += yOffset;
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, rotationZ);
+        Instantiate(twoStepSlashAttackArea, spawnPos, rotation);
+    }
+    public void StrongSlash() 
+    {
+        float yOffset = 1.75f;
+        float rotationZ = 30f;
+        Vector3 spawnPos = transform.position;
+        spawnPos.y += yOffset;
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, rotationZ);
+        Instantiate(strongSlashAttackArea, spawnPos, rotation);
     }
 
     private void Walking()
     {
-        //ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ã
         LookAtPlayerHorizontal();
 
-        //İ’è‚³‚ê‚½‘¬“x‚ÅˆÚ“®
+        //è¨­å®šã•ã‚ŒãŸé€Ÿåº¦ã§ç§»å‹•
         transform.position += transform.forward * chaseSpeed * Time.deltaTime;
 
-        //UŒ‚”ÍˆÍ‚É“ü‚Á‚½‚©ƒ`ƒFƒbƒN
+        //æ”»æ’ƒç¯„å›²ã«å…¥ã£ãŸã‹ãƒã‚§ãƒƒã‚¯
         float distance = Vector3.Distance(transform.position, playerObj.transform.position);
         if (distance <= attackRange)
         {
-            // UŒ‚”ÍˆÍ“à‚É“ü‚Á‚½‚çIdle‚É–ß‚èAŸ‚Ìs“®’Š‘I‚ğ‘£‚·
+            // æ”»æ’ƒç¯„å›²å†…ã«å…¥ã£ãŸã‚‰Idleã«æˆ»ã‚Šã€æ¬¡ã®è¡Œå‹•æŠ½é¸ã‚’ä¿ƒã™
             ChangeState(Boss02ActionType.Idle);
         }
     }
@@ -240,14 +252,14 @@ public class BossMove02 : MonoBehaviour
     {
         if (playerObj == null) return;
 
-        //ƒvƒŒƒCƒ„[‚Ì…•½ˆÊ’u‚ğŒvZ
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ°´å¹³ä½ç½®ã‚’è¨ˆç®—
         Vector3 targetPosition = new Vector3(
             playerObj.transform.position.x,
-            transform.position.y, //ƒ{ƒX‚ÌYÀ•W‚ğˆÛ‚·‚é
+            transform.position.y, //ãƒœã‚¹ã®Yåº§æ¨™ã‚’ç¶­æŒã™ã‚‹
             playerObj.transform.position.z
         );
 
-        //‚»‚Ì…•½ˆÊ’u‚ÉŒü‚©‚Á‚Ä‰ñ“]
+        //ãã®æ°´å¹³ä½ç½®ã«å‘ã‹ã£ã¦å›è»¢
         transform.LookAt(targetPosition);
     }
 }
