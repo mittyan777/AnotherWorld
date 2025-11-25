@@ -72,22 +72,37 @@ public class Player : MonoBehaviour
             //Destroy(gameObject);
         }
             
-        if (Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager>().MP >= 10)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager>().Present_MP >= 10 && manager.GetComponent<GameManager>().gage_image[1].fillAmount >= 1)
         {
-            if (manager.GetComponent<GameManager>().job == 2 ) { GetComponent<Magician_Skills>().FireBall();  }
+            if (manager.GetComponent<GameManager>().job == 2 ) 
+            {
+                manager.GetComponent<GameManager>().gage_image[1].fillAmount = 0;
+                GetComponent<Magician_Skills>().FireBall();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
+            }
 
-            manager.GetComponent<GameManager>().MP -= 10;
+            
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager>().MP >= 10)
+        if (Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager>().Present_MP >= 10 && manager.GetComponent<GameManager>().gage_image[0].fillAmount >= 1)
         {
-            if (manager.GetComponent<GameManager>().job == 2 ) { GetComponent<Magician_Skills>().ElectricBall(); }
-            manager.GetComponent<GameManager>().MP -= 10;
+            if (manager.GetComponent<GameManager>().job == 2 ) 
+            {
+                manager.GetComponent<GameManager>().gage_image[0].fillAmount = 0;
+                GetComponent<Magician_Skills>().ElectricBall();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
+            }
+        
 
         }
-        if(Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager>().MP >= 10)
+        if(Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager>().Present_MP >= 10 && manager.GetComponent<GameManager>().gage_image[2].fillAmount >= 1)
         {
-            if (manager.GetComponent<GameManager>().job == 2) { GetComponent<Magician_Skills>().TornadoAttack(); }
-            manager.GetComponent<GameManager>().MP -= 10;
+            if (manager.GetComponent<GameManager>().job == 2) 
+            {
+                manager.GetComponent<GameManager>().gage_image[2].fillAmount = 0;
+                GetComponent<Magician_Skills>().TornadoAttack();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
+            }
+           
         }
 
         if(manager.GetComponent<GameManager>().job == 1)
