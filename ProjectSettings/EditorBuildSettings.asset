@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Mouri/Scenes/EffectScenn.unity
     guid: 8ffff7413b8ab504bac0a00a7c1de0b7
   - enabled: 1
-    path: Assets/Noguchi/gamestart.unity
+    path: Assets/Noguchi/start.unity
     guid: d01fd49faa333184f96a0187ccaa31d9
   m_configObjects: {}
