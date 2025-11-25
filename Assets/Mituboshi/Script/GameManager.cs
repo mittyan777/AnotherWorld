@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]public float DefenseStatus;
    
     [SerializeField] float Present_HP;
-    [SerializeField] float Present_MP;
+    [SerializeField]public float Present_MP;
+    [SerializeField] TextMeshProUGUI MP_text;
+    [SerializeField] TextMeshProUGUI HP_text;
 
 
     [SerializeField] public float job;
@@ -30,12 +34,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject Canvas;
     [SerializeField] GameObject []skill_UI;
 
+    [SerializeField] public Image []gage_image;
+
     [SerializeField] Slider HP_slider;
     [SerializeField] Slider MP_slider;
 
     public bool slot = false;
     bool Initial_HP = false;
-
+    public bool fade = false;
+    [SerializeField] Image fade_image;
+    public float fade_image_a = 1;
 
 
 
@@ -58,18 +66,21 @@ public class GameManager : MonoBehaviour
             {
                 if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
                 {
+                    Time.timeScale = 0.5f;
                     GAMEUI.SetActive(true);
                     rouletteUI.SetActive(true);
                     Standard_UI.SetActive(false);
                 }
                 else if(GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
                 {
+                    Time.timeScale = 1;
                     GAMEUI.SetActive(false);
                     rouletteUI.SetActive(false);
                     Standard_UI.SetActive(true);
                 }
                 else if(GAMEUI.activeSelf == true && Weapon_UI == true)
                 {
+                    Time.timeScale = 1;
                     GAMEUI.SetActive(false);
                     Weapon_UI.SetActive(false);
                     Standard_UI.SetActive(true);
@@ -82,23 +93,30 @@ public class GameManager : MonoBehaviour
             {
                 if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
                 {
+                    Time.timeScale = 0.5f;
                     GAMEUI.SetActive(true);
                     rouletteUI.SetActive(true);
+                    jobroulette.SetActive(false);
                     Standard_UI.SetActive(false);
                 }
                 else if (GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
                 {
+                    Time.timeScale = 1f;
                     GAMEUI.SetActive(false);
                     rouletteUI.SetActive(false);
+                    jobroulette.SetActive(false);
                     Standard_UI.SetActive(true);
                 }
                 else if (GAMEUI.activeSelf == true && Weapon_UI == true)
                 {
+                    Time.timeScale = 1;
                     GAMEUI.SetActive(false);
                     Weapon_UI.SetActive(false);
+                    jobroulette.SetActive(false);
                     Standard_UI.SetActive(true);
                 }
             }
+          
         }
         if (FirstRoulette == false)
         {
@@ -109,6 +127,14 @@ public class GameManager : MonoBehaviour
                 Initial_HP = true;
             }
 
+        }
+
+        for (int i = 0; i < gage_image.Length; i++)
+        {
+            if (gage_image[i].fillAmount < 1)
+            {
+                gage_image[i].fillAmount += 0.5f * Time.deltaTime;
+            }
         }
 
 
@@ -137,12 +163,33 @@ public class GameManager : MonoBehaviour
                 skill_UI[i].SetActive(false);
             }
         }
+
+        if(Present_HP <= 0)
+        {
+            fade = true;
+        }
+      
+
+        HP_text.text = ($"{Mathf.Ceil(Present_HP)} / {Mathf.Ceil(HP)} ");
+        MP_text.text = ($"{Mathf.Ceil(Present_MP)} / {Mathf.Ceil(MP)} ");
+
+        if (Present_MP < MP) { Present_MP += 2 * Time.deltaTime; }
+        if (Present_MP >= MP) { Present_MP = MP; }
+
         HP_slider.maxValue = HP;
         MP_slider.maxValue = MP;
         HP_slider.value = Present_HP;
         MP_slider.value = Present_MP;
 
-
+        if(fade == false && fade_image_a >= 0)
+        {
+            fade_image_a -= Time.deltaTime;
+        }
+        else if(fade_image_a <= 1)
+        {
+            fade_image_a += Time.deltaTime;
+        }
+        fade_image.color = new Color(0,0,0, fade_image_a);
     }
     private void PlayerStatus()
     {
