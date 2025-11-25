@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4064208875593653556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172089088634732819}
+  - component: {fileID: 5395757253250492087}
+  m_Layer: 0
+  m_Name: Roulette_CG_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &172089088634732819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064208875593653556}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 211.26817, y: 153.66678, z: 4.6729584}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5395757253250492087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064208875593653556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96adc0c7e8b54242bd5bb02bff8cf67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetImage: {fileID: 0}
+  swordsman: {fileID: 21300000, guid: 92639d8234283cf4081d23bf3c0f9d7e, type: 3}
+  Magishan: {fileID: 21300000, guid: 1837a165e98518842afaf8674f81da0b, type: 3}
+  Aceher: {fileID: 21300000, guid: 8928867c3e0e1184883829534f5ddea9, type: 3}
+  Fadeout_Coin: {fileID: 0}
+  CoinText: {fileID: 0}
+  fadeTime: 0.5
+  startColor: {r: 1, g: 0.059748232, b: 0.059748232, a: 1}
+  endColor: {r: 0.9496855, g: 0.9496855, b: 0.9496855, a: 1}

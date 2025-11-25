@@ -5,7 +5,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class Rouretto_New : MonoBehaviour
+public class Rouretto_New_Back : MonoBehaviour
 {
 
 
@@ -66,7 +66,6 @@ public class Rouretto_New : MonoBehaviour
     [Header("ルーレット設定")]
     [SerializeField] private float WeponCost;   //武器の価格
     [SerializeField] private int RouletteCost=100;  //ルーレットを回す際に必要なコスト
-    [SerializeField] private bool canOnce = true;   //追加//　ルーレットを回すとき、ストップを押さないとお金を消費してルーレットを回すことを出来なくする。
     //[SerializeField] private int coin;  //所持しているお金
 
 
@@ -82,11 +81,6 @@ public class Rouretto_New : MonoBehaviour
 
     [Header("職種ごとの画像設定")]
     [SerializeField] private Rouletto_CG rouletto_CG;
-
-    [Header("ルーレットごとのサウンド")]
-    [SerializeField] private Roulette_Sound rouletteSound;
-
-
 
     void Start()
     {
@@ -181,20 +175,11 @@ public class Rouretto_New : MonoBehaviour
 
     public void StartRoulette()
     {
-        if (!canOnce) return;   //追加
-        canOnce = false;    //追加
-
         if (FirstRoulette)
         {
            
                 Spining = true;
                 spinCoroutine = StartCoroutine(SpinRoulette());
-
-            if(rouletteSound != null)
-            {
-                rouletteSound.rouletteSoundType = RouletteSoundType.Open;
-                rouletteSound.PlaySound();
-            }
        
 
         }
@@ -205,15 +190,6 @@ public class Rouretto_New : MonoBehaviour
                 Spining = true;
                 spinCoroutine = StartCoroutine(SpinRoulette());
                 GameManager.GetComponent<GameManager>().Coin -= RouletteCost;
-
-                if (rouletteSound != null)
-                {
-                    rouletteSound.rouletteSoundType = RouletteSoundType.CoinUse;
-                    rouletteSound.PlaySound();
-                }
-
-
-                
              
             }
 
@@ -249,11 +225,6 @@ public class Rouretto_New : MonoBehaviour
             StopCoroutine(spinCoroutine);
 
         }
-        if(rouletteSound != null)
-        {
-            rouletteSound.rouletteSoundType=RouletteSoundType.Stop;
-            rouletteSound.PlaySound();
-        }
 
         HP = UpdateStatus[0];
         MP = UpdateStatus[1];
@@ -262,12 +233,6 @@ public class Rouretto_New : MonoBehaviour
 
         if (rouletto_CG != null)
             rouletto_CG.UpdateJobImage(jobName[(int)job], FirstRoulette);
-
-        if(rouletteSound != null)
-        {
-            rouletteSound.rouletteSoundType = RouletteSoundType.Stop;
-            rouletteSound.PlaySound();
-        }
 
 
         ////結果を確定
@@ -278,17 +243,10 @@ public class Rouretto_New : MonoBehaviour
         Defense += Status[3];
         FirstRoulette = false;
 
-        canOnce = true; //追加
-
     }
 
     IEnumerator SpinRoulette()
     {
-        if (rouletteSound != null)
-        {
-            rouletteSound.rouletteSoundType = RouletteSoundType.Spin;
-            rouletteSound.PlaySound();
-        }
         while (Spining)
         {
             // 各ステータスを個別にランダム化
@@ -306,7 +264,6 @@ public class Rouretto_New : MonoBehaviour
             }
 
             UpdateStatusText();
-
 
             yield return new WaitForSeconds(0.05f);
 
