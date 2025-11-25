@@ -7170,75 +7170,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5291959691871055534, guid: 4f6122b02aea27540b60ee221b7415e5, type: 3}
   m_PrefabInstance: {fileID: 282951021}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1045758380
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2659401785907865531, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: Direction
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659401785907865531, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: AttackStatus
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659401785907865531, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: DefenseStatus
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776468269197788027, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-      propertyPath: m_Name
-      value: BasicMotionsDummy-nisimura
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
 --- !u!4 &1101577274 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5291959691871055534, guid: 4f6122b02aea27540b60ee221b7415e5, type: 3}
@@ -10114,11 +10045,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5785242846073902511, guid: 8c2cabd72c2871e4fa25d9761a86fef5, type: 3}
   m_PrefabInstance: {fileID: 1581671964}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1593536512 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6080066575584270276, guid: 9558d6bc6a576c74ca6d64aa3759e313, type: 3}
-  m_PrefabInstance: {fileID: 1045758380}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1616854478
 GameObject:
   m_ObjectHideFlags: 0
@@ -11937,7 +11863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d704a0c0a0e83e449adb504926fedf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetplayer: {fileID: 1593536512}
+  targetplayer: {fileID: 0}
   distance: 5
   minYAngle: -10
   maxYAngle: 80
@@ -13314,5 +13240,4 @@ SceneRoots:
   - {fileID: 814321196}
   - {fileID: 54915250}
   - {fileID: 729897468}
-  - {fileID: 1045758380}
   - {fileID: 1500946335}
