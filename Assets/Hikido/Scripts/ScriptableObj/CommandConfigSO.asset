@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6075e9580fe926f4094dc60aaeb47bca, type: 3}
+  m_Name: CommandConfigSO
+  m_EditorClassIdentifier: 
+  commandSets:
+  - JobType: 1
+    normalAttackCd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
+    avoidCd: {fileID: 11400000, guid: 689dbe22cd8fd3e48b8a1c1d5cef3d68, type: 2}
+    archerSkilsCd: {fileID: 0}
+    normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
+    avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
+    walkanimEndCd: {fileID: 0}
+    ArcherSkilsEndCd: {fileID: 0}

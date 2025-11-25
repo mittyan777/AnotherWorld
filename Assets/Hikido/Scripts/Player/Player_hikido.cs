@@ -18,6 +18,7 @@ public class Player_hikido : MonoBehaviour
     [SerializeField] GameObject fireball;
     [SerializeField] GameObject Electric_ball;
     [SerializeField] GameObject[] manager;
+    [SerializeField] AnimationFlagManagerSO _animflgSO;
 
     //[SerializeField] PlayerAtackBase attackBase;
     bool _avoidance = false;

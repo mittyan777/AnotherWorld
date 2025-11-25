@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAnimationHandle : MonoBehaviour
+{
+    [SerializeField] private PlayerAnimation animationRouter;
+
+    public void AttackAnimation_NormalEnd()
+    {
+        if (animationRouter != null)
+        {
+            animationRouter.AttackAnimation_NormalEnd();
+        }
+        else
+        {
+            Debug.LogError("AnimationRouter (PlayerAnimation) Ç÷ÇÃéQè∆Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒÅB", this);
+        }
+    }
+}

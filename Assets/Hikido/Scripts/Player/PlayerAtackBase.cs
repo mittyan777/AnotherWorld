@@ -9,8 +9,14 @@ public class PlayerAtackBase : MonoBehaviour
 {
     Animator _animator;
     bool bAvoidance = false;
+    protected  bool bNormalAttack = false;
+
+    //ゲームマネージャー
+    [SerializeField] GameObject[] manager;
+    [SerializeField] AnimationFlagManagerSO _animflgSO;
 
     /// <summary> /// レンジ構造体 /// </summary>
+    /// いらないかも
     struct PlayerRange
     {
         [SerializeField] int mangicMaxRange;
@@ -19,32 +25,37 @@ public class PlayerAtackBase : MonoBehaviour
 
     void Start()
     {
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
+        //回避
         Avoidance();
+
+        //通常攻撃
+        Atack_Normal();
     }
 
     /// <summary> /// 各職種の特殊攻撃 /// </summary>
     protected virtual void Special_Attack()
     {
-        //各職種の特殊攻撃
+        //各職種の特殊攻撃 -> 継承先で使用(剣士)
     }
 
     /// <summary> s/// 全職種共通の攻撃処理 /// </summary>
     protected virtual void Atack_Normal()
     {
-        //TODO:マウス左クリックで通常攻撃
-        if (Input.GetMouseButtonDown(0))
+        //TODO:通常攻撃の処理(全職種共通の処理)
+        bool _inputAtk = Input.GetMouseButtonDown(0);
+        if (_inputAtk)
         {
-            //攻撃のダメージ処理
-            
-            //TODO：攻撃アニメーション
-
+            //TODO:ダメージ処理(全職種共通の処理)
+            //->与えるダメージは獲得ステータスの攻撃力分を与える。
+            _animflgSO.AttackNormalflg = true;
+            bNormalAttack = true;
         }
-        
+
     }
 
     /// <summary> /// 全職種共通の回避 /// </summary>
@@ -55,8 +66,8 @@ public class PlayerAtackBase : MonoBehaviour
         float _inputVertical = Input.GetAxisRaw("Vertical");
 
         //shiftキー入力判定
-        bool _isShiftKey = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        bool _isSpaceKey = Input.GetKey(KeyCode.Space);
+        bool _isShiftKey = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
+        bool _isSpaceKey = Input.GetKeyDown(KeyCode.Space);
 
         UnityEngine.Vector3 _inputDirection = new UnityEngine.Vector3(_inputHorizontal, 0f, _inputVertical).normalized;
 
@@ -71,15 +82,12 @@ public class PlayerAtackBase : MonoBehaviour
         {
             bAvoidance = false;
         }
-
-        if (!bAvoidance)
+        //TODO:回避フラグ必要か？
+        if (bAvoidance)
         {
-            _animator.SetBool("avoidance", true);
+            //TODO:アニメーションフラグで管理
+            _animflgSO.Avoidflg = true;
             Debug.Log("回避方向");
-        }
-        else
-        {
-            _animator.SetBool("avoidance", false);
         }
     }
     public bool GetbAvoindance()
