@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AnimationResetSO", menuName = "AnimationResetSO")]
-public class AnimationResetSO : AnimationBaseSO
-{   
+[CreateAssetMenu(fileName = "AvoidAnimEndSO", menuName = "AvoidAnimEndSO ")]
+public class AvoidAnimEndSO : AnimationBaseSO
+{
     public override void Execute(Animator animator)
     {
         if (!animator) return;

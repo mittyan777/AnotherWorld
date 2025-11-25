@@ -12,6 +12,7 @@ public class AnimationFlagManagerSO : ScriptableObject
     [SerializeField] private bool attackSkilFlag = false;
     [SerializeField] private bool walkanimFlg = false;
     [SerializeField] private bool avoidanceFlg = false;
+    [SerializeField] private bool attackArcherflg = false;
 
     [Header("各通知イベント")]
     public Action Attackevents;         //攻撃イベント
@@ -31,7 +32,6 @@ public class AnimationFlagManagerSO : ScriptableObject
             {
                 UnityEngine.Debug.Log("イベント発火");
                 AttackNormal?.Invoke();  //登録したイベントを発火
-                //attackNormalFlg = false;
             }
         }
     }
@@ -42,9 +42,22 @@ public class AnimationFlagManagerSO : ScriptableObject
         get { return walkanimFlg; }
         set
         {
-            //TODO:イベント発火用アクション
-            UnityEngine.Debug.Log("イベント発火");
+            if (value) 
+            {
+                AvoidanceEvents?.Invoke();
+                UnityEngine.Debug.Log("回避イベント発火");
+            }
+        }
+    }
 
+    //アーチャーのイベント
+    public bool ArcherSkilflg 
+    {
+        get { return attackArcherflg; }
+        set
+        {
+            AttackArcherSkills?.Invoke(); 
+            UnityEngine.Debug.Log("アーチャーイベント発火");
         }
     }
 

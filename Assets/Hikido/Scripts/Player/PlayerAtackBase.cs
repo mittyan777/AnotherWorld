@@ -82,16 +82,12 @@ public class PlayerAtackBase : MonoBehaviour
         {
             bAvoidance = false;
         }
-
+        //TODO:回避フラグ必要か？
         if (bAvoidance)
         {
             //TODO:アニメーションフラグで管理
-
+            _animflgSO.Avoidflg = true;
             Debug.Log("回避方向");
-        }
-        else
-        {
-            //_animator.SetBool("avoidance", false);
         }
     }
     public bool GetbAvoindance()

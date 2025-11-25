@@ -9,6 +9,7 @@ public enum ParaMatorName
    Walk_UP,
    Walk_Down,
    NormalAttackEnd,
+   Avoid,
 
    NONE = 0
    

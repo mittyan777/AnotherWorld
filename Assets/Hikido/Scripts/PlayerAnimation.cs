@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 /// ジョブタイプごとにセットするアニメーションコマンドを変更
@@ -54,6 +55,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             //各アニメーションの処理をActionに登録
             _animFlgSO.AttackNormal += AttackAnimation_Normal;
+            _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
+
+            //回避用イベント登録
+            _animFlgSO.AvoidanceEvents += AvoidAnim;
         }
         else
         {
@@ -68,6 +73,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             //各アニメーション処理をActionから削除
             _animFlgSO.AttackNormal -= AttackAnimation_Normal;
+            _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
+
+            //回避用イベント解除
+            _animFlgSO.AvoidanceEvents -= AvoidAnim;
         }
     }
 
@@ -92,14 +101,52 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     /// <summary> /// 攻撃アニメーション終了用関数 /// </summary>
-    public void AttackAnimation_NormalEnd() 
+    public void AttackAnimation_NormalEnd()
     {
-        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
-            if(_endCmd != null) { _endCmd.Execute(animator); }
+            if (_endCmd != null) { _endCmd.Execute(animator); }
             else { UnityEngine.Debug.LogError("失敗"); }
         }
     }
+
+
+    /// <summary> /// 回避アニメーション /// </summary>
+    public void AvoidAnim() 
+    {
+        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        {
+            AnimationBaseSO _avoidCmd = commandSet.avoidCd;
+            if(_avoidCmd != null) { _avoidCmd.Execute(animator); }
+            else { UnityEngine.Debug.Log("回避アニメーション失敗。"); }
+        }
+    }
+
+    /// <summary> /// 回避アニメーション終了コマンド /// </summary>
+    public void AvodAnimationEnd() 
+    {
+        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        {
+            AnimationBaseSO _avoidEndCmd = commandSet.avoidAnimEndCd;
+            if(_avoidEndCmd != null) { _avoidEndCmd.Execute(animator); }
+            else { UnityEngine.Debug.Log("回避アニメーション終了失敗"); }
+        }
+    }
+
+    //TODO:アーチャースキルのスクリプトが存在しないのでマージ後テスト
+    //      ->現状はプレイヤーのソードスキルとして考えてテストする。
+    /// <summary> /// アーチャースキルアニメーション /// </summary>
+    public void AttackAnimation_Archer() 
+    {
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
+        {
+            AnimationBaseSO _currentCmd = commandSet.archerSkilsCd;
+            if (_currentCmd != null) { _currentCmd.Execute(animator); }
+            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+        }
+        else { UnityEngine.Debug.LogError("ジョブ設定ミス"); }
+    }
+
 
 }
