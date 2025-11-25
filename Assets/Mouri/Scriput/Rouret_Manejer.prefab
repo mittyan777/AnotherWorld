@@ -46,12 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player:
   - {fileID: 0}
-  Coin: 0
   HP: 0
   MP: 0
   Attack: 0
   Defense: 0
-  job: 
+  job: 0
+  GameManager: {fileID: 0}
   Status: 0000000000000000000000000000000000000000
   FirstRoulette: 1
   Attack_text: {fileID: 0}
@@ -74,8 +74,12 @@ MonoBehaviour:
   StopButton: {fileID: 0}
   WeponCost: 0
   RouletteCost: 100
+  canOnce: 1
   jobName:
   - "\u5263\u58EB"
   - "\u9B54\u6CD5\u4F7F\u3044"
   - "\u5F13\u4F7F\u3044"
-  changimage: {fileID: 0}
+  rouletto_CG: {fileID: 0}
+  audioSource:
+  - {fileID: 0}
+  coinUseSE: {fileID: 0}

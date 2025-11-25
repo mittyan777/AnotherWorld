@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Rouletto_CG : MonoBehaviour
+public class Rouletto_CG_Back : MonoBehaviour
 {
 
     [SerializeField] private Image targetImage; // Eí‰æ‘œ‚ğ•\¦‚·‚éImage
