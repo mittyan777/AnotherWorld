@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1655923040644116004
 Transform:
   m_ObjectHideFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 5211668933654400735}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalScale: {x: 1, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8688468544639128803}
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5211668933654400735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -158,9 +158,13 @@ PrefabInstance:
       value: Skeleton03
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+    - target: {fileID: 5866666021909216657, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 60cd557b29387ba439d8aa87ffa7d776, type: 2}
+      objectReference: {fileID: 9100000, guid: bb3b453f75e8de14b8f75c31128729f4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -186,6 +190,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 760944678467465490}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 587521475548365998}
   m_SourcePrefab: {fileID: 100100000, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
 --- !u!95 &3347169371110968985 stripped
 Animator:
@@ -207,7 +214,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -245,13 +252,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackInterval: 1.5
+  attackInterval: 2
   animationlatency: 0
   animationRecoveryTime: 0
   isAttackSequenceRunning: 0
   attackHitbox: {fileID: 5211668933654400735}
   hitboxDuration: 0.3
-  displaylatency: 0.25
+  displaylatency: 1
 --- !u!114 &2012664484238351527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +276,7 @@ MonoBehaviour:
   stayDuration: 3
   patrolRandomRange: 10
   visibilityDistance: 15
-  stopDistance: 1.5
+  stopDistance: 2
 --- !u!114 &8224206091005491492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4f1b495192cbb4dafa013bfbcf671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHP: 50
+  enemyMaxHP: 20
+  damageTime: 2
+  breakTime: 3
 --- !u!114 &760944678467465490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,9 +304,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8822aac848c4546b526f70d42fa56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinObj: {fileID: 8086908597899287270, guid: a8a90c1a1cdc5ae479d3c6d1a78ce5ca, type: 3}
-  moneyObj: {fileID: 6239400968715035659, guid: 72c483fb47e4ce64ebb1ee843562badc, type: 3}
-  coinDrop: 100
+  moneyObj: {fileID: 8395968631224569226, guid: d2b143c057075f547b88541a7fb5e0f6, type: 3}
+--- !u!65 &587521475548365998
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347550238792126041}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1.75, z: 0.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &8688468544639128803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}

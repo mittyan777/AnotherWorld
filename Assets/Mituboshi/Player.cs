@@ -1,87 +1,101 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Animator animator;  
-    public float coin = 0;
+    Animator animator;
+  
     public float HP;
     public float MP;
     public float AttackStatus;
     public float DefenseStatus;
-    public bool canControl = true;  // Å© í«â¡ÅI
+    public bool canControl = true;  // ‚Üê ËøΩÂä†ÔºÅ
+    [SerializeField] public bool mouseright = false;
+    [SerializeField] bool mouseleft = false;
     [SerializeField] GameObject hand_R;
     [SerializeField] GameObject hand_L;
 
     [SerializeField] GameObject rayobj;
     [SerializeField] GameObject slot;
     [SerializeField] float Direction;
-    [SerializeField] GameObject shootposition;
-    [SerializeField] GameObject TornadoParticleposition;
-    [SerializeField] GameObject fireball;
-    [SerializeField] GameObject Electric_ball;
-    [SerializeField] GameObject Tornado;
-    [SerializeField] GameObject []manager;
+    [SerializeField] GameObject manager;
+    [SerializeField] GameObject camera;
+    [SerializeField] GameObject ADSpos;
+    [SerializeField] GameObject NOADSpos;
+
+    private float xRotation = 0f;
+    private float yRotation = 0f;
+    [SerializeField] private float sensitivity = 300f;
+    [SerializeField] private float clampAngle = 80f;
+    [SerializeField]bool ADS = false;
+
+    [SerializeField]float a = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
         //Time.timeScale = 0f;
         animator = GetComponent<Animator>();
-       // Cursor.lockState = CursorLockMode.Locked;   //í«â¡
-        //Cursor.visible = false;     //í«â¡
+       // Cursor.lockState = CursorLockMode.Locked;   //ËøΩÂä†
+        //Cursor.visible = false;     //ËøΩÂä†
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (manager != null) { manager = GameObject.FindGameObjectsWithTag("GameManager"); }
+        if (manager == null) { manager = GameObject.FindGameObjectWithTag("GameManager"); }
+        cameracontrol();
+        
+
+       
        rayobj.transform.eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
 
-        if (!canControl) return; // Ç±Ç±Ç≈ëÄçÏëSïîé~Ç‹ÇÈ
-
-
-      
+        if (!canControl) return; // „Åì„Åì„ÅßÊìç‰ΩúÂÖ®ÈÉ®Ê≠¢„Åæ„Çã
         
-            // ëOï˚Ç…RayÇîÚÇŒÇµÇƒÅAÉãÅ[ÉåÉbÉgë‰Ç…ìñÇΩÇ¡ÇΩÇÁ
-            Ray ray = new Ray(new Vector3(rayobj.transform.position.x, rayobj.transform.position.y, rayobj.transform.position.z ), rayobj.transform.forward);
+       
+
+        // ÂâçÊñπ„Å´Ray„ÇíÈ£õ„Å∞„Åó„Å¶„ÄÅ„É´„Éº„É¨„ÉÉ„ÉàÂè∞„Å´ÂΩì„Åü„Å£„Åü„Çâ
+        Ray ray = new Ray(new Vector3(rayobj.transform.position.x, rayobj.transform.position.y, rayobj.transform.position.z ), rayobj.transform.forward);
             RaycastHit hit;
 
 
 
-            if (Physics.Raycast(ray, out hit, Direction)) // 2mà»ì‡Çí≤Ç◊ÇÈ
-            {
-                if (hit.collider.CompareTag("Roulette")) // ÉãÅ[ÉåÉbÉgë‰ÇÃÉ^ÉOÇ"Roulette"Ç…Ç∑ÇÈ
-                {
-                    // ÅuEÅvÉLÅ[Ç≈ÉãÅ[ÉåÉbÉgÇí≤Ç◊ÇÈ
-                    if (Input.GetKeyDown(KeyCode.E))
-                    {
-                        Debug.Log("ÉãÅ[ÉåÉbÉgÇí≤Ç◊ÇΩÅIÉVÅ[ÉìêÿÇËë÷Ç¶");
-                        slot.SetActive(true);
-                        //RouletteUIManager.Instance.OpenRouletteUI(this);
-                    }
-
-                }
-            }
+          
             Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown("p"))
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(fireball, shootposition.transform.position, Quaternion.identity); }
+            manager.GetComponent<GameManager>().HP -= 10;
+        }
+        if(manager.GetComponent<GameManager>().HP <= 0 )
+        {
+            //Destroy(gameObject);
+        }
             
-
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager>().MP >= 10)
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Electric_ball, shootposition.transform.position, Quaternion.identity); }
+            if (manager.GetComponent<GameManager>().job == 2 ) { GetComponent<Magician_Skills>().FireBall();  }
 
-
+            manager.GetComponent<GameManager>().MP -= 10;
         }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager>().MP >= 10)
         {
-            if (manager[0].GetComponent<GameManager>().Status[4] == 3 && manager[0].GetComponent<GameManager>().slot == false) { Instantiate(Tornado, TornadoParticleposition.transform.position, Quaternion.identity); }
+            if (manager.GetComponent<GameManager>().job == 2 ) { GetComponent<Magician_Skills>().ElectricBall(); }
+            manager.GetComponent<GameManager>().MP -= 10;
+
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager>().MP >= 10)
+        {
+            if (manager.GetComponent<GameManager>().job == 2) { GetComponent<Magician_Skills>().TornadoAttack(); }
+            manager.GetComponent<GameManager>().MP -= 10;
         }
 
+        if(manager.GetComponent<GameManager>().job == 1)
+        {
+            Archercontrol();
+
+        }
+      
     }
     private void FixedUpdate()
     {
@@ -117,8 +131,97 @@ public class Player : MonoBehaviour
     {
         if(other.gameObject.tag == "coin")
         {
-            coin += 1;
+            manager.GetComponent<GameManager>().Coin += 100;
             Destroy(other.gameObject);
+        }
+    }
+    void cameracontrol()
+    {
+        float mx = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        float my = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+        yRotation += mx;
+        xRotation -= my;
+        xRotation = Mathf.Clamp(xRotation, -clampAngle, clampAngle);
+
+        transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
+        camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        if (manager.GetComponent<GameManager>().job == 1)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                //camera.transform.position = ADSpos.transform.position;
+                ADS = true;
+            }
+            else
+            {
+                ADS = false;
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                //camera.transform.position = NOADSpos.transform.position;
+                
+            }
+            if (ADS == true)
+            {
+                camera.transform.position = Vector3.MoveTowards(camera.transform.position, ADSpos.transform.position, 10 * Time.deltaTime);
+
+            }
+            else if (ADS == false)
+            {
+                camera.transform.position = Vector3.MoveTowards(camera.transform.position, NOADSpos.transform.position, 10 * Time.deltaTime);
+            }
+           
+        }
+    }
+    void Archercontrol()
+    {
+        if (Input.GetMouseButton(0) && mouseleft == false)
+        {
+            if (mouseleft == false && mouseright == false) { GetComponent<ArcherÔºøskill>().NormalAttack(); }
+            mouseleft = true;
+
+        }
+
+        if (Input.GetMouseButton(1) && mouseright == false)
+        {
+            mouseright = true;
+
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (mouseleft == true && mouseright == true) { GetComponent<ArcherÔºøskill>().NormalAttack(); }
+            mouseleft = false;
+
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            mouseright = false;
+            GetComponent<ArcherÔºøskill>().shootpower = 0;
+        }
+
+        if (mouseright == true && mouseleft == true)
+        {
+            if (GetComponent<ArcherÔºøskill>().shootpower <= 30)
+            {
+                GetComponent<ArcherÔºøskill>().shootpower += 10 * Time.deltaTime;
+            }
+        }
+
+        if (mouseleft == false)
+        {
+
+            a -= Time.deltaTime;
+            if (a <= 0)
+            {
+                GetComponent<ArcherÔºøskill>().shootpower = 0;
+            }
+        }
+        else
+        {
+            a = 0.5f;
         }
     }
 }

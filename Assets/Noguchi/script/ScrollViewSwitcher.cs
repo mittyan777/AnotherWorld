@@ -16,31 +16,44 @@ public class ScrollViewController : MonoBehaviour
     public GameObject scrollView3;
     public GameObject scrollView4;
 
+    [Header("Text")]
+    public Text text_1;
+
+    private bool buttonsVisible = false;
+
     void Start()
     {
-        // 各ボタンのクリックイベント設定
         button1.onClick.AddListener(() => ShowScrollView(1));
         button2.onClick.AddListener(() => ShowScrollView(2));
         button3.onClick.AddListener(() => ShowScrollView(3));
         button4.onClick.AddListener(() => ShowScrollView(4));
 
-        // 起動時は全て非表示
         HideAllScrollViews();
+        HideAllButtons();
+    
+
+        ShowAllButtons();
+        text_1.gameObject.SetActive(true);
     }
 
-    private void ShowScrollView(int index)
+    void Update()
     {
-        // まず全て非表示
-        HideAllScrollViews();
-
-        // 指定した番号のScrollViewを表示
-        switch (index)
-        {
-            case 1: scrollView1.SetActive(true); break;
-            case 2: scrollView2.SetActive(true); break;
-            case 3: scrollView3.SetActive(true); break;
-            case 4: scrollView4.SetActive(true); break;
-        }
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    buttonsVisible = !buttonsVisible;
+        //
+        //    if (buttonsVisible)
+        //    {
+        //        ShowAllButtons();
+        //        text_1.gameObject.SetActive(true); // ▼ 表示
+        //    }
+        //    else
+        //    {
+        //        HideAllButtons();
+        //        HideAllScrollViews();
+        //        text_1.gameObject.SetActive(false); // ▼ 非表示
+        //    }
+        //}
     }
 
     private void HideAllScrollViews()
@@ -48,6 +61,35 @@ public class ScrollViewController : MonoBehaviour
         scrollView1.SetActive(false);
         scrollView2.SetActive(false);
         scrollView3.SetActive(false);
-        scrollView4.SetActive(false);
+        //scrollView4.SetActive(false);
+    }
+
+    private void HideAllButtons()
+    {
+        button1.gameObject.SetActive(false);
+        button2.gameObject.SetActive(false);
+        button3.gameObject.SetActive(false);
+        button4.gameObject.SetActive(false);
+    }
+
+    private void ShowScrollView(int index)
+    {
+        HideAllScrollViews();
+
+        switch (index)
+        {
+            case 1: scrollView1.SetActive(true); break;
+            case 2: scrollView2.SetActive(true); break;
+            case 3: scrollView3.SetActive(true); break;
+            //case 4: scrollView4.SetActive(true); break;
+        }
+    }
+
+    private void ShowAllButtons()
+    {
+        button1.gameObject.SetActive(true);
+        button2.gameObject.SetActive(true);
+        button3.gameObject.SetActive(true);
+        //button4.SetActive(true);
     }
 }

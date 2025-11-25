@@ -1,70 +1,130 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
-public class UIManager : MonoBehaviour
+public class Purchase : MonoBehaviour
 {
-    [Header("選択ボタン4つ")]
-    [SerializeField] private Button buttonA;
-    [SerializeField] private Button buttonB;
-    [SerializeField] private Button buttonC;
-    [SerializeField] private Button buttonD;
+    [Header("コイン管理")]
+    
+    private float getCoin;
 
-    [Header("購入UIのボタン")]
-    [SerializeField] private Button yesButton;
-    [SerializeField] private Button noButton;
+    [System.Serializable]
+    public class ScrollViewGroup
+    {
+        public string groupName;
+        public Button[] itemButtons;
+        public int[] itemPrices;
+    }
+
+    [Header("スクロールビューごとの商品情報")]
+    [SerializeField] private ScrollViewGroup[] scrollViewGroups;
 
     [Header("UI参照")]
-    [SerializeField] private GameObject mainUI;
-    [SerializeField] private GameObject purchaseUI;
+    [SerializeField] private Text coinText;
+    [SerializeField] private Text messageText;
 
-    // 現在選択されている商品名を保持
-    private string currentItemName;
+    [Header("ショップ全体のUIオブジェクト")]
+    [SerializeField] private GameObject shopUI;
+
+    private List<string> inventory = new List<string>();
+
+    GameObject gm;
 
     void Start()
     {
-        // 各ボタンのクリックイベント登録
-        buttonA.onClick.AddListener(() => OnItemSelected("A"));
-        buttonB.onClick.AddListener(() => OnItemSelected("B"));
-        buttonC.onClick.AddListener(() => OnItemSelected("C"));
-        buttonD.onClick.AddListener(() => OnItemSelected("D"));
+     
+       
 
-        yesButton.onClick.AddListener(OnPurchaseConfirmed);
-        noButton.onClick.AddListener(OnPurchaseCancelled);
+        // プレイヤーの所持コイン取得
+         gm = GameObject.FindWithTag("GameManager");
+        if (gm == null)
+        {
+            Debug.LogError("GameManager が見つかりません。");
+            return;
+        }
 
-        // 最初は購入UIを非表示
-        purchaseUI.SetActive(false);
+     
+
+        // 商品ボタンにイベント登録
+        InitializeButtons();
+
+        // UI 初期化
+        UpdateCoinUI();
+        if (messageText != null) messageText.text = "";
+        if (shopUI != null) shopUI.SetActive(false);
     }
 
-    // 商品が選択されたとき
-    void OnItemSelected(string itemName)
+    /// <summary>
+    /// スクロールビュー内ボタンに購入処理を設定
+    /// </summary>
+    private void InitializeButtons()
     {
-        currentItemName = itemName;
-        Debug.Log($"{itemName} が選択されました。購入UIに移行します。");
+        foreach (var group in scrollViewGroups)
+        {
+            for (int i = 0; i < group.itemButtons.Length; i++)
+            {
+                int index = i;
 
-        // UI切り替え
-        mainUI.SetActive(false);
-        purchaseUI.SetActive(true);
+                string itemName = $"{group.groupName}_{index + 1}";
+                int price = group.itemPrices[index];
+
+                group.itemButtons[i].onClick.AddListener(() =>
+                {
+                    TryPurchase(itemName, price);
+                });
+            }
+        }
     }
 
-    // 「はい」ボタンが押されたとき
-    void OnPurchaseConfirmed()
+    /// <summary>
+    /// 商品購入処理
+    /// </summary>
+    private void TryPurchase(string itemName, float price)
     {
-        Debug.Log($"{currentItemName} の購入が完了しました！");
-        ReturnToMainUI();
+
+        
+        if (getCoin >= price)
+        {
+            gm.GetComponent<GameManager>().Coin -= price;
+           
+            inventory.Add(itemName);
+
+            messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
+            Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager>().Coin}");
+        }
+        else
+        {
+            messageText.text = $"コインが足りません！（必要: {price}）";
+            Debug.Log($"購入失敗：価格 {price} に対して残高不足");
+        }
+        
+
+        UpdateCoinUI();
     }
 
-    // 「いいえ」ボタンが押されたとき
-    void OnPurchaseCancelled()
+    /// <summary>
+    /// コイン表示を更新
+    /// </summary>
+    private void UpdateCoinUI()
     {
-        Debug.Log("購入をキャンセルしました。");
-        ReturnToMainUI();
+        if (coinText != null)
+            coinText.text = $"所持コイン: {getCoin}";
     }
 
-    // メインUIに戻る
-    void ReturnToMainUI()
+    /// <summary>
+    /// 現在のインベントリをログに表示
+    /// </summary>
+    public void ShowInventory()
     {
-        purchaseUI.SetActive(false);
-        mainUI.SetActive(true);
-        currentItemName = null;
+        Debug.Log("=== インベントリ ===");
+        foreach (var item in inventory)
+        {
+            Debug.Log(item);
+        }
+    }
+    private void Update()
+    {
+        UpdateCoinUI();
+        getCoin = gm.GetComponent<GameManager>().Coin;
     }
 }

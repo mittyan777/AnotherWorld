@@ -6,42 +6,60 @@ using UnityEngine.UI;
 
 public class Changimage : MonoBehaviour
 {
-    [SerializeField] private Image targetImage; // •Ï‚¦‚éImage
-    [SerializeField] private Sprite warriorSprite; // Eí‚²‚Æ‚Ì‰æ‘œ
-    [SerializeField] private Sprite mageSprite;
-    [SerializeField] private Sprite archerSprite;
 
-    // ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚ÉŒÄ‚ÔŠÖ”
-    public void ChangeToWarrior()
-    {
-        targetImage.sprite = warriorSprite;
-    }
+    [SerializeField] private Image targetImage; // Eí‰æ‘œ‚ğ•\¦‚·‚éImage
 
-    public void ChangeToMage()
-    {
-        targetImage.sprite = mageSprite;
-    }
+    [Header("Eí‚²‚Æ‚Ì‰æ‘œ")]
+    [SerializeField] private Sprite swordsman;
+    [SerializeField] private Sprite Magishan;
+    [SerializeField] private Sprite Aceher;
 
-    public void ChangeToArcher()
+    private bool isFirstRoulette = true;
+
+    // ‰‰ñƒ‹[ƒŒƒbƒg‚ÉŒÄ‚Ô
+    public void ShowJob(string jobName)
     {
-        targetImage.sprite = archerSprite;
-    }
-    public void jobName(string jobName)
-    {
-        switch (jobName)
+        if (targetImage == null) return;
+
+        if (jobName == "Œ•m")
         {
-            case "Œ•m":
-                targetImage.sprite = warriorSprite;
-                break;
-            case "–‚–@":
-                targetImage.sprite = mageSprite;
-                break;
-            case "‹|g‚¢":
-                targetImage.sprite = archerSprite;
-                break;
-            default:
-                Debug.LogWarning("" + jobName);
-                break;
+            targetImage.sprite = swordsman;
+        }
+        else if (jobName == "–‚–@g‚¢")
+        {
+            targetImage.sprite = Magishan;
+        }
+        else if (jobName == "‹|g‚¢")
+        {
+            targetImage.sprite = Aceher;
+        }
+
+        targetImage.gameObject.SetActive(true);
+        isFirstRoulette = false;
+
+        Debug.Log("‰‰ñƒ‹[ƒŒƒbƒg‚Å•\¦‚·‚éE‹Æ: " + jobName);
+    }
+
+    // “ñ‰ñ–ÚˆÈ~‚ÍEí‰æ‘œ‚ğ”ñ•\¦‚É‚·‚é
+    public void HideJobImage()
+    {
+        if (targetImage != null)
+        {
+            targetImage.gameObject.SetActive(false);
+            Debug.Log("2‰ñ–ÚˆÈ~‚ÍE‹Æ‰æ‘œ”ñ•\¦");
+        }
+    }
+
+    // Rouletto_New ‚©‚çŒÄ‚Ô‹¤’Êˆ—
+    public void UpdateJobImage(string jobName, bool firstRoulette)
+    {
+        if (firstRoulette)
+        {
+            ShowJob(jobName);
+        }
+        else
+        {
+            HideJobImage();
         }
     }
 }

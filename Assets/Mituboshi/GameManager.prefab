@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2507564272328442073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5277834990421808650}
+  - component: {fileID: 3238216735800702585}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5277834990421808650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507564272328442073}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.065057, y: -0.22210602, z: 0.8336407}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3238216735800702585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507564272328442073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5e6fc43755c2e41b237dd24f3c80a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player:
+  - {fileID: 0}
+  Coin: 0
+  HP: 0
+  MP: 0
+  AttackStatus: 0
+  DefenseStatus: 0
+  job: 0
+  Status: 0000000000000000000000000000000000000000
+  slot: 1
+  powerslot_text: {fileID: 0}
+  defense_text: {fileID: 0}
+  HP_text: {fileID: 0}
+  MP_text: {fileID: 0}
+  job_text: {fileID: 0}
+  HP_slot_Max: 101
+  HP_slot_Min: 1
+  MP_slot_Max: 101
+  MP_slot_Min: 1
+  power_slot_Max: 51
+  power_slot_Min: 1
+  Defense_slot_Max: 51
+  Defense_slot_Min: 1
