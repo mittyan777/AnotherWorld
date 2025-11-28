@@ -171,7 +171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1444636047597908302, guid: af9d653d98a2b8342be6769312eae349, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9780369
+      value: -6.26
       objectReference: {fileID: 0}
     - target: {fileID: 1444636047597908302, guid: af9d653d98a2b8342be6769312eae349, type: 3}
       propertyPath: m_LocalRotation.w
@@ -205,6 +205,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss02
       objectReference: {fileID: 0}
+    - target: {fileID: 5164178730908734337, guid: af9d653d98a2b8342be6769312eae349, type: 3}
+      propertyPath: strongSlashAttackArea
+      value: 
+      objectReference: {fileID: 6358714838029468001, guid: 5da99c9e122f72d4fa573f537889f32c, type: 3}
+    - target: {fileID: 5164178730908734337, guid: af9d653d98a2b8342be6769312eae349, type: 3}
+      propertyPath: twoStepSlashAttackArea
+      value: 
+      objectReference: {fileID: 1819416493738823796, guid: 85ea0111ab657cc489b480538f3cd5eb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
