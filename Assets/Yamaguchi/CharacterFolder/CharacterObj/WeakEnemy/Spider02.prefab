@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3286096980738712516}
   - component: {fileID: -351335630220723529}
   - component: {fileID: 2841765200058673541}
+  - component: {fileID: -5321235051423233362}
   m_Layer: 0
   m_Name: Spider02
   m_TagString: Untagged
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMaxHP: 20
   damageTime: 2
-  AA: 3
+  breakTime: 0
 --- !u!114 &2841765200058673541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +163,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyObj: {fileID: 8395968631224569226, guid: 3a481f2a44b54d44cbb5ed362e34f4c3, type: 3}
+--- !u!114 &-5321235051423233362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616799773042005967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9d4dadf196b7b42b11474d8a7196ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5975737999590668711
 GameObject:
   m_ObjectHideFlags: 0
