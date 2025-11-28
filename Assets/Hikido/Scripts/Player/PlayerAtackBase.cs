@@ -86,7 +86,7 @@ public class PlayerAtackBase : MonoBehaviour
         if (bAvoidance)
         {
             //TODO:アニメーションフラグで管理
-            _animflgSO.Avoidflg = true;
+             _animflgSO.Avoidflg = true;
             Debug.Log("回避方向");
         }
     }

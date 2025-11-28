@@ -284,6 +284,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4260b881934a234391c754197277e33, type: 3}
+--- !u!1 &288623382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8694786428346500325, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 694788268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &308491132
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386521aee55d16a4baf34b649ebe1a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: []
+  manager:
+  - {fileID: 288623382}
   _animflgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
   inputwaitTime: 0.5
   maxComboCount: 3
