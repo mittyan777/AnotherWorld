@@ -57,4 +57,5 @@ public class CameraCompomentttttttt : MonoBehaviour
         // 5. カメラを常にターゲットへ向ける
         transform.LookAt(targetPosition);
     }
+
 }
