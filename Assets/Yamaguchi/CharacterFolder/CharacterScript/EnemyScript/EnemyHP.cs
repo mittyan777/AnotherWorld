@@ -10,6 +10,7 @@ public class EnemyHP : MonoBehaviour
     EnemyDropManager dropManager;
 
     protected EnemyMove enemyMove;
+    
     [SerializeField] private float damageTime;
     [SerializeField] private float breakTime;
 

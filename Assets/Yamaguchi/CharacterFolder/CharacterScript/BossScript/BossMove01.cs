@@ -64,6 +64,7 @@ public class BossMove01 : MonoBehaviour
     }
     private void Update()
     {
+        /*
         if (BossManager.instance.currentBossHP <= 0)
         {
             Rigidbody body = GetComponent<Rigidbody>();
@@ -71,6 +72,7 @@ public class BossMove01 : MonoBehaviour
             ChangeState(Boss01ActionType.Death);
             return;
         }
+         */
 
         if (currentState == Boss01ActionType.Tackle)
         {
@@ -189,7 +191,7 @@ public class BossMove01 : MonoBehaviour
         */
     }
 
-    private void ChangeState(Boss01ActionType newAction)
+    public void ChangeState(Boss01ActionType newAction)
     {
         currentState = newAction;
         if (animationManager != null)

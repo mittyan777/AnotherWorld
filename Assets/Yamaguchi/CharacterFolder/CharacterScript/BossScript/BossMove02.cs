@@ -63,6 +63,7 @@ public class BossMove02 : MonoBehaviour
 
     private void Update()
     {
+        /*
         // BossManager.instance.currentBossHPはBossManagerが更新されている前提
         if (BossManager.instance.currentBossHP <= 0)
         {
@@ -71,6 +72,7 @@ public class BossMove02 : MonoBehaviour
             ChangeState(Boss02ActionType.Death);
             return;
         }
+        */
 
         // JumpAttackの処理を追加する場合はここに記述
         if (currentState == Boss02ActionType.TwoStepAttack)
@@ -151,7 +153,8 @@ public class BossMove02 : MonoBehaviour
         ChangeState(Boss02ActionType.Idle);
     }
 
-    private void ChangeState(Boss02ActionType newAction)
+    //外部からもアニメーションを変えれるようにする
+    public void ChangeState(Boss02ActionType newAction)
     {
         currentState = newAction;
 
