@@ -93,7 +93,7 @@ public class Rouretto_New : MonoBehaviour
         //初期UIは非表示
         RouletteUI.SetActive(false);    //ルーレットUIや背景などが「RouletteUI」に格納されておりこのルーレットUIを表示/非表示にさせるか否か
 
-        //StartButton.onClick.AddListener(StartRoulette);     
+        StartButton.onClick.AddListener(StartRoulette);     
         StopButton.onClick.AddListener(StopRoulette);
 
         
@@ -186,9 +186,9 @@ public class Rouretto_New : MonoBehaviour
 
         if (FirstRoulette)
         {
+            Spining = true;
+            spinCoroutine = StartCoroutine(SpinRoulette());
            
-                Spining = true;
-                spinCoroutine = StartCoroutine(SpinRoulette());
 
             if(rouletteSound != null)
             {
@@ -212,8 +212,6 @@ public class Rouretto_New : MonoBehaviour
                     rouletteSound.PlaySound();
                 }
 
-
-                
              
             }
 
