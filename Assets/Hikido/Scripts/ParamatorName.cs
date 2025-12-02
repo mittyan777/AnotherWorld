@@ -10,6 +10,11 @@ public enum ParaMatorName
    Walk_Down,
    Avoidflg,
    ArcherAttackFlg,
+   ArcherAimWalk,
+   ArcherAimWalk_right,
+   ArcherAimWalk_left,
+   ArcherAimWalk_back,
+   Recoil,
 
    NONE = 0
    

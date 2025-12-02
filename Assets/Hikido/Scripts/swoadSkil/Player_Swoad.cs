@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -33,7 +34,7 @@ public class Player_Swoad : PlayerAtackBase
         ComboTime();
 
         //TODO;’ÊíUŒ‚”»’èŒã@{@Œ•m‚¾‚Á‚½ê‡‚Ì‚İ
-        if (base.bNormalAttack ==  true)
+        if (base.bNormalAttack ==  true && _manager.GetComponent<GameManager>().job == 0)
         {
             //Œ•m“ÁêUŒ‚
             Special_Attack();

@@ -12,7 +12,8 @@ public class AnimationFlagManagerSO : ScriptableObject
     [SerializeField] private bool attackSkilFlag = false;
     [SerializeField] private bool walkanimFlg = false;
     [SerializeField] private bool avoidanceFlg = false;
-    [SerializeField] private bool attackArcherflg = false;
+    [SerializeField] private bool attackArcherFlg = false;
+    [SerializeField] private bool archerAimWalkFlg = false;
 
     [Header("各通知イベント")]
     public Action Attackevents;         //攻撃イベント
@@ -21,6 +22,7 @@ public class AnimationFlagManagerSO : ScriptableObject
     public Action AttackNormal;
     public Action AttackMagicianSkills;
     public Action AttackArcherSkills;
+    public Action ArcherAimWalk;        //アーチャーのAim時の移動イベント
     
     //攻撃のイベント
     public bool AttackNormalflg 
@@ -46,7 +48,7 @@ public class AnimationFlagManagerSO : ScriptableObject
         get { return avoidanceFlg; }
         set
         {
-            if (avoidanceFlg == value) return;
+            if (avoidanceFlg == value){ return; }
             avoidanceFlg = value;
 
             if (value)
@@ -60,15 +62,31 @@ public class AnimationFlagManagerSO : ScriptableObject
     //アーチャーのイベント
     public bool ArcherSkilflg 
     {
-        get { return attackArcherflg; }
+        get { return attackArcherFlg; }
         set
         {
-            if(attackArcherflg == value) return;
-            attackArcherflg = value;
+            if (attackArcherFlg == value) { return; }
+            attackArcherFlg = value;
             if (value) 
             {
                 AttackArcherSkills?.Invoke();
                 UnityEngine.Debug.Log("アーチャーイベント発火");
+            }
+        }
+    }
+
+    //アーチャーのエイム時イベント
+    public bool ArcherAimSkilFlg 
+    {
+        get { return archerAimWalkFlg; }
+        set 
+        {
+            if(archerAimWalkFlg == value) { return; }
+            archerAimWalkFlg = value;
+            if (value) 
+            {
+                ArcherAimWalk?.Invoke();
+                UnityEngine.Debug.Log("エイム時のイベント発火");
             }
         }
     }

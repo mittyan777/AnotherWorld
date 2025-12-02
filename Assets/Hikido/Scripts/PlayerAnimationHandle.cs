@@ -24,4 +24,16 @@ public class PlayerAnimationHandle : MonoBehaviour
         if (animationRouter != null) { animationRouter.AvoidAnimationEnd(); }
         else { Debug.LogError("AnimationRouterなし。"); }
     }
+
+    //アーチャーアニメーションの終了用関数
+    public void ArcherAnimationEnd() 
+    {
+        if(animationRouter != null) { animationRouter.AttackAnimation_ArcherEnd(); }
+        else { Debug.LogError("animationRouterなし"); }
+    }
+
+    public void ArcherAimWalkEnd() 
+    {
+        
+    }
 }

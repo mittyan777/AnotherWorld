@@ -5,14 +5,16 @@ using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 /// ジョブタイプごとにセットするアニメーションコマンドを変更
 public enum JobType
 {
-    NONE,         //使用しない枠 = 0
-    SWORDSMAN,    //剣士  = 1
-    ARCHER,       //弓使い(アーチャー) = 2
-    WIZARD        //魔法使い = 3
+    SWORDSMAN,    //剣士  = 0
+    ARCHER,       //弓使い(アーチャー) = 1
+    WIZARD,        //魔法使い = 2
+
+    NONE
 }
 
 public class PlayerAnimation : MonoBehaviour
@@ -20,7 +22,7 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private CommandoConfigSO _cmdCofigSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
-
+    [SerializeField] GameManager _gameManager;
     [SerializeField] private Animator animator;
 
     //ジョブタイプ
@@ -29,8 +31,20 @@ public class PlayerAnimation : MonoBehaviour
     //職種に対応したコマンドセット
     private Dictionary<JobType, CommandoConfigSO.CommandSet> CommandMap;
 
-    //ゲームマネージャー
-    //[SerializeField] GameObject[] manager;
+    private int _currentjobNum = -1;
+    private void Start()
+    {
+        if (_gameManager == null)
+        {
+            UnityEngine.Debug.LogError("GameManagerが設定されていません。ジョブ設定ができません。", this);
+            return;
+        }
+        
+        _currentjobNum = (int)_gameManager.job;
+        SetJobType((JobType)_currentjobNum);
+
+        UnityEngine.Debug.Log($"初期ジョブタイプ設定完了: {jobType}");
+    }
 
     private void Awake()
     {
@@ -46,9 +60,32 @@ public class PlayerAnimation : MonoBehaviour
             return;
         }
 
+        if (_gameManager != null)
+        {
+            int jobNum = (int)_gameManager.job;
+            SetJobType((JobType)jobNum);
+
+            UnityEngine.Debug.Log($"初期ジョブタイプ: {jobType}");
+        }
+
         CommandMap = _cmdCofigSO.commandSets.ToDictionary(set => set.JobType, set => set);
 
     }
+
+    private void Update()
+    {
+        if (_gameManager == null) return;
+
+        int jobFromManager = (int)_gameManager.job;
+        if (jobFromManager != _currentjobNum)
+        {
+            _currentjobNum = jobFromManager;
+            SetJobType((JobType)_currentjobNum);
+
+            UnityEngine.Debug.Log($"ジョブが更新されました！ JobType: {jobType}");
+        }
+    }
+
     private void OnEnable()
     {
         //チェック
@@ -91,6 +128,7 @@ public class PlayerAnimation : MonoBehaviour
     /// <summary> /// 通常攻撃アニメーション /// </summary>
     private void AttackAnimation_Normal()
     {
+        
         //攻撃のアニメーション発火
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
@@ -104,6 +142,7 @@ public class PlayerAnimation : MonoBehaviour
     /// <summary> /// 攻撃アニメーション終了用関数 /// </summary>
     public void AttackAnimation_NormalEnd()
     {
+        
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
@@ -116,7 +155,8 @@ public class PlayerAnimation : MonoBehaviour
     /// <summary> /// 回避アニメーション /// </summary>
     public void AvoidAnim() 
     {
-        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        jobType = (JobType)_gameManager.job;
+        if (CommandMap.TryGetValue(jobType,out var commandSet)) 
         {
             AnimationBaseSO _avoidCmd = commandSet.avoidCd;
             if(_avoidCmd != null) { _avoidCmd.Execute(animator); }

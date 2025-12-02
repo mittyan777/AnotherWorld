@@ -12,7 +12,7 @@ public class PlayerAtackBase : MonoBehaviour
     protected  bool bNormalAttack = false;
 
     //ゲームマネージャー
-    [SerializeField] GameObject[] manager;
+    [SerializeField] protected  GameManager _manager;
     [SerializeField] AnimationFlagManagerSO _animflgSO;
 
     /// <summary> /// レンジ構造体 /// </summary>
@@ -25,7 +25,7 @@ public class PlayerAtackBase : MonoBehaviour
 
     void Start()
     {
-        //_animator = GetComponent<Animator>();
+        _animflgSO.Avoidflg = false;
     }
 
     protected virtual void Update()
