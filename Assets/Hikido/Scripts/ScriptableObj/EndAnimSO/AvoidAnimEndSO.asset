@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52bc255d16727e44ea96f08b68baa35f, type: 3}
   m_Name: AvoidAnimEndSO
   m_EditorClassIdentifier: 
-  targetParm: 4
+  targetParm: 3
   floatValue: 0

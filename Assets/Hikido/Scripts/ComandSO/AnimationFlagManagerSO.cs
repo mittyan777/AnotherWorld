@@ -28,6 +28,10 @@ public class AnimationFlagManagerSO : ScriptableObject
         get { return attackNormalFlg; }
         set 
         {
+            if(attackNormalFlg == value) { return; }
+
+            attackNormalFlg = value;
+
             if (value) 
             {
                 UnityEngine.Debug.Log("イベント発火");
@@ -37,12 +41,15 @@ public class AnimationFlagManagerSO : ScriptableObject
     }
 
    //回避のイベント
-   public bool Avoidflg 
+   public bool Avoidflg
     {
-        get { return walkanimFlg; }
+        get { return avoidanceFlg; }
         set
         {
-            if (value) 
+            if (avoidanceFlg == value) return;
+            avoidanceFlg = value;
+
+            if (value)
             {
                 AvoidanceEvents?.Invoke();
                 UnityEngine.Debug.Log("回避イベント発火");
@@ -56,8 +63,13 @@ public class AnimationFlagManagerSO : ScriptableObject
         get { return attackArcherflg; }
         set
         {
-            AttackArcherSkills?.Invoke(); 
-            UnityEngine.Debug.Log("アーチャーイベント発火");
+            if(attackArcherflg == value) return;
+            attackArcherflg = value;
+            if (value) 
+            {
+                AttackArcherSkills?.Invoke();
+                UnityEngine.Debug.Log("アーチャーイベント発火");
+            }
         }
     }
 

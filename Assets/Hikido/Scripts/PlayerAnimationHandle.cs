@@ -17,4 +17,11 @@ public class PlayerAnimationHandle : MonoBehaviour
             Debug.LogError("AnimationRouter (PlayerAnimation) への参照が設定されていません。", this);
         }
     }
+
+    //回避終了アニメーション実行用の関数
+    public void AvoidAnimationEnd() 
+    {
+        if (animationRouter != null) { animationRouter.AvoidAnimationEnd(); }
+        else { Debug.LogError("AnimationRouterなし。"); }
+    }
 }

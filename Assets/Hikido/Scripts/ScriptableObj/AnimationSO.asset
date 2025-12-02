@@ -16,3 +16,4 @@ MonoBehaviour:
   attackSkilFlag: 0
   walkanimFlg: 0
   avoidanceFlg: 0
+  attackArcherflg: 0

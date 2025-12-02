@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEditor;
 using UnityEngine;
 
 /// ジョブタイプごとにセットするアニメーションコマンドを変更
@@ -129,7 +130,12 @@ public class PlayerAnimation : MonoBehaviour
         if(CommandMap.TryGetValue(jobType,out var commandSet)) 
         {
             AnimationBaseSO _avoidEndCmd = commandSet.avoidAnimEndCd;
-            if(_avoidEndCmd != null) { _avoidEndCmd.Execute(animator); }
+            if(_avoidEndCmd != null)
+            { 
+                _avoidEndCmd.Execute(animator);
+                _animFlgSO.Avoidflg = false;
+            }
+            
             else { UnityEngine.Debug.Log("回避アニメーション終了失敗"); }
         }
     }
@@ -146,6 +152,22 @@ public class PlayerAnimation : MonoBehaviour
             else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
         }
         else { UnityEngine.Debug.LogError("ジョブ設定ミス"); }
+    }
+
+
+    //アーチャーの終了フラグ
+    public void AttackAnimation_ArcherEnd() 
+    {
+        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        {
+            AnimationBaseSO _archerEndCmd = commandSet.ArcherSkilsEndCd;
+            if(_archerEndCmd != null) 
+            { 
+                _archerEndCmd.Execute(animator);
+                _animFlgSO.ArcherSkilflg = false;
+            }
+            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+        }
     }
 
 
