@@ -56,9 +56,12 @@ public class BossMove02 : MonoBehaviour
         quickAttackArea.SetActive(false);
         // PlayerObjの検索
         playerObj = GameObject.FindGameObjectWithTag("Player");
+    }
 
-        // スケール設定 (以前のディスカッションに基づき残す)
-        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+    private void OnEnable()
+    {
+        //確実な初期化処理をここに記述
+        transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
     }
 
     private void Update()

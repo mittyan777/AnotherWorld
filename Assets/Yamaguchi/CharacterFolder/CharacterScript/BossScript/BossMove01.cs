@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -60,8 +61,14 @@ public class BossMove01 : MonoBehaviour
         animationManager = GetComponent<BossAnimationManager>();
         quickAttackArea.SetActive(false);
         playerObj = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void OnEnable() 
+    {
+        //確実な初期化処理をここに記述
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
+
     private void Update()
     {
         /*

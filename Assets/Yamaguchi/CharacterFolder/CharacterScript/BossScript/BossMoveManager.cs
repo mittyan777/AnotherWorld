@@ -125,6 +125,10 @@ public class BossMoveManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         string hitTag = other.gameObject.tag;
+        if (other.gameObject.CompareTag("Player")) 
+        { 
+            return; 
+        } 
         if (hitTag.Contains("Player"))
         {
             bossHP.TestDamage();
