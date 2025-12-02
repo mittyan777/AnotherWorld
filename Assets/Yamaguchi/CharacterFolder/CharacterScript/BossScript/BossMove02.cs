@@ -64,8 +64,8 @@ public class BossMove02 : MonoBehaviour
     private void Update()
     {
         /*
-        // BossManager.instance.currentBossHPはBossManagerが更新されている前提
-        if (BossManager.instance.currentBossHP <= 0)
+        // BossMoveManager.instance.currentBossHPはBossManagerが更新されている前提
+        if (BossMoveManager.instance.currentBossHP <= 0)
         {
             Rigidbody body = GetComponent<Rigidbody>();
             if (body != null) Destroy(body); // Rigidbodyが存在する場合のみDestroy
@@ -101,9 +101,9 @@ public class BossMove02 : MonoBehaviour
 
     public void DetermineNextAction()
     {
-        if (BossManager.instance == null)
+        if (BossMoveManager.instance == null)
         {
-            Debug.LogError("BossManager.instance が初期化されていません。Script Execution Order を確認してください。");
+            Debug.LogError("BossMoveManager.instance が初期化されていません。Script Execution Order を確認してください。");
             ChangeState(Boss02ActionType.Idle);
             return;
         }
@@ -138,7 +138,7 @@ public class BossMove02 : MonoBehaviour
         List<float> weight = targetAction.Select(a => a.ProbabilityWeight).ToList();
 
         // BossManagerの抽選関数を使用
-        int actionIndex = BossManager.instance.GetActionIndex(weight);
+        int actionIndex = BossMoveManager.instance.GetActionIndex(weight);
 
         if (actionIndex != -1)
         {

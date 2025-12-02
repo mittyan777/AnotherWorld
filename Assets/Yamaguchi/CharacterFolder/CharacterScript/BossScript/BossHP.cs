@@ -10,7 +10,7 @@ public class BossHP : MonoBehaviour
     public int currentBossHP { get; private set; }
 
     // BossManagerをAwake/Startで取得するため private に戻し、シングルトンから取得
-    private BossManager manager;
+    private BossMoveManager manager;
 
     [SerializeField] private float damageTime;
     [SerializeField] private float breakTime;
@@ -26,7 +26,7 @@ public class BossHP : MonoBehaviour
     private void Start()
     {
         // シングルトンを参照
-        manager = BossManager.instance;
+        manager = BossMoveManager.instance;
         currentBossHP = maxBossHP;
 
         // --- Sliderの初期設定 ---
