@@ -22,6 +22,10 @@ public class BossHP : MonoBehaviour
     [SerializeField] private Slider fadingHPSlider;
     //黄色いバーの減るスピード
     [SerializeField] private float fadeSpeed = 2.0f;
+    //ダメージ処理区間
+    [SerializeField] private float damageInterval;
+    //ダメージを受けれるかのフラグ
+    private bool isInvulnerabal = false;
 
     private void Start()
     {
@@ -58,7 +62,7 @@ public class BossHP : MonoBehaviour
 
     private void UpdateHPBar(int newHP)
     {
-        // 1. 赤色のSlider (currentHPSlider) を目標値に即座に設定
+        //赤色のSlider (currentHPSlider) を目標値に即座に設定
         if (currentHPSlider != null)
         {
             // valueプロパティに現在のHPを直接設定
@@ -66,8 +70,10 @@ public class BossHP : MonoBehaviour
         }
     }
 
+    //メインのダメージ処理
     public void TakeDamage(int damageAmount)
     {
+        if (isInvulnerabal) return;
         if (currentBossHP <= 0) return;
 
         currentBossHP -= damageAmount;
@@ -84,20 +90,27 @@ public class BossHP : MonoBehaviour
         }
     }
 
-    public void TestDamage()
+    public IEnumerator TestDamege02(int testDamage) 
     {
-        if (currentBossHP <= 0) return;
-
-        currentBossHP -= 25;
-        UpdateHPBar(currentBossHP);
-        // 死亡チェックを修正
-        if (currentBossHP <= 0)
+        if (!isInvulnerabal)
         {
-            currentBossHP = 0;
-            if (manager != null)
-            {
-                // Managerに共通処理の実行を依頼する
-                manager.HandleBossDeath();
+            isInvulnerabal = true;
+            if (currentBossHP >= 0)
+            { 
+                currentBossHP -= testDamage;
+                UpdateHPBar(currentBossHP);
+                // 死亡チェックを修正
+                if (currentBossHP <= 0)
+                {
+                    currentBossHP = 0;
+                    if (manager != null)
+                    {
+                        // Managerに共通処理の実行を依頼する
+                        manager.HandleBossDeath();
+                    }
+                }
+                yield return new WaitForSeconds(damageInterval);
+                isInvulnerabal = false;
             }
         }
     }

@@ -43,7 +43,18 @@ public class BossMoveManager : MonoBehaviour
         //テスト用のダメージ
         if (Input.GetKey(KeyCode.P))
         {
-            bossHP.TestDamage();
+            //bossHP.TestDamage();
+            StartCoroutine(bossHP.TestDamege02(25));
+            // HPが変更されたらcurrentBossHPを同期
+            if (bossHP != null)
+            {
+                currentBossHP = bossHP.currentBossHP;
+            }
+        }
+        if (Input.GetKey(KeyCode.O))
+        {
+            //bossHP.TestDamage();
+            StartCoroutine(bossHP.TestDamege02(100));
             // HPが変更されたらcurrentBossHPを同期
             if (bossHP != null)
             {
@@ -131,7 +142,10 @@ public class BossMoveManager : MonoBehaviour
         } 
         if (hitTag.Contains("Player"))
         {
-            bossHP.TestDamage();
+            //攻撃力の取得を行う
+            //int currentDamage = GameManager.Instantiate.「変数名」;
+            //BossのメインHP処理にPlayerの現在の攻撃力を渡す。
+            //bossHP.TakeDamage(currentDamage);
         }
     }
 }

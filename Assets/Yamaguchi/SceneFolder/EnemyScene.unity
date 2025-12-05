@@ -207,7 +207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253964169382226932, guid: af9d653d98a2b8342be6769312eae349, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5164178730908734337, guid: af9d653d98a2b8342be6769312eae349, type: 3}
       propertyPath: strongSlashAttackArea
@@ -1200,7 +1200,7 @@ GameObject:
   - component: {fileID: 776179335}
   - component: {fileID: 776179334}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: BossHPCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

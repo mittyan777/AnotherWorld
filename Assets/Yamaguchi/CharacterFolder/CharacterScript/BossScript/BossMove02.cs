@@ -221,7 +221,6 @@ public class BossMove02 : MonoBehaviour
         float yOffset = 1.5f;
         float rotationZ = 30f;
         Vector3 spawnPos = transform.position;
-        // 注意: spawnPos.y = yOffset; は、Y座標をyOffsetの値に上書きしています。
         // オフセットとして使いたい場合は spawnPos.y += yOffset; に修正が必要です。
         spawnPos.y += yOffset;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, rotationZ);
