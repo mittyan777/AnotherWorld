@@ -18,6 +18,10 @@ public class Player_Swoad : PlayerAtackBase
     //斬撃の発生箇所
     [SerializeField] private Transform SlasshPoint;
 
+    //テスト時のみhikido使用
+    //[SerializeField] GameManager _manager;
+    [SerializeField] GameManager_hikido _manager;
+
     private float _comboTime = 0.0f;
     private int _comboCount = 0;
     private bool isAttack = false;
@@ -33,8 +37,8 @@ public class Player_Swoad : PlayerAtackBase
         //コンボ時間減算
         ComboTime();
 
-        //TODO;通常攻撃判定後　＋　剣士だった場合のみ
-        if (base.bNormalAttack ==  true && _manager.GetComponent<GameManager>().job == 0)
+        //TODO;通常攻撃判定後　＋　剣士だった場合のみ-> gamemanager：テスト時のみhikido使用
+        if (base.bNormalAttack ==  true && _manager.GetComponent<GameManager_hikido>().job == 0)
         {
             //剣士特殊攻撃
             Special_Attack();

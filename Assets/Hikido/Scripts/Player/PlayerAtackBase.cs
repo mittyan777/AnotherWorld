@@ -10,18 +10,8 @@ public class PlayerAtackBase : MonoBehaviour
     Animator _animator;
     bool bAvoidance = false;
     protected  bool bNormalAttack = false;
-
-    //ゲームマネージャー
-    [SerializeField] protected  GameManager _manager;
+    
     [SerializeField] AnimationFlagManagerSO _animflgSO;
-
-    /// <summary> /// レンジ構造体 /// </summary>
-    /// いらないかも
-    struct PlayerRange
-    {
-        [SerializeField] int mangicMaxRange;
-        [SerializeField] int archerMaxRange;
-    }
 
     void Start()
     {
@@ -55,7 +45,6 @@ public class PlayerAtackBase : MonoBehaviour
             _animflgSO.AttackNormalflg = true;
             bNormalAttack = true;
         }
-
     }
 
     /// <summary> /// 全職種共通の回避 /// </summary>
@@ -87,6 +76,7 @@ public class PlayerAtackBase : MonoBehaviour
             _animflgSO.Avoidflg = true;
             Debug.Log("回避方向");
         }
+        else { _animflgSO.Avoidflg = false; }
      
     }
 }

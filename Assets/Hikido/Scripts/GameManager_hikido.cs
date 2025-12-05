@@ -140,11 +140,11 @@ public class GameManager_hikido : MonoBehaviour
 
         if (rouletteUI.activeSelf == true || Weapon_UI.activeSelf == true)
         {
-            Player[0].GetComponent<Player>().enabled = false;
+            Player[0].GetComponent<Player_hikido1>().enabled = false;
         }
         else
         {
-            Player[0].GetComponent<Player>().enabled = true;
+            Player[0].GetComponent<Player_hikido1>().enabled = true;
         }
         if(job == 0) job_text.text = ($"剣士");
         if (job == 1) job_text.text = ($"アーチャー");
@@ -200,16 +200,16 @@ public class GameManager_hikido : MonoBehaviour
        
      
        
-        Player[0].GetComponent<Player>().HP = HP;
+        Player[0].GetComponent<Player_hikido1>().HP = HP;
 
        
-        Player[0].GetComponent<Player>().MP = MP;
+        Player[0].GetComponent<Player_hikido1>().MP = MP;
 
       
-        Player[0].GetComponent<Player>().AttackStatus = AttackStatus;
+        Player[0].GetComponent<Player_hikido1>().AttackStatus = AttackStatus;
 
      
-        Player[0].GetComponent<Player>().DefenseStatus = DefenseStatus;
+        Player[0].GetComponent<Player_hikido1>().DefenseStatus = DefenseStatus;
     }
    
     public void UIchange()

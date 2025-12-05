@@ -17,6 +17,7 @@ MonoBehaviour:
     normalAttackCd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
     avoidCd: {fileID: 11400000, guid: 689dbe22cd8fd3e48b8a1c1d5cef3d68, type: 2}
     archerSkilsCd: {fileID: 0}
+    archerAimCd: {fileID: 0}
     normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
     avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
     walkanimEndCd: {fileID: 0}
@@ -25,6 +26,7 @@ MonoBehaviour:
     normalAttackCd: {fileID: 11400000, guid: a010899acc116984cac5336b0641af87, type: 2}
     avoidCd: {fileID: 11400000, guid: 689dbe22cd8fd3e48b8a1c1d5cef3d68, type: 2}
     archerSkilsCd: {fileID: 0}
+    archerAimCd: {fileID: 11400000, guid: a0f5c7dde86779d469b77643a0c1c760, type: 2}
     normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
     avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
     walkanimEndCd: {fileID: 0}
@@ -33,6 +35,7 @@ MonoBehaviour:
     normalAttackCd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
     avoidCd: {fileID: 11400000, guid: 689dbe22cd8fd3e48b8a1c1d5cef3d68, type: 2}
     archerSkilsCd: {fileID: 0}
+    archerAimCd: {fileID: 0}
     normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
     avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
     walkanimEndCd: {fileID: 0}

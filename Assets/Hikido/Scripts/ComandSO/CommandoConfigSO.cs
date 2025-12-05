@@ -18,6 +18,8 @@ public class CommandoConfigSO : ScriptableObject
         public AnimationBaseSO avoidCd;
         //アーチャースキルコマンド
         public AnimationBaseSO archerSkilsCd;
+        //アーチャーエイム時のコマンド
+        public AnimationBaseSO archerAimCd;
 
         //移動コマンド
         //上下左右移動用のアニメーションコマンド管理

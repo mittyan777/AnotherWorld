@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5974255678979026645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8670171708946901045}
+  - component: {fileID: 114934914685780818}
+  m_Layer: 0
+  m_Name: GameManager_test
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8670171708946901045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974255678979026645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0475914, y: 4.7101645, z: -5.510728}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114934914685780818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974255678979026645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64964baf3507c1d46a1f7d6af49ed430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player:
+  - {fileID: 0}
+  Coin: 1000
+  HP: 0
+  MP: 0
+  AttackStatus: 0
+  DefenseStatus: 0
+  Present_HP: 100
+  Present_MP: 0
+  MP_text: {fileID: 0}
+  HP_text: {fileID: 0}
+  job: 0
+  FirstRoulette: 1
+  job_text: {fileID: 0}
+  Status: 
+  rouletteUI: {fileID: 0}
+  Weapon_UI: {fileID: 0}
+  GAMEUI: {fileID: 0}
+  jobroulette: {fileID: 0}
+  Standard_UI: {fileID: 0}
+  Canvas: {fileID: 0}
+  skill_UI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gage_image:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  HP_slider: {fileID: 0}
+  MP_slider: {fileID: 0}
+  slot: 0
+  fade: 0
+  fade_image: {fileID: 0}
+  fade_image_a: 1

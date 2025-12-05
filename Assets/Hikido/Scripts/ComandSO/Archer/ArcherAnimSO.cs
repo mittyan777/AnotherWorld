@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ArcherAnimSO", menuName = "ArcherAnimSO ")]
@@ -11,6 +12,6 @@ public class ArcherAnimSO : AnimationBaseSO
         string paramName = targetParm.ToString();
         animator.SetBool(paramName, true);
         //チェック
-        Debug.Log($"コマンド実行:{paramName} animationをセット");
+        UnityEngine.Debug.Log($"コマンド実行:{paramName} animationをセット");
     }
 }

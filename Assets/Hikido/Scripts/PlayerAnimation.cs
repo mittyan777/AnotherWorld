@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,12 +7,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 
-/// ƒWƒ‡ƒuƒ^ƒCƒv‚²‚Æ‚ÉƒZƒbƒg‚·‚éƒAƒjƒ[ƒVƒ‡ƒ“ƒRƒ}ƒ“ƒh‚ğ•ÏX
+/// ã‚¸ãƒ§ãƒ–ã‚¿ã‚¤ãƒ—ã”ã¨ã«ã‚»ãƒƒãƒˆã™ã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚³ãƒãƒ³ãƒ‰ã‚’å¤‰æ›´
 public enum JobType
 {
-    SWORDSMAN,    //Œ•m  = 0
-    ARCHER,       //‹|g‚¢(ƒA[ƒ`ƒƒ[) = 1
-    WIZARD,        //–‚–@g‚¢ = 2
+    SWORDSMAN,    //å‰£å£«  = 0
+    ARCHER,       //å¼“ä½¿ã„(ã‚¢ãƒ¼ãƒãƒ£ãƒ¼) = 1
+    WIZARD,        //é­”æ³•ä½¿ã„ = 2
 
     NONE
 }
@@ -22,41 +22,50 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private CommandoConfigSO _cmdCofigSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
-    [SerializeField] GameManager _gameManager;
-    [SerializeField] private Animator animator;
 
-    //ƒWƒ‡ƒuƒ^ƒCƒv
+    //TODOï¼›ãƒ†ã‚¹ãƒˆæ™‚ã®ã¿hikidoä½¿ç”¨
+    [SerializeField] GameManager_hikido _gameManager;
+    //[SerializeField] GameManager _gameManager;
+
+    [SerializeField] private Animator animator;
+    [SerializeField] Player_hikido1 _player;  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼hikido
+    [SerializeField] private Transform _cameraTransform;
+    private Transform _playerTransform;
+
+    //ã‚¸ãƒ§ãƒ–ã‚¿ã‚¤ãƒ—
     public JobType jobType { get; private set; } = JobType.NONE;
 
-    //Eí‚É‘Î‰‚µ‚½ƒRƒ}ƒ“ƒhƒZƒbƒg
+    //è·ç¨®ã«å¯¾å¿œã—ãŸã‚³ãƒãƒ³ãƒ‰ã‚»ãƒƒãƒˆ
     private Dictionary<JobType, CommandoConfigSO.CommandSet> CommandMap;
 
     private int _currentjobNum = -1;
     private void Start()
     {
+        if (_player != null) { _playerTransform = _player.transform; }
+
         if (_gameManager == null)
         {
-            UnityEngine.Debug.LogError("GameManager‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñBƒWƒ‡ƒuİ’è‚ª‚Å‚«‚Ü‚¹‚ñB", this);
+            UnityEngine.Debug.LogError("GameManagerãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚ã‚¸ãƒ§ãƒ–è¨­å®šãŒã§ãã¾ã›ã‚“ã€‚", this);
             return;
         }
-        
+
         _currentjobNum = (int)_gameManager.job;
         SetJobType((JobType)_currentjobNum);
 
-        UnityEngine.Debug.Log($"‰ŠúƒWƒ‡ƒuƒ^ƒCƒvİ’èŠ®—¹: {jobType}");
+        UnityEngine.Debug.Log($"åˆæœŸã‚¸ãƒ§ãƒ–ã‚¿ã‚¤ãƒ—è¨­å®šå®Œäº†: {jobType}");
     }
 
     private void Awake()
     {
         if (!animator)
         {
-            UnityEngine.Debug.LogError("AnimatorƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB", this);
+            UnityEngine.Debug.LogError("Animatorã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚", this);
             return;
         }
 
         if (!_cmdCofigSO)
         {
-            UnityEngine.Debug.LogError("ƒRƒ}ƒ“ƒhƒRƒ“ƒtƒBƒO‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢", this);
+            UnityEngine.Debug.LogError("ã‚³ãƒãƒ³ãƒ‰ã‚³ãƒ³ãƒ•ã‚£ã‚°ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„", this);
             return;
         }
 
@@ -65,7 +74,7 @@ public class PlayerAnimation : MonoBehaviour
             int jobNum = (int)_gameManager.job;
             SetJobType((JobType)jobNum);
 
-            UnityEngine.Debug.Log($"‰ŠúƒWƒ‡ƒuƒ^ƒCƒv: {jobType}");
+            UnityEngine.Debug.Log($"åˆæœŸã‚¸ãƒ§ãƒ–ã‚¿ã‚¤ãƒ—: {jobType}");
         }
 
         CommandMap = _cmdCofigSO.commandSets.ToDictionary(set => set.JobType, set => set);
@@ -82,25 +91,70 @@ public class PlayerAnimation : MonoBehaviour
             _currentjobNum = jobFromManager;
             SetJobType((JobType)_currentjobNum);
 
-            UnityEngine.Debug.Log($"ƒWƒ‡ƒu‚ªXV‚³‚ê‚Ü‚µ‚½I JobType: {jobType}");
+            UnityEngine.Debug.Log($"ã‚¸ãƒ§ãƒ–ãŒæ›´æ–°ã•ã‚Œã¾ã—ãŸï¼ JobType: {jobType}");
         }
+    }
+
+
+    private void FixedUpdate()
+    {
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        bool isAiming = _player.isAiming;
+        bool isArcher = (jobType == JobType.ARCHER);
+        int adsLayerIndex = animator.GetLayerIndex("ADS Layer");
+
+        if (isAiming && isArcher)
+        {
+            if (_playerTransform != null && _cameraTransform != null)
+            {
+                float targetYAngle = _cameraTransform.eulerAngles.y - 90f;
+
+                Quaternion targetRotation = Quaternion.Euler(
+                    0f,
+                    targetYAngle,
+                    0f
+                );
+                _playerTransform.rotation = Quaternion.Slerp(
+                    _playerTransform.rotation,
+                    targetRotation,
+                    Time.fixedDeltaTime * 10f
+                );
+            }
+
+            if (CommandMap.TryGetValue(jobType, out var commandSet) && commandSet.archerAimCd != null)
+            {
+                if (commandSet.archerAimCd is ArcherAimWalkSO aimWalkBoolCmd)
+                {
+                    aimWalkBoolCmd.ExecuteMoveMent(animator, _playerTransform, moveInput);
+                }
+            }
+
+            UnityEngine.Debug.Log($"Input: X={moveInput.x}, Y={moveInput.y}");
+        }
+        else
+        {
+            _player.HandleStanderdMovement(_playerTransform, animator);
+            if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 0f); }
+        }
+
     }
 
     private void OnEnable()
     {
-        //ƒ`ƒFƒbƒN
+        //ãƒã‚§ãƒƒã‚¯
         if (_animFlgSO)
         {
-            //ŠeƒAƒjƒ[ƒVƒ‡ƒ“‚Ìˆ—‚ğAction‚É“o˜^
+            //å„ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å‡¦ç†ã‚’Actionã«ç™»éŒ²
             _animFlgSO.AttackNormal += AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
 
-            //‰ñ”ğ—pƒCƒxƒ“ƒg“o˜^
+            //å›é¿ç”¨ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²
             _animFlgSO.AvoidanceEvents += AvoidAnim;
         }
         else
         {
-            UnityEngine.Debug.LogError("_animFlgSO‚ª‘¶İ‚µ‚È‚¢", this);
+            UnityEngine.Debug.LogError("_animFlgSOãŒå­˜åœ¨ã—ãªã„", this);
             return;
         }
     }
@@ -109,106 +163,122 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_animFlgSO)
         {
-            //ŠeƒAƒjƒ[ƒVƒ‡ƒ“ˆ—‚ğAction‚©‚çíœ
+            //å„ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å‡¦ç†ã‚’Actionã‹ã‚‰å‰Šé™¤
             _animFlgSO.AttackNormal -= AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
 
-            //‰ñ”ğ—pƒCƒxƒ“ƒg‰ğœ
+            //å›é¿ç”¨ã‚¤ãƒ™ãƒ³ãƒˆè§£é™¤
             _animFlgSO.AvoidanceEvents -= AvoidAnim;
         }
     }
 
-    /// <summary> /// ƒWƒ‡ƒuİ’è(ƒAƒjƒ[ƒVƒ‡ƒ“—p) /// </summary>
+    /// <summary> /// ã‚¸ãƒ§ãƒ–è¨­å®š(ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç”¨) /// </summary>
     /// <param name="_newJob"></param>
     public void SetJobType(JobType _newJob)
     {
         jobType = _newJob;
     }
 
-    /// <summary> /// ’ÊíUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“ /// </summary>
+    /// <summary> /// é€šå¸¸æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ /// </summary>
     private void AttackAnimation_Normal()
     {
-        
-        //UŒ‚‚ÌƒAƒjƒ[ƒVƒ‡ƒ“”­‰Î
+
+        //æ”»æ’ƒã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç™ºç«
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.normalAttackCd;
             if (_currentCmd != null) { _currentCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogWarning($"ƒWƒ‡ƒu:{jobType} ‚ÌƒRƒ}ƒ“ƒh‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢B"); }
+            else { UnityEngine.Debug.LogWarning($"ã‚¸ãƒ§ãƒ–:{jobType} ã®ã‚³ãƒãƒ³ãƒ‰ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã€‚"); }
         }
-        else { UnityEngine.Debug.LogError($"ƒWƒ‡ƒuİ’èƒ~ƒX{jobType}"); }
+        else { UnityEngine.Debug.LogError($"ã‚¸ãƒ§ãƒ–è¨­å®šãƒŸã‚¹{jobType}"); }
     }
 
-    /// <summary> /// UŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“I—¹—pŠÖ” /// </summary>
+    /// <summary> /// æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†ç”¨é–¢æ•° /// </summary>
     public void AttackAnimation_NormalEnd()
     {
-        
+
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
             if (_endCmd != null) { _endCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogError("¸”s"); }
+            else { UnityEngine.Debug.LogError("å¤±æ•—"); }
         }
     }
 
 
-    /// <summary> /// ‰ñ”ğƒAƒjƒ[ƒVƒ‡ƒ“ /// </summary>
-    public void AvoidAnim() 
+    /// <summary> /// å›é¿ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ /// </summary>
+    public void AvoidAnim()
     {
         jobType = (JobType)_gameManager.job;
-        if (CommandMap.TryGetValue(jobType,out var commandSet)) 
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _avoidCmd = commandSet.avoidCd;
-            if(_avoidCmd != null) { _avoidCmd.Execute(animator); }
-            else { UnityEngine.Debug.Log("‰ñ”ğƒAƒjƒ[ƒVƒ‡ƒ“¸”sB"); }
+            if (_avoidCmd != null) { _avoidCmd.Execute(animator); }
+            else { UnityEngine.Debug.Log("å›é¿ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å¤±æ•—ã€‚"); }
         }
     }
 
-    /// <summary> /// ‰ñ”ğƒAƒjƒ[ƒVƒ‡ƒ“I—¹ƒRƒ}ƒ“ƒh /// </summary>
-    public void AvoidAnimationEnd() 
+    /// <summary> /// å›é¿ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†ã‚³ãƒãƒ³ãƒ‰ /// </summary>
+    public void AvoidAnimationEnd()
     {
-        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _avoidEndCmd = commandSet.avoidAnimEndCd;
-            if(_avoidEndCmd != null)
-            { 
+            if (_avoidEndCmd != null)
+            {
                 _avoidEndCmd.Execute(animator);
                 _animFlgSO.Avoidflg = false;
             }
-            
-            else { UnityEngine.Debug.Log("‰ñ”ğƒAƒjƒ[ƒVƒ‡ƒ“I—¹¸”s"); }
+
+            else { UnityEngine.Debug.Log("å›é¿ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†å¤±æ•—"); }
         }
     }
 
-    //TODO:ƒA[ƒ`ƒƒ[ƒXƒLƒ‹‚ÌƒXƒNƒŠƒvƒg‚ª‘¶İ‚µ‚È‚¢‚Ì‚Åƒ}[ƒWŒãƒeƒXƒg
-    //      ->Œ»ó‚ÍƒvƒŒƒCƒ„[‚Ìƒ\[ƒhƒXƒLƒ‹‚Æ‚µ‚Äl‚¦‚ÄƒeƒXƒg‚·‚éB
-    /// <summary> /// ƒA[ƒ`ƒƒ[ƒXƒLƒ‹ƒAƒjƒ[ƒVƒ‡ƒ“ /// </summary>
-    public void AttackAnimation_Archer() 
+    //TODO:ã‚¢ãƒ¼ãƒãƒ£ãƒ¼ã‚¹ã‚­ãƒ«ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆãŒå­˜åœ¨ã—ãªã„ã®ã§ãƒãƒ¼ã‚¸å¾Œãƒ†ã‚¹ãƒˆ
+    //      ->ç¾çŠ¶ã¯ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚½ãƒ¼ãƒ‰ã‚¹ã‚­ãƒ«ã¨ã—ã¦è€ƒãˆã¦ãƒ†ã‚¹ãƒˆã™ã‚‹ã€‚
+    /// <summary> /// ã‚¢ãƒ¼ãƒãƒ£ãƒ¼ã‚¹ã‚­ãƒ«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ /// </summary>
+    public void AttackAnimation_Archer()
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.archerSkilsCd;
             if (_currentCmd != null) { _currentCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogWarning($"ƒWƒ‡ƒu:{jobType} ‚ÌƒRƒ}ƒ“ƒh‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢B"); }
+            else { UnityEngine.Debug.LogWarning($"ã‚¸ãƒ§ãƒ–:{jobType} ã®ã‚³ãƒãƒ³ãƒ‰ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã€‚"); }
         }
-        else { UnityEngine.Debug.LogError("ƒWƒ‡ƒuİ’èƒ~ƒX"); }
+        else { UnityEngine.Debug.LogError("ã‚¸ãƒ§ãƒ–è¨­å®šãƒŸã‚¹"); }
     }
 
 
-    //ƒA[ƒ`ƒƒ[‚ÌI—¹ƒtƒ‰ƒO
-    public void AttackAnimation_ArcherEnd() 
+    //ã‚¢ãƒ¼ãƒãƒ£ãƒ¼ã®çµ‚äº†ãƒ•ãƒ©ã‚°
+    public void AttackAnimation_ArcherEnd()
     {
-        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _archerEndCmd = commandSet.ArcherSkilsEndCd;
-            if(_archerEndCmd != null) 
-            { 
+            if (_archerEndCmd != null)
+            {
                 _archerEndCmd.Execute(animator);
                 _animFlgSO.ArcherSkilflg = false;
             }
-            else { UnityEngine.Debug.LogWarning($"ƒWƒ‡ƒu:{jobType} ‚ÌƒRƒ}ƒ“ƒh‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢B"); }
+            else { UnityEngine.Debug.LogWarning($"ã‚¸ãƒ§ãƒ–:{jobType} ã®ã‚³ãƒãƒ³ãƒ‰ãŒè¨­å®šã•ã‚Œã¦ã„ãªã„ã€‚"); }
         }
     }
 
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if (_player.isAiming && jobType == JobType.ARCHER)
+        {
+            if (_cameraTransform == null) return;
 
+            float lookAtWeight = 1.0f;
+            Vector3 targetPosition = _cameraTransform.position + _cameraTransform.forward * 10f; // ã‚«ãƒ¡ãƒ©ã®è¦‹ã¦ã„ã‚‹å…ˆ
+
+            animator.SetLookAtWeight(lookAtWeight);
+            animator.SetLookAtPosition(targetPosition);
+        }
+        else
+        {
+            animator.SetLookAtWeight(0f);
+        }
+    }
 }
