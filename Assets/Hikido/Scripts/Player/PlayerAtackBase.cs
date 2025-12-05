@@ -11,7 +11,7 @@ public class PlayerAtackBase : MonoBehaviour
     bool bAvoidance = false;
     protected  bool bNormalAttack = false;
     
-    [SerializeField] AnimationFlagManagerSO _animflgSO;
+    [SerializeField] protected AnimationFlagManagerSO _animflgSO;
 
     void Start()
     {
@@ -47,6 +47,7 @@ public class PlayerAtackBase : MonoBehaviour
         }
     }
 
+    //TODO:マウスで向いている方向に回避する。
     /// <summary> /// 全職種共通の回避 /// </summary>
     private void Avoidance()
     {

@@ -20,6 +20,8 @@ public class CommandoConfigSO : ScriptableObject
         public AnimationBaseSO archerSkilsCd;
         //アーチャーエイム時のコマンド
         public AnimationBaseSO archerAimCd;
+        //アーチャー発射時のコマンド
+        public AnimationBaseSO ArcherrecoilCd;
 
         //移動コマンド
         //上下左右移動用のアニメーションコマンド管理
@@ -31,11 +33,11 @@ public class CommandoConfigSO : ScriptableObject
         //回避終了用コマンド
         public AnimationBaseSO avoidAnimEndCd;
 
-        //移動アニメーション終了用コマンド  -> 不要の場合は削除するあとで
-        public AnimationBaseSO walkanimEndCd;
-
         //アーチャースキル終了用コマンド
         public AnimationBaseSO ArcherSkilsEndCd;
+
+        //アーチャー発射時コマンド
+        public AnimationBaseSO ArcherrecoilEndCd;
 
     }
 

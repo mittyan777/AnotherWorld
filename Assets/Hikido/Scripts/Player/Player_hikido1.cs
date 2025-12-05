@@ -32,6 +32,9 @@ public class Player_hikido1 : MonoBehaviour
     [SerializeField] private float clampAngle = 80f;
     [SerializeField] bool ADS = false;
 
+    //‚Ð‚«‚Ç’Ç‰Á
+    [SerializeField] AnimationFlagManagerSO _animflgSO;
+
     [SerializeField] float a = 0.5f;
     // Start is called before the first frame update
     void Start()
@@ -106,12 +109,9 @@ public class Player_hikido1 : MonoBehaviour
         if (manager.GetComponent<GameManager_hikido>().job == 1)
         {
             Archercontrol();
-
         }
 
     }
-  
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -138,9 +138,11 @@ public class Player_hikido1 : MonoBehaviour
             {
                 //camera.transform.position = ADSpos.transform.position;
                 ADS = true;
+                _animflgSO.ArcherSkilflg = true;
             }
             else
             {
+                _animflgSO.ArcherSkilflg = false;
                 ADS = false;
             }
             if (Input.GetMouseButtonUp(1))
@@ -164,7 +166,10 @@ public class Player_hikido1 : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && mouseleft == false)
         {
-            if (mouseleft == false && mouseright == false) { GetComponent<ArcherQskill_hikido>().NormalAttack(); }
+            if (mouseleft == false && mouseright == false) 
+            {
+                GetComponent<ArcherQskill_hikido>().NormalAttack();
+            }
             mouseleft = true;
 
         }

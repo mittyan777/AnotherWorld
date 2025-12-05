@@ -10,20 +10,20 @@ public class AnimationFlagManagerSO : ScriptableObject
     [Header("管理用アニメーションフラグ")]
     [SerializeField] private bool attackNormalFlg = false; 
     [SerializeField] private bool attackSkilFlag = false;
-    [SerializeField] private bool walkanimFlg = false;
-    [SerializeField] private bool avoidanceFlg = false;
-    [SerializeField] private bool attackArcherFlg = false;
-    [SerializeField] private bool archerAimWalkFlg = false;
+    [SerializeField] private bool walkanimFlg = false;     
+    [SerializeField] private bool avoidanceFlg = false;    //回避フラグ
+    [SerializeField] private bool attackArcherFlg = false; //アーチャーフラグ
+    [SerializeField] private bool archerRecoilFlg = false; //アーチャー発射フラグ
 
     [Header("各通知イベント")]
-    public Action Attackevents;         //攻撃イベント
-    public Action WalkEvents;           //移動イベント
-    public Action AvoidanceEvents;      //回避イベント
+    public Action Attackevents;          //攻撃イベント
+    public Action WalkEvents;            //移動イベント
+    public Action AvoidanceEvents;       //回避イベント
     public Action AttackNormal;
-    public Action AttackMagicianSkills;
-    public Action AttackArcherSkills;
-    public Action ArcherAimWalk;        //アーチャーのAim時の移動イベント
-    
+    public Action AttackMagicianSkills;  //マジシャンスキルイベント
+    public Action AttackArcherSkills;    //アーチャースキルイベント
+    public Action ArcherRecoil;          //アーチャー発射イベント
+                                       
     //攻撃のイベント
     public bool AttackNormalflg 
     {
@@ -75,17 +75,17 @@ public class AnimationFlagManagerSO : ScriptableObject
         }
     }
 
-    //アーチャーのエイム時イベント
-    public bool ArcherAimSkilFlg 
+    //アーチャーの発射イベント
+    public bool ArcherRecoileFlg 
     {
-        get { return archerAimWalkFlg; }
+        get { return archerRecoilFlg; }
         set 
         {
-            if(archerAimWalkFlg == value) { return; }
-            archerAimWalkFlg = value;
+            if (archerRecoilFlg == value) { return; }
+            archerRecoilFlg = value;
             if (value) 
             {
-                ArcherAimWalk?.Invoke();
+                ArcherRecoil?.Invoke();
                 UnityEngine.Debug.Log("エイム時のイベント発火");
             }
         }

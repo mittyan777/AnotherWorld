@@ -148,6 +148,7 @@ public class PlayerAnimation : MonoBehaviour
             //各アニメーションの処理をActionに登録
             _animFlgSO.AttackNormal += AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
+            _animFlgSO.ArcherRecoil += ArcherRecoilAnim;
 
             //回避用イベント登録
             _animFlgSO.AvoidanceEvents += AvoidAnim;
@@ -166,6 +167,7 @@ public class PlayerAnimation : MonoBehaviour
             //各アニメーション処理をActionから削除
             _animFlgSO.AttackNormal -= AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
+            _animFlgSO.ArcherRecoil -= ArcherRecoilAnim;
 
             //回避用イベント解除
             _animFlgSO.AvoidanceEvents -= AvoidAnim;
@@ -234,8 +236,34 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    //TODO:アーチャースキルのスクリプトが存在しないのでマージ後テスト
-    //      ->現状はプレイヤーのソードスキルとして考えてテストする。
+    /// <summary>/// アーチャー発射アニメーション /// </summary>
+    public void ArcherRecoilAnim() 
+    {
+        if(CommandMap.TryGetValue(jobType,out var commandSet)) 
+        {
+            AnimationBaseSO _currentCmd = commandSet.ArcherrecoilCd;
+            if(_currentCmd != null) {_currentCmd.Execute(animator); }
+            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない"); }
+        }
+    }
+
+    /// <summary> /// 終了用コマンド /// </summary>
+    public void ArcherRecoilEndAnim() 
+    {
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
+        {
+            AnimationBaseSO _archerrecoilEndCmd = commandSet.ArcherrecoilEndCd;
+            if (_archerrecoilEndCmd != null)
+            {
+                _archerrecoilEndCmd.Execute(animator);
+                _animFlgSO.ArcherRecoileFlg = false;
+            }
+            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+        }
+    }
+
+
+
     /// <summary> /// アーチャースキルアニメーション /// </summary>
     public void AttackAnimation_Archer()
     {

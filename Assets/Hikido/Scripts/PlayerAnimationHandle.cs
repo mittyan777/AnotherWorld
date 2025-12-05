@@ -32,8 +32,11 @@ public class PlayerAnimationHandle : MonoBehaviour
         else { Debug.LogError("animationRouterなし"); }
     }
 
-    public void ArcherAimWalkEnd() 
+
+    //アーチャーの発射アニメーション終了
+    public void ArcherrecoilEnd() 
     {
-        
+        if(animationRouter != null) { animationRouter.ArcherRecoilEndAnim(); }
+        else { Debug.LogError("aimatorRouterなし"); }
     }
 }
