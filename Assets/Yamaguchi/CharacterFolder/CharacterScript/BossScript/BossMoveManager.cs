@@ -16,6 +16,9 @@ public class BossMoveManager : MonoBehaviour
     // 死亡処理が一度だけ実行されたことを保証するフラグ
     private bool isDeathSequenceStarted = false;
 
+    private GameManager gameManager;
+    private int takeDamege;
+    
     private void Awake()
     {
         if (instance == null)
@@ -36,6 +39,12 @@ public class BossMoveManager : MonoBehaviour
         {
             currentBossHP = bossHP.currentBossHP;
         }
+        //重い処理だから1回だけにする
+        GameObject managerObject = GameObject.FindWithTag("GameManager");
+        if (managerObject != null)
+        { 
+            gameManager = managerObject.GetComponent<GameManager>();
+        }
     }
 
     private void Update()
@@ -51,7 +60,7 @@ public class BossMoveManager : MonoBehaviour
                 currentBossHP = bossHP.currentBossHP;
             }
         }
-        if (Input.GetKey(KeyCode.O))
+        if (Input.GetKey(KeyCode.L))
         {
             //bossHP.TestDamage();
             StartCoroutine(bossHP.TestDamege02(100));
@@ -139,13 +148,13 @@ public class BossMoveManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player")) 
         { 
             return; 
-        } 
-        if (hitTag.Contains("Player"))
+        }
+        if (hitTag.Contains("Player") && gameManager != null)
         {
-            //攻撃力の取得を行う
-            //int currentDamage = GameManager.Instantiate.「変数名」;
-            //BossのメインHP処理にPlayerの現在の攻撃力を渡す。
-            //bossHP.TakeDamage(currentDamage);
+            //GameManagerから最新の攻撃力を取得する。
+            int takeDamege = (int)gameManager.AttackStatus;
+            //プレイヤーの攻撃力を渡す
+            bossHP.TakeDamage(takeDamege);
         }
     }
 }

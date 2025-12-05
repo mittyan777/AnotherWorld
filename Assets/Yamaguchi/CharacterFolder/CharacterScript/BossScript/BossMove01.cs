@@ -42,6 +42,7 @@ public class BossMove01 : MonoBehaviour
 
     //タックルに必要な変数
     [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject tackleObj;
     [SerializeField] private float tackleSpeed;
     [SerializeField] private float tackleTime;
     private Vector3 tackleDirection;
@@ -58,13 +59,14 @@ public class BossMove01 : MonoBehaviour
 
     private void Start()
     {
-        animationManager = GetComponent<BossAnimationManager>();
-        quickAttackArea.SetActive(false);
-        playerObj = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnEnable() 
     {
+        animationManager = GetComponent<BossAnimationManager>();
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+        quickAttackArea.SetActive(false);
+        tackleObj.SetActive(false);
         //確実な初期化処理をここに記述
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
@@ -231,6 +233,9 @@ public class BossMove01 : MonoBehaviour
             case Boss01ActionType.Walking:
                 //Walking固有のロジックを実行
                 break;
+            case Boss01ActionType.Death:
+                tackleObj.SetActive(false);
+                break;
         }
     }
 
@@ -251,11 +256,12 @@ public class BossMove01 : MonoBehaviour
         //ChangeState(Boss01ActionType.Tackle);
         currentTime += Time.deltaTime;
         transform.position += tackleDirection * tackleSpeed * Time.deltaTime;
-
+        tackleObj.SetActive(true);
         if (currentTime >= tackleTime)
         {
             ChangeState(Boss01ActionType.Idle);
             currentTime = 0;
+            tackleObj.SetActive(false);
         }
     }
 
@@ -343,6 +349,7 @@ public class BossMove01 : MonoBehaviour
         if (collision.gameObject.CompareTag("syounin"))
         {
             ChangeState(Boss01ActionType.Idle);
+            tackleObj.SetActive(false);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -350,6 +357,7 @@ public class BossMove01 : MonoBehaviour
         if (other.CompareTag("syounin"))
         {
             ChangeState(Boss01ActionType.Idle);
+            tackleObj.SetActive(false);
         }
     }
 }
