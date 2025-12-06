@@ -89,7 +89,8 @@ public class Purchase : MonoBehaviour
            
             inventory.Add(itemName);
 
-            messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
+            messageText.text = $"{itemName} を購入しました！\n（-{price}コイン）";
+            Invoke("message_reset", 1);
             Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager>().Coin}");
         }
         else
@@ -101,7 +102,10 @@ public class Purchase : MonoBehaviour
 
         UpdateCoinUI();
     }
-
+    void message_reset()
+    {
+        messageText.text = "";
+    }
     /// <summary>
     /// コイン表示を更新
     /// </summary>

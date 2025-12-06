@@ -26,7 +26,7 @@ public class ScrollViewController : MonoBehaviour
         button1.onClick.AddListener(() => ShowScrollView(1));
         button2.onClick.AddListener(() => ShowScrollView(2));
         button3.onClick.AddListener(() => ShowScrollView(3));
-        button4.onClick.AddListener(() => ShowScrollView(4));
+       // button4.onClick.AddListener(() => ShowScrollView(4));
 
         HideAllScrollViews();
         HideAllButtons();
@@ -69,7 +69,7 @@ public class ScrollViewController : MonoBehaviour
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
         button3.gameObject.SetActive(false);
-        button4.gameObject.SetActive(false);
+        //button4.gameObject.SetActive(false);
     }
 
     private void ShowScrollView(int index)
