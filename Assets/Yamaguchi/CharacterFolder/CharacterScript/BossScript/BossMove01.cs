@@ -59,6 +59,7 @@ public class BossMove01 : MonoBehaviour
 
     private void Start()
     {
+        tackleObj.SetActive(false);
     }
 
     private void OnEnable() 
@@ -82,6 +83,7 @@ public class BossMove01 : MonoBehaviour
             return;
         }
          */
+        if (currentState == Boss01ActionType.Death) return;
 
         if (currentState == Boss01ActionType.Tackle)
         {
@@ -202,6 +204,7 @@ public class BossMove01 : MonoBehaviour
 
     public void ChangeState(Boss01ActionType newAction)
     {
+        StopAllCoroutines();
         currentState = newAction;
         if (animationManager != null)
         {
@@ -213,6 +216,7 @@ public class BossMove01 : MonoBehaviour
             case Boss01ActionType.Idle:
                 //アニメーターのisIdleをTrueにする
                 currentThinkingTime = 0;
+                tackleObj.SetActive(false);
                 break;
             case Boss01ActionType.QuickAttack:
                 //NavMeshAgentを起動し、プレイヤーを追跡する処理を実行
@@ -229,6 +233,7 @@ public class BossMove01 : MonoBehaviour
                 currentTime = 0;
                 LookAtPlayerHorizontal();
                 tackleDirection = transform.forward;
+                tackleObj.SetActive(true);
                 break;
             case Boss01ActionType.Walking:
                 //Walking固有のロジックを実行
@@ -256,12 +261,10 @@ public class BossMove01 : MonoBehaviour
         //ChangeState(Boss01ActionType.Tackle);
         currentTime += Time.deltaTime;
         transform.position += tackleDirection * tackleSpeed * Time.deltaTime;
-        tackleObj.SetActive(true);
         if (currentTime >= tackleTime)
         {
             ChangeState(Boss01ActionType.Idle);
             currentTime = 0;
-            tackleObj.SetActive(false);
         }
     }
 
