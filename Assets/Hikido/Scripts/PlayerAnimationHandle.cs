@@ -17,4 +17,18 @@ public class PlayerAnimationHandle : MonoBehaviour
             Debug.LogError("AnimationRouter (PlayerAnimation) への参照が設定されていません。", this);
         }
     }
+
+    //回避終了アニメーション実行用の関数
+    public void AvoidAnimationEnd() 
+    {
+        if (animationRouter != null) { animationRouter.AvoidAnimationEnd(); }
+        else { Debug.LogError("AnimationRouterなし。"); }
+    }
+
+    //アーチャーの発射アニメーション終了
+    public void ArcherrecoilEnd() 
+    {
+        if(animationRouter != null) { animationRouter.ArcherRecoilEndAnim(); }
+        else { Debug.LogError("aimatorRouterなし"); }
+    }
 }
