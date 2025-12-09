@@ -44,17 +44,18 @@ public class magic : MonoBehaviour
                 Instantiate(Thunder_Magic, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
-            if (gameObject.name == "fireball(Clone)")
-            {
-              
-                
-                des_count += 1;
-                if(des_count == 4)
-                {
-                    Destroy(gameObject);
-                }
-            }
+           
 
+        }
+        if (gameObject.name == "fireball(Clone)")
+        {
+
+
+            des_count += 1;
+            if (des_count == 4)
+            {
+                Destroy(gameObject);
+            }
         }
     }
     void des()
