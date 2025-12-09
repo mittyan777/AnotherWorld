@@ -5,13 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mouri/Scenes/GamePlayer.unity
     guid: 9430510003bc634458ed802929135415
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mouri/Scenes/EffectScenn.unity
     guid: 8ffff7413b8ab504bac0a00a7c1de0b7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Noguchi/start.unity
     guid: d01fd49faa333184f96a0187ccaa31d9
+  - enabled: 1
+    path: Assets/Mituboshi/load_screen.unity
+    guid: 70680c34d4cd72d47a8a7b31126b0740
+  - enabled: 1
+    path: Assets/Mituboshi/Synthesis_Test.unity
+    guid: 2b2c97e40ac8a824aa83c76b2008691d
+  - enabled: 1
+    path: Assets/Mituboshi/Test_Stage1.unity
+    guid: dca319304299ba04abad011162e9a89d
   m_configObjects: {}

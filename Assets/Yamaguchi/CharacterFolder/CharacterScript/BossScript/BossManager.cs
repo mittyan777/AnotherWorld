@@ -1,99 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class BossManager : MonoBehaviour
 {
-    //staticを使用し、いつでも他スクリプトから情報を見れるようにする
-    public static BossManager instance { get; private set; }
+    private bool bossBattle;
+    [SerializeField] private GameObject activeBossObj;
+    [SerializeField] private GameObject activeCanvas;
+    [SerializeField] private float deleteTime;
 
-    [SerializeField] private GameObject playerObj;
-    [SerializeField] private int BossHP;
+    //Boss毎の攻撃力
+    //インスペクターで設定する用
+    [SerializeField] private int _attackDamage01;
+    [SerializeField] private int _attackDamage02;
+    [SerializeField] private int _attackDamage03;
 
-
-    //ダメージ処理を行うための変数(テスト用)
-    [SerializeField] private int testDamege;
-    public int currentBossHP { get; private set; }
-
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else 
-        { 
-            Destroy(gameObject);
-        }
-    }
+    //外部で渡すよう変数
+    // => (ラムダ演算子) を使って、バッキングフィールドの値を直接返す
+    // 外部から読み取り専用でアクセス可能。内部からも変更不可。
+    public int AttackDamage01 => _attackDamage01;
+    public int AttackDamage02 => _attackDamage02;
+    public int AttackDamage03 => _attackDamage03;
 
     private void Start()
     {
-        currentBossHP = BossHP;
+        bossBattle = false;
+        activeBossObj.SetActive(false);
+        activeCanvas.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.P))
-        {
-            TakeDamage();
-        }
-    }
-
-    //この関数を呼び出したScriptのリストにあるfloat型のデータをリストで取得
-    public int GetActionIndex(List<float> weights)
-    {
-        //リスト自体があるかチェック
-        if (weights == null || weights == null)
-        {
-            return -1;
-        }
-
-        //リスト内にデータがあるかチェック
-        float totalWeight = 0;
-        for (int i = 0; i < weights.Count; i++)
-        { 
-            totalWeight += weights[i];
-        }
-        
-        //行動の確率が0より大きいかチェック
-        if (totalWeight <= 0)
-        {
-            return -1;
-        }
-
-        //ランダムで行動を選抜
-        float drawValue = Random.Range(0, totalWeight);
-        float currentWeight = 0;
-
-        for (int i = 0; i < weights.Count; i++)
-        { 
-            currentWeight += weights[i];
-
-            if (drawValue < currentWeight)
-            { 
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    private void TakeDamage()
-    {
-        currentBossHP -= testDamege;
-    }
-
-    //当たったオブジェクトにPlayerが含まれていたらダメージをくらうようにする
     private void OnTriggerEnter(Collider other)
     {
-        string hitTag = other.gameObject.tag;
-        if (hitTag.Contains("Player"))
+        if (other.gameObject.CompareTag("Player") && !bossBattle)
         {
-            //TakeDamage();
+            BossBatrleStart();
+            bossBattle = true;
         }
-        
+    }
+
+    private void BossBatrleStart() 
+    {
+        activeBossObj.SetActive(true);
+        activeCanvas.SetActive(true);
     }
 }

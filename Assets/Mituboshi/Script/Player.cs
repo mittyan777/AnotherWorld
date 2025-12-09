@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
@@ -32,6 +33,13 @@ public class Player : MonoBehaviour
     [SerializeField]bool ADS = false;
 
     [SerializeField]float a = 0.5f;
+
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float defaultDistance = 5f; // 通常のカメラ距離
+    [SerializeField] private float smoothSpeed = 10f;    // 補間速度
+    [SerializeField] private float cameraHeight = 1.5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,17 +60,8 @@ public class Player : MonoBehaviour
        rayobj.transform.eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
 
         if (!canControl) return; // ここで操作全部止まる
-        
-       
-
-        // 前方にRayを飛ばして、ルーレット台に当たったら
-        Ray ray = new Ray(new Vector3(rayobj.transform.position.x, rayobj.transform.position.y, rayobj.transform.position.z ), rayobj.transform.forward);
-            RaycastHit hit;
 
 
-
-          
-            Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
         if (Input.GetKeyDown("p"))
         {
             manager.GetComponent<GameManager>().HP -= 10;
@@ -182,10 +181,10 @@ public class Player : MonoBehaviour
                 camera.transform.position = Vector3.MoveTowards(camera.transform.position, ADSpos.transform.position, 10 * Time.deltaTime);
 
             }
-            else if (ADS == false)
-            {
-                camera.transform.position = Vector3.MoveTowards(camera.transform.position, NOADSpos.transform.position, 10 * Time.deltaTime);
-            }
+            //else if (ADS == false)
+            //{
+            //    camera.transform.position = Vector3.MoveTowards(camera.transform.position, NOADSpos.transform.position, 10 * Time.deltaTime);
+            //}
            
         }
     }
@@ -239,4 +238,30 @@ public class Player : MonoBehaviour
             a = 0.5f;
         }
     }
+
+    void LateUpdate()
+    {
+        // プレイヤーの位置に高さオフセットを加える
+        Vector3 basePos = transform.position + Vector3.up * cameraHeight;
+
+        // 後方へ Ray を飛ばす
+        Vector3 desiredPos = basePos - transform.forward * defaultDistance;
+        Ray ray = new Ray(basePos, -transform.forward);
+        RaycastHit hit;
+
+        Debug.DrawRay(ray.origin, ray.direction * defaultDistance, Color.red);
+
+        if (Physics.Raycast(ray, out hit, defaultDistance))
+        {
+            float hitDistance = Vector3.Distance(basePos, hit.point);
+            Vector3 correctedPos = basePos - transform.forward * (hitDistance - 0.2f);
+            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, correctedPos, smoothSpeed * Time.deltaTime);
+        }
+        else
+        {
+            playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, desiredPos, smoothSpeed * Time.deltaTime);
+        }
+    }
+
+
 }

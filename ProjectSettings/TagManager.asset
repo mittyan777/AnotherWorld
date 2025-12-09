@@ -10,6 +10,10 @@ TagManager:
   - Enemy
   - Floor
   - syounin
+  - TAZOFX
+  - AttackArea01
+  - AttackArea02
+  - AttackArea03
   layers:
   - Default
   - TransparentFX

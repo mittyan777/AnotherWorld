@@ -1,4 +1,4 @@
-﻿using System.Collections;
+�ｿusing System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,12 +9,12 @@ using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.Windows;
 
-/// ジョブタイプごとにセットするアニメーションコマンドを変更
+/// 繧ｸ繝ｧ繝悶ち繧､繝励＃縺ｨ縺ｫ繧ｻ繝�ヨ縺吶ｋ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ繧ｳ繝槭Φ繝峨ｒ螟画峩
 public enum JobType
 {
-    SWORDSMAN,    //剣士  = 0
-    ARCHER,       //弓使い(アーチャー) = 1
-    WIZARD,        //魔法使い = 2
+    SWORDSMAN,    //蜑｣螢ｫ  = 0
+    ARCHER,       //蠑謎ｽｿ縺(繧｢繝ｼ繝√Ε繝ｼ) = 1
+    WIZARD,        //鬲疲ｳ穂ｽｿ縺 = 2
 
     NONE
 }
@@ -25,12 +25,12 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private CommandoConfigSO _cmdCofigSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
 
-    //TODO；テスト時のみhikido使用
+    //TODO�帙ユ繧ｹ繝域凾縺ｮ縺ｿhikido菴ｿ逕ｨ
     [SerializeField] GameManager_hikido _gameManager;
     //[SerializeField] GameManager _gameManager;
 
     [SerializeField] private Animator animator;
-    [SerializeField] Player_hikido1 _player;  //プレイヤーhikido
+    [SerializeField] Player_hikido1 _player;  //繝励Ξ繧､繝､繝ｼhikido
     [SerializeField] private Transform _cameraTransform;
     private Transform _playerTransform;
     private bool _isCurrentlyAiming = false;
@@ -39,12 +39,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private SwordSkillAnime _swordSkillCmd;
     [SerializeField] Player_Swoad _plSwardLogic;
 
-    //ジョブタイプ
+    //繧ｸ繝ｧ繝悶ち繧､繝
     public JobType jobType { get; private set; } = JobType.NONE;
 
-    //職種に対応したコマンドセット
+    //閨ｷ遞ｮ縺ｫ蟇ｾ蠢懊＠縺溘さ繝槭Φ繝峨そ繝�ヨ
     private Dictionary<JobType, CommandoConfigSO.CommandSet> CommandMap;
-
     private int _currentjobNum = -1;
     private void Start()
     {
@@ -52,7 +51,7 @@ public class PlayerAnimation : MonoBehaviour
 
         if (_gameManager == null)
         {
-            UnityEngine.Debug.LogError("GameManagerが設定されていません。ジョブ設定ができません。", this);
+            UnityEngine.Debug.LogError("GameManager縺瑚ｨｭ螳壹＆繧後※縺�∪縺帙ｓ縲ゅず繝ｧ繝冶ｨｭ螳壹′縺ｧ縺阪∪縺帙ｓ縲", this);
             return;
         }
 
@@ -60,20 +59,20 @@ public class PlayerAnimation : MonoBehaviour
         SetJobType((JobType)_currentjobNum);
         _plSwardLogic.GetComponent<Player_Swoad>();
 
-        UnityEngine.Debug.Log($"初期ジョブタイプ設定完了: {jobType}");
+        UnityEngine.Debug.Log($"蛻晄悄繧ｸ繝ｧ繝悶ち繧､繝苓ｨｭ螳壼ｮ御ｺ: {jobType}");
     }
 
     private void Awake()
     {
         if (!animator)
         {
-            UnityEngine.Debug.LogError("Animatorコンポーネントが見つかりません。", this);
+            UnityEngine.Debug.LogError("Animator繧ｳ繝ｳ繝昴�繝阪Φ繝医′隕九▽縺九ｊ縺ｾ縺帙ｓ縲", this);
             return;
         }
 
         if (!_cmdCofigSO)
         {
-            UnityEngine.Debug.LogError("コマンドコンフィグが設定されていない", this);
+            UnityEngine.Debug.LogError("繧ｳ繝槭Φ繝峨さ繝ｳ繝輔ぅ繧ｰ縺瑚ｨｭ螳壹＆繧後※縺�↑縺", this);
             return;
         }
 
@@ -82,7 +81,7 @@ public class PlayerAnimation : MonoBehaviour
             int jobNum = (int)_gameManager.job;
             SetJobType((JobType)jobNum);
 
-            UnityEngine.Debug.Log($"初期ジョブタイプ: {jobType}");
+            UnityEngine.Debug.Log($"蛻晄悄繧ｸ繝ｧ繝悶ち繧､繝: {jobType}");
         }
 
         CommandMap = _cmdCofigSO.commandSets.ToDictionary(set => set.JobType, set => set);
@@ -99,7 +98,7 @@ public class PlayerAnimation : MonoBehaviour
             _currentjobNum = jobFromManager;
             SetJobType((JobType)_currentjobNum);
 
-            UnityEngine.Debug.Log($"ジョブが更新されました！ JobType: {jobType}");
+            UnityEngine.Debug.Log($"繧ｸ繝ｧ繝悶′譖ｴ譁ｰ縺輔ｌ縺ｾ縺励◆� JobType: {jobType}");
         }
 
         if(_player.isAiming && UnityEngine.Input.GetMouseButtonUp(0)) 
@@ -116,15 +115,15 @@ public class PlayerAnimation : MonoBehaviour
         bool isAiming = _player.isAiming;
         bool isArcher = (jobType == JobType.ARCHER);
 
-        //ADSが始まった最初のフレーム値を検出
+        //ADS縺悟ｧ九∪縺｣縺滓怙蛻昴�繝輔Ξ繝ｼ繝蛟､繧呈､懷�
         bool isAimingStartFrame = (isAiming && isArcher && !_isCurrentlyAiming);
 
-        //マウスボタン離しで発射
+        //繝槭え繧ｹ繝懊ち繝ｳ髮｢縺励〒逋ｺ蟆
         bool isShootRequested = _shootInputConfirmed;
 
         int adsLayerIndex = animator.GetLayerIndex("ADS Layer");
 
-        //ADS時の処理
+        //ADS譎ゅ�蜃ｦ逅
         if (isAiming && isArcher)
         {
             _isCurrentlyAiming = true;
@@ -176,21 +175,21 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        //チェック
+        //繝√ぉ繝�け
         if (_animFlgSO)
         {
-            //各アニメーションの処理をActionに登録
+            //蜷�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ蜃ｦ逅�ｒAction縺ｫ逋ｻ骭ｲ
             _animFlgSO.AttackNormal += AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil += ArcherRecoilAnim;
             _animFlgSO.MajicSkil += AttackAnimation_Wizard;
 
-            //回避用イベント登録
+            //蝗樣∩逕ｨ繧､繝吶Φ繝育匳骭ｲ
             _animFlgSO.AvoidanceEvents += AvoidAnim;
         }
         else
         {
-            UnityEngine.Debug.LogError("_animFlgSOが存在しない", this);
+            UnityEngine.Debug.LogError("_animFlgSO縺悟ｭ伜惠縺励↑縺", this);
             return;
         }
     }
@@ -199,39 +198,39 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (_animFlgSO)
         {
-            //各アニメーション処理をActionから削除
+            //蜷�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蜃ｦ逅�ｒAction縺九ｉ蜑企勁
             _animFlgSO.AttackNormal -= AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil -= ArcherRecoilAnim;
             _animFlgSO.MajicSkil -= AttackAnimation_Wizard;
 
-            //回避用イベント解除
+            //蝗樣∩逕ｨ繧､繝吶Φ繝郁ｧ｣髯､
             _animFlgSO.AvoidanceEvents -= AvoidAnim;
         }
     }
 
-    /// <summary> /// ジョブ設定(アニメーション用) /// </summary>
+    /// <summary> /// 繧ｸ繝ｧ繝冶ｨｭ螳(繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ逕ｨ) /// </summary>
     /// <param name="_newJob"></param>
     public void SetJobType(JobType _newJob)
     {
         jobType = _newJob;
     }
 
-    /// <summary> /// 通常攻撃アニメーション /// </summary>
+    /// <summary> /// 騾壼ｸｸ謾ｻ謦�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
     private void AttackAnimation_Normal()
     {
 
-        //攻撃のアニメーション発火
+        //謾ｻ謦��繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ逋ｺ轣ｫ
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.normalAttackCd;
             if (_currentCmd != null) { _currentCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+            else { UnityEngine.Debug.LogWarning($"繧ｸ繝ｧ繝:{jobType} 縺ｮ繧ｳ繝槭Φ繝峨′險ｭ螳壹＆繧後※縺�↑縺�"); }
         }
-        else { UnityEngine.Debug.LogError($"ジョブ設定ミス{jobType}"); }
+        else { UnityEngine.Debug.LogError($"繧ｸ繝ｧ繝冶ｨｭ螳壹Α繧ｹ{jobType}"); }
     }
 
-    /// <summary> /// 攻撃アニメーション終了用関数 /// </summary>
+    /// <summary> /// 謾ｻ謦�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ邨ゆｺ�畑髢｢謨ｰ /// </summary>
     public void AttackAnimation_NormalEnd()
     {
 
@@ -239,11 +238,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
             if (_endCmd != null) { _endCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogError("失敗"); }
+            else { UnityEngine.Debug.LogError("螟ｱ謨"); }
         }
     }
 
-    /// <summary> /// 回避アニメーション /// </summary>
+    /// <summary> /// 蝗樣∩繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
     public void AvoidAnim()
     {
         jobType = (JobType)_gameManager.job;
@@ -251,11 +250,11 @@ public class PlayerAnimation : MonoBehaviour
         {
             AnimationBaseSO _avoidCmd = commandSet.avoidCd;
             if (_avoidCmd != null) { _avoidCmd.Execute(animator); }
-            else { UnityEngine.Debug.Log("回避アニメーション失敗。"); }
+            else { UnityEngine.Debug.Log("蝗樣∩繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ螟ｱ謨励"); }
         }
     }
 
-    /// <summary> /// 回避アニメーション終了コマンド /// </summary>
+    /// <summary> /// 蝗樣∩繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ邨ゆｺ�さ繝槭Φ繝 /// </summary>
     public void AvoidAnimationEnd()
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
@@ -267,22 +266,22 @@ public class PlayerAnimation : MonoBehaviour
                 _animFlgSO.Avoidflg = false;
             }
 
-            else { UnityEngine.Debug.Log("回避アニメーション終了失敗"); }
+            else { UnityEngine.Debug.Log("蝗樣∩繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ邨ゆｺ�､ｱ謨"); }
         }
     }
 
-    /// <summary>/// アーチャー発射アニメーション /// </summary>
+    /// <summary>/// 繧｢繝ｼ繝√Ε繝ｼ逋ｺ蟆�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
     public void ArcherRecoilAnim() 
     {
         if(CommandMap.TryGetValue(jobType,out var commandSet)) 
         {
             AnimationBaseSO _currentCmd = commandSet.ArcherrecoilCd;
             if(_currentCmd != null) {_currentCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない"); }
+            else { UnityEngine.Debug.LogWarning($"繧ｸ繝ｧ繝:{jobType} 縺ｮ繧ｳ繝槭Φ繝峨′險ｭ螳壹＆繧後※縺�↑縺"); }
         }
     }
 
-    /// <summary> /// 終了用コマンド /// </summary>
+    /// <summary> /// 邨ゆｺ�畑繧ｳ繝槭Φ繝 /// </summary>
     public void ArcherRecoilEndAnim() 
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
@@ -293,23 +292,23 @@ public class PlayerAnimation : MonoBehaviour
                 _archerrecoilEndCmd.Execute(animator);
                 _animFlgSO.ArcherRecoileFlg = false;
             }
-            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+            else { UnityEngine.Debug.LogWarning($"繧ｸ繝ｧ繝:{jobType} 縺ｮ繧ｳ繝槭Φ繝峨′險ｭ螳壹＆繧後※縺�↑縺�"); }
         }
     }
 
-    /// <summary> /// アーチャースキルアニメーション /// </summary>
+    /// <summary> /// 繧｢繝ｼ繝√Ε繝ｼ繧ｹ繧ｭ繝ｫ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
     public void AttackAnimation_Archer()
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.archerSkilsCd;
             if (_currentCmd != null) { _currentCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+            else { UnityEngine.Debug.LogWarning($"繧ｸ繝ｧ繝:{jobType} 縺ｮ繧ｳ繝槭Φ繝峨′險ｭ螳壹＆繧後※縺�↑縺�"); }
         }
-        else { UnityEngine.Debug.LogError("ジョブ設定ミス"); }
+        else { UnityEngine.Debug.LogError("繧ｸ繝ｧ繝冶ｨｭ螳壹Α繧ｹ"); }
     }
 
-    //剣士アニメーション
+    //蜑｣螢ｫ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
     public void AttackAnimation_Swordman(int comboCount) 
     {
         if (_swordSkillCmd != null)
@@ -317,20 +316,20 @@ public class PlayerAnimation : MonoBehaviour
             _swordSkillCmd.ExecuteCombo(animator, comboCount);
             OnComboSlash();
         }
-        else { UnityEngine.Debug.LogWarning($"SwordSkillAnimSO が設定されていません。"); }
+        else { UnityEngine.Debug.LogWarning($"SwordSkillAnimSO 縺瑚ｨｭ螳壹＆繧後※縺�∪縺帙ｓ縲"); }
     }
 
-    //マジシャンのアニメーション
+    //繝槭ず繧ｷ繝｣繝ｳ縺ｮ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
     public void AttackAnimation_Wizard() 
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.WizardSkilCd;
             if (_currentCmd != null) { _currentCmd.Execute(animator); }
-            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+            else { UnityEngine.Debug.LogWarning($"繧ｸ繝ｧ繝:{jobType} 縺ｮ繧ｳ繝槭Φ繝峨′險ｭ螳壹＆繧後※縺�↑縺�"); }
             _animFlgSO.MajicSkilFlg = false;
         }
-        else { UnityEngine.Debug.LogError("ジョブ設定ミス"); }
+        else { UnityEngine.Debug.LogError("繧ｸ繝ｧ繝冶ｨｭ螳壹Α繧ｹ"); }
     }
 
     public void SetWizardSkillIndex(int skillIndex)
@@ -343,7 +342,7 @@ public class PlayerAnimation : MonoBehaviour
             }
             else
             {
-                UnityEngine.Debug.LogError("WizardSkilCdがMajician_SkilAnimSOではありません。");
+                UnityEngine.Debug.LogError("WizardSkilCd縺勲ajician_SkilAnimSO縺ｧ縺ｯ縺ゅｊ縺ｾ縺帙ｓ縲");
             }
         }
     }
@@ -357,7 +356,7 @@ public class PlayerAnimation : MonoBehaviour
             if (_cameraTransform == null) return;
 
             float lookAtWeight = 1.0f;
-            Vector3 targetPosition = _cameraTransform.position + _cameraTransform.forward * 10f; // カメラの見ている先
+            Vector3 targetPosition = _cameraTransform.position + _cameraTransform.forward * 10f; // 繧ｫ繝｡繝ｩ縺ｮ隕九※縺�ｋ蜈
 
             animator.SetLookAtWeight(lookAtWeight);
             animator.SetLookAtPosition(targetPosition);
