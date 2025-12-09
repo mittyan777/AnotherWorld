@@ -14,6 +14,7 @@ public class AnimationFlagManagerSO : ScriptableObject
     [SerializeField] private bool avoidanceFlg = false;    //回避フラグ
     [SerializeField] private bool attackArcherFlg = false; //アーチャーフラグ
     [SerializeField] private bool archerRecoilFlg = false; //アーチャー発射フラグ
+    [SerializeField] private bool majicSkilFlg = false;    //マジシャンスキルフラグ
 
     [Header("各通知イベント")]
     public Action Attackevents;          //攻撃イベント
@@ -23,6 +24,7 @@ public class AnimationFlagManagerSO : ScriptableObject
     public Action AttackMagicianSkills;  //マジシャンスキルイベント
     public Action AttackArcherSkills;    //アーチャースキルイベント
     public Action ArcherRecoil;          //アーチャー発射イベント
+    public Action MajicSkil;             //マジシャンイベント
                                        
     //攻撃のイベント
     public bool AttackNormalflg 
@@ -87,6 +89,22 @@ public class AnimationFlagManagerSO : ScriptableObject
             {
                 ArcherRecoil?.Invoke();
                 UnityEngine.Debug.Log("エイム時のイベント発火");
+            }
+        }
+    }
+
+    //マジシャンスキルイベント
+    public bool MajicSkilFlg 
+    {
+        get { return majicSkilFlg; }
+        set 
+        {
+            if(MajicSkilFlg == value) { return; }
+            majicSkilFlg = value;
+            if (value) 
+            {
+                MajicSkil?.Invoke();
+                UnityEngine.Debug.Log("マジシャンスキル時のイベント発火");
             }
         }
     }

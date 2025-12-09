@@ -41,20 +41,20 @@ public class Player_Swoad : PlayerAtackBase
         ComboTime();
 
         //TODO;通常攻撃判定後　＋　剣士だった場合のみ-> gamemanager：テスト時のみhikido使用
-        if (_manager.GetComponent<GameManager_hikido>().job == 0)
-        {
-            //剣士特殊攻撃
-            Special_Attack();
-        }
+        //if (bNormalAttack && _manager.GetComponent<GameManager_hikido>().job == 0)
+        //{
+        //    //剣士特殊攻撃
+        //    Special_Attack();
+        //}
 
     }
 
     protected override void Special_Attack()
     {
-        SwordSkill();
+        //SwordSkill();
     }
 
-    private void SwordSkill()
+    public void SwordSkill()
     {
         //左クリック入力状況を保持
         bool _bisAttack = Input.GetMouseButtonDown(0);

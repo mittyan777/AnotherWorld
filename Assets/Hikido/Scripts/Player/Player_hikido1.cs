@@ -34,6 +34,7 @@ public class Player_hikido1 : MonoBehaviour
 
     //ひきど追加
     [SerializeField] AnimationFlagManagerSO _animflgSO;
+    [SerializeField] PlayerAnimation playerAnim;
 
     [SerializeField] float a = 0.5f;
     // Start is called before the first frame update
@@ -51,13 +52,9 @@ public class Player_hikido1 : MonoBehaviour
         if (manager == null) { manager = GameObject.FindGameObjectWithTag("GameManager"); }
         cameracontrol();
 
-
-
         rayobj.transform.eulerAngles = new Vector3(Camera.main.transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, Camera.main.transform.eulerAngles.z);
 
         if (!canControl) return; // ここで操作全部止まる
-
-
 
         // 前方にRayを飛ばして、ルーレット台に当たったら
         Ray ray = new Ray(new Vector3(rayobj.transform.position.x, rayobj.transform.position.y, rayobj.transform.position.z), rayobj.transform.forward);
@@ -80,6 +77,9 @@ public class Player_hikido1 : MonoBehaviour
                 manager.GetComponent<GameManager_hikido>().gage_image[1].fillAmount = 0;
                 GetComponent<Magician_Skills_hikido>().FireBall();
                 manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
+
+                //playerAnim.SetWizardSkillIndex(1);
+                //_animflgSO.MajicSkilFlg = true;
             }
 
 
@@ -91,6 +91,9 @@ public class Player_hikido1 : MonoBehaviour
                 manager.GetComponent<GameManager_hikido>().gage_image[0].fillAmount = 0;
                 GetComponent<Magician_Skills_hikido>().ElectricBall();
                 manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
+
+                playerAnim.SetWizardSkillIndex(2);
+                _animflgSO.MajicSkilFlg = true;
             }
 
 
@@ -100,8 +103,12 @@ public class Player_hikido1 : MonoBehaviour
             if (manager.GetComponent<GameManager_hikido>().job == 2)
             {
                 manager.GetComponent<GameManager_hikido>().gage_image[2].fillAmount = 0;
+                _animflgSO.MajicSkilFlg = true;
                 GetComponent<Magician_Skills_hikido>().TornadoAttack();
                 manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
+
+                playerAnim.SetWizardSkillIndex(3);
+                _animflgSO.MajicSkilFlg = true;
             }
 
         }
@@ -109,6 +116,11 @@ public class Player_hikido1 : MonoBehaviour
         if (manager.GetComponent<GameManager_hikido>().job == 1)
         {
             Archercontrol();
+        }
+
+        if(manager.GetComponent<GameManager_hikido>().job == 0) 
+        {
+            SwordSkil();
         }
 
     }
@@ -216,6 +228,15 @@ public class Player_hikido1 : MonoBehaviour
         else
         {
             a = 0.5f;
+        }
+    }
+
+    //ひきど追加分
+    void SwordSkil() 
+    {
+        if (Input.GetMouseButtonDown(0)) 
+        {
+            GetComponent<Player_Swoad>().SwordSkill();
         }
     }
 

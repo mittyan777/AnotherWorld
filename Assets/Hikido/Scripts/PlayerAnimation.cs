@@ -183,6 +183,7 @@ public class PlayerAnimation : MonoBehaviour
             _animFlgSO.AttackNormal += AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil += ArcherRecoilAnim;
+            _animFlgSO.MajicSkil += AttackAnimation_Wizard;
 
             //回避用イベント登録
             _animFlgSO.AvoidanceEvents += AvoidAnim;
@@ -202,6 +203,7 @@ public class PlayerAnimation : MonoBehaviour
             _animFlgSO.AttackNormal -= AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil -= ArcherRecoilAnim;
+            _animFlgSO.MajicSkil -= AttackAnimation_Wizard;
 
             //回避用イベント解除
             _animFlgSO.AvoidanceEvents -= AvoidAnim;
@@ -316,6 +318,34 @@ public class PlayerAnimation : MonoBehaviour
             OnComboSlash();
         }
         else { UnityEngine.Debug.LogWarning($"SwordSkillAnimSO が設定されていません。"); }
+    }
+
+    //マジシャンのアニメーション
+    public void AttackAnimation_Wizard() 
+    {
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
+        {
+            AnimationBaseSO _currentCmd = commandSet.WizardSkilCd;
+            if (_currentCmd != null) { _currentCmd.Execute(animator); }
+            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+            _animFlgSO.MajicSkilFlg = false;
+        }
+        else { UnityEngine.Debug.LogError("ジョブ設定ミス"); }
+    }
+
+    public void SetWizardSkillIndex(int skillIndex)
+    {
+        if (CommandMap.TryGetValue(jobType, out var commandSet))
+        {
+            if (commandSet.WizardSkilCd is Majician_SkilAnimSO majicianSO)
+            {
+                majicianSO.ActiveSkillIndex = skillIndex;
+            }
+            else
+            {
+                UnityEngine.Debug.LogError("WizardSkilCdがMajician_SkilAnimSOではありません。");
+            }
+        }
     }
 
     public void OnComboSlash()  { _plSwardLogic.TryAttackCombo(); }

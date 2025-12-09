@@ -36,14 +36,10 @@ public class PlayerAtackBase : MonoBehaviour
     /// <summary> s/// 全職種共通の攻撃処理 /// </summary>
     protected virtual void Atack_Normal()
     {
-        //TODO:通常攻撃の処理(全職種共通の処理)
         bool _inputAtk = Input.GetMouseButtonDown(0);
         if (_inputAtk)
         {
-            //TODO:ダメージ処理(全職種共通の処理)
-            //->与えるダメージは獲得ステータスの攻撃力分を与える。
-            _animflgSO.AttackNormalflg = true;
-            bNormalAttack = true;
+          
         }
     }
 

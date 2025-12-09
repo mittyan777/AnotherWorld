@@ -23,6 +23,9 @@ public class CommandoConfigSO : ScriptableObject
         //アーチャー発射時のコマンド
         public AnimationBaseSO ArcherrecoilCd;
 
+        //マジシャンのスキルコマンド
+        public AnimationBaseSO WizardSkilCd;
+
         //移動コマンド
         //上下左右移動用のアニメーションコマンド管理
 

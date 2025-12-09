@@ -19,6 +19,7 @@ MonoBehaviour:
     archerSkilsCd: {fileID: 0}
     archerAimCd: {fileID: 0}
     ArcherrecoilCd: {fileID: 0}
+    WizardSkilCd: {fileID: 0}
     normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
     avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
     ArcherSkilsEndCd: {fileID: 0}
@@ -29,6 +30,7 @@ MonoBehaviour:
     archerSkilsCd: {fileID: 11400000, guid: a010899acc116984cac5336b0641af87, type: 2}
     archerAimCd: {fileID: 11400000, guid: a0f5c7dde86779d469b77643a0c1c760, type: 2}
     ArcherrecoilCd: {fileID: 0}
+    WizardSkilCd: {fileID: 0}
     normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
     avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
     ArcherSkilsEndCd: {fileID: 11400000, guid: 4a24dc2fbd2f8f3459a9e23046a2ea75, type: 2}
@@ -39,6 +41,7 @@ MonoBehaviour:
     archerSkilsCd: {fileID: 0}
     archerAimCd: {fileID: 0}
     ArcherrecoilCd: {fileID: 0}
+    WizardSkilCd: {fileID: 11400000, guid: c877cf5f715b7cc46929289ec754f7f8, type: 2}
     normalAttackEndCd: {fileID: 11400000, guid: 0844e34499d568440be7a12db2827f4e, type: 2}
     avoidAnimEndCd: {fileID: 11400000, guid: 3e192dd651d982f4cbd34d349579e387, type: 2}
     ArcherSkilsEndCd: {fileID: 0}
