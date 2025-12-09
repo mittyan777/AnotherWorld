@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8755928923240821504}
   m_Layer: 0
   m_Name: StrongAttackArea
-  m_TagString: Untagged
+  m_TagString: AttackArea03
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -207,6 +207,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2253964169382226932, guid: af9d653d98a2b8342be6769312eae349, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124496998032073013, guid: af9d653d98a2b8342be6769312eae349, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5164178730908734337, guid: af9d653d98a2b8342be6769312eae349, type: 3}
@@ -217,6 +221,10 @@ PrefabInstance:
       propertyPath: twoStepSlashAttackArea
       value: 
       objectReference: {fileID: 1819416493738823796, guid: 85ea0111ab657cc489b480538f3cd5eb, type: 3}
+    - target: {fileID: 5561789513402795093, guid: af9d653d98a2b8342be6769312eae349, type: 3}
+      propertyPath: m_TagString
+      value: AttackArea01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -377,7 +385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &481845940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,10 +399,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
+  - {fileID: 8347550238792126041, guid: 9f0fac3c73f11864595cdcfdc047d26c, type: 3}
+  - {fileID: 1018025056615703034, guid: e06af25beba69ff4a91459d319a1c452, type: 3}
+  - {fileID: 3616799773042005967, guid: dad5dfbe351543743a52111a2bbf4d60, type: 3}
   - {fileID: 2121770041380104553, guid: d0c98af1951adc64fa87a986826fac88, type: 3}
   maxAttempts: 10
   spawnInterval: 1
-  maxSpawn: 3
+  maxSpawn: 5
 --- !u!4 &481845941
 Transform:
   m_ObjectHideFlags: 0
@@ -2390,7 +2401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1534878186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2404,10 +2415,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 2121770041380104553, guid: d0c98af1951adc64fa87a986826fac88, type: 3}
+  - {fileID: 6574638428291751397, guid: 874f5928f2a05e04294bcf0ad27c6eb9, type: 3}
+  - {fileID: 5711669388771541780, guid: 1cd7de00b9088854c9e3e079ec20a10f, type: 3}
+  - {fileID: 2870752869659365238, guid: 2bac4ff9384c8cd4a8a9dbe3eec8de17, type: 3}
+  - {fileID: 746263171458399349, guid: f5038673333b3964a97d7fca68efb0ba, type: 3}
+  - {fileID: 2318509184685728293, guid: c7875631332fafe4389e6184e14ad458, type: 3}
   maxAttempts: 10
   spawnInterval: 1
-  maxSpawn: 3
+  maxSpawn: 5
 --- !u!4 &1534878187
 Transform:
   m_ObjectHideFlags: 0
@@ -3400,7 +3415,7 @@ Transform:
   m_GameObject: {fileID: 1973056559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.72, y: 0.84, z: 9.35}
+  m_LocalPosition: {x: -8.6, y: 0.84, z: 53.3}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3493,9 +3508,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8408215341091054377, guid: ae487ace8bd74604ea9dc023364a6e0c, type: 3}
+      propertyPath: m_TagString
+      value: AttackArea01
+      objectReference: {fileID: 0}
     - target: {fileID: 8428966170973909830, guid: ae487ace8bd74604ea9dc023364a6e0c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428966170973909830, guid: ae487ace8bd74604ea9dc023364a6e0c, type: 3}
+      propertyPath: m_TagString
+      value: AttackArea02
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2348632949538707835, guid: ae487ace8bd74604ea9dc023364a6e0c, type: 3}

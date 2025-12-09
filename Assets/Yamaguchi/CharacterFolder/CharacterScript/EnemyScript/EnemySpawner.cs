@@ -76,9 +76,13 @@ public class EnemySpawner : MonoBehaviour
         if (spawnPosition != Vector3.zero)
         {
             GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+            newEnemy.transform.rotation = Quaternion.Euler(0f, newEnemy.transform.rotation.eulerAngles.y, 0f);
             //生成された敵オブジェクトにスポナーの参照を渡す
             EnemySpawnerManager enemySpawnerManager = newEnemy.GetComponent<EnemySpawnerManager>();
-            enemySpawnerManager.SetSpawner(this);
+            if (enemySpawnerManager != null)
+            {
+                enemySpawnerManager.SetSpawner(this);
+            }
         }
     }
 

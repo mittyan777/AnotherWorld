@@ -9,6 +9,19 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject activeCanvas;
     [SerializeField] private float deleteTime;
 
+    //Boss毎の攻撃力
+    //インスペクターで設定する用
+    [SerializeField] private int _attackDamage01;
+    [SerializeField] private int _attackDamage02;
+    [SerializeField] private int _attackDamage03;
+
+    //外部で渡すよう変数
+    // => (ラムダ演算子) を使って、バッキングフィールドの値を直接返す
+    // 外部から読み取り専用でアクセス可能。内部からも変更不可。
+    public int AttackDamage01 => _attackDamage01;
+    public int AttackDamage02 => _attackDamage02;
+    public int AttackDamage03 => _attackDamage03;
+
     private void Start()
     {
         bossBattle = false;
