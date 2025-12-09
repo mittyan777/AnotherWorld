@@ -36,18 +36,16 @@ public class ArcherQskill_hikido : PlayerAtackBase
     {
         if (shootpower >= 0 && shootpower <= 14)
         {
-            _animflgSO.ArcherRecoileFlg = true;
+           
             Instantiate(Arrow, shootposition[0].transform.position, Quaternion.identity);
         }
         else if (shootpower >= 15 && shootpower <= 30)
         {
-            _animflgSO.ArcherRecoileFlg = true;
             Instantiate(Arrow, shootposition[0].transform.position, Quaternion.identity);
             Instantiate(Arrow, shootposition[1].transform.position, Quaternion.identity);
         }
         else if (shootpower > 30)
         {
-            _animflgSO.ArcherRecoileFlg = true;
             Instantiate(Arrow, shootposition[0].transform.position, Quaternion.identity);
             Instantiate(Arrow, shootposition[1].transform.position, Quaternion.identity);
             Instantiate(Arrow, shootposition[2].transform.position, Quaternion.identity);

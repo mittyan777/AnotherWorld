@@ -17,4 +17,4 @@ MonoBehaviour:
   walkanimFlg: 0
   avoidanceFlg: 0
   attackArcherFlg: 0
-  archerAimWalkFlg: 0
+  archerRecoilFlg: 0

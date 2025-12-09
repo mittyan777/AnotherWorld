@@ -6,12 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ArcherAnimSO", menuName = "ArcherAnimSO ")]
 public class ArcherAnimSO : AnimationBaseSO
 {
+    private const string PARAM_ATTACK_NORMAL_TRIGGER = "AttackNormalArcher";
+
     public override void Execute(Animator animator)
     {
         if (!animator) { return; }
-        string paramName = targetParm.ToString();
-        animator.SetBool(paramName, true);
+        animator.SetTrigger(PARAM_ATTACK_NORMAL_TRIGGER);
         //チェック
-        UnityEngine.Debug.Log($"コマンド実行:{paramName} animationをセット");
+        UnityEngine.Debug.Log($"コマンド実行:{PARAM_ATTACK_NORMAL_TRIGGER} animationをセット");
     }
 }

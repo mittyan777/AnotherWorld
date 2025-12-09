@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,6 +23,8 @@ public class Player_Swoad : PlayerAtackBase
     //[SerializeField] GameManager _manager;
     [SerializeField] GameManager_hikido _manager;
 
+    [SerializeField] private PlayerAnimation _playerAnim;
+
     private float _comboTime = 0.0f;
     private int _comboCount = 0;
     private bool isAttack = false;
@@ -38,7 +41,7 @@ public class Player_Swoad : PlayerAtackBase
         ComboTime();
 
         //TODO;通常攻撃判定後　＋　剣士だった場合のみ-> gamemanager：テスト時のみhikido使用
-        if (base.bNormalAttack ==  true && _manager.GetComponent<GameManager_hikido>().job == 0)
+        if (_manager.GetComponent<GameManager_hikido>().job == 0)
         {
             //剣士特殊攻撃
             Special_Attack();
@@ -48,7 +51,6 @@ public class Player_Swoad : PlayerAtackBase
 
     protected override void Special_Attack()
     {
-        //剣士だった場合のみー＞　通常攻撃後
         SwordSkill();
     }
 
@@ -71,9 +73,8 @@ public class Player_Swoad : PlayerAtackBase
         //TODO：実際の攻撃処理 -> 攻撃アニメーションは別クラスでまとめて行うので後に
         isAttack = true;
         _comboTime += inputwaitTime;
-        _comboCount++;
         //攻撃処理
-        //TODO:アニメーションがないため確認用でデバッグログ出力
+        _comboCount++;
         ComboAnimation(_comboCount);
         Debug.Log("コンボ確認");
         
@@ -106,7 +107,7 @@ public class Player_Swoad : PlayerAtackBase
     }
 
     //コンボリセット
-    private void ComboReset()
+    public void ComboReset()
     {
         //TODO:コンボのリセット処理
         //Debug.Log("コンボリセット確認");
@@ -119,26 +120,17 @@ public class Player_Swoad : PlayerAtackBase
     //コンボのアニメーション
     private void ComboAnimation(int _comboCount) 
     {
-        //斬撃波を生み出す処理 -> 3コンボ目のみ
-        if(_comboCount == 3)
+        if(_playerAnim != null) 
         {
-            TryAttackCombo();
+            _playerAnim.AttackAnimation_Swordman(_comboCount);
         }
-
-        Debug.Log("アニメーション処理確認");
-        //TODO;アニメーションクラスの処理を呼び出す。
-
-        //アニメーションクラスからアニメーションのクリップ時間を取得する
-        float _animationLength = 0.5f;
-
-        //アニメーションの間隔
-        AttackDuration(_animationLength);
-
     }
 
     /// <summary> /// 三コンボ目で斬撃波を生成する /// </summary>
-    private void TryAttackCombo()
+    public void TryAttackCombo()
     {
+        if(_comboCount != 2) { return; }
+
         //発生ポイントの座標を取得
         Quaternion _rotation = SlasshPoint.rotation;
 
@@ -146,16 +138,6 @@ public class Player_Swoad : PlayerAtackBase
         //仮でトランスフォームのポジションから
         Debug.Log("三コンボ目");
         var slashEffectprefa = Instantiate<GameObject>(SlashEffect,SlasshPoint.position,_rotation);
-        
     }
-
-
-    //攻撃アニメーション間隔
-    IEnumerator AttackDuration(float _combo)
-    {
-        //アニメーションクラスでアニメーションのクリップ時間を取得する。
-        yield return new WaitForSeconds(_combo);
-    }
-
     
 }

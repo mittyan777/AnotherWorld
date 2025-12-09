@@ -138,11 +138,9 @@ public class Player_hikido1 : MonoBehaviour
             {
                 //camera.transform.position = ADSpos.transform.position;
                 ADS = true;
-                _animflgSO.ArcherSkilflg = true;
             }
             else
             {
-                _animflgSO.ArcherSkilflg = false;
                 ADS = false;
             }
             if (Input.GetMouseButtonUp(1))
@@ -171,6 +169,7 @@ public class Player_hikido1 : MonoBehaviour
                 GetComponent<ArcherQskill_hikido>().NormalAttack();
             }
             mouseleft = true;
+            _animflgSO.ArcherSkilflg = true;
 
         }
 
@@ -182,9 +181,13 @@ public class Player_hikido1 : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (mouseleft == true && mouseright == true) { GetComponent<ArcherQskill_hikido>().NormalAttack(); }
+            if (mouseleft == true && mouseright == true) 
+            {
+                GetComponent<ArcherQskill_hikido>().NormalAttack(); 
+            }
             mouseleft = false;
 
+            _animflgSO.ArcherSkilflg = false;
         }
 
         if (Input.GetMouseButtonUp(1))

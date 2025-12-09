@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.Windows;
 
 /// ジョブタイプごとにセットするアニメーションコマンドを変更
 public enum JobType
@@ -31,6 +33,11 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] Player_hikido1 _player;  //プレイヤーhikido
     [SerializeField] private Transform _cameraTransform;
     private Transform _playerTransform;
+    private bool _isCurrentlyAiming = false;
+    private bool _shootInputConfirmed = false;
+
+    [SerializeField] private SwordSkillAnime _swordSkillCmd;
+    [SerializeField] Player_Swoad _plSwardLogic;
 
     //ジョブタイプ
     public JobType jobType { get; private set; } = JobType.NONE;
@@ -51,6 +58,7 @@ public class PlayerAnimation : MonoBehaviour
 
         _currentjobNum = (int)_gameManager.job;
         SetJobType((JobType)_currentjobNum);
+        _plSwardLogic.GetComponent<Player_Swoad>();
 
         UnityEngine.Debug.Log($"初期ジョブタイプ設定完了: {jobType}");
     }
@@ -93,19 +101,35 @@ public class PlayerAnimation : MonoBehaviour
 
             UnityEngine.Debug.Log($"ジョブが更新されました！ JobType: {jobType}");
         }
+
+        if(_player.isAiming && UnityEngine.Input.GetMouseButtonUp(0)) 
+        {
+            _shootInputConfirmed = true;
+        }
     }
 
 
     private void FixedUpdate()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 moveInput = new Vector2(UnityEngine.Input.GetAxis("Horizontal"), UnityEngine.Input.GetAxis("Vertical"));
 
         bool isAiming = _player.isAiming;
         bool isArcher = (jobType == JobType.ARCHER);
+
+        //ADSが始まった最初のフレーム値を検出
+        bool isAimingStartFrame = (isAiming && isArcher && !_isCurrentlyAiming);
+
+        //マウスボタン離しで発射
+        bool isShootRequested = _shootInputConfirmed;
+
         int adsLayerIndex = animator.GetLayerIndex("ADS Layer");
 
+        //ADS時の処理
         if (isAiming && isArcher)
         {
+            _isCurrentlyAiming = true;
+            if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 1f); }
+
             if (_playerTransform != null && _cameraTransform != null)
             {
                 float targetYAngle = _cameraTransform.eulerAngles.y - 90f;
@@ -126,14 +150,24 @@ public class PlayerAnimation : MonoBehaviour
             {
                 if (commandSet.archerAimCd is ArcherAimWalkSO aimWalkBoolCmd)
                 {
-                    aimWalkBoolCmd.ExecuteMoveMent(animator, _playerTransform, moveInput);
+                    aimWalkBoolCmd.ExecuteMoveMent(
+                        animator,
+                        _playerTransform, 
+                        moveInput,
+                        isAimingStartFrame,
+                        isShootRequested);
                 }
             }
+
+            if (isShootRequested) { _shootInputConfirmed = false; }
 
             UnityEngine.Debug.Log($"Input: X={moveInput.x}, Y={moveInput.y}");
         }
         else
         {
+            _isCurrentlyAiming = false;
+            animator.ResetTrigger("StartADS");
+            animator.ResetTrigger("Recoil");
             _player.HandleStanderdMovement(_playerTransform, animator);
             if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 0f); }
         }
@@ -207,7 +241,6 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-
     /// <summary> /// 回避アニメーション /// </summary>
     public void AvoidAnim()
     {
@@ -262,8 +295,6 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-
-
     /// <summary> /// アーチャースキルアニメーション /// </summary>
     public void AttackAnimation_Archer()
     {
@@ -276,21 +307,18 @@ public class PlayerAnimation : MonoBehaviour
         else { UnityEngine.Debug.LogError("ジョブ設定ミス"); }
     }
 
-
-    //アーチャーの終了フラグ
-    public void AttackAnimation_ArcherEnd()
+    //剣士アニメーション
+    public void AttackAnimation_Swordman(int comboCount) 
     {
-        if (CommandMap.TryGetValue(jobType, out var commandSet))
-        {
-            AnimationBaseSO _archerEndCmd = commandSet.ArcherSkilsEndCd;
-            if (_archerEndCmd != null)
-            {
-                _archerEndCmd.Execute(animator);
-                _animFlgSO.ArcherSkilflg = false;
-            }
-            else { UnityEngine.Debug.LogWarning($"ジョブ:{jobType} のコマンドが設定されていない。"); }
+        if (_swordSkillCmd != null)
+        { 
+            _swordSkillCmd.ExecuteCombo(animator, comboCount);
+            OnComboSlash();
         }
+        else { UnityEngine.Debug.LogWarning($"SwordSkillAnimSO が設定されていません。"); }
     }
+
+    public void OnComboSlash()  { _plSwardLogic.TryAttackCombo(); }
 
     private void OnAnimatorIK(int layerIndex)
     {

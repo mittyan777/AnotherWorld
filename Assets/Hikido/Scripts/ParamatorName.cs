@@ -15,6 +15,7 @@ public enum ParaMatorName
    ArcherAimWalk_left,
    ArcherAimWalk_back,
    Recoil,
+   StartADS,
 
    NONE = 0
    
