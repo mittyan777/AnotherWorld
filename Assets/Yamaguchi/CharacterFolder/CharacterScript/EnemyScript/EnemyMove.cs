@@ -14,6 +14,7 @@ public class EnemyMove : MonoBehaviour
         RangedAttack,
         damage,
         death,
+        Stun,
         None 
     }
 
@@ -54,6 +55,11 @@ public class EnemyMove : MonoBehaviour
         EnemyState previousState = currentState;
         if (currentState == EnemyState.death)
         {
+            return;
+        }
+        if (currentState == EnemyState.Stun)
+        {
+            UpdateAnimationState(true);
             return;
         }
         //ダメージ中、もしくは攻撃中なら移動などの処理をスキップする
@@ -249,9 +255,18 @@ public class EnemyMove : MonoBehaviour
 
         //ダメージと死は何よりも優先されるアニメーション
         if (currentState == EnemyState.damage || 
-            currentState == EnemyState.death)
+            currentState == EnemyState.death ||
+            currentState == EnemyState.Stun)
         {
-            animationManager.UpdateAnimation(currentState);
+            EnemyState animationState = currentState;
+
+            // スタン状態の場合、Idleアニメーションを使用する (専用アニメがない場合)
+            if (currentState == EnemyState.Stun)
+            {
+                animationState = EnemyState.Idle;
+            }
+
+            animationManager.UpdateAnimation(animationState);
             return;
         }
 
@@ -308,19 +323,45 @@ public class EnemyMove : MonoBehaviour
             }
         }
     }
-    
+
+    //スタン状態の追加
+    public void SetStunState(bool isStunned)
+    {
+        if (isStunned)
+        {
+            // スタン開始
+            ForceSetState(EnemyState.Stun); // 状態をStunに設定
+            if (agent != null && agent.enabled)
+            {
+                agent.ResetPath(); // 現在のパスをキャンセル
+                agent.isStopped = true; // 移動を停止
+            }
+        }
+        else
+        {
+            // スタン解除
+            if (agent != null && agent.enabled)
+            {
+                agent.isStopped = false; // 移動を再開
+            }
+
+            // スタン解除後の行動を決定（ChasePlayerやPatrolLogicが動くように状態をWalkに戻す）
+            bool playerVisible = CheckPlayerVisibility();
+            if (playerVisible)
+            {
+                currentState = EnemyState.Walk;
+            }
+            else
+            {
+                SetRandomDestination(); // 巡回へ戻る
+            }
+        }
+    }
+
     //状態を強制的に設定し、アニメーションを即座に更新する
     public void ForceSetState(EnemyState newState)
     { 
         currentState = newState;
         UpdateAnimationState(true);
     }
-
-    /*
-    // 攻撃アニメーションを強制的に更新（AttackSequenceの冒頭などで使用）
-    public void ForceUpdateAnimation()
-    {
-        UpdateAnimationState(true);
-    }
-    */
 }

@@ -388,7 +388,6 @@ GameObject:
   - component: {fileID: 7163693998460429460}
   - component: {fileID: 1512993802081420687}
   - component: {fileID: 9177832823985315176}
-  - component: {fileID: 3232563606212326736}
   - component: {fileID: 1785243397707583684}
   - component: {fileID: 1410026446644597250}
   - component: {fileID: 1111833663807129866}
@@ -396,6 +395,7 @@ GameObject:
   - component: {fileID: 5846309231762117273}
   - component: {fileID: 8330710913829000976}
   - component: {fileID: 3206198575711754374}
+  - component: {fileID: -5168748693415455410}
   m_Layer: 0
   m_Name: Wolf01
   m_TagString: Untagged
@@ -469,33 +469,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &3232563606212326736
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121770041380104553}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1785243397707583684
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -608,6 +581,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9d4dadf196b7b42b11474d8a7196ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5168748693415455410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121770041380104553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d46b6dd8c325d458cf948fbc04e192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunTime: 5
 --- !u!1 &2678941433797286118
 GameObject:
   m_ObjectHideFlags: 0
