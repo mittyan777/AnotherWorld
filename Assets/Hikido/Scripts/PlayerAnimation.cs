@@ -29,7 +29,7 @@ public class PlayerAnimation : MonoBehaviour
     private Dictionary<JobType, CommandoConfigSO.CommandSet> CommandMap;
 
     //ゲームマネージャー
-    //[SerializeField] GameObject[] manager;
+    //[SerializeField] GameObject[] bossManager;
 
     private void Awake()
     {
