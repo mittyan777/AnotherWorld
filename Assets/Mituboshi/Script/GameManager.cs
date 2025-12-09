@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -21,8 +23,8 @@ public class GameManager : MonoBehaviour
 
 
     [SerializeField] public float job;
-    [SerializeField] public bool FirstRoulette = true;
-    [SerializeField] Text job_text;
+    [SerializeField] Image job_text;
+    [SerializeField] Sprite []job_sprite;
 
     [SerializeField] public int []Status;
 
@@ -45,6 +47,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image fade_image;
     public float fade_image_a = 1;
 
+    public string scene_name;
+    int tutorial_count = 0;
+    [SerializeField]GameObject tutorial_UI;
+    public float speed = 10000.0f;      // 移動速度
+    public float distance = 10000.0f;   // 移動距離
+
+    private Vector3 startPos;
 
 
     // Start is called before the first frame update
@@ -52,26 +61,29 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(Canvas);
-        
       
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerStatus();
+        if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
+        {
+            Canvas.SetActive(true);
+            if (Player[0] == null)
+            {
+                Player = GameObject.FindGameObjectsWithTag("Player");
+            }
+            PlayerStatus();
+        }
+        else { Canvas.SetActive(false); }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (FirstRoulette == true)
+            if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
             {
-                if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
-                {
-                    Time.timeScale = 0.5f;
-                    GAMEUI.SetActive(true);
-                    rouletteUI.SetActive(true);
-                    Standard_UI.SetActive(false);
-                }
-                else if(GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
+             
+                if(GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
                 {
                     Time.timeScale = 1;
                     GAMEUI.SetActive(false);
@@ -118,7 +130,21 @@ public class GameManager : MonoBehaviour
             }
           
         }
-        if (FirstRoulette == false)
+        if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
+        {
+            if (SceneManager.GetActiveScene().name == "Test_Stage1")
+            {
+                if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
+                {
+                    Time.timeScale = 0.5f;
+                    GAMEUI.SetActive(true);
+                    rouletteUI.SetActive(true);
+                    Standard_UI.SetActive(false);
+                }
+            }
+        }
+
+        if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == false)
         {
             if(Initial_HP == false) 
             { 
@@ -144,13 +170,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Player[0].GetComponent<Player>().enabled = true;
+            if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start") { Player[0].GetComponent<Player>().enabled = true; }
         }
-        if(job == 0) job_text.text = ($"剣士");
-        if (job == 1) job_text.text = ($"アーチャー");
+        if(job == 0) job_text.sprite = job_sprite[0];
+        if (job == 1) job_text.sprite = job_sprite[1];
         if (job == 2) 
         {
-            job_text.text = ($"魔法使い");
+            job_text.sprite = job_sprite[2];
             for (int i = 0; i < 3; i++)
             {
                 skill_UI[i].SetActive(true);
@@ -190,13 +216,82 @@ public class GameManager : MonoBehaviour
             fade_image_a += Time.deltaTime;
         }
         fade_image.color = new Color(0,0,0, fade_image_a);
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SceneManager.LoadScene("load_screen");
+        }
+
+        if (SceneManager.GetActiveScene().name == "Synthesis_Test")
+        {
+            scene_name = "Test_Stage1";
+        }
+
+        if (tutorial_count == 0)
+        {
+            startPos = new Vector3(-17, 106, -2);
+            float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+            tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
+            tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -238);
+            tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (tutorial_count == 1)
+        {
+            startPos = new Vector3(344, 106, -2);
+            float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+            tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
+            //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(344, 106, -2);
+            tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -306);
+            tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (tutorial_count == 2)
+        {
+            startPos = new Vector3(-165, 335, -2);
+            float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+            tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+            //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(-165, 335, -2);
+            tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -385);
+            tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        }
+        else if (tutorial_count == 3)
+        {
+            if (job == 0)
+            {
+                startPos = new Vector3(145, 100, -2);
+                float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+                //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 100, -2);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
+                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            }
+            else if(job == 2)
+            {
+                startPos = new Vector3(145, 55, -2);
+                float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+                //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 55, -2);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
+                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            }
+            else if(job == 1)
+            {
+                startPos = new Vector3(145, 5, -2);
+                float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+               // tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 5, -2);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
+                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            }
+        }
+        else
+        {
+            Destroy(tutorial_UI);
+        }
+
     }
     private void PlayerStatus()
     {
-        if (Player[0] == null)
-        {
-            Player = GameObject.FindGameObjectsWithTag("Player");
-        }
+       
        
      
        
@@ -229,6 +324,10 @@ public class GameManager : MonoBehaviour
             rouletteUI.SetActive(true);
             Weapon_UI.SetActive(false);
         }
+    }
+    public void tutorial()
+    {
+        tutorial_count++;
     }
 
 }
