@@ -529,6 +529,10 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3238216735800702585, guid: ce27c20c212d00a42b9c27e9168d3d1a, type: 3}
+      propertyPath: job
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3238216735800702585, guid: ce27c20c212d00a42b9c27e9168d3d1a, type: 3}
       propertyPath: Coin
       value: 1000
       objectReference: {fileID: 0}
@@ -1124,9 +1128,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3285177922063472877, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+    - target: {fileID: 3285177922063472877, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 506370520366993736}
+    - target: {fileID: 4511332648678717678, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_Text
+      value: 'NewText
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5239598928138810937, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_Text
+      value: '
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 5929957334597753007, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1251,6 +1270,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7334266571413100825, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8260052984650171923, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1259,8 +1282,41 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 244.4648
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 107.8502
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -360.39316
+      objectReference: {fileID: 0}
+    - target: {fileID: 8406622842679930167, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 142.25578
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1195873957017219027, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b6cfbb32545424e82b0c23248ab95b, type: 3}
@@ -1317,9 +1373,21 @@ PrefabInstance:
       value: Roulette_CG_1
       objectReference: {fileID: 0}
     - target: {fileID: 5395757253250492087, guid: 6677ebef7ce76024d90a71931af919c5, type: 3}
+      propertyPath: Aceher
+      value: 
+      objectReference: {fileID: 21300000, guid: 2fef2cf80cb83cf4f8bcfbcc7300a874, type: 3}
+    - target: {fileID: 5395757253250492087, guid: 6677ebef7ce76024d90a71931af919c5, type: 3}
       propertyPath: CoinText
       value: 
       objectReference: {fileID: 226192811}
+    - target: {fileID: 5395757253250492087, guid: 6677ebef7ce76024d90a71931af919c5, type: 3}
+      propertyPath: Magishan
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ab0e6bade776cb49abb4da909e9c43c, type: 3}
+    - target: {fileID: 5395757253250492087, guid: 6677ebef7ce76024d90a71931af919c5, type: 3}
+      propertyPath: swordsman
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e825c393c9af214ab787f83e4361cd9, type: 3}
     - target: {fileID: 5395757253250492087, guid: 6677ebef7ce76024d90a71931af919c5, type: 3}
       propertyPath: targetImage
       value: 
