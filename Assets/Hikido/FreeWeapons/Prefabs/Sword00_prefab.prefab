@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc93a2dc577a7a48b2b50329c554f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponCollider: {fileID: 0}
+  weaponCollider: {fileID: 6599268}
 --- !u!1 &181888
 GameObject:
   m_ObjectHideFlags: 0

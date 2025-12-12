@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    public Transform rightHandAttachPoint;
+    public  Transform rightHandAttachPoint;
     private GameObject currentWeaponInstance;
     private AttackContorol attackContorol;
 
@@ -15,7 +15,7 @@ public class EquipmentManager : MonoBehaviour
        {
             attackContorol = gameObject.AddComponent<AttackContorol>();
        }
-        else { Debug.LogError("あったっくこんとろーるがないよ。"); }
+        else { Debug.LogError("あたっくこんとろーるがないよ。"); }
     }
 
     public void EquipWeapon(WeaponData data)
