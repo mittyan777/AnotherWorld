@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 172089088634732819}
-  - component: {fileID: 5395757253250492087}
+  - component: {fileID: 8930680252621541931}
   m_Layer: 0
   m_Name: Roulette_CG_1
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5395757253250492087
+--- !u!114 &8930680252621541931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 0}
-  swordsman: {fileID: 21300000, guid: 92639d8234283cf4081d23bf3c0f9d7e, type: 3}
-  Magishan: {fileID: 21300000, guid: 1837a165e98518842afaf8674f81da0b, type: 3}
-  Aceher: {fileID: 21300000, guid: 8928867c3e0e1184883829534f5ddea9, type: 3}
+  swordsman: {fileID: 21300000, guid: 8e825c393c9af214ab787f83e4361cd9, type: 3}
+  Magishan: {fileID: 21300000, guid: 9ab0e6bade776cb49abb4da909e9c43c, type: 3}
+  Aceher: {fileID: 21300000, guid: 2fef2cf80cb83cf4f8bcfbcc7300a874, type: 3}
   Fadeout_Coin: {fileID: 0}
   CoinText: {fileID: 0}
-  fadeTime: 0.5
-  startColor: {r: 1, g: 0.059748232, b: 0.059748232, a: 1}
-  endColor: {r: 0.9496855, g: 0.9496855, b: 0.9496855, a: 1}
+  fadeTime: 0
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 1, g: 1, b: 1, a: 0}
