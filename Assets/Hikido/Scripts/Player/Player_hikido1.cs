@@ -78,8 +78,8 @@ public class Player_hikido1 : MonoBehaviour
                 GetComponent<Magician_Skills_hikido>().FireBall();
                 manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
 
-                //playerAnim.SetWizardSkillIndex(1);
-                //_animflgSO.MajicSkilFlg = true;
+                playerAnim.SetWizardSkillIndex(1);
+                _animflgSO.MajicSkilFlg = true;
             }
 
 
