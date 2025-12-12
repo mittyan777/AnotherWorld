@@ -10,24 +10,32 @@ public class AnimationFlagManagerSO : ScriptableObject
     [Header("管理用アニメーションフラグ")]
     [SerializeField] private bool attackNormalFlg = false; 
     [SerializeField] private bool attackSkilFlag = false;
-    [SerializeField] private bool walkanimFlg = false;
-    [SerializeField] private bool avoidanceFlg = false;
-    [SerializeField] private bool attackArcherflg = false;
+    [SerializeField] private bool walkanimFlg = false;     
+    [SerializeField] private bool avoidanceFlg = false;    //回避フラグ
+    [SerializeField] private bool attackArcherFlg = false; //アーチャーフラグ
+    [SerializeField] private bool archerRecoilFlg = false; //アーチャー発射フラグ
+    [SerializeField] private bool majicSkilFlg = false;    //マジシャンスキルフラグ
 
     [Header("各通知イベント")]
-    public Action Attackevents;         //攻撃イベント
-    public Action WalkEvents;           //移動イベント
-    public Action AvoidanceEvents;      //回避イベント
+    public Action Attackevents;          //攻撃イベント
+    public Action WalkEvents;            //移動イベント
+    public Action AvoidanceEvents;       //回避イベント
     public Action AttackNormal;
-    public Action AttackMagicianSkills;
-    public Action AttackArcherSkills;
-    
+    public Action AttackMagicianSkills;  //マジシャンスキルイベント
+    public Action AttackArcherSkills;    //アーチャースキルイベント
+    public Action ArcherRecoil;          //アーチャー発射イベント
+    public Action MajicSkil;             //マジシャンイベント
+                                       
     //攻撃のイベント
     public bool AttackNormalflg 
     {
         get { return attackNormalFlg; }
         set 
         {
+            if(attackNormalFlg == value) { return; }
+
+            attackNormalFlg = value;
+
             if (value) 
             {
                 UnityEngine.Debug.Log("イベント発火");
@@ -37,12 +45,15 @@ public class AnimationFlagManagerSO : ScriptableObject
     }
 
    //回避のイベント
-   public bool Avoidflg 
+   public bool Avoidflg
     {
-        get { return walkanimFlg; }
+        get { return avoidanceFlg; }
         set
         {
-            if (value) 
+            if (avoidanceFlg == value){ return; }
+            avoidanceFlg = value;
+
+            if (value)
             {
                 AvoidanceEvents?.Invoke();
                 UnityEngine.Debug.Log("回避イベント発火");
@@ -53,11 +64,48 @@ public class AnimationFlagManagerSO : ScriptableObject
     //アーチャーのイベント
     public bool ArcherSkilflg 
     {
-        get { return attackArcherflg; }
+        get { return attackArcherFlg; }
         set
         {
-            AttackArcherSkills?.Invoke(); 
-            UnityEngine.Debug.Log("アーチャーイベント発火");
+            if (attackArcherFlg == value) { return; }
+            attackArcherFlg = value;
+            if (value) 
+            {
+                AttackArcherSkills?.Invoke();
+                UnityEngine.Debug.Log("アーチャーイベント発火");
+            }
+        }
+    }
+
+    //アーチャーの発射イベント
+    public bool ArcherRecoileFlg 
+    {
+        get { return archerRecoilFlg; }
+        set 
+        {
+            if (archerRecoilFlg == value) { return; }
+            archerRecoilFlg = value;
+            if (value) 
+            {
+                ArcherRecoil?.Invoke();
+                UnityEngine.Debug.Log("エイム時のイベント発火");
+            }
+        }
+    }
+
+    //マジシャンスキルイベント
+    public bool MajicSkilFlg 
+    {
+        get { return majicSkilFlg; }
+        set 
+        {
+            if(MajicSkilFlg == value) { return; }
+            majicSkilFlg = value;
+            if (value) 
+            {
+                MajicSkil?.Invoke();
+                UnityEngine.Debug.Log("マジシャンスキル時のイベント発火");
+            }
         }
     }
 

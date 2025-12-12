@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="CommandConfigSO",menuName = "CommandConfigSO")]
@@ -19,6 +18,13 @@ public class CommandoConfigSO : ScriptableObject
         public AnimationBaseSO avoidCd;
         //アーチャースキルコマンド
         public AnimationBaseSO archerSkilsCd;
+        //アーチャーエイム時のコマンド
+        public AnimationBaseSO archerAimCd;
+        //アーチャー発射時のコマンド
+        public AnimationBaseSO ArcherrecoilCd;
+
+        //マジシャンのスキルコマンド
+        public AnimationBaseSO WizardSkilCd;
 
         //移動コマンド
         //上下左右移動用のアニメーションコマンド管理
@@ -30,11 +36,11 @@ public class CommandoConfigSO : ScriptableObject
         //回避終了用コマンド
         public AnimationBaseSO avoidAnimEndCd;
 
-        //移動アニメーション終了用コマンド  -> 不要の場合は削除するあとで
-        public AnimationBaseSO walkanimEndCd;
-
         //アーチャースキル終了用コマンド
         public AnimationBaseSO ArcherSkilsEndCd;
+
+        //アーチャー発射時コマンド
+        public AnimationBaseSO ArcherrecoilEndCd;
 
     }
 

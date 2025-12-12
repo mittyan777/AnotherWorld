@@ -17,7 +17,6 @@ public class BossMoveManager : MonoBehaviour
     private bool isDeathSequenceStarted = false;
 
     private GameManager gameManager;
-    private int takeDamege;
     
     private void Awake()
     {
@@ -62,13 +61,10 @@ public class BossMoveManager : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.L))
         {
-            //bossHP.TestDamage();
-            StartCoroutine(bossHP.TestDamege02(100));
-            // HP‚ª•ÏX‚³‚ê‚½‚çcurrentBossHP‚ğ“¯Šú
-            if (bossHP != null)
-            {
-                currentBossHP = bossHP.currentBossHP;
-            }
+            //GameManager‚©‚çÅV‚ÌUŒ‚—Í‚ğæ“¾‚·‚éB
+            int takeDamege = (int)gameManager.AttackStatus;
+            //ƒvƒŒƒCƒ„[‚ÌUŒ‚—Í‚ğ“n‚·
+            StartCoroutine(bossHP.TakeDamage(takeDamege));
         }
     }
 
@@ -115,7 +111,9 @@ public class BossMoveManager : MonoBehaviour
     {
         if (isDeathSequenceStarted) return;
         isDeathSequenceStarted = true;
-
+        
+        //Ÿè‚É‰ñ“]‚µ‚È‚¢‚æ‚¤‚É€–SAnimation‚Ì‰ñ“]‚ğŒÅ’è‚·‚éB
+        transform.localEulerAngles = new Vector3(0f,transform.localEulerAngles.y,0f);
         //Rigidbody‚ğíœ (•¨—‹““®‚ğ~‚ß‚é)
         Rigidbody body = GetComponent<Rigidbody>();
         if (body != null) Destroy(body);
@@ -154,7 +152,7 @@ public class BossMoveManager : MonoBehaviour
             //GameManager‚©‚çÅV‚ÌUŒ‚—Í‚ğæ“¾‚·‚éB
             int takeDamege = (int)gameManager.AttackStatus;
             //ƒvƒŒƒCƒ„[‚ÌUŒ‚—Í‚ğ“n‚·
-            bossHP.TakeDamage(takeDamege);
+            StartCoroutine(bossHP.TakeDamage(takeDamege));
         }
     }
 }

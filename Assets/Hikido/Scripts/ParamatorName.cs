@@ -8,8 +8,14 @@ public enum ParaMatorName
    NormalAttack,
    Walk_UP,
    Walk_Down,
-   NormalAttackEnd,
-   Avoid,
+   Avoidflg,
+   ArcherAttackFlg,
+   ArcherAimWalk,
+   ArcherAimWalk_right,
+   ArcherAimWalk_left,
+   ArcherAimWalk_back,
+   Recoil,
+   StartADS,
 
    NONE = 0
    

@@ -10,7 +10,7 @@ public class BossHP : MonoBehaviour
     public int currentBossHP { get; private set; }
 
     // BossManagerをAwake/Startで取得するため private に戻し、シングルトンから取得
-    private BossMoveManager manager;
+    private BossMoveManager bossManager;
 
     [SerializeField] private float damageTime;
     [SerializeField] private float breakTime;
@@ -30,7 +30,7 @@ public class BossHP : MonoBehaviour
     private void Start()
     {
         // シングルトンを参照
-        manager = BossMoveManager.instance;
+        bossManager = BossMoveManager.instance;
         currentBossHP = maxBossHP;
 
         // --- Sliderの初期設定 ---
@@ -69,8 +69,7 @@ public class BossHP : MonoBehaviour
             currentHPSlider.value = newHP;
         }
     }
-
-    //メインのダメージ処理
+    /*
     public void TakeDamage(int damageAmount)
     {
         if (isInvulnerabal) return;
@@ -82,14 +81,42 @@ public class BossHP : MonoBehaviour
         if (currentBossHP <= 0)
         {
             currentBossHP = 0;
-            if (manager != null)
+            if (bossManager != null)
             {
                 // Managerに共通処理の実行を依頼する
-                manager.HandleBossDeath();
+                bossManager.HandleBossDeath();
+            }
+        }
+    }
+    */
+
+    //メインのダメージ処理
+    public IEnumerator TakeDamage(int testDamage)
+    {
+        if (!isInvulnerabal)
+        {
+            isInvulnerabal = true;
+            if (currentBossHP >= 0)
+            {
+                currentBossHP -= testDamage;
+                UpdateHPBar(currentBossHP);
+                // 死亡チェックを修正
+                if (currentBossHP <= 0)
+                {
+                    currentBossHP = 0;
+                    if (bossManager != null)
+                    {
+                        // Managerに共通処理の実行を依頼する
+                        bossManager.HandleBossDeath();
+                    }
+                }
+                yield return new WaitForSeconds(damageInterval);
+                isInvulnerabal = false;
             }
         }
     }
 
+    //テスト用
     public IEnumerator TestDamege02(int testDamage) 
     {
         if (!isInvulnerabal)
@@ -103,10 +130,10 @@ public class BossHP : MonoBehaviour
                 if (currentBossHP <= 0)
                 {
                     currentBossHP = 0;
-                    if (manager != null)
+                    if (bossManager != null)
                     {
                         // Managerに共通処理の実行を依頼する
-                        manager.HandleBossDeath();
+                        bossManager.HandleBossDeath();
                     }
                 }
                 yield return new WaitForSeconds(damageInterval);
