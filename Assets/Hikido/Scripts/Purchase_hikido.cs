@@ -85,12 +85,17 @@ public class Purchase_hikido : MonoBehaviour
         
         if (getCoin >= price)
         {
-            gm.GetComponent<GameManager>().Coin -= price;
+            gm.GetComponent<GameManager_hikido>().Coin -= price;
            
             inventory.Add(itemName);
 
+            //ひきど追加
+            PlayerInventry.Instance.AddWeaponToInventory(itemName); 
+            PlayerInventry.Instance.SetEquippedWeapon(itemName);
+
+
             messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
-            Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager>().Coin}");
+            Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager_hikido>().Coin}");
         }
         else
         {
