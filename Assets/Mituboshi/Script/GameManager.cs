@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public Image []gage_image;
 
-    [SerializeField] Slider HP_slider;
-    [SerializeField] Slider MP_slider;
+    [SerializeField] Image HP_slider;
+    [SerializeField] Image MP_slider;
 
     public bool slot = false;
     bool Initial_HP = false;
@@ -48,10 +48,10 @@ public class GameManager : MonoBehaviour
     public float fade_image_a = 1;
 
     public string scene_name;
-    int tutorial_count = 0;
+    public int tutorial_count = 0;
     [SerializeField]GameObject tutorial_UI;
-    public float speed = 10000.0f;      // ˆÚ“®‘¬“x
-    public float distance = 10000.0f;   // ˆÚ“®‹——£
+     float speed = 50;      // ˆÚ“®‘¬“x
+     float distance = 10;   // ˆÚ“®‹——£
 
     private Vector3 startPos;
 
@@ -82,13 +82,15 @@ public class GameManager : MonoBehaviour
         {
             if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
             {
-             
-                if(GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
+                
+                if (GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
                 {
                     Time.timeScale = 1;
                     GAMEUI.SetActive(false);
                     rouletteUI.SetActive(false);
                     Standard_UI.SetActive(true);
+                    
+
                 }
                 else if(GAMEUI.activeSelf == true && Weapon_UI == true)
                 {
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
                     GAMEUI.SetActive(false);
                     Weapon_UI.SetActive(false);
                     Standard_UI.SetActive(true);
+                    
                 }
 
 
@@ -110,6 +113,7 @@ public class GameManager : MonoBehaviour
                     rouletteUI.SetActive(true);
                     jobroulette.SetActive(false);
                     Standard_UI.SetActive(false);
+                    Destroy(tutorial_UI.gameObject);
                 }
                 else if (GAMEUI.activeSelf == true && rouletteUI.activeSelf == true)
                 {
@@ -202,10 +206,9 @@ public class GameManager : MonoBehaviour
         if (Present_MP < MP) { Present_MP += 2 * Time.deltaTime; }
         if (Present_MP >= MP) { Present_MP = MP; }
 
-        HP_slider.maxValue = HP;
-        MP_slider.maxValue = MP;
-        HP_slider.value = Present_HP;
-        MP_slider.value = Present_MP;
+       
+        HP_slider.fillAmount = Present_HP / HP;
+        MP_slider.fillAmount = Present_MP / MP;
 
         if(fade == false && fade_image_a >= 0)
         {
@@ -226,66 +229,68 @@ public class GameManager : MonoBehaviour
         {
             scene_name = "Test_Stage1";
         }
-
-        if (tutorial_count == 0)
+        if (tutorial_UI != null)
         {
-            startPos = new Vector3(-17, 106, -2);
-            float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
-            tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
-            tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -238);
-            tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if (tutorial_count == 1)
-        {
-            startPos = new Vector3(344, 106, -2);
-            float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
-            tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
-            //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(344, 106, -2);
-            tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -306);
-            tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if (tutorial_count == 2)
-        {
-            startPos = new Vector3(-165, 335, -2);
-            float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
-            tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
-            //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(-165, 335, -2);
-            tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -385);
-            tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if (tutorial_count == 3)
-        {
-            if (job == 0)
+            if (tutorial_count == 0)
             {
-                startPos = new Vector3(145, 100, -2);
-                float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
-                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
-                //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 100, -2);
-                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
-                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                startPos = new Vector3(-17, 106, -2);
+                float offset = Mathf.PingPong(Time.time * speed, distance);
+                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -238);
+                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
             }
-            else if(job == 2)
+            else if (tutorial_count == 1)
             {
-                startPos = new Vector3(145, 55, -2);
-                float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
-                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
-                //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 55, -2);
-                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
-                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                startPos = new Vector3(344, 106, -2);
+                float offset = Mathf.PingPong(Time.time * speed, distance);
+                tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
+                //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(344, 106, -2);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -306);
+                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
             }
-            else if(job == 1)
+            else if (tutorial_count == 2)
             {
-                startPos = new Vector3(145, 5, -2);
-                float offset = Mathf.PingPong(Time.time * speed * 30, distance * 10);
+                startPos = new Vector3(-165, 335, -2);
+                float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
-               // tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 5, -2);
-                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
-                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(-165, 335, -2);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -385);
+                tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
             }
-        }
-        else
-        {
-            Destroy(tutorial_UI);
+            else if (tutorial_count == 3)
+            {
+                if (job == 0)
+                {
+                    startPos = new Vector3(145, 100, -2);
+                    float offset = Mathf.PingPong(Time.time * speed, distance);
+                    tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+                    //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 100, -2);
+                    tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
+                    tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                }
+                else if (job == 2)
+                {
+                    startPos = new Vector3(145, 55, -2);
+                    float offset = Mathf.PingPong(Time.time * speed, distance);
+                    tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+                    //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 55, -2);
+                    tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
+                    tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                }
+                else if (job == 1)
+                {
+                    startPos = new Vector3(145, 5, -2);
+                    float offset = Mathf.PingPong(Time.time * speed, distance);
+                    tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
+                    // tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(185, 5, -2);
+                    tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
+                    tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                }
+            }
+            else
+            {
+                Destroy(tutorial_UI.gameObject);
+            }
         }
 
     }
@@ -329,5 +334,14 @@ public class GameManager : MonoBehaviour
     {
         tutorial_count++;
     }
+    public void reset_tutorial()
+    {
+        if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
+        {
+            HP = 0;
+            MP = 0;
+        }
+    }
+
 
 }
