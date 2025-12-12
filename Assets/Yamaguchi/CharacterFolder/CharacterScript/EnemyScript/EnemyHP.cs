@@ -114,13 +114,13 @@ public class EnemyHP : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
         if (other.gameObject.tag.Contains("Player"))
         {
             GetDamege();
-        }
-        else 
-        {
-            return;
         }
     }
 }

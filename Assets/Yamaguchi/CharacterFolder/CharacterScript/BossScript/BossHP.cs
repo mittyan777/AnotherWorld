@@ -69,8 +69,7 @@ public class BossHP : MonoBehaviour
             currentHPSlider.value = newHP;
         }
     }
-
-    //メインのダメージ処理
+    /*
     public void TakeDamage(int damageAmount)
     {
         if (isInvulnerabal) return;
@@ -86,6 +85,33 @@ public class BossHP : MonoBehaviour
             {
                 // Managerに共通処理の実行を依頼する
                 bossManager.HandleBossDeath();
+            }
+        }
+    }
+    */
+
+    //メインのダメージ処理
+    public IEnumerator TakeDamage(int testDamage)
+    {
+        if (!isInvulnerabal)
+        {
+            isInvulnerabal = true;
+            if (currentBossHP >= 0)
+            {
+                currentBossHP -= testDamage;
+                UpdateHPBar(currentBossHP);
+                // 死亡チェックを修正
+                if (currentBossHP <= 0)
+                {
+                    currentBossHP = 0;
+                    if (bossManager != null)
+                    {
+                        // Managerに共通処理の実行を依頼する
+                        bossManager.HandleBossDeath();
+                    }
+                }
+                yield return new WaitForSeconds(damageInterval);
+                isInvulnerabal = false;
             }
         }
     }

@@ -61,12 +61,10 @@ public class BossMoveManager : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.L))
         {
-            StartCoroutine(bossHP.TestDamege02(100));
-            // HPが変更されたらcurrentBossHPを同期
-            if (bossHP != null)
-            {
-                currentBossHP = bossHP.currentBossHP;
-            }
+            //GameManagerから最新の攻撃力を取得する。
+            int takeDamege = (int)gameManager.AttackStatus;
+            //プレイヤーの攻撃力を渡す
+            StartCoroutine(bossHP.TakeDamage(takeDamege));
         }
     }
 
@@ -154,7 +152,7 @@ public class BossMoveManager : MonoBehaviour
             //GameManagerから最新の攻撃力を取得する。
             int takeDamege = (int)gameManager.AttackStatus;
             //プレイヤーの攻撃力を渡す
-            bossHP.TakeDamage(takeDamege);
+            StartCoroutine(bossHP.TakeDamage(takeDamege));
         }
     }
 }
