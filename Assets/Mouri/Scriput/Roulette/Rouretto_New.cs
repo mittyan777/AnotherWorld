@@ -198,7 +198,12 @@ public class Rouretto_New : MonoBehaviour
                 rouletteSound.rouletteSoundType = RouletteSoundType.Open;
                 rouletteSound.PlaySound();
             }
-       
+
+            if (rouletto_CG != null)
+            {
+                rouletto_CG.StartSpinEffect(0.05f);  // 0.05秒ごとに画像切替
+            }
+
 
         }
         else
@@ -249,6 +254,11 @@ public class Rouretto_New : MonoBehaviour
         {
             StopCoroutine(spinCoroutine);
 
+        }
+
+        if(rouletto_CG!= null)
+        {
+            rouletto_CG.StopSpinAndShow(jobName[(int)job]);
         }
         if(rouletteSound != null)
         {
