@@ -43,7 +43,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110294}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 045db865079f08b48b033ff895d5502c, type: 3}
   m_Name: 
@@ -163,10 +163,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.05845211, y: 0.723807, z: 0.04441164}
+  m_Center: {x: 0.0066723097, y: 0.37421256, z: 0.0028383974}
 --- !u!54 &5582962787825600059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 2308106}
   - component: {fileID: 5452636}
   - component: {fileID: 6598898}
+  - component: {fileID: 1703897277183640927}
   m_Layer: 0
   m_Name: Arrow00_mesh(Clone)
   m_TagString: Untagged
@@ -222,13 +223,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 199956}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 458612}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &3393954
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -327,3 +328,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.030360099, y: 0.7059591, z: 0.026292618}
   m_Center: {x: -4.656613e-10, y: 0.35297894, z: 0.004368006}
+--- !u!114 &1703897277183640927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045db865079f08b48b033ff895d5502c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  power: 5
