@@ -74,7 +74,8 @@ public class EquipmentManager : MonoBehaviour
         
         WeaponCollision collisionScriot = newWeapon.GetComponentInChildren<WeaponCollision>();
         if (collisionScriot == null) { collisionScriot = newWeapon.GetComponentInChildren<WeaponCollision>(); }
-        if (attackContorol != null) { attackContorol.SetcurrentWeaponCollision(collisionScriot); }
+        if (attackContorol != null) 
+        { attackContorol.SetcurrentWeaponCollision(collisionScriot); }
 
         //装備インスタンスの更新
         currentWeaponInstance = newWeapon;
