@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class Player_hikido1 : MonoBehaviour
 {
@@ -61,7 +62,7 @@ public class Player_hikido1 : MonoBehaviour
         RaycastHit hit;
 
         Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
-        if (Input.GetKeyDown("p"))
+        if (UnityEngine.Input.GetKeyDown("p"))
         {
             manager.GetComponent<GameManager_hikido>().HP -= 10;
         }
@@ -70,7 +71,7 @@ public class Player_hikido1 : MonoBehaviour
             //Destroy(gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[1].fillAmount >= 1)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[1].fillAmount >= 1)
         {
             if (manager.GetComponent<GameManager_hikido>().job == 2)
             {
@@ -84,7 +85,7 @@ public class Player_hikido1 : MonoBehaviour
 
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[0].fillAmount >= 1)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[0].fillAmount >= 1)
         {
             if (manager.GetComponent<GameManager_hikido>().job == 2)
             {
@@ -98,7 +99,7 @@ public class Player_hikido1 : MonoBehaviour
 
 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[2].fillAmount >= 1)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[2].fillAmount >= 1)
         {
             if (manager.GetComponent<GameManager_hikido>().job == 2)
             {
@@ -112,6 +113,18 @@ public class Player_hikido1 : MonoBehaviour
             }
 
         }
+
+        
+        if(manager.GetComponent<GameManager_hikido>().job == 2) 
+        {
+            bool normalAtkmajic = UnityEngine.Input.GetMouseButtonDown(0);
+            if(normalAtkmajic)
+            { _animflgSO.MajicAttackNormalFlg = true; }
+            else 
+            { _animflgSO.MajicAttackNormalFlg = false; }
+           
+        }
+
 
         if (manager.GetComponent<GameManager_hikido>().job == 1)
         {
@@ -135,8 +148,8 @@ public class Player_hikido1 : MonoBehaviour
     }
     void cameracontrol()
     {
-        float mx = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        float my = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        float mx = UnityEngine.Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        float my = UnityEngine.Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
         yRotation += mx;
         xRotation -= my;
@@ -146,7 +159,7 @@ public class Player_hikido1 : MonoBehaviour
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         if (manager.GetComponent<GameManager_hikido>().job == 1)
         {
-            if (Input.GetMouseButton(1))
+            if (UnityEngine.Input.GetMouseButton(1))
             {
                 //camera.transform.position = ADSpos.transform.position;
                 ADS = true;
@@ -155,7 +168,7 @@ public class Player_hikido1 : MonoBehaviour
             {
                 ADS = false;
             }
-            if (Input.GetMouseButtonUp(1))
+            if (UnityEngine.Input.GetMouseButtonUp(1))
             {
                 //camera.transform.position = NOADSpos.transform.position;
 
@@ -174,7 +187,7 @@ public class Player_hikido1 : MonoBehaviour
     }
     void Archercontrol()
     {
-        if (Input.GetMouseButton(0) && mouseleft == false)
+        if (UnityEngine.Input.GetMouseButton(0) && mouseleft == false)
         {
             if (mouseleft == false && mouseright == false) 
             {
@@ -185,13 +198,13 @@ public class Player_hikido1 : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButton(1) && mouseright == false)
+        if (UnityEngine.Input.GetMouseButton(1) && mouseright == false)
         {
             mouseright = true;
 
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (UnityEngine.Input.GetMouseButtonUp(0))
         {
             if (mouseleft == true && mouseright == true) 
             {
@@ -202,7 +215,7 @@ public class Player_hikido1 : MonoBehaviour
             _animflgSO.ArcherSkilflg = false;
         }
 
-        if (Input.GetMouseButtonUp(1))
+        if (UnityEngine.Input.GetMouseButtonUp(1))
         {
             mouseright = false;
             GetComponent<ArcherQskill_hikido>().shootpower = 0;
@@ -234,7 +247,7 @@ public class Player_hikido1 : MonoBehaviour
     //‚Ð‚«‚Ç’Ç‰Á•ª
     void SwordSkil() 
     {
-        if (Input.GetMouseButtonDown(0)) 
+        if (UnityEngine.Input.GetMouseButtonDown(0)) 
         {
             GetComponent<Player_Swoad>().SwordSkill();
         }
@@ -249,25 +262,25 @@ public class Player_hikido1 : MonoBehaviour
     //“¯‚¶‚­‚Ð‚«‚Ç’Ç‰Á•ª
     public void HandleStanderdMovement(Transform transform, Animator animator) 
     {
-        if (Input.GetKey("w"))
+        if (UnityEngine.Input.GetKey("w"))
         {
             transform.position += transform.forward * 5 * Time.deltaTime;
             animator.SetBool("walk", true);
         }
         else { animator.SetBool("walk", false); }
-        if (Input.GetKey("s"))
+        if (UnityEngine.Input.GetKey("s"))
         {
             transform.position -= transform.forward * 5 * Time.deltaTime;
             animator.SetBool("back", true);
         }
         else { animator.SetBool("back", false); }
-        if (Input.GetKey("a"))
+        if (UnityEngine.Input.GetKey("a"))
         {
             transform.position -= transform.right * 5 * Time.deltaTime;
             animator.SetBool("left", true);
         }
         else { animator.SetBool("left", false); }
-        if (Input.GetKey("d"))
+        if (UnityEngine.Input.GetKey("d"))
         {
             transform.position += transform.right * 5 * Time.deltaTime;
             animator.SetBool("right", true);

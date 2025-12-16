@@ -36,7 +36,7 @@ MonoBehaviour:
     ArcherSkilsEndCd: {fileID: 11400000, guid: 4a24dc2fbd2f8f3459a9e23046a2ea75, type: 2}
     ArcherrecoilEndCd: {fileID: 0}
   - JobType: 2
-    normalAttackCd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
+    normalAttackCd: {fileID: 11400000, guid: bcfd4844203579748a0927b59303ad5a, type: 2}
     avoidCd: {fileID: 11400000, guid: 689dbe22cd8fd3e48b8a1c1d5cef3d68, type: 2}
     archerSkilsCd: {fileID: 0}
     archerAimCd: {fileID: 0}

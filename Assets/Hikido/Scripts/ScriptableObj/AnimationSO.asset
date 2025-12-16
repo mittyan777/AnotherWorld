@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98addd9147ea34b47a3a44c476223060, type: 3}
   m_Name: AnimationSO
   m_EditorClassIdentifier: 
-  attackNormalFlg: 1
+  attackNormalFlg: 0
   attackSkilFlag: 0
   walkanimFlg: 0
   avoidanceFlg: 0
   attackArcherFlg: 0
   archerRecoilFlg: 0
+  majicSkilFlg: 0
+  normalMagickFlg: 0
