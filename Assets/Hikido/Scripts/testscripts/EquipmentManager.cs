@@ -72,9 +72,9 @@ public class EquipmentManager : MonoBehaviour
         newWeapon.transform.localPosition = localPos;
         newWeapon.transform.localRotation = Quaternion.Euler(localRot);
         
-        WeaponCollision collisionScriot = newWeapon.GetComponent<WeaponCollision>();
-        if (!collisionScriot) { collisionScriot = newWeapon.GetComponent<WeaponCollision>(); }
-        if (attackContorol) { attackContorol.SetcurrentWeaponCollision(collisionScriot); }
+        WeaponCollision collisionScriot = newWeapon.GetComponentInChildren<WeaponCollision>();
+        if (collisionScriot == null) { collisionScriot = newWeapon.GetComponentInChildren<WeaponCollision>(); }
+        if (attackContorol != null) { attackContorol.SetcurrentWeaponCollision(collisionScriot); }
 
         //装備インスタンスの更新
         currentWeaponInstance = newWeapon;

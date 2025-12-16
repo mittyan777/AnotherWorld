@@ -39,8 +39,9 @@ public class PlayerAtackBase : MonoBehaviour
         bool _inputAtk = Input.GetMouseButtonDown(0);
         if (_inputAtk)
         {
-          
+           // _animflgSO.MajicAttackNormalFlg = true;
         }
+
     }
 
     //TODO:マウスで向いている方向に回避する。

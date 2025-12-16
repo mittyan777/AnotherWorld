@@ -15,7 +15,7 @@ MonoBehaviour:
   itemKeyName: Scroll View3_1
   weaponPrefab: {fileID: 107374, guid: c223b5254ae0cec4180d5af774d0d2b3, type: 3}
   type: 2
-  plusAttack: 1
+  plusAttack: 0.98
   attackRange: 1
   attatchLocalPos: {x: 0, y: 0, z: 0}
   attachLocalRotationEules: {x: 0, y: 0, z: 0}
