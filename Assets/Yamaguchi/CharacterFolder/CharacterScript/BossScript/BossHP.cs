@@ -91,14 +91,14 @@ public class BossHP : MonoBehaviour
     */
 
     //メインのダメージ処理
-    public IEnumerator TakeDamage(int testDamage)
+    public IEnumerator TakeDamage(int takeDamage)
     {
         if (!isInvulnerabal)
         {
             isInvulnerabal = true;
             if (currentBossHP >= 0)
             {
-                currentBossHP -= testDamage;
+                currentBossHP -= takeDamage;
                 UpdateHPBar(currentBossHP);
                 // 死亡チェックを修正
                 if (currentBossHP <= 0)

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnemyDamageManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //“G‚Ìƒ_ƒ[ƒW—Ê
+    [SerializeField] private int _enemyAttackDamage01;
+    [SerializeField] private int _enemyAttackDamage02;
+    [SerializeField] private int _enemyAttackDamage03;
+    [SerializeField] private int _enemyAttackDamage04;
+    [SerializeField] private int _enemyAttackDamage05;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int AttackDamage01 => _enemyAttackDamage01;
+    public int AttackDamage02 => _enemyAttackDamage02;
+    public int AttackDamage03 => _enemyAttackDamage03;
+    public int AttackDamage04 => _enemyAttackDamage04;
+    public int AttackDamage05 => _enemyAttackDamage05;
 }
