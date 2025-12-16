@@ -22,6 +22,8 @@ public class EnemySpawner : MonoBehaviour
     public int currentSpawnCount { get; private set; }
     private float timer;
 
+    //スポナーにセットされている敵の数引き渡し用変数
+    public int spawnEnemyCount { get; private set; }
     void Start()
     {
         //子オブジェクトの2点を取得
@@ -36,6 +38,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         currentSpawnCount = 0;
+        spawnEnemyCount = enemyPrefabs.Length;
     }
 
     void Update()
