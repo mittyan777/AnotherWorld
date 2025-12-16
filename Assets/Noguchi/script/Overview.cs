@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
    [Header("順番に表示するCanvas")]
     public GameObject[] canvases;
 
+    [Header("遷移先シーン名")]
+    public string nextSceneName;
     private int currentIndex = 0;
+    private bool isFinished = false;
 
     void Start()
     {
@@ -26,7 +28,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Update()
     {
-        // Enterキーで次へ
+        if (isFinished) return;
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             ShowNextCanvas();
@@ -35,19 +38,20 @@ public class NewBehaviourScript : MonoBehaviour
 
     void ShowNextCanvas()
     {
-        // 現在のCanvasを非表示
-        canvases[currentIndex].SetActive(false);
-
-        currentIndex++;
-
-        // 配列範囲チェック
-        if (currentIndex >= canvases.Length)
+        // 最後のCanvasならシーン遷移
+        if (currentIndex >= canvases.Length - 1)
         {
-            currentIndex = canvases.Length - 1;
+            isFinished = true;
+            LoadNextScene();
             return;
         }
-        
-         // 次のCanvasを表示
+        canvases[currentIndex].SetActive(false);
+        currentIndex++;
         canvases[currentIndex].SetActive(true);
+    }
+
+    void LoadNextScene()
+    {
+        SceneManager.LoadScene(nextSceneName);
     }
 }
