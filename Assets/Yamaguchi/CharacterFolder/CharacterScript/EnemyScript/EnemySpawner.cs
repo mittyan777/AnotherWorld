@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,14 @@ public class EnemySpawner : MonoBehaviour
     
     //生成対象のEnemyオブジェクト
     [SerializeField] private GameObject[] enemyPrefabs;
-
     //生成失敗を何回まで許容するか。
     [SerializeField] private int maxAttempts = 10;
     //スポーン間隔
     [SerializeField] private float spawnInterval;
-
+    //スポーンする敵の最大数
+    [SerializeField] private int maxSpawn;
+    //現在のスポーン数
+    public int currentSpawnCount { get; private set; }
     private float timer;
 
     void Start()
@@ -31,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogError("子オブジェクトないよ");
         }
+
+        currentSpawnCount = 0;
     }
 
     void Update()
@@ -38,15 +43,24 @@ public class EnemySpawner : MonoBehaviour
         if (pointA == null || pointB == null) return;
 
         timer += Time.deltaTime;
-        if (timer >= spawnInterval)
+        if (timer >= spawnInterval&&currentSpawnCount < maxSpawn)
         {
             SpawnEnemy();
             timer = 0f;
         }
     }
 
+    // スポーン数を減らすための公開メソッドを定義
+    public void DecrementSpawnCount()
+    {
+        // スポーン数を減らす
+        // 0未満にならないようガードする
+        currentSpawnCount = Mathf.Max(0, currentSpawnCount - 1);
+    }
+
     private void SpawnEnemy()
     {
+        currentSpawnCount++;
         if (enemyPrefabs == null || enemyPrefabs.Length == 0)
         {
             Debug.LogError("敵のプレハブ入れて");
@@ -54,14 +68,21 @@ public class EnemySpawner : MonoBehaviour
         }
 
         //敵の種類をランダムで選択
-        GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+        GameObject enemyToSpawn = enemyPrefabs[UnityEngine.Random.Range(0, enemyPrefabs.Length)];
 
         //NavMesh上の有効なランダム位置を検索
         Vector3 spawnPosition = GetRandomNavMeshPosition();
 
         if (spawnPosition != Vector3.zero)
         {
-            Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);
+            newEnemy.transform.rotation = Quaternion.Euler(0f, newEnemy.transform.rotation.eulerAngles.y, 0f);
+            //生成された敵オブジェクトにスポナーの参照を渡す
+            EnemySpawnerManager enemySpawnerManager = newEnemy.GetComponent<EnemySpawnerManager>();
+            if (enemySpawnerManager != null)
+            {
+                enemySpawnerManager.SetSpawner(this);
+            }
         }
     }
 
@@ -78,8 +99,8 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < maxAttempts; i++)
         {
             //スポーン範囲内でランダムな点を生成
-            float randomX = Random.Range(minX, maxX);
-            float randomZ = Random.Range(minZ, maxZ);
+            float randomX = UnityEngine.Random.Range(minX, maxX);
+            float randomZ = UnityEngine.Random.Range(minZ, maxZ);
 
             //スポーンさせるポジションYを決める
             float randomY = (pointA.position.y + pointB.position.y) / 2f;

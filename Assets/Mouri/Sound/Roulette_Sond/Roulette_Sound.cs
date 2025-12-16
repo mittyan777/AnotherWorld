@@ -21,6 +21,13 @@ public class Roulette_Sound : MonoBehaviour
 
     public RouletteSoundType rouletteSoundType;
 
+    private bool isSpinPlaying=false;
+
+    public bool IsSpinPlaying()
+    {
+        return isSpinPlaying;
+    }
+
 
     public void PlaySound()
     {
@@ -29,25 +36,33 @@ public class Roulette_Sound : MonoBehaviour
         if(audioSource == null|| SoundClips==null) return;
 
         int index = (int)rouletteSoundType;
+
         if (index >= SoundClips.Length && SoundClips[index] != null)return;
-        {
-            audioSource.PlayOneShot(SoundClips[index]);
-        }
 
-        if (rouletteSoundType == RouletteSoundType.Spin)
+        if (rouletteSoundType == RouletteSoundType.Spin)    //音の種類_1
         {
-            audioSource.loop = true;
-            audioSource.clip = SoundClips[index];
-            audioSource.Play();
+            if (!isSpinPlaying)
+            {
+                isSpinPlaying = true;
+                audioSource.loop = true;
+                audioSource.clip = SoundClips[index];
+                audioSource.Play();
+
+            }
             return;
+
         }
 
-        if (rouletteSoundType == RouletteSoundType.Stop)
+        if (rouletteSoundType == RouletteSoundType.Stop)    //音の種類_2
         {
-            audioSource.loop = false;
-            audioSource.Stop(); // Spinのループを停止
-
+            if (isSpinPlaying)
+            {
+                audioSource.loop = false;
+                audioSource.Stop(); // Spinのループを停止
+                isSpinPlaying = false;
+            }
             audioSource.PlayOneShot(SoundClips[index]);
+            
             return;
         }
 

@@ -1043,7 +1043,7 @@ MonoBehaviour:
   coin: 0
   canControl: 1
   RayPointer: {fileID: 2054830580}
-  slot: {fileID: 1656161918}
+  slot: {fileID: 0}
   Direction: 3
 --- !u!54 &1265844319
 Rigidbody:
@@ -1261,13 +1261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a0b34f42c8cf548be5f881a5b9d77a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rouletteUI: {fileID: 1656161918}
-  player: {fileID: 0}
-  jobText: {fileID: 0}
-  statusText: {fileID: 0}
-  MinValue: 10
-  MaxValue: 100
-  PlayerMony: 0
 --- !u!1 &1359608523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,6 +1646,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 95.9
       objectReference: {fileID: 0}
+    - target: {fileID: 1966328063068518219, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3636560473536652120, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1688,7 +1685,7 @@ PrefabInstance:
     - target: {fileID: 5691805019895271750, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1656161921}
+      objectReference: {fileID: 0}
     - target: {fileID: 5691805019895271750, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -1792,51 +1789,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8542116484164666288, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1656161921}
-    - targetCorrespondingSourceObject: {fileID: 8542116484164666288, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1656161923}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
---- !u!1 &1656161918 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8542116484164666288, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
-  m_PrefabInstance: {fileID: 1656161917}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1656161921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656161918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 063757a0c3e313e4bb7fc60f0d8c5554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 0
-  powerslot_text: {fileID: 1921566501}
-  player: {fileID: 1265844318}
-  slotUI: {fileID: 1656161918}
-  PMIN_Text: 1
-  PMAX_Text: 100
-  tienn: 0.8
---- !u!114 &1656161923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656161918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7afe24fa35b4d2b4f8e3e78b2c3cac70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuManager: {fileID: 1442050996}
 --- !u!1 &1692460953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,17 +1935,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09c0ed0003c529d49a95775e557486e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1921566501 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3636560473536652120, guid: 5f0a14565dbab6a41839f66cd68fb282, type: 3}
-  m_PrefabInstance: {fileID: 1656161917}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2054830580

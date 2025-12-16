@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -41,6 +42,7 @@ public class BossMove01 : MonoBehaviour
 
     //タックルに必要な変数
     [SerializeField] private GameObject playerObj;
+    [SerializeField] private GameObject tackleObj;
     [SerializeField] private float tackleSpeed;
     [SerializeField] private float tackleTime;
     private Vector3 tackleDirection;
@@ -57,20 +59,31 @@ public class BossMove01 : MonoBehaviour
 
     private void Start()
     {
+        tackleObj.SetActive(false);
+    }
+
+    private void OnEnable() 
+    {
         animationManager = GetComponent<BossAnimationManager>();
-        quickAttackArea.SetActive(false);
         playerObj = GameObject.FindGameObjectWithTag("Player");
+        quickAttackArea.SetActive(false);
+        tackleObj.SetActive(false);
+        //確実な初期化処理をここに記述
         transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
+
     private void Update()
     {
-        if (BossManager.instance.currentBossHP <= 0)
+        /*
+        if (BossMoveManager.instance.currentBossHP <= 0)
         {
             Rigidbody body = GetComponent<Rigidbody>();
             Destroy(body);
             ChangeState(Boss01ActionType.Death);
             return;
         }
+         */
+        if (currentState == Boss01ActionType.Death) return;
 
         if (currentState == Boss01ActionType.Tackle)
         {
@@ -99,9 +112,9 @@ public class BossMove01 : MonoBehaviour
     public void DetermineNextAction()
     {
         //【重要】BossManagerのインスタンスがnullでないことを最初に確認する
-        if (BossManager.instance == null)
+        if (BossMoveManager.instance == null)
         {
-            Debug.LogError("BossManager.instance が初期化されていません。Script Execution Order を確認してください。");
+            Debug.LogError("BossMoveManager.instance が初期化されていません。Script Execution Order を確認してください。");
             ChangeState(Boss01ActionType.Idle);
             return;
         }
@@ -138,8 +151,8 @@ public class BossMove01 : MonoBehaviour
 
         List<float> weight = targetAction.Select(a => a.ProbabilityWeight).ToList();
 
-        // ここで BossManager.instance が null の場合、エラーが出る
-        int actionIndex = BossManager.instance.GetActionIndex(weight);
+        // ここで BossMoveManager.instance が null の場合、エラーが出る
+        int actionIndex = BossMoveManager.instance.GetActionIndex(weight);
 
         if (actionIndex != -1)
         {
@@ -189,8 +202,9 @@ public class BossMove01 : MonoBehaviour
         */
     }
 
-    private void ChangeState(Boss01ActionType newAction)
+    public void ChangeState(Boss01ActionType newAction)
     {
+        StopAllCoroutines();
         currentState = newAction;
         if (animationManager != null)
         {
@@ -202,6 +216,7 @@ public class BossMove01 : MonoBehaviour
             case Boss01ActionType.Idle:
                 //アニメーターのisIdleをTrueにする
                 currentThinkingTime = 0;
+                tackleObj.SetActive(false);
                 break;
             case Boss01ActionType.QuickAttack:
                 //NavMeshAgentを起動し、プレイヤーを追跡する処理を実行
@@ -218,9 +233,13 @@ public class BossMove01 : MonoBehaviour
                 currentTime = 0;
                 LookAtPlayerHorizontal();
                 tackleDirection = transform.forward;
+                tackleObj.SetActive(true);
                 break;
             case Boss01ActionType.Walking:
                 //Walking固有のロジックを実行
+                break;
+            case Boss01ActionType.Death:
+                tackleObj.SetActive(false);
                 break;
         }
     }
@@ -242,7 +261,6 @@ public class BossMove01 : MonoBehaviour
         //ChangeState(Boss01ActionType.Tackle);
         currentTime += Time.deltaTime;
         transform.position += tackleDirection * tackleSpeed * Time.deltaTime;
-
         if (currentTime >= tackleTime)
         {
             ChangeState(Boss01ActionType.Idle);
@@ -334,6 +352,7 @@ public class BossMove01 : MonoBehaviour
         if (collision.gameObject.CompareTag("syounin"))
         {
             ChangeState(Boss01ActionType.Idle);
+            tackleObj.SetActive(false);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -341,6 +360,7 @@ public class BossMove01 : MonoBehaviour
         if (other.CompareTag("syounin"))
         {
             ChangeState(Boss01ActionType.Idle);
+            tackleObj.SetActive(false);
         }
     }
 }

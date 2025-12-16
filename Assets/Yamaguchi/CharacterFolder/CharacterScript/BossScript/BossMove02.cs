@@ -56,21 +56,26 @@ public class BossMove02 : MonoBehaviour
         quickAttackArea.SetActive(false);
         // PlayerObjの検索
         playerObj = GameObject.FindGameObjectWithTag("Player");
+    }
 
-        // スケール設定 (以前のディスカッションに基づき残す)
-        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+    private void OnEnable()
+    {
+        //確実な初期化処理をここに記述
+        transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
     }
 
     private void Update()
     {
-        // BossManager.instance.currentBossHPはBossManagerが更新されている前提
-        if (BossManager.instance.currentBossHP <= 0)
+        /*
+        // BossMoveManager.instance.currentBossHPはBossManagerが更新されている前提
+        if (BossMoveManager.instance.currentBossHP <= 0)
         {
             Rigidbody body = GetComponent<Rigidbody>();
             if (body != null) Destroy(body); // Rigidbodyが存在する場合のみDestroy
             ChangeState(Boss02ActionType.Death);
             return;
         }
+        */
 
         // JumpAttackの処理を追加する場合はここに記述
         if (currentState == Boss02ActionType.TwoStepAttack)
@@ -99,9 +104,9 @@ public class BossMove02 : MonoBehaviour
 
     public void DetermineNextAction()
     {
-        if (BossManager.instance == null)
+        if (BossMoveManager.instance == null)
         {
-            Debug.LogError("BossManager.instance が初期化されていません。Script Execution Order を確認してください。");
+            Debug.LogError("BossMoveManager.instance が初期化されていません。Script Execution Order を確認してください。");
             ChangeState(Boss02ActionType.Idle);
             return;
         }
@@ -136,7 +141,7 @@ public class BossMove02 : MonoBehaviour
         List<float> weight = targetAction.Select(a => a.ProbabilityWeight).ToList();
 
         // BossManagerの抽選関数を使用
-        int actionIndex = BossManager.instance.GetActionIndex(weight);
+        int actionIndex = BossMoveManager.instance.GetActionIndex(weight);
 
         if (actionIndex != -1)
         {
@@ -151,7 +156,8 @@ public class BossMove02 : MonoBehaviour
         ChangeState(Boss02ActionType.Idle);
     }
 
-    private void ChangeState(Boss02ActionType newAction)
+    //外部からもアニメーションを変えれるようにする
+    public void ChangeState(Boss02ActionType newAction)
     {
         currentState = newAction;
 
@@ -215,7 +221,6 @@ public class BossMove02 : MonoBehaviour
         float yOffset = 1.5f;
         float rotationZ = 30f;
         Vector3 spawnPos = transform.position;
-        // 注意: spawnPos.y = yOffset; は、Y座標をyOffsetの値に上書きしています。
         // オフセットとして使いたい場合は spawnPos.y += yOffset; に修正が必要です。
         spawnPos.y += yOffset;
         Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, rotationZ);

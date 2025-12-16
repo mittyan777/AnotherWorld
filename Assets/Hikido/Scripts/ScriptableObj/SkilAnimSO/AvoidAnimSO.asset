@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf003dc5b4787746bf7e557716640fe, type: 3}
   m_Name: AvoidAnimSO
   m_EditorClassIdentifier: 
-  targetParm: 4
+  targetParm: 3
   floatValue: 0

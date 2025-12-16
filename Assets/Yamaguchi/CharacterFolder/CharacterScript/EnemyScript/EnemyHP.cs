@@ -10,6 +10,7 @@ public class EnemyHP : MonoBehaviour
     EnemyDropManager dropManager;
 
     protected EnemyMove enemyMove;
+    
     [SerializeField] private float damageTime;
     [SerializeField] private float breakTime;
 
@@ -113,13 +114,13 @@ public class EnemyHP : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            return;
+        }
         if (other.gameObject.tag.Contains("Player"))
         {
             GetDamege();
-        }
-        else 
-        {
-            return;
         }
     }
 }

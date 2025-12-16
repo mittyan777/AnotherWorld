@@ -10,22 +10,12 @@ public class PlayerAtackBase : MonoBehaviour
     Animator _animator;
     bool bAvoidance = false;
     protected  bool bNormalAttack = false;
-
-    //ゲームマネージャー
-    [SerializeField] GameObject[] manager;
-    [SerializeField] AnimationFlagManagerSO _animflgSO;
-
-    /// <summary> /// レンジ構造体 /// </summary>
-    /// いらないかも
-    struct PlayerRange
-    {
-        [SerializeField] int mangicMaxRange;
-        [SerializeField] int archerMaxRange;
-    }
+    
+    [SerializeField] protected AnimationFlagManagerSO _animflgSO;
 
     void Start()
     {
-        //_animator = GetComponent<Animator>();
+        _animflgSO.Avoidflg = false;
     }
 
     protected virtual void Update()
@@ -46,18 +36,14 @@ public class PlayerAtackBase : MonoBehaviour
     /// <summary> s/// 全職種共通の攻撃処理 /// </summary>
     protected virtual void Atack_Normal()
     {
-        //TODO:通常攻撃の処理(全職種共通の処理)
         bool _inputAtk = Input.GetMouseButtonDown(0);
         if (_inputAtk)
         {
-            //TODO:ダメージ処理(全職種共通の処理)
-            //->与えるダメージは獲得ステータスの攻撃力分を与える。
-            _animflgSO.AttackNormalflg = true;
-            bNormalAttack = true;
+          
         }
-
     }
 
+    //TODO:マウスで向いている方向に回避する。
     /// <summary> /// 全職種共通の回避 /// </summary>
     private void Avoidance()
     {
@@ -69,32 +55,25 @@ public class PlayerAtackBase : MonoBehaviour
         bool _isShiftKey = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
         bool _isSpaceKey = Input.GetKeyDown(KeyCode.Space);
 
-        UnityEngine.Vector3 _inputDirection = new UnityEngine.Vector3(_inputHorizontal, 0f, _inputVertical).normalized;
+        Transform _cameraTransform = Camera.main.transform;
+
+        UnityEngine.Vector3 _cameraForward = UnityEngine.Vector3.Scale(_cameraTransform.forward, new UnityEngine.Vector3(1, 0, 1)).normalized;
+        UnityEngine.Vector3 _cameraRight = UnityEngine.Vector3.Scale(_cameraTransform.right, new UnityEngine.Vector3(1, 0, 1)).normalized;
+
+        UnityEngine.Vector3 _inputDirection = (_cameraForward * _inputVertical) + (_cameraRight * _inputHorizontal);
+        _inputDirection = _inputDirection.normalized;
 
         //Shift + 方向キーでの回避
         if (_isShiftKey && _inputDirection.magnitude > 0.1f || _isSpaceKey && _inputDirection.magnitude > 0.1f)
         {
             UnityEngine.Quaternion targetRotation = UnityEngine.Quaternion.LookRotation(_inputDirection);
             transform.rotation = targetRotation;
-            bAvoidance = true;
-        }
-        else
-        {
-            bAvoidance = false;
-        }
-        //TODO:回避フラグ必要か？
-        if (bAvoidance)
-        {
-            //TODO:アニメーションフラグで管理
+
+            //回避アニメーションフラグ
             _animflgSO.Avoidflg = true;
             Debug.Log("回避方向");
         }
+        else { _animflgSO.Avoidflg = false; }
+     
     }
-    public bool GetbAvoindance()
-    {
-        return bAvoidance;
-    }
-
-
-
 }

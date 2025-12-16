@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Rouretto_New : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class Rouretto_New : MonoBehaviour
 
     [Header("ルーレット内部システム")]
     [SerializeField] public int[] Status;   //プレイヤーの配列ごとのステータスを探すための役割
-    [SerializeField] private bool FirstRoulette = true;//初回かどうかの判断をするための関数
+    [SerializeField] public bool FirstRoulette = true;//初回かどうかの判断をするための関数
     
     private bool isActive = false;  //UIが開いているかを判断する
 
@@ -93,7 +93,7 @@ public class Rouretto_New : MonoBehaviour
         //初期UIは非表示
         RouletteUI.SetActive(false);    //ルーレットUIや背景などが「RouletteUI」に格納されておりこのルーレットUIを表示/非表示にさせるか否か
 
-        //StartButton.onClick.AddListener(StartRoulette);     
+        StartButton.onClick.AddListener(StartRoulette);     
         StopButton.onClick.AddListener(StopRoulette);
 
         
@@ -109,7 +109,10 @@ public class Rouretto_New : MonoBehaviour
     }
     void Update()
     {
-        PlayerStatus();
+        if (SceneManager.GetActiveScene().name != "load_screen")
+        {
+            PlayerStatus();
+        }
 
         jobtext();
     }
@@ -186,9 +189,9 @@ public class Rouretto_New : MonoBehaviour
 
         if (FirstRoulette)
         {
+            Spining = true;
+            spinCoroutine = StartCoroutine(SpinRoulette());
            
-                Spining = true;
-                spinCoroutine = StartCoroutine(SpinRoulette());
 
             if(rouletteSound != null)
             {
@@ -212,8 +215,6 @@ public class Rouretto_New : MonoBehaviour
                     rouletteSound.PlaySound();
                 }
 
-
-                
              
             }
 
