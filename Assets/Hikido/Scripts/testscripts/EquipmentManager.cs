@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
 {
-    public Transform rightHandAttachPoint;
+    //右手に装備
+    public  Transform rightHandAttachPoint;
+
+    //左手に装備
+    public Transform leftHandAttackPoint;
+
     private GameObject currentWeaponInstance;
+    private WeaponData currentWeapData;
+
     private AttackContorol attackContorol;
 
     private void Start()
@@ -15,7 +22,7 @@ public class EquipmentManager : MonoBehaviour
        {
             attackContorol = gameObject.AddComponent<AttackContorol>();
        }
-        else { Debug.LogError("あったっくこんとろーるがないよ。"); }
+        else { Debug.LogError("あたっくこんとろーるがないよ。"); }
     }
 
     public void EquipWeapon(WeaponData data)
@@ -26,16 +33,44 @@ public class EquipmentManager : MonoBehaviour
             currentWeaponInstance = null;
         }
 
-        if (!rightHandAttachPoint)
+        //現在装備データを更新
+        currentWeapData = data;
+
+        Transform targetAttachPoint;
+        Vector3 localPos;
+        Vector3 localRot;
+
+        if(data.type == WeaponType.Bow) 
         {
-            Debug.LogError("設定されていない。");
-            return;
+            targetAttachPoint = leftHandAttackPoint;
+            localPos = data.leftAttachLocalPos;
+            localRot = data.leftAttachLocalRotationEules;
+
+            if (!leftHandAttackPoint) 
+            {
+                Debug.LogError("左手のアタッチポイントが設定されていない");
+                return;
+            }
+        }
+        else 
+        {
+            targetAttachPoint = rightHandAttachPoint;
+            localPos = data.attatchLocalPos;
+            localRot = data.attachLocalRotationEules;
+
+            if (!rightHandAttachPoint) 
+            {
+                Debug.LogError("右手のアタッチポイントが設定されていない");
+                return;
+            }
         }
 
-        GameObject newWeapon = Instantiate(data.weaponPrefab, rightHandAttachPoint);
+        
 
-        newWeapon.transform.localPosition = data.attatchLocalPos;
-        newWeapon.transform.localRotation = Quaternion.Euler(data.attachLocalRotationEules);
+        GameObject newWeapon = Instantiate(data.weaponPrefab, targetAttachPoint);
+
+        newWeapon.transform.localPosition = localPos;
+        newWeapon.transform.localRotation = Quaternion.Euler(localRot);
         
         WeaponCollision collisionScriot = newWeapon.GetComponent<WeaponCollision>();
         if (!collisionScriot) { collisionScriot = newWeapon.GetComponent<WeaponCollision>(); }

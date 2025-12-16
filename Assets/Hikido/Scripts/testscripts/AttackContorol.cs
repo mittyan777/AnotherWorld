@@ -16,13 +16,13 @@ public class AttackContorol : MonoBehaviour
     //アニメーションイベント呼び出し -> hitbox表示
     public void EnableWeaponHitBox() 
     {
-        if (!currentWeaponCollision) { currentWeaponCollision.SetCollisionActive(true); }
+        if (currentWeaponCollision) { currentWeaponCollision.SetCollisionActive(true); }
     }
 
     //hitbox 非表示
     public void DisableWeaponhitBox() 
     {
-        if (!currentWeaponCollision) { currentWeaponCollision.SetCollisionActive(false);}
+        if (currentWeaponCollision) { currentWeaponCollision.SetCollisionActive(false);}
     }
 
 
