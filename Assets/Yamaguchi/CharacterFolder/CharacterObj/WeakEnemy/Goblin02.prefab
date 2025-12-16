@@ -219,7 +219,7 @@ MonoBehaviour:
   animationlatency: 1
   animationRecoveryTime: 0
   isAttackSequenceRunning: 0
-  projectilePrefab: {fileID: 7555427716517911455, guid: 7c803678c7e122c4083cbef002c59fd8, type: 3}
+  projectilePrefab: {fileID: 1982624496745144682, guid: 53ef0d417dabf4a4ba65b497f60c5854, type: 3}
   firePoint: {fileID: 1406427903097422589}
   throwWaitingTime: 0.75
 --- !u!114 &6203012493243144710
