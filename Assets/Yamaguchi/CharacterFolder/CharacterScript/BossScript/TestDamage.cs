@@ -21,6 +21,10 @@ public class TestDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!bossManager.bossBattle)
+        {
+            return;
+        }
         if (other.gameObject.CompareTag("AttackArea01"))
         {
             Debug.Log(attackDamage01);

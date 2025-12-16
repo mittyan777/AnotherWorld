@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossManager : MonoBehaviour
 {
-    private bool bossBattle;
+    public bool bossBattle { get; private set; }
     [SerializeField] private GameObject activeBossObj;
     [SerializeField] private GameObject activeCanvas;
     [SerializeField] private float deleteTime;
@@ -31,10 +31,10 @@ public class BossManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !bossBattle)
+        if (other.CompareTag("Player") && !bossBattle)
         {
-            BossBatrleStart();
             bossBattle = true;
+            BossBatrleStart(); 
         }
     }
 

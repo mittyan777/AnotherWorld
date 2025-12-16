@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7446604766277331761}
   m_Layer: 0
   m_Name: QuickAttackObj
-  m_TagString: Untagged
+  m_TagString: AttackArea01
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4356839988861448017}
   m_Layer: 0
   m_Name: TacklObj
-  m_TagString: Untagged
+  m_TagString: AttackArea02
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8428966170973909830}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
