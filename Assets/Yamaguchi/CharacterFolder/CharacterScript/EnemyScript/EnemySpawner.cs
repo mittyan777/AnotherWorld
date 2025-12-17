@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour
             //NavMesh.AllAreasはすべての歩行可能なNavMeshを対象にする
             if (NavMesh.SamplePosition(randomPoint, out hit, 3.0f, NavMesh.AllAreas))
             {
-                Debug.Log("スポーンできる");
+                //Debug.Log("スポーンできる");
                 //NavMesh上の有効な位置が見つかった
                 return hit.position;                
             }
