@@ -14,6 +14,16 @@ TagManager:
   - AttackArea01
   - AttackArea02
   - AttackArea03
+  - GoblinAttack01
+  - GoblinAttack03
+  - SkeletonAttack01
+  - SkeletonAttack03
+  - ThrowableAttack
+  - SpiderAttack01
+  - SpiderAttack02
+  - WolfAttack
+  - test
+  - WeakEnemyAttack04
   layers:
   - Default
   - TransparentFX
