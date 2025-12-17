@@ -8,7 +8,7 @@ public class WeaponClass : MonoBehaviour
     public static WeaponClass Instance { get; private set; }
 
     [Header("全武器データの参照")]
-    [Tooltip("プロジェクト内の全ての WeaponData ScriptableObject をここに登録してください")]
+    [Tooltip("プロジェクト内の全ての WeaponData ScriptableObject をここに登録")]
     [SerializeField] private WeaponData[] allWeapons;
 
     private Dictionary<string, WeaponData> weaponDictionary;

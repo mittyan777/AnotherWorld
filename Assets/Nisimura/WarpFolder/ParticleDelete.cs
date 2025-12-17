@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ワープオブジェクトを消す用のスクリプト
 public class ParticleDelete : MonoBehaviour
 {
 

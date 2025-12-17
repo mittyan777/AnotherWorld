@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: edd09db89803e9246aada198d5621474, type: 3}
-  m_Name: WeaponData
+  m_Name: WeaponData_Bow
   m_EditorClassIdentifier: 
-  itemKeyName: 
-  weaponPrefab: {fileID: 0}
-  plusAttack: 1
+  itemKeyName: Scroll View3_1
+  weaponPrefab: {fileID: 107374, guid: c223b5254ae0cec4180d5af774d0d2b3, type: 3}
+  type: 2
+  plusAttack: 0.98
   attackRange: 1
   attatchLocalPos: {x: 0, y: 0, z: 0}
   attachLocalRotationEules: {x: 0, y: 0, z: 0}
+  leftAttachLocalPos: {x: -0.23, y: -0.514, z: 0.18}
+  leftAttachLocalRotationEules: {x: -32.205, y: -79.494, z: 10.284}
