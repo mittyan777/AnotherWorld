@@ -23,7 +23,11 @@ TagManager:
   - SpiderAttack02
   - WolfAttack
   - test
-  - WeakEnemyAttack04
+  - PlayerFireMagic
+  - PlayerThunderMagic
+  - PlayerWindMagic
+  - PlayerArrow
+  - PlayerSword
   layers:
   - Default
   - TransparentFX
