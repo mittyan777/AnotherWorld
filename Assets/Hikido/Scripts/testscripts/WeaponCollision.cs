@@ -23,7 +23,7 @@ public class WeaponCollision : MonoBehaviour
 
     public void SetCollisionActive(bool isActive) 
     {
-        if (weaponCollider) 
+        if (weaponCollider != null) 
         {
             weaponCollider.enabled = isActive;
         }

@@ -179,7 +179,7 @@ public class PlayerAnimation : MonoBehaviour
         if (_animFlgSO)
         {
             //蜷�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ蜃ｦ逅�ｒAction縺ｫ逋ｻ骭ｲ
-            _animFlgSO.AttackNormal += AttackAnimation_Normal;
+            _animFlgSO.NormalMajicAttack += AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil += ArcherRecoilAnim;
             _animFlgSO.MajicSkil += AttackAnimation_Wizard;
@@ -199,7 +199,7 @@ public class PlayerAnimation : MonoBehaviour
         if (_animFlgSO)
         {
             //蜷�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蜃ｦ逅�ｒAction縺九ｉ蜑企勁
-            _animFlgSO.AttackNormal -= AttackAnimation_Normal;
+            _animFlgSO.NormalMajicAttack -= AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil -= ArcherRecoilAnim;
             _animFlgSO.MajicSkil -= AttackAnimation_Wizard;
@@ -219,7 +219,6 @@ public class PlayerAnimation : MonoBehaviour
     /// <summary> /// 騾壼ｸｸ謾ｻ謦�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
     private void AttackAnimation_Normal()
     {
-
         //謾ｻ謦��繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ逋ｺ轣ｫ
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
@@ -346,6 +345,7 @@ public class PlayerAnimation : MonoBehaviour
             }
         }
     }
+
 
     public void OnComboSlash()  { _plSwardLogic.TryAttackCombo(); }
 

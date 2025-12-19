@@ -52,7 +52,7 @@ public class BossMoveManager : MonoBehaviour
         if (Input.GetKey(KeyCode.P))
         {
             //bossHP.TestDamage();
-            StartCoroutine(bossHP.TestDamege02(25));
+            StartCoroutine(bossHP.TestDamege02(100));
             // HP‚ª•ÏX‚³‚ê‚½‚çcurrentBossHP‚ğ“¯Šú
             if (bossHP != null)
             {

@@ -13,6 +13,6 @@ public class MoneyDrop : MonoBehaviour
         int randomValue = Random.Range(minMoneyAmount, maxMoneyAmount);
         money = randomValue;
 
-        Debug.Log(money);
+        //Debug.Log(money);
     }
 }
