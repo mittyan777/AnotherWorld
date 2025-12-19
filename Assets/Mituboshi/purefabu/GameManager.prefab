@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2507564272328442073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5277834990421808650}
+  - component: {fileID: 3238216735800702585}
+  - component: {fileID: 8883917638635748478}
+  - component: {fileID: 763605349419252060}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5277834990421808650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507564272328442073}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.065057, y: -0.22210602, z: 0.8336407}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3238216735800702585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507564272328442073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5e6fc43755c2e41b237dd24f3c80a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player:
+  - {fileID: 0}
+  Coin: 1000
+  HP: 100
+  MP: 100
+  AttackStatus: 0
+  DefenseStatus: 0
+  Present_HP: 100
+  Present_MP: 100
+  MP_text: {fileID: 0}
+  HP_text: {fileID: 0}
+  job: 0
+  job_text: {fileID: 0}
+  job_sprite:
+  - {fileID: 21300000, guid: 44e18e7368c5d9243a2abc0d9105fe4e, type: 3}
+  - {fileID: 21300000, guid: c9128c14af79051488c4cb6952c546a7, type: 3}
+  - {fileID: 21300000, guid: 846cda25981e3c64cb6a9c36cef60736, type: 3}
+  Status: 00000000000000000000000000000000
+  rouletteUI: {fileID: 0}
+  Weapon_UI: {fileID: 0}
+  GAMEUI: {fileID: 0}
+  jobroulette: {fileID: 0}
+  Standard_UI: {fileID: 0}
+  Canvas: {fileID: 0}
+  skill_UI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  gage_image:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  HP_slider: {fileID: 0}
+  MP_slider: {fileID: 0}
+  slot: 0
+  fade: 0
+  fade_image: {fileID: 0}
+  fade_image_a: 1
+  scene_name: 
+  tutorial_count: 0
+  tutorial_UI: {fileID: 0}
+--- !u!64 &8883917638635748478
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507564272328442073}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &763605349419252060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507564272328442073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab6393767cda56468b923695af93e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollViewGroups:
+  - groupName: Scroll View1
+    itemButtons:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    itemPrices: 64000000780000002c010000f4010000
+  - groupName: Scroll View2
+    itemButtons:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    itemPrices: 64000000780000002c010000f4010000
+  - groupName: Scroll View3
+    itemButtons:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    itemPrices: 64000000780000002c010000f4010000
+  - groupName: Scroll View4
+    itemButtons: []
+    itemPrices: 
+  coinText: {fileID: 0}
+  messageText: {fileID: 0}
+  shopUI: {fileID: 0}
