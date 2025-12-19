@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Overview : MonoBehaviour
 {
-    [Header("順番に表示するCanvas")]
+   [Header("順番に表示するCanvas")]
     public GameObject[] canvases;
 
     private int currentIndex = 0;
@@ -10,47 +10,48 @@ public class Overview : MonoBehaviour
 
     void Start()
     {
-        CloseAll();
+        Close();
     }
 
     void Update()
     {
-        // Escキーで開閉
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isOpen){CloseAll();}
-            else{Open();}
-        }
-
         if (!isOpen) return;
 
-        // 右キー（次へ）
         if (Input.GetKeyDown(KeyCode.RightArrow))
-        {ShowNext();}
+        {
+            ShowNext();
+        }
 
-        // 左キー（前へ）
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {ShowPrevious();}
+        {
+            ShowPrevious();
+        }
     }
 
-    void Open()
+    // ===== 外部操作用 =====
+    public void Open()
     {
         isOpen = true;
         currentIndex = 0;
         ShowCurrent();
     }
 
-    void CloseAll()
+    public void Close()
     {
         isOpen = false;
         foreach (var canvas in canvases)
-        { canvas.SetActive(false);}
+        {
+            canvas.SetActive(false);
+        }
     }
 
+    // ===== 内部処理 =====
     void ShowCurrent()
     {
-        CloseAll();
-        isOpen = true;
+        foreach (var canvas in canvases)
+        {
+            canvas.SetActive(false);
+        }
         canvases[currentIndex].SetActive(true);
     }
 
