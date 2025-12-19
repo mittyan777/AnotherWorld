@@ -1,57 +1,70 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Overview : MonoBehaviour
 {
-   [Header("順番に表示するCanvas")]
+    [Header("順番に表示するCanvas")]
     public GameObject[] canvases;
 
-    [Header("遷移先シーン名")]
-    public string nextSceneName;
     private int currentIndex = 0;
-    private bool isFinished = false;
+    private bool isOpen = false;
 
     void Start()
     {
-        // 全Canvasを非表示
-        foreach (var canvas in canvases)
-        {
-            canvas.SetActive(false);
-        }
-
-        // 最初のCanvasを表示
-        if (canvases.Length > 0)
-        {
-            canvases[0].SetActive(true);
-        }
+        CloseAll();
     }
 
     void Update()
     {
-        if (isFinished) return;
-
-        if (Input.GetKeyDown(KeyCode.Return))
+        // Escキーで開閉
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowNextCanvas();
+            if (isOpen){CloseAll();}
+            else{Open();}
         }
+
+        if (!isOpen) return;
+
+        // 右キー（次へ）
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {ShowNext();}
+
+        // 左キー（前へ）
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {ShowPrevious();}
     }
 
-    void ShowNextCanvas()
+    void Open()
     {
-        // 最後のCanvasならシーン遷移
-        if (currentIndex >= canvases.Length - 1)
-        {
-            isFinished = true;
-            LoadNextScene();
-            return;
-        }
-        canvases[currentIndex].SetActive(false);
-        currentIndex++;
+        isOpen = true;
+        currentIndex = 0;
+        ShowCurrent();
+    }
+
+    void CloseAll()
+    {
+        isOpen = false;
+        foreach (var canvas in canvases)
+        { canvas.SetActive(false);}
+    }
+
+    void ShowCurrent()
+    {
+        CloseAll();
+        isOpen = true;
         canvases[currentIndex].SetActive(true);
     }
 
-    void LoadNextScene()
+    void ShowNext()
     {
-        SceneManager.LoadScene(nextSceneName);
+        if (currentIndex >= canvases.Length - 1) return;
+        currentIndex++;
+        ShowCurrent();
+    }
+
+    void ShowPrevious()
+    {
+        if (currentIndex <= 0) return;
+        currentIndex--;
+        ShowCurrent();
     }
 }
