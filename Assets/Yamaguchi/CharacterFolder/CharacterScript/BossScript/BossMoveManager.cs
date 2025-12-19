@@ -17,7 +17,17 @@ public class BossMoveManager : MonoBehaviour
     private bool isDeathSequenceStarted = false;
 
     private GameManager gameManager;
-    
+
+    private TestManerger testManerger;
+
+    //スタン設定
+    [SerializeField] private string stunTag = "PlayerThunderMagic"; // スタンさせる攻撃のタグ
+    [SerializeField][Range(0, 100)] private float stunProbability = 30f; // スタン確率(%)
+    [SerializeField] private float stunDuration = 2.0f; // スタン時間
+    private bool isStunned = false;
+    //外部使用用
+    public bool IsStunned => isStunned;
+
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +43,12 @@ public class BossMoveManager : MonoBehaviour
 
     private void Start()
     {
+        GameObject test = GameObject.FindWithTag("test");
+        if (test != null)
+        {
+            testManerger= test.GetComponent<TestManerger>();
+        }
+
         // BossHPがAwake/StartでHPを設定しているため、ここで値を同期
         if (bossHP != null)
         {
@@ -138,11 +154,42 @@ public class BossMoveManager : MonoBehaviour
         }
     }
 
+    private IEnumerator StunRoutine()
+    {
+        isStunned = true;
+        Debug.Log("ボスがスタンしました！");
+
+        // 各ボスのスクリプトを取得して状態をIdleにする
+        BossMove01 boss01 = GetComponent<BossMove01>();
+        if (boss01 != null) boss01.ChangeState(BossMove01.Boss01ActionType.Idle);
+
+        BossMove02 boss02 = GetComponent<BossMove02>();
+        if (boss02 != null) boss02.ChangeState(BossMove02.Boss02ActionType.Idle);
+
+        // 指定時間待機
+        yield return new WaitForSeconds(stunDuration);
+
+        isStunned = false;
+        Debug.Log("スタンの解除");
+    }
+
     //当たったオブジェクトにPlayerが含まれていたらダメージをくらうようにする
     // この衝突処理はプレイヤーではなくプレイヤーの攻撃タグをチェックすべきですが、元のコードを維持します。
     private void OnTriggerEnter(Collider other)
     {
         string hitTag = other.gameObject.tag;
+
+        // --- スタン判定ロジック ---
+        if (hitTag == stunTag && !isStunned && !isDeathSequenceStarted)
+        {
+            float roll = Random.Range(0f, 100f);
+            if (roll <= stunProbability)
+            {
+                StartCoroutine(StunRoutine());
+            }
+        }
+
+
         if (other.gameObject.CompareTag("Player")) 
         { 
             return; 
@@ -151,6 +198,14 @@ public class BossMoveManager : MonoBehaviour
         {
             //GameManagerから最新の攻撃力を取得する。
             int takeDamege = (int)gameManager.AttackStatus;
+            //プレイヤーの攻撃力を渡す
+            StartCoroutine(bossHP.TakeDamage(takeDamege));
+        }
+
+        if (hitTag.Contains("Player"))
+        {
+            //GameManagerから最新の攻撃力を取得する。
+            int takeDamege = testManerger.HP;
             //プレイヤーの攻撃力を渡す
             StartCoroutine(bossHP.TakeDamage(takeDamege));
         }

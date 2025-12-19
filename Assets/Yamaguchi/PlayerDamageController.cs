@@ -55,7 +55,7 @@ public class PlayerDamageController : MonoBehaviour
         if (gameManager == null || enemyDamageManager == null || bossManager == null)
         {
             Debug.LogError("必要なマネージャーが見つかりません。PlayerHealthControllerを無効化します。", this);
-            enabled = false;
+            //enabled = false;
         }
     }
 
@@ -128,8 +128,11 @@ public class PlayerDamageController : MonoBehaviour
             //GameManagerの公開メソッドを呼び出し、HP減少を依頼 ★
             if (gameManager != null)
             {
-                testManerger.testDamage(damage);
                 //gameManager.TakeDamage(damage);
+            }
+            if (testManerger != null&&bossManager.bossBattle)
+            {
+                testManerger.testDamage(damage);
             }
             // 無敵時間をリセット
             invincibilityTimer = invincibilityDuration;
