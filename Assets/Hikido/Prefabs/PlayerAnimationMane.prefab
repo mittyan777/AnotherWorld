@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3716454457299693910}
   - component: {fileID: 6976128363539079020}
-  - component: {fileID: 3458788291979090871}
   m_Layer: 0
   m_Name: PlayerAnimationMane
   m_TagString: Untagged
@@ -53,19 +52,3 @@ MonoBehaviour:
   _cameraTransform: {fileID: 0}
   _swordSkillCmd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
   _plSwardLogic: {fileID: 0}
---- !u!114 &3458788291979090871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3019045837574355565}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c776e83e59abd7c43ae77817608dc4be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAnimation: {fileID: 6976128363539079020}
-  initialJob: 0
-  switchWizardKey: 49
-  switchArcherKey: 50

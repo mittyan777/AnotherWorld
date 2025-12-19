@@ -10,7 +10,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.Windows;
 
 /// 繧ｸ繝ｧ繝悶ち繧､繝励＃縺ｨ縺ｫ繧ｻ繝�ヨ縺吶ｋ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ繧ｳ繝槭Φ繝峨ｒ螟画峩
-public enum JobType
+public enum JobType_main
 {
     SWORDSMAN,    //蜑｣螢ｫ  = 0
     ARCHER,       //蠑謎ｽｿ縺(繧｢繝ｼ繝√Ε繝ｼ) = 1
