@@ -76,6 +76,11 @@ public class BossMove02 : MonoBehaviour
             return;
         }
         */
+        if (currentState == Boss02ActionType.Death) return;
+        if (BossMoveManager.instance != null && BossMoveManager.instance.IsStunned)
+        {
+            return;
+        }
 
         // JumpAttackの処理を追加する場合はここに記述
         if (currentState == Boss02ActionType.TwoStepAttack)

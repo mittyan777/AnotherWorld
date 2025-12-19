@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]public float AttackStatus;
     [SerializeField]public float DefenseStatus;
    
-    [SerializeField] float Present_HP;
+    [SerializeField] public float Present_HP;
     [SerializeField]public float Present_MP;
     [SerializeField] TextMeshProUGUI MP_text;
     [SerializeField] TextMeshProUGUI HP_text;
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             {
                 Player = GameObject.FindGameObjectsWithTag("Player");
             }
-            PlayerStatus();
+           // PlayerStatus();
         }
         else { Canvas.SetActive(false); }
 
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Synthesis_Test")
         {
-            scene_name = "Test_Stage1";
+            scene_name = "EnemyScene_mitubosi";
         }
         if (tutorial_UI != null)
         {
@@ -341,6 +341,13 @@ public class GameManager : MonoBehaviour
             HP = 0;
             MP = 0;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Present_HP -= damage;
+        Debug.Log(damage);
+        Debug.Log(HP);
     }
 
 

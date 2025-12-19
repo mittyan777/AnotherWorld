@@ -23,7 +23,7 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] EnemyAnimationManager animationManager;
 
     // NavMeshAgentの到達判定に使用する小さな閾値
-    private const float ARRIVAL_THRESHOLD = 0.5f;
+    private const float ARRIVAL_THRESHOLD = 1.0f;
 
 
     [SerializeField] private float stayDuration = 3f;           //目的地到着後の待機時間 (秒)
@@ -187,6 +187,7 @@ public class EnemyMove : MonoBehaviour
 
         // 自分の位置を中心とした patrolRandomRange の範囲内で目的地を探す
         Vector3 randomDirection = Random.insideUnitSphere * patrolRandomRange;
+        randomDirection.y = 0;
         randomDirection += transform.position;
 
         NavMeshHit hit;

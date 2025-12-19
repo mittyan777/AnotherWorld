@@ -29,4 +29,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Noguchi/BossUI.unity
     guid: e453bf458b3e9be498f682ffe01c674e
+
   m_configObjects: {}

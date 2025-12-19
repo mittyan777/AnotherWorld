@@ -84,6 +84,10 @@ public class BossMove01 : MonoBehaviour
         }
          */
         if (currentState == Boss01ActionType.Death) return;
+        if (BossMoveManager.instance != null && BossMoveManager.instance.IsStunned)
+        {
+            return;
+        }
 
         if (currentState == Boss01ActionType.Tackle)
         {
