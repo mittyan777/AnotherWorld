@@ -16,7 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -24,7 +25,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -82,7 +83,92 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: asa(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cone.004
+      parentName: asa(Clone)
+      position: {x: 0.0031514028, y: 0.5713297, z: 0.0000727647}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: -1.003699, y: -1.003699, z: -1.003699}
+    - name: Point.001
+      parentName: asa(Clone)
+      position: {x: 0.0030046732, y: 0.58949864, z: 0.00025314093}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.002
+      parentName: asa(Clone)
+      position: {x: 0.0030046732, y: 0.15609032, z: 0.00025314093}
+      rotation: {x: 0.7071067, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 315.08676, z: 100}
+    - name: Point.003
+      parentName: asa(Clone)
+      position: {x: 0.0030046732, y: 0.087160006, z: 0.00025314093}
+      rotation: {x: 0.7071067, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 315.08676, z: 100}
+    - name: Point.004
+      parentName: asa(Clone)
+      position: {x: 0.0030046732, y: 0.6768727, z: 0.00025314093}
+      rotation: {x: 0.7071067, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 315.08676, z: 100}
+    - name: Point.005
+      parentName: asa(Clone)
+      position: {x: 0.0030046732, y: 0.7187493, z: 0.00025314093}
+      rotation: {x: 0.7071067, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 315.08676, z: 100}
+    - name: Point.006
+      parentName: asa(Clone)
+      position: {x: 0.0030046732, y: 0.7580107, z: 0.00025314093}
+      rotation: {x: 0.7071067, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 315.08676, z: 100}
+    - name: Point.007
+      parentName: asa(Clone)
+      position: {x: -0, y: 0.4449575, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.008
+      parentName: asa(Clone)
+      position: {x: -0, y: 0.35025054, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.009
+      parentName: asa(Clone)
+      position: {x: -0, y: 0.25245228, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.010
+      parentName: asa(Clone)
+      position: {x: -0.005023178, y: 0.87503296, z: 0.07354001}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.011
+      parentName: asa(Clone)
+      position: {x: 0.0054189, y: 0.869462, z: -0.040329814}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.012
+      parentName: asa(Clone)
+      position: {x: 0.0054189, y: 0.98093593, z: -0.094990745}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.013
+      parentName: asa(Clone)
+      position: {x: 0.0054189, y: 1.0717506, z: -0.030430583}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Point.014
+      parentName: asa(Clone)
+      position: {x: 0.0054189, y: 0.91895825, z: 0.11332339}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Empty
+      parentName: asa(Clone)
+      position: {x: -0, y: 0.5643416, z: -0.016459964}
+      rotation: {x: 0.000000015454313, y: -0.70710677, z: 0.000000015454312, w: 0.7071068}
+      scale: {x: 25.183836, y: 25.183836, z: 25.183836}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -93,13 +179,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
