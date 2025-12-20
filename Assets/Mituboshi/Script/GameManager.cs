@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject []Player;
+    [SerializeField] public GameObject []Player;
     [SerializeField]public float Coin;
     [SerializeField]public float HP;
     [SerializeField]public float MP;
