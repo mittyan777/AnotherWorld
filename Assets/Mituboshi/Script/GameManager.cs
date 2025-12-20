@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject Standard_UI;
     [SerializeField] GameObject Canvas;
     [SerializeField] GameObject []skill_UI;
+    [SerializeField] GameObject UI_change_button;
 
     [SerializeField] public Image []gage_image;
 
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
      float distance = 10;   // ˆÚ“®‹——£
 
     private Vector3 startPos;
-
+    [SerializeField] GameObject[] Status_text;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(Canvas);
       
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -136,7 +138,7 @@ public class GameManager : MonoBehaviour
         }
         if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
         {
-            if (SceneManager.GetActiveScene().name == "Test_Stage1")
+            if (SceneManager.GetActiveScene().name == "EnemyScene_mitubosi")
             {
                 if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
                 {
@@ -159,6 +161,8 @@ public class GameManager : MonoBehaviour
 
         }
 
+       
+
         for (int i = 0; i < gage_image.Length; i++)
         {
             if (gage_image[i].fillAmount < 1)
@@ -176,8 +180,15 @@ public class GameManager : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start") { Player[0].GetComponent<Player>().enabled = true; }
         }
-        if(job == 0) job_text.sprite = job_sprite[0];
-        if (job == 1) job_text.sprite = job_sprite[1];
+        if (job == 0) 
+        {
+            job_text.sprite = job_sprite[0];
+        }
+        if (job == 1) 
+        {
+            job_text.sprite = job_sprite[1];
+            
+        }
         if (job == 2) 
         {
             job_text.sprite = job_sprite[2];
@@ -233,14 +244,23 @@ public class GameManager : MonoBehaviour
         {
             if (tutorial_count == 0)
             {
+                for (int i = 0; i < Status_text.Length; i++)
+                {
+                    Status_text[i].transform.eulerAngles = new Vector3(0, 0, 0);
+                }
                 startPos = new Vector3(-17, 106, -2);
                 float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
                 tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -238);
                 tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                UI_change_button.SetActive(false);
             }
             else if (tutorial_count == 1)
             {
+                for (int i = 0; i < Status_text.Length; i++)
+                {
+                    Status_text[i].transform.Rotate(3, 0, 0);
+                }
                 startPos = new Vector3(344, 106, -2);
                 float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
@@ -250,12 +270,17 @@ public class GameManager : MonoBehaviour
             }
             else if (tutorial_count == 2)
             {
+                for (int i = 0; i < Status_text.Length; i++)
+                {
+                    Status_text[i].transform.eulerAngles = new Vector3(0, 0, 0);
+                }
                 startPos = new Vector3(-165, 335, -2);
                 float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
                 //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(-165, 335, -2);
                 tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -385);
                 tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                UI_change_button.SetActive(true);
             }
             else if (tutorial_count == 3)
             {
