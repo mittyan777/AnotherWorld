@@ -74,6 +74,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  UI_change_button: {fileID: 0}
+  rouletteUI_camera: {fileID: 0}
+  standard_camera: {fileID: 0}
   gage_image:
   - {fileID: 0}
   - {fileID: 0}
@@ -87,6 +90,18 @@ MonoBehaviour:
   scene_name: 
   tutorial_count: 0
   tutorial_UI: {fileID: 0}
+  Status_text:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Present_Status_text:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  coin_text: {fileID: 0}
+  buttons: []
 --- !u!64 &8883917638635748478
 MeshCollider:
   m_ObjectHideFlags: 0
