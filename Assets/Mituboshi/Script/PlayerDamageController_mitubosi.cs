@@ -126,7 +126,7 @@ public class PlayerDamageController_mitubosi : MonoBehaviour
         if (damage > 0)
         {
             //GameManagerの公開メソッドを呼び出し、HP減少を依頼 ★
-            if (gameManager != null)
+            if (gameManager != null && bossManager.bossBattle)
             {
                 //testManerger.testDamage(damage);
                 gameManager.TakeDamage(damage);
