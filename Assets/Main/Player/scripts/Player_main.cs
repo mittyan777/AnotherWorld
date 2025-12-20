@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class Player_hikido1 : MonoBehaviour
+public class Player_main : MonoBehaviour
 {
     Animator animator;
 

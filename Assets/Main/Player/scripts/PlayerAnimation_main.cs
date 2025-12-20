@@ -37,7 +37,7 @@ public class PlayerAnimation_main : MonoBehaviour
     private bool _shootInputConfirmed = false;
 
     [SerializeField] private SwordSkillAnime _swordSkillCmd;
-    [SerializeField] Player_Swoad _plSwardLogic;
+    [SerializeField] Player_Swoad_main _plSwardLogic;
 
     //繧ｸ繝ｧ繝悶ち繧､繝
     public JobType jobType { get; private set; } = JobType.NONE;
@@ -57,7 +57,7 @@ public class PlayerAnimation_main : MonoBehaviour
 
         _currentjobNum = (int)_gameManager.job;
         SetJobType((JobType)_currentjobNum);
-        _plSwardLogic.GetComponent<Player_Swoad>();
+        _plSwardLogic.GetComponent<Player_Swoad_main>();
 
         UnityEngine.Debug.Log($"蛻晄悄繧ｸ繝ｧ繝悶ち繧､繝苓ｨｭ螳壼ｮ御ｺ: {jobType}");
     }
