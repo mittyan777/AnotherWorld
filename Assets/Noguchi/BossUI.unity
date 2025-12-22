@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 92607994}
   - component: {fileID: 92607993}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text (Make a choice)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 885023026}
   - component: {fileID: 885023025}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: "\u9078\u629E\u753B\u9762"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
