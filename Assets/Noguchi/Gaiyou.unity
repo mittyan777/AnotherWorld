@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 249700798}
   - component: {fileID: 249700797}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Text (Menu)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1291,7 +1291,7 @@ GameObject:
   - component: {fileID: 1168093403}
   - component: {fileID: 1168093402}
   m_Layer: 0
-  m_Name: GameObject2
+  m_Name: "\u6982\u8981UI"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 1720783104}
   - component: {fileID: 1720783103}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: "\u30E1\u30CB\u30E5\u30FCUI"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1763,7 +1763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1862903390
 MonoBehaviour:
   m_ObjectHideFlags: 0
