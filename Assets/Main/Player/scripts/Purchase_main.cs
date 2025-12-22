@@ -85,7 +85,7 @@ public class Purchase_main : MonoBehaviour
         
         if (getCoin >= price)
         {
-            gm.GetComponent<GameManager_hikido>().Coin -= price;
+            gm.GetComponent<GameManager>().Coin -= price;
            
             inventory.Add(itemName);
 
@@ -95,7 +95,7 @@ public class Purchase_main : MonoBehaviour
 
 
             messageText.text = $"{itemName} を購入しました！（-{price}コイン）";
-            Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager_hikido>().Coin}");
+            Debug.Log($"{itemName} の購入完了。残りコイン: {gm.GetComponent<GameManager>().Coin}");
         }
         else
         {
@@ -130,6 +130,6 @@ public class Purchase_main : MonoBehaviour
     private void Update()
     {
         UpdateCoinUI();
-        getCoin = gm.GetComponent<GameManager_hikido>().Coin;
+        getCoin = gm.GetComponent<GameManager>().Coin;
     }
 }

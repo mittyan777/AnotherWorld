@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicMotionsDummy_hikido
       objectReference: {fileID: 0}
+    - target: {fileID: 4482639997862421502, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4496331629700767466, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.01
@@ -269,9 +273,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4863375857720334195, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
   m_PrefabInstance: {fileID: 6052498912247342525}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1445055121451388634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5184512109442558823, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1890922682955640412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5315131121719856097, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2204056025772254103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5577896113425745450, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3162126873501216782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8655049947838764467, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5047392043209982155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1582236691347465590, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5173462313095440674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1456104282009652383, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5757452345789943243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2024473405398214774, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+  m_PrefabInstance: {fileID: 6052498912247342525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7813202252524701416 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4580400222646346581, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
   m_PrefabInstance: {fileID: 6052498912247342525}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7911490711176660547 stripped
@@ -291,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4439821503442e439ac5ee024e9cc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animflgSO: {fileID: 0}
+  _animflgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
   shootposition: {fileID: 0}
   TornadoParticleposition: {fileID: 0}
   fireball: {fileID: 0}
@@ -322,13 +361,13 @@ MonoBehaviour:
   slot: {fileID: 0}
   Direction: 0
   manager: {fileID: 0}
-  camera: {fileID: 0}
-  ADSpos: {fileID: 0}
-  NOADSpos: {fileID: 0}
+  camera: {fileID: 7813202252524701416}
+  ADSpos: {fileID: 1890922682955640412}
+  NOADSpos: {fileID: 3162126873501216782}
   sensitivity: 300
   clampAngle: 80
   ADS: 0
-  _animflgSO: {fileID: 0}
+  _animflgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
   playerAnim: {fileID: 0}
   a: 0.5
 --- !u!114 &8738518057402071911
@@ -343,11 +382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90b65e462181cb429498a2d6eec7cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animflgSO: {fileID: 0}
+  _animflgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
   inputwaitTime: 0.5
   maxComboCount: 3
-  SlashEffect: {fileID: 0}
-  SlasshPoint: {fileID: 0}
+  SlashEffect: {fileID: 2324118759566387009, guid: 76863c8278f71d84493bbb452e7f8070, type: 3}
+  SlasshPoint: {fileID: 1445055121451388634}
   _manager: {fileID: 0}
   _playerAnim: {fileID: 0}
 --- !u!114 &988963179941373191
@@ -388,9 +427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a18a75bae45972e4aa2eab3e0848c7a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animflgSO: {fileID: 0}
-  Arrow: {fileID: 0}
-  shootposition: []
+  _animflgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
+  Arrow: {fileID: 110294, guid: 6a93ba9dff0d6ad4190dcf85a02ed67b, type: 3}
+  shootposition:
+  - {fileID: 5173462313095440674}
+  - {fileID: 5047392043209982155}
+  - {fileID: 5757452345789943243}
   shootpower: 0
 --- !u!114 &1909871809490741310
 MonoBehaviour:

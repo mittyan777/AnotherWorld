@@ -35,7 +35,7 @@ public class Player_main : MonoBehaviour
 
     //‚Ð‚«‚Ç’Ç‰Á
     [SerializeField] AnimationFlagManagerSO _animflgSO;
-    [SerializeField] PlayerAnimation playerAnim;
+    [SerializeField] PlayerAnimation_main playerAnim;
 
     [SerializeField] float a = 0.5f;
     // Start is called before the first frame update
@@ -64,20 +64,20 @@ public class Player_main : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
         if (UnityEngine.Input.GetKeyDown("p"))
         {
-            manager.GetComponent<GameManager_hikido>().HP -= 10;
+            manager.GetComponent<GameManager>().HP -= 10;
         }
-        if (manager.GetComponent<GameManager_hikido>().HP <= 0)
+        if (manager.GetComponent<GameManager>().HP <= 0)
         {
             //Destroy(gameObject);
         }
 
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[1].fillAmount >= 1)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1) && manager.GetComponent<GameManager>().Present_MP >= 10 && manager.GetComponent<GameManager>().gage_image[1].fillAmount >= 1)
         {
-            if (manager.GetComponent<GameManager_hikido>().job == 2)
+            if (manager.GetComponent<GameManager>().job == 2)
             {
-                manager.GetComponent<GameManager_hikido>().gage_image[1].fillAmount = 0;
-                GetComponent<Magician_Skills_hikido>().FireBall();
-                manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
+                manager.GetComponent<GameManager>().gage_image[1].fillAmount = 0;
+                GetComponent<Magician_Skills_main>().FireBall();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
 
                 playerAnim.SetWizardSkillIndex(1);
                 _animflgSO.MajicSkilFlg = true;
@@ -85,13 +85,13 @@ public class Player_main : MonoBehaviour
 
 
         }
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[0].fillAmount >= 1)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2) && manager.GetComponent<GameManager>().Present_MP >= 10 && manager.GetComponent<GameManager>().gage_image[0].fillAmount >= 1)
         {
-            if (manager.GetComponent<GameManager_hikido>().job == 2)
+            if (manager.GetComponent<GameManager>().job == 2)
             {
-                manager.GetComponent<GameManager_hikido>().gage_image[0].fillAmount = 0;
-                GetComponent<Magician_Skills_hikido>().ElectricBall();
-                manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
+                manager.GetComponent<GameManager>().gage_image[0].fillAmount = 0;
+                GetComponent<Magician_Skills_main>().ElectricBall();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
 
                 playerAnim.SetWizardSkillIndex(2);
                 _animflgSO.MajicSkilFlg = true;
@@ -99,14 +99,14 @@ public class Player_main : MonoBehaviour
 
 
         }
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager_hikido>().Present_MP >= 10 && manager.GetComponent<GameManager_hikido>().gage_image[2].fillAmount >= 1)
+        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha3) && manager.GetComponent<GameManager>().Present_MP >= 10 && manager.GetComponent<GameManager>().gage_image[2].fillAmount >= 1)
         {
-            if (manager.GetComponent<GameManager_hikido>().job == 2)
+            if (manager.GetComponent<GameManager>().job == 2)
             {
-                manager.GetComponent<GameManager_hikido>().gage_image[2].fillAmount = 0;
+                manager.GetComponent<GameManager>().gage_image[2].fillAmount = 0;
                 _animflgSO.MajicSkilFlg = true;
-                GetComponent<Magician_Skills_hikido>().TornadoAttack();
-                manager.GetComponent<GameManager_hikido>().Present_MP -= 10;
+                GetComponent<Magician_Skills_main>().TornadoAttack();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
 
                 playerAnim.SetWizardSkillIndex(3);
                 _animflgSO.MajicSkilFlg = true;
@@ -115,7 +115,7 @@ public class Player_main : MonoBehaviour
         }
 
         
-        if(manager.GetComponent<GameManager_hikido>().job == 2) 
+        if(manager.GetComponent<GameManager>().job == 2) 
         {
             bool normalAtkmajic = UnityEngine.Input.GetMouseButtonDown(0);
             if(normalAtkmajic)
@@ -126,12 +126,12 @@ public class Player_main : MonoBehaviour
         }
 
 
-        if (manager.GetComponent<GameManager_hikido>().job == 1)
+        if (manager.GetComponent<GameManager>().job == 1)
         {
             Archercontrol();
         }
 
-        if(manager.GetComponent<GameManager_hikido>().job == 0) 
+        if(manager.GetComponent<GameManager>().job == 0) 
         {
             SwordSkil();
         }
@@ -142,7 +142,7 @@ public class Player_main : MonoBehaviour
     {
         if (other.gameObject.tag == "coin")
         {
-            manager.GetComponent<GameManager_hikido>().Coin += 100;
+            manager.GetComponent<GameManager>().Coin += 100;
             Destroy(other.gameObject);
         }
     }
@@ -157,7 +157,7 @@ public class Player_main : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
         camera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        if (manager.GetComponent<GameManager_hikido>().job == 1)
+        if (manager.GetComponent<GameManager>().job == 1)
         {
             if (UnityEngine.Input.GetMouseButton(1))
             {
@@ -191,7 +191,7 @@ public class Player_main : MonoBehaviour
         {
             if (mouseleft == false && mouseright == false) 
             {
-                GetComponent<ArcherQskill_hikido>().NormalAttack();
+                GetComponent<ArcherQskill_main>().NormalAttack();
             }
             mouseleft = true;
             _animflgSO.ArcherSkilflg = true;
@@ -208,7 +208,7 @@ public class Player_main : MonoBehaviour
         {
             if (mouseleft == true && mouseright == true) 
             {
-                GetComponent<ArcherQskill_hikido>().NormalAttack(); 
+                GetComponent<ArcherQskill_main>().NormalAttack(); 
             }
             mouseleft = false;
 
@@ -218,14 +218,14 @@ public class Player_main : MonoBehaviour
         if (UnityEngine.Input.GetMouseButtonUp(1))
         {
             mouseright = false;
-            GetComponent<ArcherQskill_hikido>().shootpower = 0;
+            GetComponent<ArcherQskill_main>().shootpower = 0;
         }
 
         if (mouseright == true && mouseleft == true)
         {
-            if (GetComponent<ArcherQskill_hikido>().shootpower <= 30)
+            if (GetComponent<ArcherQskill_main>().shootpower <= 30)
             {
-                GetComponent<ArcherQskill_hikido>().shootpower += 10 * Time.deltaTime;
+                GetComponent<ArcherQskill_main>().shootpower += 10 * Time.deltaTime;
             }
         }
 
@@ -235,7 +235,7 @@ public class Player_main : MonoBehaviour
             a -= Time.deltaTime;
             if (a <= 0)
             {
-                GetComponent<ArcherQskill_hikido>().shootpower = 0;
+                GetComponent<ArcherQskill_main>().shootpower = 0;
             }
         }
         else
@@ -249,7 +249,7 @@ public class Player_main : MonoBehaviour
     {
         if (UnityEngine.Input.GetMouseButtonDown(0)) 
         {
-            GetComponent<Player_Swoad>().SwordSkill();
+            GetComponent<Player_Swoad_main>().SwordSkill();
         }
     }
 

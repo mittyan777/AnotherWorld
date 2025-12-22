@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3716454457299693910}
   - component: {fileID: 6976128363539079020}
+  - component: {fileID: 8072664106607215301}
   m_Layer: 0
   m_Name: PlayerAnimationMane
   m_TagString: Untagged
@@ -39,9 +40,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3019045837574355565}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e11ff43e7e590ef4cbf8e631f11eb6f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cmdCofigSO: {fileID: 11400000, guid: c3a3be59d201ee74582f41f3d73d5aef, type: 2}
+  _animFlgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
+  _gameManager: {fileID: 0}
+  animator: {fileID: 0}
+  _player: {fileID: 0}
+  _cameraTransform: {fileID: 0}
+  _swordSkillCmd: {fileID: 11400000, guid: 85ff71f25b4eaf34b9eac5b9373b6711, type: 2}
+  _plSwardLogic: {fileID: 0}
+--- !u!114 &8072664106607215301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3019045837574355565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da170d8f04c7684689b62b0898017ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cmdCofigSO: {fileID: 11400000, guid: c3a3be59d201ee74582f41f3d73d5aef, type: 2}
