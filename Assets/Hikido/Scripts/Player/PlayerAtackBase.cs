@@ -10,7 +10,8 @@ public class PlayerAtackBase : MonoBehaviour
     Animator _animator;
     bool bAvoidance = false;
     protected  bool bNormalAttack = false;
-    
+    Transform _cameraTransform;
+
     [SerializeField] protected AnimationFlagManagerSO _animflgSO;
 
     void Start()
@@ -56,7 +57,14 @@ public class PlayerAtackBase : MonoBehaviour
         bool _isShiftKey = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
         bool _isSpaceKey = Input.GetKeyDown(KeyCode.Space);
 
-        Transform _cameraTransform = Camera.main.transform;
+        if(Camera.main != null) 
+        {
+            _cameraTransform = Camera.main.transform;
+        }
+        else 
+        {
+            return;
+        }
 
         UnityEngine.Vector3 _cameraForward = UnityEngine.Vector3.Scale(_cameraTransform.forward, new UnityEngine.Vector3(1, 0, 1)).normalized;
         UnityEngine.Vector3 _cameraRight = UnityEngine.Vector3.Scale(_cameraTransform.right, new UnityEngine.Vector3(1, 0, 1)).normalized;

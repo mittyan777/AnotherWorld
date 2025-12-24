@@ -29,7 +29,9 @@ Transform:
   m_LocalPosition: {x: 105.39151, y: 283.76324, z: 17.460447}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4666439772175148691}
+  - {fileID: 8348618535438899054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5166419123771245737
@@ -79,7 +81,141 @@ MonoBehaviour:
   - "\u5263\u58EB"
   - "\u9B54\u6CD5\u4F7F\u3044"
   - "\u5F13\u4F7F\u3044"
-  rouletto_CG: {fileID: 0}
-  audioSource:
-  - {fileID: 0}
-  coinUseSE: {fileID: 0}
+  rouletto_CG: {fileID: 5395757253250492087, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+  rouletteSound: {fileID: 3221994507473004771, guid: 036202908fa09164796ea1351b372156, type: 3}
+--- !u!1001 &2449428461730450642
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 968008326793382631}
+    m_Modifications:
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -66.157524
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -61.459274
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2183.6025
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6409562468598025049, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_Name
+      value: Roulette_Sound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 036202908fa09164796ea1351b372156, type: 3}
+--- !u!4 &8348618535438899054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
+  m_PrefabInstance: {fileID: 2449428461730450642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4801369516720940928
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 968008326793382631}
+    m_Modifications:
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 105.87666
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -130.09647
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.787489
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064208875593653556, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: m_Name
+      value: Roulette_CG_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5395757253250492087, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: CoinText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5395757253250492087, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: targetImage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5395757253250492087, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+      propertyPath: Fadeout_Coin
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+--- !u!4 &4666439772175148691 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 172089088634732819, guid: f67f23c9e310e694bb66badb643ef7fc, type: 3}
+  m_PrefabInstance: {fileID: 4801369516720940928}
+  m_PrefabAsset: {fileID: 0}

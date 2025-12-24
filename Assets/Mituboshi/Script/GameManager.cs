@@ -167,7 +167,8 @@ public class GameManager : MonoBehaviour
         }
         if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
         {
-            if (SceneManager.GetActiveScene().name == "EnemyScene_mitubosi")
+            //ひきど変更　EnemyScene_mituboshi -> TownScene_mainに変更 
+            if (SceneManager.GetActiveScene().name == "TownScene_main")
             {
                 if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
                 {
@@ -267,9 +268,11 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("load_screen");
         }
 
-        if (SceneManager.GetActiveScene().name == "Synthesis_Test")
+        //ひきど変更 シーン名をmainで使用するシーン名に変更 Synthesis_Test -> TownScene_main
+        if (SceneManager.GetActiveScene().name == "TownScene_main")
         {
-            scene_name = "EnemyScene_mitubosi";
+            //ひきど変更　シーン名をmainで使用する名前に変更 EnemyScene_mitubosi -> Stage1_main
+            scene_name = "Stage1_main";
         }
         if (tutorial_UI != null)
         {
@@ -352,20 +355,27 @@ public class GameManager : MonoBehaviour
     }
     private void PlayerStatus()
     {
-       
-       
-     
-       
-        Player[0].GetComponent<Player>().HP = HP;
 
-       
-        Player[0].GetComponent<Player>().MP = MP;
 
-      
-        Player[0].GetComponent<Player>().AttackStatus = AttackStatus;
+        //ひきど変更 Player -> Player_main （メインで使う方に変更）
+        //Player[0].GetComponent<Player>().HP = HP;
+        //Player[0].GetComponent<Player>().MP = MP;
+        //Player[0].GetComponent<Player>().AttackStatus = AttackStatus;
+        //Player[0].GetComponent<Player>().DefenseStatus = DefenseStatus;
 
-     
-        Player[0].GetComponent<Player>().DefenseStatus = DefenseStatus;
+
+        Player[0].GetComponent<Player_main>().HP = HP;
+
+
+        Player[0].GetComponent<Player_main>().MP = MP;
+
+
+        Player[0].GetComponent<Player_main>().AttackStatus = AttackStatus;
+
+
+        Player[0].GetComponent<Player_main>().DefenseStatus = DefenseStatus;
+
+
     }
    
     public void UIchange()
