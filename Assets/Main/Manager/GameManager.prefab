@@ -64,7 +64,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6a4fec7befbe38142b7117b351a16be3, type: 3}
   - {fileID: 21300000, guid: c08649e611d994840ada72e6c2ec10bb, type: 3}
   - {fileID: 21300000, guid: 0007ead698a8e3f448e3febe53dee196, type: 3}
-  Status: 0000000000000000000000000000000000000000
+  Status: 00000000000000000000000000000000
   rouletteUI: {fileID: 0}
   Weapon_UI: {fileID: 0}
   GAMEUI: {fileID: 0}
@@ -91,8 +91,16 @@ MonoBehaviour:
   scene_name: 
   tutorial_count: 
   tutorial_UI: {fileID: 0}
-  Status_text: []
-  Present_Status_text: []
+  Status_text:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Present_Status_text:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   coin_text: {fileID: 0}
   buttons: []
 --- !u!114 &2167149350797239510
@@ -107,7 +115,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55020eb89c6d1014b82ad3e026fb2422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollViewGroups: []
+  scrollViewGroups:
+  - groupName: Scroll View1
+    itemButtons:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    itemPrices: 64000000780000002c010000f4010000
+  - groupName: Scroll View2
+    itemButtons:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    itemPrices: 64000000780000002c010000f4010000
+  - groupName: Scroll View3
+    itemButtons:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    itemPrices: 64000000780000002c010000f4010000
   coinText: {fileID: 0}
   messageText: {fileID: 0}
   shopUI: {fileID: 0}
@@ -137,4 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94915fc156ef8104ea1186f0f9b14ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allWeapons: []
+  allWeapons:
+  - {fileID: 11400000, guid: 61b824477d5cc7e409f5825794ac5fb4, type: 2}
+  - {fileID: 11400000, guid: adf5cb2614583854985fc8ea8f93d730, type: 2}
+  - {fileID: 11400000, guid: 6b2767a065a1a2d4bbc94f7fb3a918c7, type: 2}
