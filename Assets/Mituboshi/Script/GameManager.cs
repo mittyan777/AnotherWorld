@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start") { Player[0].GetComponent<Player>().enabled = true; }
+            if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start") { Player[0].GetComponent<Player_main>().enabled = true; }
         }
         if (job == 0) 
         {
@@ -279,7 +279,7 @@ public class GameManager : MonoBehaviour
                 {
                     Status_text[i].transform.eulerAngles = new Vector3(0, 0, 0);
                 }
-                startPos = new Vector3(-17, 106, -2);
+                startPos = new Vector3(15, 81, -2);
                 float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
                 tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -238);
@@ -292,11 +292,11 @@ public class GameManager : MonoBehaviour
                 {
                     Status_text[i].transform.Rotate(3, 0, 0);
                 }
-                startPos = new Vector3(344, 106, -2);
+                startPos = new Vector3(183, 81, -2);
                 float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(0, offset, 0);
                 //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(344, 106, -2);
-                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -306);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 133);
                 tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
             }
             else if (tutorial_count == "Stop_Roulet")
@@ -305,11 +305,11 @@ public class GameManager : MonoBehaviour
                 {
                     Status_text[i].transform.eulerAngles = new Vector3(0, 0, 0);
                 }
-                startPos = new Vector3(-165, 335, -2);
+                startPos = new Vector3(-222, 322, 0);
                 float offset = Mathf.PingPong(Time.time * speed, distance);
                 tutorial_UI.GetComponent<RectTransform>().transform.localPosition = startPos + new Vector3(offset, 0, 0);
                 //tutorial_UI.GetComponent<RectTransform>().localPosition = new Vector3(-165, 335, -2);
-                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -385);
+                tutorial_UI.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, -21);
                 tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
                 UI_change_button.SetActive(true);
             }
@@ -343,10 +343,10 @@ public class GameManager : MonoBehaviour
                     tutorial_UI.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
                 }
             }
-            //else
-            //{
-            //    Destroy(tutorial_UI.gameObject);
-            //}
+            else
+            {
+                Destroy(tutorial_UI.gameObject);
+            }
         }
 
     }
