@@ -256,21 +256,22 @@ public class GameManager : MonoBehaviour
         {
             fade_image_a -= Time.deltaTime;
         }
-        else if(fade_image_a <= 1)
+        else if(fade == true && fade_image_a <= 1)
         {
             fade_image_a += Time.deltaTime;
         }
         fade_image.color = new Color(0,0,0, fade_image_a);
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SceneManager.LoadScene("load_screen");
-        }
 
         if (SceneManager.GetActiveScene().name == "Synthesis_Test")
         {
             scene_name = "EnemyScene_mitubosi";
         }
+        //ƒƒCƒ“‚ÅŽg‚¤•û
+        //if (SceneManager.GetActiveScene().name == "TownScene_main")
+        //{
+        //    scene_name = "Stage1_main";
+        //}
         if (tutorial_UI != null)
         {
             if (tutorial_count == "")
