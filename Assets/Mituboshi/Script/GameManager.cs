@@ -257,16 +257,12 @@ public class GameManager : MonoBehaviour
         {
             fade_image_a -= Time.deltaTime;
         }
-        else if(fade_image_a <= 1)
+        else if(fade == true && fade_image_a <= 1)
         {
             fade_image_a += Time.deltaTime;
         }
         fade_image.color = new Color(0,0,0, fade_image_a);
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SceneManager.LoadScene("load_screen");
-        }
 
         //ひきど変更 シーン名をmainで使用するシーン名に変更 Synthesis_Test -> TownScene_main
         if (SceneManager.GetActiveScene().name == "TownScene_main")
@@ -274,6 +270,11 @@ public class GameManager : MonoBehaviour
             //ひきど変更　シーン名をmainで使用する名前に変更 EnemyScene_mitubosi -> Stage1_main
             scene_name = "Stage1_main";
         }
+        //メインで使う方
+        //if (SceneManager.GetActiveScene().name == "TownScene_main")
+        //{
+        //    scene_name = "Stage1_main";
+        //}
         if (tutorial_UI != null)
         {
             if (tutorial_count == "")
