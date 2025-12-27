@@ -167,8 +167,8 @@ public class GameManager : MonoBehaviour
         }
         if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
         {
-            //ひきど変更　EnemyScene_mituboshi -> TownScene_mainに変更 
-            if (SceneManager.GetActiveScene().name == "TownScene_main")
+            //ひきど変更　EnemyScene_mituboshi -> Stage1_mainに変更 
+            if (SceneManager.GetActiveScene().name == "Stage1_main")
             {
                 if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
                 {
