@@ -26,6 +26,7 @@ public class scene_load : MonoBehaviour
         _slider.value += 0.1f * Time.deltaTime;
         if(_slider.value >= 1f)
         {
+            gameManager.GetComponent<GameManager>().fade = false;
             SceneManager.LoadScene(gameManager.scene_name);
         }
     }
