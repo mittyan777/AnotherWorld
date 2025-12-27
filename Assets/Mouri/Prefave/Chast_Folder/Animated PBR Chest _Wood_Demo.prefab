@@ -199,5 +199,5 @@ MonoBehaviour:
   animator: {fileID: 1087653425164103779}
   chestTrigger: {fileID: 5238853991066239850}
   openKey: 101
-  openUI: {fileID: 0}
+  openUI: {fileID: 6604622324912023568, guid: 8de095b52cf766b4a915b325172d3be1, type: 3}
   destroyTime: 2

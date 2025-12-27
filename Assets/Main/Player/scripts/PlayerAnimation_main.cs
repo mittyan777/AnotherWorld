@@ -58,6 +58,7 @@ public class PlayerAnimation_main : MonoBehaviour
         _currentjobNum = (int)_gameManager.job;
         SetJobType((JobType)_currentjobNum);
         _plSwardLogic.GetComponent<Player_Swoad_main>();
+        
 
         UnityEngine.Debug.Log($"蛻晄悄繧ｸ繝ｧ繝悶ち繧､繝苓ｨｭ螳壼ｮ御ｺ: {jobType}");
     }
@@ -90,7 +91,7 @@ public class PlayerAnimation_main : MonoBehaviour
 
     private void Update()
     {
-        if (_gameManager == null) return;
+        if (_gameManager == null) { _gameManager = GetComponent<GameManager>(); }
 
         int jobFromManager = (int)_gameManager.job;
         if (jobFromManager != _currentjobNum)
