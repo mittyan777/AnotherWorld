@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Overview : MonoBehaviour
 {
-   [Header("順番に表示するCanvas")]
-    public GameObject[] canvases;
+    [Header("順番に表示するPanel(子オブジェクト)")]
+    [SerializeField] private GameObject[] panels;
 
     private int currentIndex = 0;
     private bool isOpen = false;
@@ -28,9 +28,11 @@ public class Overview : MonoBehaviour
         }
     }
 
-    // ===== 外部操作用 =====
+    // ===== 外部操作 =====
     public void Open()
     {
+        if (panels == null || panels.Length == 0) return;
+
         isOpen = true;
         currentIndex = 0;
         ShowCurrent();
@@ -39,32 +41,35 @@ public class Overview : MonoBehaviour
     public void Close()
     {
         isOpen = false;
-        foreach (var canvas in canvases)
+
+        foreach (var panel in panels)
         {
-            canvas.SetActive(false);
+            if (panel != null)
+                panel.SetActive(false);
         }
     }
 
     // ===== 内部処理 =====
-    void ShowCurrent()
+    private void ShowCurrent()
     {
-        foreach (var canvas in canvases)
+        for (int i = 0; i < panels.Length; i++)
         {
-            canvas.SetActive(false);
+            panels[i].SetActive(i == currentIndex);
         }
-        canvases[currentIndex].SetActive(true);
     }
 
-    void ShowNext()
+    private void ShowNext()
     {
-        if (currentIndex >= canvases.Length - 1) return;
+        if (currentIndex >= panels.Length - 1) return;
+
         currentIndex++;
         ShowCurrent();
     }
 
-    void ShowPrevious()
+    private void ShowPrevious()
     {
         if (currentIndex <= 0) return;
+
         currentIndex--;
         ShowCurrent();
     }

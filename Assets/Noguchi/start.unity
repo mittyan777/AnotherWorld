@@ -5750,7 +5750,7 @@ MonoBehaviour:
   buttonA: {fileID: 1541847992}
   buttonB: {fileID: 541768893}
   fadeImage: {fileID: 2002727737}
-  SceneName: 
+  SceneName: TownScene
 --- !u!1001 &930601097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8959,6 +8959,7 @@ GameObject:
   - component: {fileID: 1541847994}
   - component: {fileID: 1541847993}
   - component: {fileID: 1541847992}
+  - component: {fileID: 1541847995}
   m_Layer: 5
   m_Name: Button (start)
   m_TagString: Untagged
@@ -9029,7 +9030,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1541847993}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1541847995}
+        m_TargetAssemblyTypeName: choice, Assembly-CSharp
+        m_MethodName: ChangeScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1541847993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9068,6 +9081,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541847990}
   m_CullTransparentMesh: 1
+--- !u!114 &1541847995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541847990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e1ded1d101b1148a7734a8974ad557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: TownScene
 --- !u!1 &1551384912
 GameObject:
   m_ObjectHideFlags: 0
@@ -11780,7 +11806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
