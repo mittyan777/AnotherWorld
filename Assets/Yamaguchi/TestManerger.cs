@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestManerger : MonoBehaviour
 {
     public int HP=1000;
+    public int AP = 10;
 
     public void testDamage(int damage) 
     {
