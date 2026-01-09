@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8219798148007873054}
   m_Layer: 0
   m_Name: TestSlashEffects
-  m_TagString: Untagged
+  m_TagString: PlayerSword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

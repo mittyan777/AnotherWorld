@@ -4,53 +4,43 @@ using UnityEngine;
 
 public class PlayerInventry : MonoBehaviour
 {
-    //購入した武器のリスト
-    public List<string> purchasedWeaponKeys = new List<string>();
-
-    public string eqippedWeaponkey = "";
-
-    //シングルトン
     public static PlayerInventry Instance { get; private set; }
+
+    [Header("データ保持用")]
+    public List<string> purchasedWeaponKeys = new List<string>();
+    public string eqippedWeaponkey = "";
 
     private void Awake()
     {
-        if(Instance == null) 
+        if (Instance == null)
         {
             Instance = this;
-            if(transform.parent == null) { DontDestroyOnLoad(gameObject); }
+            // 親がいない場合のみDontDestroy。GameManagerの子ならこれ自体は不要
+            if (transform.parent == null) { DontDestroyOnLoad(gameObject); }
         }
         else { Destroy(gameObject); }
     }
 
-    //購入成功時に呼び出す関数
-    public void AddWeaponToInventory(string weaponKey) 
+    public void AddWeaponToInventory(string weaponKey)
     {
         if (!purchasedWeaponKeys.Contains(weaponKey))
         {
             purchasedWeaponKeys.Add(weaponKey);
-            Debug.Log($"インベントリに武器を追加しました: {weaponKey}");
-            if (eqippedWeaponkey == "")
-            {
-                SetEquippedWeapon(weaponKey);
-            }
+            // 最初の一本なら自動装備
+            if (string.IsNullOrEmpty(eqippedWeaponkey)) { SetEquippedWeapon(weaponKey); }
         }
     }
 
     public void SetEquippedWeapon(string weaponKey)
     {
-        //購入済みのアイテムであるかチェック
-        if (!purchasedWeaponKeys.Contains(weaponKey))
-        {
-            Debug.LogWarning($"インベントリにない武器は装備できません: {weaponKey}");
-            return;
-        }
+        if (!purchasedWeaponKeys.Contains(weaponKey)) return;
 
         eqippedWeaponkey = weaponKey;
-        Debug.Log($"装備武器キーを更新: {weaponKey}");
 
-        WeaponClass.Instance?.EquipWeaponByNameKey(weaponKey);
+        // 現在のシーンのプレイヤーに装備させる
+        if (WeaponClass_main.Instance != null)
+        {
+            WeaponClass_main.Instance.EquipWeaponByNameKey(weaponKey);
+        }
     }
-
-
-
 }

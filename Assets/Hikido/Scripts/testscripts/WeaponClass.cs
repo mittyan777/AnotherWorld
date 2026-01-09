@@ -30,7 +30,7 @@ public class WeaponClass : MonoBehaviour
 
     void Start()
     {
-        GameManager_hikido gm = GetComponent<GameManager_hikido>();
+        GameManager gm = GetComponent<GameManager>();
         if (gm == null || gm.Player.Length == 0 || gm.Player[0] == null)
         {
             Debug.LogError("Playerオブジェクトが見つからないため、装備システムを初期化できません。");

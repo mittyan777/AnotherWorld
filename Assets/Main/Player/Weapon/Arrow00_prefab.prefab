@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7584893102371560483}
   - component: {fileID: 1060063734827703417}
   - component: {fileID: 5582962787825600059}
-  - component: {fileID: 5559268081581795516}
   m_Layer: 0
   m_Name: Arrow00_prefab
   m_TagString: Untagged
@@ -180,20 +179,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5559268081581795516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95bf14d25b1bc284987a84a2e3f8191b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  power: 0
 --- !u!1 &199956
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,9 +192,10 @@ GameObject:
   - component: {fileID: 2308106}
   - component: {fileID: 5452636}
   - component: {fileID: 6598898}
+  - component: {fileID: 6866904568124372791}
   m_Layer: 0
   m_Name: Arrow00_mesh(Clone)
-  m_TagString: Untagged
+  m_TagString: PlayerArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -302,7 +288,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -321,9 +307,23 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.030360099, y: 0.7059591, z: 0.026292618}
   m_Center: {x: -4.656613e-10, y: 0.35297894, z: 0.004368006}
+--- !u!114 &6866904568124372791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bf14d25b1bc284987a84a2e3f8191b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  power: 0

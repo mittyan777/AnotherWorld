@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponData_staff
   m_EditorClassIdentifier: 
   itemKeyName: Scroll View2_1
-  weaponPrefab: {fileID: 100102, guid: cbea85a4a35c4054289154c8f244a8b8, type: 3}
+  weaponPrefab: {fileID: 100102, guid: 989b7d5a4bf0c164cbed06da6fc4f397, type: 3}
   type: 1
   plusAttack: 1
   attackRange: 1

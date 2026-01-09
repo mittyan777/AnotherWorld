@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3900221476089369912}
   m_Layer: 0
   m_Name: Staff00_mesh(Clone)
-  m_TagString: Untagged
+  m_TagString: PlayerSword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
