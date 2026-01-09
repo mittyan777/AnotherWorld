@@ -19,7 +19,7 @@ public class WeaponClass_main : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // 高速検索のために辞書を作成
+            //高速検索のために辞書を作成
             weaponDictionary = allWeapons.ToDictionary(data => data.itemKeyName);
         }
         else
@@ -42,7 +42,7 @@ public class WeaponClass_main : MonoBehaviour
 
         if (equipmentManager == null)
         {
-            // EquipmentManager がなければ自動で追加
+            //EquipmentManager がなければ自動で追加
             equipmentManager = playerObject.AddComponent<EquipmentManager>();
             Debug.Log("Playerオブジェクトに EquipmentManager を自動追加しました。");
         }

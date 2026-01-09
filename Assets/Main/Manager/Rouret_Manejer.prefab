@@ -52,7 +52,7 @@ MonoBehaviour:
   MP: 0
   Attack: 0
   Defense: 0
-  job: 0
+  job: 4
   GameManager: {fileID: 0}
   Status: 0000000000000000000000000000000000000000
   FirstRoulette: 1

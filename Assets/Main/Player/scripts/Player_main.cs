@@ -43,6 +43,8 @@ public class Player_main : MonoBehaviour
     {
         //Time.timeScale = 0f;
         animator = GetComponent<Animator>();
+        manager = GameObject.FindGameObjectWithTag("GameManager");
+        if (PlayerAnimation_main.Instance != null) { playerAnim = PlayerAnimation_main.Instance; }
         // Cursor.lockState = CursorLockMode.Locked;   //’Ç‰Á
         //Cursor.visible = false;     //’Ç‰Á
     }

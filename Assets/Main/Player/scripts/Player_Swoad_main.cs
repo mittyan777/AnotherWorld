@@ -30,8 +30,18 @@ public class Player_Swoad_main : PlayerAtackBase
     private bool isAttack = false;
 
     void Start()
-    {
+    { 
         inputwaitTime = ATTACKCOUNT;
+        ComboReset();
+        if(PlayerAnimation_main.Instance != null) 
+        {
+            _playerAnim = PlayerAnimation_main.Instance;
+        }
+
+        if (_manager == null) 
+        {
+            _manager = GameObject.FindAnyObjectByType<GameManager>();
+        }
     }
 
     protected override void Update()
@@ -39,19 +49,11 @@ public class Player_Swoad_main : PlayerAtackBase
         base.Update();
         //コンボ時間減算
         ComboTime();
-
-        //TODO;通常攻撃判定後　＋　剣士だった場合のみ-> gamemanager：テスト時のみhikido使用
-        //if (bNormalAttack && _manager.GetComponent<GameManager_hikido>().job == 0)
-        //{
-        //    //剣士特殊攻撃
-        //    Special_Attack();
-        //}
-
     }
 
     protected override void Special_Attack()
     {
-        //SwordSkill();
+       
     }
 
     public void SwordSkill()
