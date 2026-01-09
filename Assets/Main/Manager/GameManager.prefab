@@ -58,13 +58,13 @@ MonoBehaviour:
   Present_MP: 100
   MP_text: {fileID: 0}
   HP_text: {fileID: 0}
-  job: 0
+  job: 3
   job_text: {fileID: 0}
   job_sprite:
   - {fileID: 21300000, guid: 6a4fec7befbe38142b7117b351a16be3, type: 3}
   - {fileID: 21300000, guid: c08649e611d994840ada72e6c2ec10bb, type: 3}
   - {fileID: 21300000, guid: 0007ead698a8e3f448e3febe53dee196, type: 3}
-  Status: 00000000000000000000000000000000
+  Status: 0000000000000000000000000000000000000000
   rouletteUI: {fileID: 0}
   Weapon_UI: {fileID: 0}
   GAMEUI: {fileID: 0}

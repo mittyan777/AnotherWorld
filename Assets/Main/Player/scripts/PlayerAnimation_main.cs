@@ -1,97 +1,82 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
-using UnityEngine.Windows;
+using UnityEngine.SceneManagement;
 
-/// 繧ｸ繝ｧ繝悶ち繧､繝励＃縺ｨ縺ｫ繧ｻ繝�ヨ縺吶ｋ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ繧ｳ繝槭Φ繝峨ｒ螟画峩
+//ジョブ列挙
 public enum JobType
 {
-    SWORDSMAN,    //蜑｣螢ｫ  = 0
-    ARCHER,       //蠑謎ｽｿ縺(繧｢繝ｼ繝√Ε繝ｼ) = 1
-    WIZARD,        //鬲疲ｳ穂ｽｿ縺 = 2
+    SWORDSMAN,   // 剣士 = 0
+    ARCHER,      // アーチャー = 1  
+    WIZARD,      // 魔法使い = 2 
 
     NONE
 }
 
 public class PlayerAnimation_main : MonoBehaviour
 {
+    public  static PlayerAnimation_main Instance {  get; private set; } 
 
     [SerializeField] private CommandoConfigSO _cmdCofigSO;
     [SerializeField] private AnimationFlagManagerSO _animFlgSO;
-
-    //TODO�帙ユ繧ｹ繝域凾縺ｮ縺ｿhikido菴ｿ逕ｨ
     [SerializeField] GameManager _gameManager;
-    //[SerializeField] GameManager _gameManager;
-
     [SerializeField] private Animator animator;
-    [SerializeField] Player_main _player;  //繝励Ξ繧､繝､繝ｼhikido
+    [SerializeField] Player_main _player;  
     [SerializeField] private Transform _cameraTransform;
+    [SerializeField] private SwordSkillAnime _swordSkillCmd;
+    [SerializeField] Player_Swoad_main _plSwardLogic;
+
     private Transform _playerTransform;
     private bool _isCurrentlyAiming = false;
     private bool _shootInputConfirmed = false;
 
-    [SerializeField] private SwordSkillAnime _swordSkillCmd;
-    [SerializeField] Player_Swoad_main _plSwardLogic;
-
-    //繧ｸ繝ｧ繝悶ち繧､繝
+    //初期ジョブNone
     public JobType jobType { get; private set; } = JobType.NONE;
 
-    //閨ｷ遞ｮ縺ｫ蟇ｾ蠢懊＠縺溘さ繝槭Φ繝峨そ繝�ヨ
     private Dictionary<JobType, CommandoConfigSO.CommandSet> CommandMap;
     private int _currentjobNum = -1;
+
+    private void Awake()
+    {
+        //シングルトン
+        if(Instance == null) 
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else 
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (!animator) { animator = GetComponent<Animator>();  }
+
+        SetSceneCompornent();
+
+        if (_cmdCofigSO != null) { CommandMap = _cmdCofigSO.commandSets.ToDictionary(set => set.JobType, set => set); }
+
+    }
+
     private void Start()
     {
         if (_player != null) { _playerTransform = _player.transform; }
 
         if (_gameManager == null)
         {
-            UnityEngine.Debug.LogError("GameManager縺瑚ｨｭ螳壹＆繧後※縺�∪縺帙ｓ縲ゅず繝ｧ繝冶ｨｭ螳壹′縺ｧ縺阪∪縺帙ｓ縲", this);
+            UnityEngine.Debug.LogError("GameManagerなし", this);
             return;
         }
 
         _currentjobNum = (int)_gameManager.job;
         SetJobType((JobType)_currentjobNum);
-        _plSwardLogic.GetComponent<Player_Swoad_main>();
-        
-
-        UnityEngine.Debug.Log($"蛻晄悄繧ｸ繝ｧ繝悶ち繧､繝苓ｨｭ螳壼ｮ御ｺ: {jobType}");
-    }
-
-    private void Awake()
-    {
-        if (!animator)
-        {
-            UnityEngine.Debug.LogError("Animator繧ｳ繝ｳ繝昴�繝阪Φ繝医′隕九▽縺九ｊ縺ｾ縺帙ｓ縲", this);
-            return;
-        }
-
-        if (!_cmdCofigSO)
-        {
-            UnityEngine.Debug.LogError("繧ｳ繝槭Φ繝峨さ繝ｳ繝輔ぅ繧ｰ縺瑚ｨｭ螳壹＆繧後※縺�↑縺", this);
-            return;
-        }
-
-        if (_gameManager != null)
-        {
-            int jobNum = (int)_gameManager.job;
-            SetJobType((JobType)jobNum);
-
-            UnityEngine.Debug.Log($"蛻晄悄繧ｸ繝ｧ繝悶ち繧､繝: {jobType}");
-        }
-
-        CommandMap = _cmdCofigSO.commandSets.ToDictionary(set => set.JobType, set => set);
-
+        UnityEngine.Debug.Log($"セット: {jobType}");
     }
 
     private void Update()
     {
-        if (_gameManager == null) { _gameManager = GetComponent<GameManager>(); }
+        if (_gameManager == null) { _gameManager = GameObject.FindAnyObjectByType<GameManager>(); }
+        if (_gameManager == null) return;
 
         int jobFromManager = (int)_gameManager.job;
         if (jobFromManager != _currentjobNum)
@@ -99,10 +84,10 @@ public class PlayerAnimation_main : MonoBehaviour
             _currentjobNum = jobFromManager;
             SetJobType((JobType)_currentjobNum);
 
-            UnityEngine.Debug.Log($"繧ｸ繝ｧ繝悶′譖ｴ譁ｰ縺輔ｌ縺ｾ縺励◆� JobType: {jobType}");
+            UnityEngine.Debug.Log($"ジョブ更新 JobType: {jobType}");
         }
 
-        if(_player.isAiming && UnityEngine.Input.GetMouseButtonUp(0)) 
+        if(_player != null && _player.isAiming && UnityEngine.Input.GetMouseButtonUp(0)) 
         {
             _shootInputConfirmed = true;
         }
@@ -111,20 +96,17 @@ public class PlayerAnimation_main : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(_player == null || animator == null) { return; }
+
         Vector2 moveInput = new Vector2(UnityEngine.Input.GetAxis("Horizontal"), UnityEngine.Input.GetAxis("Vertical"));
 
         bool isAiming = _player.isAiming;
         bool isArcher = (jobType == JobType.ARCHER);
 
-        //ADS縺悟ｧ九∪縺｣縺滓怙蛻昴�繝輔Ξ繝ｼ繝蛟､繧呈､懷�
+        //ADS時　ー＞　アーチャー
         bool isAimingStartFrame = (isAiming && isArcher && !_isCurrentlyAiming);
-
-        //繝槭え繧ｹ繝懊ち繝ｳ髮｢縺励〒逋ｺ蟆
         bool isShootRequested = _shootInputConfirmed;
-
         int adsLayerIndex = animator.GetLayerIndex("ADS Layer");
-
-        //ADS譎ゅ�蜃ｦ逅
         if (isAiming && isArcher)
         {
             _isCurrentlyAiming = true;
@@ -176,51 +158,80 @@ public class PlayerAnimation_main : MonoBehaviour
 
     private void OnEnable()
     {
-        //繝√ぉ繝�け
+        //各イベント登録
         if (_animFlgSO)
         {
-            //蜷�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ蜃ｦ逅�ｒAction縺ｫ逋ｻ骭ｲ
             _animFlgSO.NormalMajicAttack += AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills += AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil += ArcherRecoilAnim;
             _animFlgSO.MajicSkil += AttackAnimation_Wizard;
 
-            //蝗樣∩逕ｨ繧､繝吶Φ繝育匳骭ｲ
             _animFlgSO.AvoidanceEvents += AvoidAnim;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
-            UnityEngine.Debug.LogError("_animFlgSO縺悟ｭ伜惠縺励↑縺", this);
+            UnityEngine.Debug.LogError("_animFlgSOがない", this);
             return;
         }
     }
 
+
+
     private void OnDisable()
     {
+        //イベント解除
         if (_animFlgSO)
         {
-            //蜷�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ蜃ｦ逅�ｒAction縺九ｉ蜑企勁
             _animFlgSO.NormalMajicAttack -= AttackAnimation_Normal;
             _animFlgSO.AttackArcherSkills -= AttackAnimation_Archer;
             _animFlgSO.ArcherRecoil -= ArcherRecoilAnim;
             _animFlgSO.MajicSkil -= AttackAnimation_Wizard;
 
-            //蝗樣∩逕ｨ繧､繝吶Φ繝郁ｧ｣髯､
             _animFlgSO.AvoidanceEvents -= AvoidAnim;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
-    /// <summary> /// 繧ｸ繝ｧ繝冶ｨｭ螳(繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ逕ｨ) /// </summary>
+    //シーン切り替え時に情報検索
+    private void OnSceneLoaded(Scene scene,LoadSceneMode mode) 
+    {
+        SetSceneCompornent();
+    }
+
+    /// <summary> /// コンポーネント取得 /// </summary>
+    private void SetSceneCompornent() 
+    {
+        _gameManager = GameObject.FindAnyObjectByType<GameManager>();
+        _player = GameObject.FindAnyObjectByType<Player_main>();
+        
+        if(_player != null) 
+        {
+            _playerTransform = _player.transform;
+            _plSwardLogic = _player.GetComponent<Player_Swoad_main>();
+            animator = _player.GetComponent<Animator>();
+            Camera childCam = _player.GetComponentInChildren<Camera>();
+            _cameraTransform = (childCam != null) ? childCam.transform : Camera.main?.transform;
+        }
+
+        if (_gameManager != null)
+        {
+            int jobNum = (int)_gameManager.job;
+            SetJobType((JobType)jobNum);
+            UnityEngine.Debug.Log($"ジョブ: {jobType}");
+        }
+    }
+
+    /// <summary> ///　jobセット /// </summary>
     /// <param name="_newJob"></param>
     public void SetJobType(JobType _newJob)
     {
         jobType = _newJob;
     }
 
-    /// <summary> /// 騾壼ｸｸ謾ｻ謦�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
+    /// <summary> /// 通常攻撃アニメーション /// </summary>
     private void AttackAnimation_Normal()
     {
-        //謾ｻ謦��繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ逋ｺ轣ｫ
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _currentCmd = commandSet.normalAttackCd;
@@ -230,10 +241,9 @@ public class PlayerAnimation_main : MonoBehaviour
         else { UnityEngine.Debug.LogError($"繧ｸ繝ｧ繝冶ｨｭ螳壹Α繧ｹ{jobType}"); }
     }
 
-    /// <summary> /// 謾ｻ謦�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ邨ゆｺ�畑髢｢謨ｰ /// </summary>
+    /// <summary> /// 通常攻撃終了 /// </summary>
     public void AttackAnimation_NormalEnd()
     {
-
         if (CommandMap.TryGetValue(jobType, out var commandSet))
         {
             AnimationBaseSO _endCmd = commandSet.normalAttackEndCd;
@@ -242,7 +252,7 @@ public class PlayerAnimation_main : MonoBehaviour
         }
     }
 
-    /// <summary> /// 蝗樣∩繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
+    /// <summary> /// 回避アニメーション/// </summary>
     public void AvoidAnim()
     {
         jobType = (JobType)_gameManager.job;
@@ -254,7 +264,7 @@ public class PlayerAnimation_main : MonoBehaviour
         }
     }
 
-    /// <summary> /// 蝗樣∩繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ邨ゆｺ�さ繝槭Φ繝 /// </summary>
+    /// <summary> /// 回避終了 /// </summary>
     public void AvoidAnimationEnd()
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
@@ -270,7 +280,7 @@ public class PlayerAnimation_main : MonoBehaviour
         }
     }
 
-    /// <summary>/// 繧｢繝ｼ繝√Ε繝ｼ逋ｺ蟆�い繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
+    /// <summary>///  アーチャーアニメーションー＞構え /// </summary>
     public void ArcherRecoilAnim() 
     {
         if(CommandMap.TryGetValue(jobType,out var commandSet)) 
@@ -281,7 +291,7 @@ public class PlayerAnimation_main : MonoBehaviour
         }
     }
 
-    /// <summary> /// 邨ゆｺ�畑繧ｳ繝槭Φ繝 /// </summary>
+    /// <summary> /// アーチャー -> 構え終了 /// </summary>
     public void ArcherRecoilEndAnim() 
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
@@ -296,7 +306,6 @@ public class PlayerAnimation_main : MonoBehaviour
         }
     }
 
-    /// <summary> /// 繧｢繝ｼ繝√Ε繝ｼ繧ｹ繧ｭ繝ｫ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ /// </summary>
     public void AttackAnimation_Archer()
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
@@ -308,7 +317,6 @@ public class PlayerAnimation_main : MonoBehaviour
         else { UnityEngine.Debug.LogError("繧ｸ繝ｧ繝冶ｨｭ螳壹Α繧ｹ"); }
     }
 
-    //蜑｣螢ｫ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
     public void AttackAnimation_Swordman(int comboCount) 
     {
         if (_swordSkillCmd != null)
@@ -319,7 +327,6 @@ public class PlayerAnimation_main : MonoBehaviour
         else { UnityEngine.Debug.LogWarning($"SwordSkillAnimSO 縺瑚ｨｭ螳壹＆繧後※縺�∪縺帙ｓ縲"); }
     }
 
-    //繝槭ず繧ｷ繝｣繝ｳ縺ｮ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
     public void AttackAnimation_Wizard() 
     {
         if (CommandMap.TryGetValue(jobType, out var commandSet))
@@ -342,7 +349,7 @@ public class PlayerAnimation_main : MonoBehaviour
             }
             else
             {
-                UnityEngine.Debug.LogError("WizardSkilCd縺勲ajician_SkilAnimSO縺ｧ縺ｯ縺ゅｊ縺ｾ縺帙ｓ縲");
+                UnityEngine.Debug.LogError("WizardSkilCd");
             }
         }
     }
@@ -357,7 +364,7 @@ public class PlayerAnimation_main : MonoBehaviour
             if (_cameraTransform == null) return;
 
             float lookAtWeight = 1.0f;
-            Vector3 targetPosition = _cameraTransform.position + _cameraTransform.forward * 10f; // 繧ｫ繝｡繝ｩ縺ｮ隕九※縺�ｋ蜈
+            Vector3 targetPosition = _cameraTransform.position + _cameraTransform.forward * 10f;
 
             animator.SetLookAtWeight(lookAtWeight);
             animator.SetLookAtPosition(targetPosition);
