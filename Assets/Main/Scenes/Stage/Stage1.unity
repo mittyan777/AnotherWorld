@@ -3455,13 +3455,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 558263516216145357, guid: d5efa70463301c643a7929cb1f88d0b7, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5152439211636990438, guid: d5efa70463301c643a7929cb1f88d0b7, type: 3}
-      insertIndex: 4
+      insertIndex: 5
       addedObject: {fileID: 1992086766}
   m_SourcePrefab: {fileID: 100100000, guid: d5efa70463301c643a7929cb1f88d0b7, type: 3}
 --- !u!4 &350680287 stripped
