@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 458612}
-  - component: {fileID: 4688802562013068926}
   - component: {fileID: 7584893102371560483}
   - component: {fileID: 1060063734827703417}
   - component: {fileID: 5582962787825600059}
+  - component: {fileID: 5559268081581795516}
   m_Layer: 0
   m_Name: Arrow00_prefab
   m_TagString: Untagged
@@ -36,20 +36,6 @@ Transform:
   - {fileID: 463598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4688802562013068926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 110294}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045db865079f08b48b033ff895d5502c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  power: 5
 --- !u!82 &7584893102371560483
 AudioSource:
   m_ObjectHideFlags: 0
@@ -194,6 +180,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5559268081581795516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bf14d25b1bc284987a84a2e3f8191b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  power: 0
 --- !u!1 &199956
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +207,6 @@ GameObject:
   - component: {fileID: 2308106}
   - component: {fileID: 5452636}
   - component: {fileID: 6598898}
-  - component: {fileID: 1703897277183640927}
   m_Layer: 0
   m_Name: Arrow00_mesh(Clone)
   m_TagString: Untagged
@@ -328,17 +327,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.030360099, y: 0.7059591, z: 0.026292618}
   m_Center: {x: -4.656613e-10, y: 0.35297894, z: 0.004368006}
---- !u!114 &1703897277183640927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045db865079f08b48b033ff895d5502c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  power: 5
