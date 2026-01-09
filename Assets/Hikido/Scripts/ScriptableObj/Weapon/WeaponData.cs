@@ -25,7 +25,9 @@ public class WeaponData : ScriptableObject
     [Header("追加性能")]
     //武器の追加性能 -> こちらでは使わないかも
     public float plusAttack = 1.0f;
-    public float attackRange = 1.0f;
+    public float plusMP = 1.0f;
+    public float plusDifence = 1.0f;
+    public float plusHP = 1.0f;
 
     [Header("アタッチ位置")]
     public Vector3 attatchLocalPos = Vector3.zero;
