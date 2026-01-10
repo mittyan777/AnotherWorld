@@ -14,6 +14,9 @@ public class EnemyHP : MonoBehaviour
     [SerializeField] private float damageTime;
     [SerializeField] private float breakTime;
 
+    private GameManager gameManager;
+    private TestManerger testManerger;
+
     private void Start()
     {
         enemyCurrentHP = enemyMaxHP;
@@ -25,6 +28,19 @@ public class EnemyHP : MonoBehaviour
             Debug.LogError(gameObject.name + ": EnemyMoveが見つかりません。", this);
             this.enabled = false;
             return;
+        }
+
+        GameObject managerObject = GameObject.FindWithTag("GameManager");
+        if (managerObject != null)
+        {
+            gameManager = managerObject.GetComponent<GameManager>();
+        }
+
+        //テストコード
+        GameObject test = GameObject.FindWithTag("test");
+        if (test != null)
+        {
+            testManerger = test.GetComponent<TestManerger>();
         }
     }
 
@@ -88,7 +104,16 @@ public class EnemyHP : MonoBehaviour
         if (enemyMove.currentState == EnemyMove.EnemyState.death) return;
         if (enemyCurrentHP <= 0) return;
         //TODO:ここではPlayerから受け取ったダメージを入れる。
-        enemyCurrentHP -= 5;
+
+        //本来のコード
+        //enemyCurrentHP -= (int)gameManager.AttackStatus;
+
+        //テストコード
+        enemyCurrentHP -= testManerger.AP;
+
+        //enemyCurrentHP -= 5;
+        Debug.Log(testManerger.AP);
+        Debug.Log(enemyCurrentHP);
 
         //死亡しているのでダメージのアニメーションは不要
         if (enemyCurrentHP <= 0)
@@ -119,6 +144,13 @@ public class EnemyHP : MonoBehaviour
             return;
         }
         if (other.gameObject.tag.Contains("Player"))
+        {
+            GetDamege();
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "PlayerFireMagic")
         {
             GetDamege();
         }

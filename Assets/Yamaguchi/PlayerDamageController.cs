@@ -19,7 +19,7 @@ public class PlayerDamageController : MonoBehaviour
     [SerializeField] private string goblinAttack03      = "GoblinAttack03";
     [SerializeField] private string skeletonAttack01    = "SkeletonAttack01";
     [SerializeField] private string skeletonAttack03    = "SkeletonAttack03";
-    [SerializeField] private string ThrowadleAttack     = "ThrowadleAttack";
+    [SerializeField] private string ThrowadleAttack     = "ThrowableAttack";
     [SerializeField] private string spiderAttack01      = "SpiderAttack01";
     [SerializeField] private string spiderAttack02      = "SpiderAttack02";
     [SerializeField] private string wolfAttack01        = "WolfAttack";
@@ -51,8 +51,14 @@ public class PlayerDamageController : MonoBehaviour
         {
             Debug.Log("ない");
         }
-
+        /*
         if (gameManager == null || enemyDamageManager == null || bossManager == null)
+        {
+            Debug.LogError("必要なマネージャーが見つかりません。PlayerHealthControllerを無効化します。", this);
+            //enabled = false;
+        }
+        */
+        if (testManerger == null || enemyDamageManager == null || bossManager == null)
         {
             Debug.LogError("必要なマネージャーが見つかりません。PlayerHealthControllerを無効化します。", this);
             //enabled = false;
@@ -130,7 +136,7 @@ public class PlayerDamageController : MonoBehaviour
             {
                 //gameManager.TakeDamage(damage);
             }
-            if (testManerger != null&&bossManager.bossBattle)
+            if (testManerger != null)
             {
                 testManerger.testDamage(damage);
             }
