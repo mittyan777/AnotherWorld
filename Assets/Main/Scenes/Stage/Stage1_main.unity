@@ -8716,7 +8716,7 @@ MonoBehaviour:
   - {fileID: 1018025056615703034, guid: b7196a836aa33644ea9075a6704199ac, type: 3}
   maxAttempts: 10
   spawnInterval: 1
-  maxSpawn: 20
+  maxSpawn: 5
 --- !u!114 &1251850004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8988,7 +8988,7 @@ Transform:
   m_GameObject: {fileID: 1307391094}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.24799, y: -53.2377, z: 44.502934}
+  m_LocalPosition: {x: 19.24799, y: -54.18, z: 44.502934}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10141,7 +10141,7 @@ Transform:
   m_GameObject: {fileID: 1507616538}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.349999, y: 2.14, z: -29.789999}
+  m_LocalPosition: {x: 8.349999, y: 0, z: -29.789999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10961,7 +10961,7 @@ MonoBehaviour:
   - {fileID: 5711669388771541780, guid: b69f2d49c9246d645a2ae7147d1e6baa, type: 3}
   maxAttempts: 10
   spawnInterval: 3
-  maxSpawn: 15
+  maxSpawn: 5
 --- !u!114 &1622744874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11346,7 +11346,7 @@ MonoBehaviour:
   - {fileID: 1018025056615703034, guid: b7196a836aa33644ea9075a6704199ac, type: 3}
   maxAttempts: 10
   spawnInterval: 3
-  maxSpawn: 10
+  maxSpawn: 5
 --- !u!114 &1729699129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11479,7 +11479,7 @@ MonoBehaviour:
   - {fileID: 2121770041380104553, guid: 93a19c3754eafe847a40e92b632f33d0, type: 3}
   maxAttempts: 10
   spawnInterval: 1
-  maxSpawn: 10
+  maxSpawn: 5
 --- !u!114 &1785668376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14339,7 +14339,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4257476112260191843, guid: 486e7188bfd288a4fb2e8fb6c74a7ac3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.75
+      value: 24.33
       objectReference: {fileID: 0}
     - target: {fileID: 4257476112260191843, guid: 486e7188bfd288a4fb2e8fb6c74a7ac3, type: 3}
       propertyPath: m_LocalPosition.y

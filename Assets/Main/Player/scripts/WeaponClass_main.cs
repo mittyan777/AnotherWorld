@@ -22,26 +22,26 @@ public class WeaponClass_main : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-    // 今のシーンのプレイヤーからEquipmentManagerを見つけ出す
+    //今のシーンのプレイヤーからEquipmentManagerを見つけ出す
     private bool RefreshPlayerReference()
     {
         GameManager gm = GetComponent<GameManager>();
         GameObject playerObj = null;
 
-        // GameManagerのPlayer[0]が今のシーンのものを指しているか確認
+        //GameManagerのPlayer[0]が今のシーンのものを指しているか確認
         if (gm != null && gm.Player != null && gm.Player.Length > 0 && gm.Player[0] != null)
         {
             playerObj = gm.Player[0];
         }
         else
         {
-            // GameManagerで見つからない場合の予備（タグ検索）
+            //GameManagerで見つからない場合の予備（タグ検索）
             playerObj = GameObject.FindGameObjectWithTag("Player");
         }
 
         if (playerObj == null) return false;
 
-        // 参照が古い、または未取得なら取得
+        //参照が古いor未取得なら取得
         if (currentEquipmentManager == null || currentEquipmentManager.gameObject != playerObj)
         {
             currentEquipmentManager = playerObj.GetComponent<EquipmentManager>();

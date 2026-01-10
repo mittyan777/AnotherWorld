@@ -15,7 +15,7 @@ public class PlayerInventry : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // 親がいない場合のみDontDestroy。GameManagerの子ならこれ自体は不要
+            //親がいない場合のみDontDestroy。GameManagerの子ならこれ自体は不要
             if (transform.parent == null) { DontDestroyOnLoad(gameObject); }
         }
         else { Destroy(gameObject); }
@@ -26,7 +26,7 @@ public class PlayerInventry : MonoBehaviour
         if (!purchasedWeaponKeys.Contains(weaponKey))
         {
             purchasedWeaponKeys.Add(weaponKey);
-            // 最初の一本なら自動装備
+            //最初の一本なら自動装備
             if (string.IsNullOrEmpty(eqippedWeaponkey)) { SetEquippedWeapon(weaponKey); }
         }
     }
@@ -37,7 +37,7 @@ public class PlayerInventry : MonoBehaviour
 
         eqippedWeaponkey = weaponKey;
 
-        // 現在のシーンのプレイヤーに装備させる
+        //現在のシーンのプレイヤーに装備させる
         if (WeaponClass_main.Instance != null)
         {
             WeaponClass_main.Instance.EquipWeaponByNameKey(weaponKey);
