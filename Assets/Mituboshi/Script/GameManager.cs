@@ -1,6 +1,7 @@
-using System;
+Ôªøusing System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,13 +11,21 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private WeaponData []weaponData;
+
+    [SerializeField] Text []Weapon_status_text;
     [SerializeField] public GameObject []Player;
     [SerializeField]public float Coin;
     [SerializeField]public float HP;
     [SerializeField]public float MP;
     [SerializeField]public float AttackStatus;
     [SerializeField]public float DefenseStatus;
-   
+
+    [SerializeField] public float MAX_HP;
+    [SerializeField] public float MAX_MP;
+
+    [SerializeField] public float Present_Defense;
+    [SerializeField] public float Present_Attack;
     [SerializeField] public float Present_HP;
     [SerializeField]public float Present_MP;
     [SerializeField] TextMeshProUGUI MP_text;
@@ -54,8 +63,8 @@ public class GameManager : MonoBehaviour
     public string scene_name;
     public string tutorial_count;
     [SerializeField]GameObject tutorial_UI;
-     float speed = 50;      // à⁄ìÆë¨ìx
-     float distance = 10;   // à⁄ìÆãóó£
+     float speed = 50;      // ÁßªÂãïÈÄüÂ∫¶
+     float distance = 10;   // ÁßªÂãïË∑ùÈõ¢
 
     private Vector3 startPos;
     [SerializeField] GameObject[] Status_text;
@@ -79,6 +88,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
+        Debug.Log(Present_Attack);
+        Debug.Log(Present_Defense);
+        Debug.Log(Present_HP);
+        Debug.Log(Present_MP);
         if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
         {
             Canvas.SetActive(true);
@@ -94,10 +108,10 @@ public class GameManager : MonoBehaviour
             {
                 standard_camera = GameObject.Find("MainCamera");
             }
-            Present_Status_text[0].text = ($"{HP}");
-            Present_Status_text[1].text = ($"{MP}");
-            Present_Status_text[2].text = ($"{AttackStatus}");
-            Present_Status_text[3].text = ($"{DefenseStatus}");
+            Present_Status_text[0].text = ($"{AttackStatus}");
+            Present_Status_text[1].text = ($"{DefenseStatus}");
+            Present_Status_text[2].text = ($"{HP}");
+            Present_Status_text[3].text = ($"{MP}");
             coin_text.text = ($"{Coin}");
             // PlayerStatus();
         }
@@ -167,7 +181,7 @@ public class GameManager : MonoBehaviour
         }
         if (GameObject.Find("Rouret_Manejer").GetComponent<Rouretto_New>().FirstRoulette == true)
         {
-            //Ç–Ç´Ç«ïœçXÅ@EnemyScene_mituboshi -> Stage1_mainÇ…ïœçX 
+            //„Å≤„Åç„Å©Â§âÊõ¥„ÄÄEnemyScene_mituboshi -> Stage1_main„Å´Â§âÊõ¥ 
             if (SceneManager.GetActiveScene().name == "Stage1_main")
             {
                 if (GAMEUI.activeSelf == false && rouletteUI.activeSelf == false)
@@ -247,11 +261,11 @@ public class GameManager : MonoBehaviour
         MP_text.text = ($"{Mathf.Ceil(Present_MP)} / {Mathf.Ceil(MP)} ");
 
         if (Present_MP < MP) { Present_MP += 2 * Time.deltaTime; }
-        if (Present_MP >= MP) { Present_MP = MP; }
+        if (Present_MP >= MP) { Present_MP = MAX_MP; }
 
        
-        HP_slider.fillAmount = Present_HP / HP;
-        MP_slider.fillAmount = Present_MP / MP;
+        HP_slider.fillAmount = Present_HP / MAX_HP;
+        MP_slider.fillAmount = Present_MP / MAX_HP;
 
         if(fade == false && fade_image_a >= 0)
         {
@@ -264,13 +278,13 @@ public class GameManager : MonoBehaviour
         fade_image.color = new Color(0,0,0, fade_image_a);
 
 
-        //Ç–Ç´Ç«ïœçX ÉVÅ[ÉìñºÇmainÇ≈égópÇ∑ÇÈÉVÅ[ÉìñºÇ…ïœçX Synthesis_Test -> TownScene_main
-        if (SceneManager.GetActiveScene().name == "TownScene_main")
+        //„Å≤„Åç„Å©Â§âÊõ¥ „Ç∑„Éº„É≥Âêç„Çímain„Åß‰ΩøÁî®„Åô„Çã„Ç∑„Éº„É≥Âêç„Å´Â§âÊõ¥ Synthesis_Test -> TownScene_main
+        if (SceneManager.GetActiveScene().name == "Town_mitubosi")
         {
-            //Ç–Ç´Ç«ïœçXÅ@ÉVÅ[ÉìñºÇmainÇ≈égópÇ∑ÇÈñºëOÇ…ïœçX EnemyScene_mitubosi -> Stage1_main
+            //„Å≤„Åç„Å©Â§âÊõ¥„ÄÄ„Ç∑„Éº„É≥Âêç„Çímain„Åß‰ΩøÁî®„Åô„ÇãÂêçÂâç„Å´Â§âÊõ¥ EnemyScene_mitubosi -> Stage1_main
             scene_name = "Stage1_main";
         }
-        //ÉÅÉCÉìÇ≈égÇ§ï˚
+        //„É°„Ç§„É≥„Åß‰Ωø„ÅÜÊñπ
         //if (SceneManager.GetActiveScene().name == "TownScene_main")
         //{
         //    scene_name = "Stage1_main";
@@ -358,7 +372,7 @@ public class GameManager : MonoBehaviour
     {
 
 
-        //Ç–Ç´Ç«ïœçX Player -> Player_main ÅiÉÅÉCÉìÇ≈égÇ§ï˚Ç…ïœçXÅj
+        //„Å≤„Åç„Å©Â§âÊõ¥ Player -> Player_main Ôºà„É°„Ç§„É≥„Åß‰Ωø„ÅÜÊñπ„Å´Â§âÊõ¥Ôºâ
         //Player[0].GetComponent<Player>().HP = HP;
         //Player[0].GetComponent<Player>().MP = MP;
         //Player[0].GetComponent<Player>().AttackStatus = AttackStatus;
@@ -409,6 +423,55 @@ public class GameManager : MonoBehaviour
             MP = 0;
         }
     }
+
+
+    public void Weapon_status(string button_name)
+    {
+        int index = -1;
+
+        switch (button_name)
+        {
+            case "Button1-1": index = 0; break;
+            case "Button1-2": index = 1; break;
+            case "Button1-3": index = 2; break;
+            case "Button1-4": index = 3; break;
+
+            case "Button2-1": index = 4; break;
+            case "Button2-2": index = 5; break;
+            case "Button2-3": index = 6; break;
+            case "Button2-4": index = 7; break;
+
+            case "Button3-1": index = 8; break;
+            case "Button3-2": index = 9; break;
+            case "Button3-3": index = 10; break;
+            case "Button3-4": index = 11; break;
+
+            default:
+                Debug.LogWarning("Button not in valid range");
+                return;
+        }
+
+        if (index < 0 || index >= weaponData.Length)
+        {
+            Debug.LogWarning("weaponData index out of range");
+            return;
+        }
+
+        Present_Attack = AttackStatus + weaponData[index].plusAttack;
+        Present_Defense = DefenseStatus + weaponData[index].plusDifence;
+        MAX_HP = HP + weaponData[index].plusHP;
+        MAX_MP = MP + weaponData[index].plusMP;
+
+        Weapon_status_text[0].text = ($"{MAX_HP - HP}");
+        Weapon_status_text[1].text = ($"{MAX_MP - MP}");
+        Weapon_status_text[2].text = ($"{Present_Attack - AttackStatus}");
+        Weapon_status_text[3].text = ($"{Present_Defense - DefenseStatus}");
+    }
+
+
+
+
+
 
     public void TakeDamage(int damage)
     {
