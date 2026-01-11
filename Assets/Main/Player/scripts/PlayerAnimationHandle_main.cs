@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerAnimationHandle_main : MonoBehaviour
 {
     [SerializeField] private PlayerAnimation_main animationRouter;
+    private void Start()
+    {
+        animationRouter = GetComponent<PlayerAnimation_main>();
+    }
 
     public void AttackAnimation_NormalEnd()
     {

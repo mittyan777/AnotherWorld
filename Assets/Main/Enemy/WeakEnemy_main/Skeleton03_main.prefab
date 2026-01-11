@@ -155,7 +155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
       propertyPath: m_Name
-      value: Skeleton03
+      value: Skeleton03_main
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
       propertyPath: m_Avatar
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8822aac848c4546b526f70d42fa56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyObj: {fileID: 8395968631224569226, guid: d2b143c057075f547b88541a7fb5e0f6, type: 3}
+  moneyObj: {fileID: 8395968631224569226, guid: 3bb5896ea5cbc6f4f8a26a434b49e0b8, type: 3}
 --- !u!114 &5315088981127426805
 MonoBehaviour:
   m_ObjectHideFlags: 0

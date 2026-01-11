@@ -36,6 +36,7 @@ public class Player_main : MonoBehaviour
     //‚Ð‚«‚Ç’Ç‰Á
     [SerializeField] AnimationFlagManagerSO _animflgSO;
     [SerializeField] PlayerAnimation_main playerAnim;
+    [SerializeField] MoneyDrop _money;
 
     [SerializeField] float a = 0.5f;
     // Start is called before the first frame update
@@ -44,6 +45,7 @@ public class Player_main : MonoBehaviour
         //Time.timeScale = 0f;
         animator = GetComponent<Animator>();
         manager = GameObject.FindGameObjectWithTag("GameManager");
+        _money = GetComponent<MoneyDrop>();
         if (PlayerAnimation_main.Instance != null) { playerAnim = PlayerAnimation_main.Instance; }
         // Cursor.lockState = CursorLockMode.Locked;   //’Ç‰Á
         //Cursor.visible = false;     //’Ç‰Á
@@ -142,12 +144,14 @@ public class Player_main : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        _money = other.gameObject.GetComponent<MoneyDrop>();
         if (other.gameObject.tag == "coin")
         {
-            manager.GetComponent<GameManager>().Coin += 100;
+            manager.GetComponent<GameManager>().Coin += _money.money;
             Destroy(other.gameObject);
         }
     }
+
     void cameracontrol()
     {
         float mx = UnityEngine.Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;

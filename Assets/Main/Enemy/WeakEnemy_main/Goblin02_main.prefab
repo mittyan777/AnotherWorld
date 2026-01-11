@@ -89,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cf26cc453853b954eb3c7cd904bee4c0, type: 3}
       propertyPath: m_Name
-      value: Goblin02
+      value: Goblin02_main
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cf26cc453853b954eb3c7cd904bee4c0, type: 3}
       propertyPath: m_Controller
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8822aac848c4546b526f70d42fa56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyObj: {fileID: 8395968631224569226, guid: 3a481f2a44b54d44cbb5ed362e34f4c3, type: 3}
+  moneyObj: {fileID: 8395968631224569226, guid: 44500e12c5cf9a04ab64205067960e42, type: 3}
 --- !u!65 &3442605614570951980
 BoxCollider:
   m_ObjectHideFlags: 0

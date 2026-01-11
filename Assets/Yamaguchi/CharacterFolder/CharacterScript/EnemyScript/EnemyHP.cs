@@ -102,17 +102,17 @@ public class EnemyHP : MonoBehaviour
     private void GetDamege()
     {
         if (enemyMove.currentState == EnemyMove.EnemyState.death) return;
-        if (enemyCurrentHP <= 0) return;
+        //if (enemyCurrentHP <= 0) return;
         //TODO:ここではPlayerから受け取ったダメージを入れる。
 
         //本来のコード
-        //enemyCurrentHP -= (int)gameManager.AttackStatus;
+        enemyCurrentHP -= (int)gameManager.AttackStatus;
 
         //テストコード
-        enemyCurrentHP -= testManerger.AP;
+        //enemyCurrentHP -= testManerger.AP;
 
         //enemyCurrentHP -= 5;
-        Debug.Log(testManerger.AP);
+        //Debug.Log(testManerger.AP);
         Debug.Log(enemyCurrentHP);
 
         //死亡しているのでダメージのアニメーションは不要
