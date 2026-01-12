@@ -237,4 +237,6 @@ MonoBehaviour:
   CoinSpawn: {fileID: 8301121145211775986}
   CoinCount: 5
   CoinUp: 5
-  CoinSide: 0
+  CoinSide: 0.3
+  OpenChestTime: 0.15
+  AnimWaitTime: 1

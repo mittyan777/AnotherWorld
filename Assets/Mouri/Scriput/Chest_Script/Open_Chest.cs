@@ -13,6 +13,9 @@ public class Open_Chest : MonoBehaviour
     [SerializeField] private GameObject openUI;       // 「Eで開ける」などのUI
     [SerializeField] private float destroyTime = 1.5f; // 宝箱破壊までの遅延時間
 
+    [Header("サウンド設定")]
+    [SerializeField] private AudioSource Open_SE;
+
     [Header("コイン設定")]
     [SerializeField] private GameObject Coin;         // コインPrefab
     [SerializeField] private Transform CoinSpawn;     // コイン出現位置
@@ -56,6 +59,12 @@ public class Open_Chest : MonoBehaviour
         if (isPlayerNear && !isOpened && Input.GetKeyDown(openKey))
         {
             StartCoroutine(OpenChestCoroutine());
+
+
+            if (Open_SE != null)
+            {
+                Open_SE.Play();
+            }
         }
     }
 
@@ -90,6 +99,7 @@ public class Open_Chest : MonoBehaviour
         {
             animator.SetBool("open", true);
         }
+
 
         // 再接触防止
         if (chestTrigger != null)
