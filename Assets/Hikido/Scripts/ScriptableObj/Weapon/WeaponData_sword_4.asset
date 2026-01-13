@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponData_sword_4
   m_EditorClassIdentifier: 
   itemKeyName: Scroll View1_4
-  weaponPrefab: {fileID: 181888, guid: b20b7a1b4320ffe4a92c77dfd5c6d7a3, type: 3}
+  weaponPrefab: {fileID: 9190878331159525150, guid: 696547c1f5c9dbc45978c7720f94b01e, type: 3}
   type: 0
   plusAttack: 99
   plusMP: 1
