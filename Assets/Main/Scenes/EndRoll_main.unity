@@ -181,19 +181,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 100
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Reader\nNoriaki Mouri\n\nMember(PG)\n    Haruki Hikudo        Syou Yamaguchi\n
-    Masaki Nisimura    Hinata Mitubosi\nMasahiro Noguchi"
+  m_Text: "Reader\nNoriaki Mouri\n\nMember(PG)\n    Haruki Hikudo    Syou Yamaguchi\n  
+    Masaki Nisimura  Hinata Mitubosi\nMasahiro Noguchi"
 --- !u!222 &38880392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -404,11 +404,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 100
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716381228}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64a759493f35fc3489cfa263f2572feb, type: 3}
   m_Name: 
@@ -660,28 +660,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 100
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Assets
-
-
-    Fantasy Skybox FREE
-
-    Free HDR Skyboxes Pack
-
-    Medieval
-    Castle
-
-'
+  m_Text: "Role\n\nPlayer\nHaruki Hikudo    Syou Yamaguchi\nHinata Mitubosi\nStage\n
+    Masaki Nisimura\nSE.UI\nMasahiro Noguchi Noriaki Mouri"
 --- !u!222 &1761311820
 CanvasRenderer:
   m_ObjectHideFlags: 0
