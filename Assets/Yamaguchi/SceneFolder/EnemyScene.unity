@@ -211,11 +211,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 481845941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &333841711 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5793946239716068314, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
-  m_PrefabInstance: {fileID: 4041072122941036569}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &471436855
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
+  AP: 10
 --- !u!65 &1778665748
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3370,9 +3366,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1820855367039304498, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820855367039304498, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2815184838856646603, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2815184838856646603, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
       propertyPath: m_Name
       value: Boss02_Ver1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778138210266432016, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778138210266432016, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7828538782796724415, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3414,6 +3438,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9068134915884560740, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068134915884560740, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3427,6 +3459,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1680175903583462956, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680175903583462956, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2601039363636921356, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_Name
       value: Boss01_Golem_Ver1.1
@@ -3469,6 +3509,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3410191567667027638, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344512546709116026, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8344512546709116026, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3535,7 +3583,7 @@ PrefabInstance:
     - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
       propertyPath: activeCanvas
       value: 
-      objectReference: {fileID: 333841711}
+      objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
       propertyPath: activeBossObj
       value: 

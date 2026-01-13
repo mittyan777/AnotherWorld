@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2324237426434916052, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7192690295415736982, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -186,16 +190,13 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8025778750387521964, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 22910390}
-    - targetCorrespondingSourceObject: {fileID: 8025778750387521964, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4546081455056259822, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 22910389}
   m_SourcePrefab: {fileID: 100100000, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
 --- !u!1 &22910388 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8025778750387521964, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4546081455056259822, guid: e5f20ee88a4ffcd468693512c9dccdb7, type: 3}
   m_PrefabInstance: {fileID: 22910387}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &22910389
@@ -210,28 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b3ee889156cc34594d2e59fb3f3290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPanel: {fileID: 1666321676}
---- !u!65 &22910390
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 22910388}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  uiPanel: {fileID: 22910388}
 --- !u!1 &28246018 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9084275281703877156, guid: 9ef95eb74fbef4145bc387e83b897495, type: 3}
