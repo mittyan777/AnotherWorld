@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d60d7c47649cfd45a0e7118b94845e8, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: 0f5d1a89131b4b148b0db2fdf90071d0, type: 3}
-  rouletteSoundType: 2
+  rouletteSoundType: 3
 --- !u!82 &5053486477763516078
 AudioSource:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
