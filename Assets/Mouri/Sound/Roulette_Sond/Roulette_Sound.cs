@@ -13,15 +13,15 @@ public enum RouletteSoundType
 }
 public class Roulette_Sound : MonoBehaviour
 {
- 
-    
+
+
     [Header("ƒ‹[ƒŒƒbƒg‰¹")]
-    [SerializeField]private  AudioSource audioSource;
-    [SerializeField] private AudioClip []SoundClips;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] SoundClips;
 
     public RouletteSoundType rouletteSoundType;
 
-    private bool isSpinPlaying=false;
+    private bool isSpinPlaying = false;
 
     public bool IsSpinPlaying()
     {
@@ -33,11 +33,11 @@ public class Roulette_Sound : MonoBehaviour
     {
         Debug.Log(rouletteSoundType);
 
-        if(audioSource == null|| SoundClips==null) return;
+        if (audioSource == null || SoundClips == null) return;
 
         int index = (int)rouletteSoundType;
 
-        if (index >= SoundClips.Length && SoundClips[index] != null)return;
+        if (index >= SoundClips.Length || SoundClips[index] != null) return;
 
         if (rouletteSoundType == RouletteSoundType.Spin)    //‰¹‚ÌŽí—Þ_1
         {
@@ -62,7 +62,7 @@ public class Roulette_Sound : MonoBehaviour
                 isSpinPlaying = false;
             }
             audioSource.PlayOneShot(SoundClips[index]);
-            
+
             return;
         }
 
