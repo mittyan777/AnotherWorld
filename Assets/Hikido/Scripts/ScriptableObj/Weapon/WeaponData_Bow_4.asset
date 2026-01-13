@@ -21,5 +21,5 @@ MonoBehaviour:
   plusHP: 0
   attatchLocalPos: {x: 0, y: 0, z: 0}
   attachLocalRotationEules: {x: 0, y: 0, z: 0}
-  leftAttachLocalPos: {x: -0.23, y: -0.514, z: 0.18}
-  leftAttachLocalRotationEules: {x: -32.205, y: -79.494, z: 10.284}
+  leftAttachLocalPos: {x: 0.11, y: 0.16, z: 0.02}
+  leftAttachLocalRotationEules: {x: -23, y: 86, z: 102}
