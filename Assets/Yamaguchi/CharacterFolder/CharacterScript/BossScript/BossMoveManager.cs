@@ -202,12 +202,12 @@ public class BossMoveManager : MonoBehaviour
             StartCoroutine(bossHP.TakeDamage(takeDamege));
         }
 
-        if (hitTag.Contains("Player"))
-        {
-            //GameManagerから最新の攻撃力を取得する。
-            int takeDamege = testManerger.HP;
-            //プレイヤーの攻撃力を渡す
-            StartCoroutine(bossHP.TakeDamage(takeDamege));
-        }
+        //if (hitTag.Contains("Player"))
+        //{
+        //    //GameManagerから最新の攻撃力を取得する。
+        //    int takeDamege = testManerger.HP;
+        //    //プレイヤーの攻撃力を渡す
+        //    StartCoroutine(bossHP.TakeDamage(takeDamege));
+        //}
     }
 }

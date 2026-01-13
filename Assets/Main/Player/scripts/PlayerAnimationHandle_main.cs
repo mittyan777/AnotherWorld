@@ -7,7 +7,13 @@ public class PlayerAnimationHandle_main : MonoBehaviour
     [SerializeField] private PlayerAnimation_main animationRouter;
     private void Start()
     {
-        animationRouter = GetComponent<PlayerAnimation_main>();
+        animationRouter = PlayerAnimation_main.Instance;
+
+        if (animationRouter == null)
+        {
+            Debug.LogError("AnimationManager シングルトンがシーンに存在しません。", this);
+        }
+
     }
 
     public void AttackAnimation_NormalEnd()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5870302311529118238}
   m_Layer: 0
   m_Name: Attack
-  m_TagString: Untagged
+  m_TagString: SkeletonAttack03
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

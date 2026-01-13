@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: _animflgSO
       value: 
       objectReference: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
+    - target: {fileID: 1456104282009652383, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 2783842407740752407, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.27
@@ -230,6 +234,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.96
       objectReference: {fileID: 0}
+    - target: {fileID: 3608186249288334250, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 4482639997862421502, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       propertyPath: m_Name
       value: BasicMotionsDummy_hikido
@@ -260,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5577896113425745450, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.83
+      value: -4.916
       objectReference: {fileID: 0}
     - target: {fileID: 5577896113425745450, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -298,6 +306,18 @@ PrefabInstance:
       propertyPath: Arrow
       value: 
       objectReference: {fileID: 110294, guid: 3d135ed9417e31c45b1a8115ab7ff192, type: 3}
+    - target: {fileID: 6323296990996661376, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6323296990996661376, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6323296990996661376, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.13
+      objectReference: {fileID: 0}
     - target: {fileID: 7023838340936343566, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -361,6 +381,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4482639997862421502, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1909871809490741310}
+    - targetCorrespondingSourceObject: {fileID: 4482639997862421502, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2660562289981419065}
+    - targetCorrespondingSourceObject: {fileID: 4482639997862421502, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2673688444469303776}
   m_SourcePrefab: {fileID: 100100000, guid: a00c5c94946ec2340b68c238ac6c48b8, type: 3}
 --- !u!4 &672252329206603865 stripped
 Transform:
@@ -478,6 +504,7 @@ MonoBehaviour:
   ADS: 0
   _animflgSO: {fileID: 11400000, guid: b548850e413f57849b0bcd4f0ccc7e14, type: 2}
   playerAnim: {fileID: 0}
+  _money: {fileID: 0}
   a: 0.5
 --- !u!114 &8738518057402071911
 MonoBehaviour:
@@ -510,6 +537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8699626f273469e489aac01583a5d571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightHandName: RightHand
+  leftHandName: LeftHand
   rightHandAttachPoint: {fileID: 2971509879181846735}
   leftHandAttackPoint: {fileID: 4063965095910004455}
 --- !u!114 &7310920101136856102
@@ -542,7 +571,7 @@ MonoBehaviour:
   - {fileID: 5173462313095440674}
   - {fileID: 5047392043209982155}
   - {fileID: 5757452345789943243}
-  shootpower: 0
+  shootpower: 10
 --- !u!114 &1909871809490741310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,3 +585,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationRouter: {fileID: 0}
+--- !u!114 &2660562289981419065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911490711176660547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babadc5b467595a4eb68587ca0e992ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibilityDuration: 0.5
+  goblinAttack01: GoblinAttack01
+  goblinAttack03: GoblinAttack03
+  skeletonAttack01: SkeletonAttack01
+  skeletonAttack03: SkeletonAttack03
+  ThrowadleAttack: ThrowableAttack
+  spiderAttack01: SpiderAttack01
+  spiderAttack02: SpiderAttack02
+  wolfAttack01: WolfAttack
+  bossAttackTag01: AttackArea01
+  bossAttackTag02: AttackArea02
+  bossAttackTag03: AttackArea03
+--- !u!65 &2673688444469303776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7911490711176660547}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.9598985, y: 1.7614441, z: 0.65296334}
+  m_Center: {x: -0.020050779, y: 1.2471344, z: -0.053332627}

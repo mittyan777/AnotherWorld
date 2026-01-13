@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 458612}
   - component: {fileID: 7584893102371560483}
-  - component: {fileID: 1060063734827703417}
-  - component: {fileID: 5582962787825600059}
+  - component: {fileID: 4126623705718173598}
+  - component: {fileID: 5601445844718832122}
+  - component: {fileID: 4314062553382327259}
   m_Layer: 0
   m_Name: Arrow00_prefab
   m_TagString: Untagged
@@ -131,7 +132,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &1060063734827703417
+--- !u!65 &4126623705718173598
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,11 +149,11 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05845211, y: 0.723807, z: 0.04441164}
-  m_Center: {x: 0.0066723097, y: 0.37421256, z: 0.0028383974}
---- !u!54 &5582962787825600059
+  m_Size: {x: 0.75008494, y: 0.066266805, z: 0.102175035}
+  m_Center: {x: -0.34767947, y: -0.0026172549, z: -0.005507726}
+--- !u!54 &5601445844718832122
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,6 +180,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4314062553382327259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95bf14d25b1bc284987a84a2e3f8191b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  power: 10
 --- !u!1 &199956
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,9 +205,6 @@ GameObject:
   - component: {fileID: 463598}
   - component: {fileID: 3393954}
   - component: {fileID: 2308106}
-  - component: {fileID: 5452636}
-  - component: {fileID: 6598898}
-  - component: {fileID: 6866904568124372791}
   m_Layer: 0
   m_Name: Arrow00_mesh(Clone)
   m_TagString: PlayerArrow
@@ -265,65 +277,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &5452636
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199956}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &6598898
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199956}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.030360099, y: 0.7059591, z: 0.026292618}
-  m_Center: {x: -4.656613e-10, y: 0.35297894, z: 0.004368006}
---- !u!114 &6866904568124372791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 199956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95bf14d25b1bc284987a84a2e3f8191b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  power: 0
