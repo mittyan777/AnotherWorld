@@ -96,7 +96,8 @@ public class GameManager : MonoBehaviour
             Destroy(Canvas);
             Destroy(gameObject);
         }
-            if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
+
+        if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
 
         {
             Canvas.SetActive(true);
