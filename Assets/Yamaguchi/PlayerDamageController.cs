@@ -52,11 +52,11 @@ public class PlayerDamageController : MonoBehaviour
             Debug.Log("ない");
         }
 
-        if (gameManager == null || enemyDamageManager == null || bossManager == null)
-        {
-            Debug.LogError("必要なマネージャーが見つかりません。PlayerHealthControllerを無効化します。", this);
-            enabled = false;
-        }
+        //if (gameManager == null || enemyDamageManager == null || bossManager == null)
+        //{
+        //    Debug.LogError("必要なマネージャーが見つかりません。PlayerHealthControllerを無効化します。", this);
+        //    enabled = false;
+        //}
 
         //if (testManerger == null || enemyDamageManager == null || bossManager == null)
         //{

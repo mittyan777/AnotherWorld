@@ -75,6 +75,16 @@ public class PlayerAnimation_main : MonoBehaviour
 
     private void Update()
     {
+
+        if (SceneManager.GetActiveScene().name == "start_main")
+        {
+            Destroy(gameObject);
+        }
+
+        if (SceneManager.GetActiveScene().name == "EndRoll")
+        {
+            Destroy(gameObject);
+        }
         if (_gameManager == null) { _gameManager = GameObject.FindAnyObjectByType<GameManager>(); }
         if (_gameManager == null) return;
 

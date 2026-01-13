@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject standard_camera;
 
     [SerializeField] GameObject []jobWeapon_UI;
+   
 
     int itemPrices_index;
     [SerializeField] public Image []gage_image;
@@ -91,12 +92,25 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+  
         if (SceneManager.GetActiveScene().name == "start_main")
         {
             Destroy(Canvas);
             Destroy(gameObject);
             Destroy(GameObject.Find("Rouret_Manejer"));
+           
+           
         }
+
+        if (SceneManager.GetActiveScene().name == "EndRoll")
+        {
+            Destroy(Canvas);
+            Destroy(gameObject);
+            Destroy(GameObject.Find("Rouret_Manejer"));
+
+
+        }
+
 
         if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
 
@@ -268,6 +282,7 @@ public class GameManager : MonoBehaviour
         if(Present_HP <= 0)
         {
             fade = true;
+            SceneManager.LoadScene("start_main");
         }
       
 
