@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject rouletteUI_camera;
     [SerializeField] GameObject standard_camera;
 
+    [SerializeField] GameObject []jobWeapon_UI;
+
+    int itemPrices_index;
     [SerializeField] public Image []gage_image;
 
     [SerializeField] Image HP_slider;
@@ -229,15 +232,23 @@ public class GameManager : MonoBehaviour
         if (job == 0) 
         {
             job_text.sprite = job_sprite[0];
+            jobWeapon_UI[0].SetActive(true);
+            jobWeapon_UI[1].SetActive(false);
+            jobWeapon_UI[2].SetActive(false);
         }
         if (job == 1) 
         {
             job_text.sprite = job_sprite[1];
-            
+            jobWeapon_UI[0].SetActive(false);
+            jobWeapon_UI[1].SetActive(false);
+            jobWeapon_UI[2].SetActive(true);
         }
         if (job == 2) 
         {
             job_text.sprite = job_sprite[2];
+            jobWeapon_UI[0].SetActive(false);
+            jobWeapon_UI[1].SetActive(true);
+            jobWeapon_UI[2].SetActive(false);
             for (int i = 0; i < 3; i++)
             {
                 skill_UI[i].SetActive(true);
@@ -279,7 +290,7 @@ public class GameManager : MonoBehaviour
 
 
         //ひきど変更 シーン名をmainで使用するシーン名に変更 Synthesis_Test -> TownScene_main
-        if (SceneManager.GetActiveScene().name == "Town_mitubosi")
+        if (SceneManager.GetActiveScene().name == "TownScene_main")
         {
             //ひきど変更　シーン名をmainで使用する名前に変更 EnemyScene_mitubosi -> Stage1_main
             scene_name = "Stage1_main";
@@ -425,47 +436,65 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Weapon_status(string button_name)
+    public void Weapon_status(GameObject button_name )
     {
-        int index = -1;
 
-        switch (button_name)
+        if (button_name.name == "Button1-1") { itemPrices_index = 0; }
+        if (button_name.name == "Button1-2") { itemPrices_index = 1; }
+        if (button_name.name == "Button1-3") { itemPrices_index = 2; }
+        if (button_name.name == "Button1-4") { itemPrices_index = 3; }
+
+        if (button_name.name == "Button2-1") { itemPrices_index = 0; }
+        if (button_name.name == "Button2-2") { itemPrices_index = 1; }
+        if (button_name.name == "Button2-3") { itemPrices_index = 2; }
+        if (button_name.name == "Button2-4") { itemPrices_index = 3; }
+
+        if (button_name.name == "Button3-1") { itemPrices_index = 0; }
+        if (button_name.name == "Button3-2") { itemPrices_index = 1; }
+        if (button_name.name == "Button3-3") { itemPrices_index = 2; }
+        if (button_name.name == "Button3-4") { itemPrices_index = 3; }
+        if (Coin >= GetComponent<Purchase_main>().scrollViewGroups[0].itemPrices[itemPrices_index])
         {
-            case "Button1-1": index = 0; break;
-            case "Button1-2": index = 1; break;
-            case "Button1-3": index = 2; break;
-            case "Button1-4": index = 3; break;
+            int index = -1;
 
-            case "Button2-1": index = 4; break;
-            case "Button2-2": index = 5; break;
-            case "Button2-3": index = 6; break;
-            case "Button2-4": index = 7; break;
+            switch (button_name.name)
+            {
+                case "Button1-1": index = 0; break;
+                case "Button1-2": index = 1; break;
+                case "Button1-3": index = 2; break;
+                case "Button1-4": index = 3; break;
 
-            case "Button3-1": index = 8; break;
-            case "Button3-2": index = 9; break;
-            case "Button3-3": index = 10; break;
-            case "Button3-4": index = 11; break;
+                case "Button2-1": index = 4; break;
+                case "Button2-2": index = 5; break;
+                case "Button2-3": index = 6; break;
+                case "Button2-4": index = 7; break;
 
-            default:
-                Debug.LogWarning("Button not in valid range");
+                case "Button3-1": index = 8; break;
+                case "Button3-2": index = 9; break;
+                case "Button3-3": index = 10; break;
+                case "Button3-4": index = 11; break;
+
+                default:
+                    Debug.LogWarning("Button not in valid range");
+                    return;
+            }
+
+            if (index < 0 || index >= weaponData.Length)
+            {
+                Debug.LogWarning("weaponData index out of range");
                 return;
+            }
+
+            Present_Attack = AttackStatus + weaponData[index].plusAttack;
+            Present_Defense = DefenseStatus + weaponData[index].plusDifence;
+            MAX_HP = HP + weaponData[index].plusHP;
+            MAX_MP = MP + weaponData[index].plusMP;
+
+            Weapon_status_text[0].text = ($"{MAX_HP - HP}");
+            Weapon_status_text[1].text = ($"{MAX_MP - MP}");
+            Weapon_status_text[2].text = ($"{Present_Attack - AttackStatus}");
+            Weapon_status_text[3].text = ($"{Present_Defense - DefenseStatus}");
         }
-
-        if (index < 0 || index >= weaponData.Length)
-        {
-            Debug.LogWarning("weaponData index out of range");
-            return;
-        }
-
-        Present_Attack = AttackStatus + weaponData[index].plusAttack;
-        Present_Defense = DefenseStatus + weaponData[index].plusDifence;
-        MAX_HP = HP + weaponData[index].plusHP;
-        MAX_MP = MP + weaponData[index].plusMP;
-
-        Weapon_status_text[0].text = ($"{MAX_HP - HP}");
-        Weapon_status_text[1].text = ($"{MAX_MP - MP}");
-        Weapon_status_text[2].text = ($"{Present_Attack - AttackStatus}");
-        Weapon_status_text[3].text = ($"{Present_Defense - DefenseStatus}");
     }
 
 
