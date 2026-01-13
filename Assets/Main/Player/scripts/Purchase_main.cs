@@ -17,7 +17,7 @@ public class Purchase_main : MonoBehaviour
     }
 
     [Header("スクロールビューごとの商品情報")]
-    [SerializeField] private ScrollViewGroup[] scrollViewGroups;
+    [SerializeField] public ScrollViewGroup[] scrollViewGroups;
 
     [Header("UI参照")]
     [SerializeField] private Text coinText;
