@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Canvas);
             Destroy(gameObject);
+            Destroy(GameObject.Find("Rouret_Manejer"));
         }
 
         if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
