@@ -79,7 +79,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
+        if (SceneManager.GetActiveScene().name == "start_main")
+        {
+            Destroy(Canvas);
+            Destroy(gameObject);
+        }
+            if (SceneManager.GetActiveScene().name != "load_screen" && SceneManager.GetActiveScene().name != "start")
         {
             Canvas.SetActive(true);
             if (Player[0] == null)
