@@ -24,7 +24,7 @@ public class EnemyStatusHandler : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // タグチェック（例: PlayerMagic や StunAreaTag に変更推奨）
-        if (other.gameObject.CompareTag("PlaeryThunderMagic"))
+        if (other.gameObject.CompareTag("PlayerThunderMagic"))
         {
             // DeathやDamage状態の敵にスタンをかけないガード
             if (enemyMove.currentState != EnemyMove.EnemyState.death &&
