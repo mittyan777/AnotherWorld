@@ -143,6 +143,11 @@ public class EnemyHP : MonoBehaviour
         {
             return;
         }
+
+        if (other.gameObject.CompareTag("PlayerThunderMagic"))
+        {
+            return;
+        }
         if (other.gameObject.tag.Contains("Player"))
         {
             GetDamege();

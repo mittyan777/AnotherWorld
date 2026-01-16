@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7699989671739586518}
   m_Layer: 0
   m_Name: Electric_ball
-  m_TagString: PlayerThunderMagic
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
