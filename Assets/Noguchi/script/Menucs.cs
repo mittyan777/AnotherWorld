@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Menucs : MonoBehaviour
@@ -50,11 +49,6 @@ public class Menucs : MonoBehaviour
         OpenOverview();
     }
 
-    public void OverViewButton() 
-    {
-        OpenOverview();
-    }
-
     // ===== メニュー制御 =====
     void OpenMenu()
     {
@@ -80,6 +74,4 @@ public class Menucs : MonoBehaviour
         isOverviewOpen = false;
         overview.Close();
     }
-
-    
 }
