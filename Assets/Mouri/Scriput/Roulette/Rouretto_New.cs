@@ -231,6 +231,9 @@ public class Rouretto_New : MonoBehaviour
     }
     void Status_Boost()
     {
+        GameManager.GetComponent<GameManager>().Present_HP += GameManager.GetComponent<GameManager>().Status[0];
+        GameManager.GetComponent<GameManager>().Present_MP += GameManager.GetComponent<GameManager>().Status[1];
+
         GameManager.GetComponent<GameManager>().HP += GameManager.GetComponent<GameManager>().Status[0];
         GameManager.GetComponent<GameManager>().MP += GameManager.GetComponent<GameManager>().Status[1];
         GameManager.GetComponent<GameManager>().AttackStatus += GameManager.GetComponent<GameManager>().Status[2];
@@ -255,7 +258,7 @@ public class Rouretto_New : MonoBehaviour
             rouletteSound.rouletteSoundType=RouletteSoundType.Stop;
             rouletteSound.PlaySound();
         }
-
+       
         HP = UpdateStatus[0];
         MP = UpdateStatus[1];
         Attack = UpdateStatus[2];
