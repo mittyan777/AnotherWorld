@@ -15,7 +15,7 @@ MonoBehaviour:
   itemKeyName: Scroll View3_1
   weaponPrefab: {fileID: 107374, guid: 0663be341be27c64686698673524b31b, type: 3}
   type: 2
-  plusAttack: 0.98
+  plusAttack: 1
   plusMP: 1
   plusDifence: 1
   plusHP: 1

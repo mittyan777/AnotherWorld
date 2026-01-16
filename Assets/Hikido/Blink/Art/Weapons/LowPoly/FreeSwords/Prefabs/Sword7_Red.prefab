@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 184049407388754381}
   m_Layer: 0
   m_Name: Sword7_Red
-  m_TagString: Untagged
+  m_TagString: PlayerSword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
