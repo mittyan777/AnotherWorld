@@ -227,7 +227,7 @@ public class Rouretto_New : MonoBehaviour
         }
 
 
-
+        canOnce = true; //追加
     }
     void Status_Boost()
     {
@@ -282,9 +282,10 @@ public class Rouretto_New : MonoBehaviour
         Defense += Status[3];
         FirstRoulette = false;
 
-        canOnce = true; //追加
+       
 
     }
+
 
     IEnumerator SpinRoulette()
     {
