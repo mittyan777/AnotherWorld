@@ -267,10 +267,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   animationManager: {fileID: 5551833349264477558}
-  stayDuration: 3
+  stayDuration: 5
   patrolRandomRange: 10
   visibilityDistance: 15
-  stopDistance: 2
+  stopDistance: 1.5
 --- !u!114 &3163480365174730902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackInterval: 2
+  attackInterval: 1.5
   animationlatency: 0
   animationRecoveryTime: 0
   isAttackSequenceRunning: 0

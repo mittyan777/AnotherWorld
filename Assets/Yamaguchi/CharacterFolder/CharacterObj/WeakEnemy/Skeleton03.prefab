@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackInterval: 2
+  attackInterval: 1.5
   animationlatency: 0
   animationRecoveryTime: 0
   isAttackSequenceRunning: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
   stayDuration: 3
   patrolRandomRange: 10
   visibilityDistance: 15
-  stopDistance: 2
+  stopDistance: 1.5
 --- !u!114 &8224206091005491492
 MonoBehaviour:
   m_ObjectHideFlags: 0

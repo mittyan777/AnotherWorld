@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 502950681409120453}
   - component: {fileID: 2801474401895174097}
   - component: {fileID: -939299082914229999}
-  - component: {fileID: 6051810677651118020}
+  - component: {fileID: -4690082638932616888}
   m_Layer: 0
-  m_Name: NormalGoldCoin
+  m_Name: HighPriceGoldCoin
   m_TagString: coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,11 +114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e71a66e99b70479baf158f0c46f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoneyAmount: 1
-  minMoneyAmount: 1000
+  maxMoneyAmount: 1000
+  minMoneyAmount: 10000
   money: 0
---- !u!65 &6051810677651118020
-BoxCollider:
+--- !u!64 &-4690082638932616888
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -135,6 +135,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.058852464, y: 0.020218275, z: 0.06506889}
-  m_Center: {x: 0.0032892236, y: 0.010496559, z: 0.0014966959}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 83c43ff4797616741b9121073c7d1191, type: 3}
