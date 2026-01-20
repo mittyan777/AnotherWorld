@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 502950681409120453}
   - component: {fileID: 2801474401895174097}
   - component: {fileID: -939299082914229999}
+  - component: {fileID: -965684503143455563}
   m_Layer: 0
   m_Name: NormalGoldCoin
   m_TagString: coin
@@ -116,3 +117,24 @@ MonoBehaviour:
   maxMoneyAmount: 1
   minMoneyAmount: 1000
   money: 0
+--- !u!65 &-965684503143455563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395968631224569226}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.058852464, y: 0.020218275, z: 0.06506889}
+  m_Center: {x: 0.0032892236, y: 0.010496559, z: 0.0014966959}
