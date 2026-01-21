@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoneyAmount: 1
-  minMoneyAmount: 1000
+  minMoneyAmount: 100
   money: 0
 --- !u!64 &-9151392334034811319
 MeshCollider:

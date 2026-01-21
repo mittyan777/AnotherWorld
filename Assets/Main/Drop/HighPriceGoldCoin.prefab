@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17e71a66e99b70479baf158f0c46f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMoneyAmount: 1000
-  minMoneyAmount: 10000
+  maxMoneyAmount: 2000
+  minMoneyAmount: 500
   money: 0
 --- !u!64 &-4690082638932616888
 MeshCollider:
