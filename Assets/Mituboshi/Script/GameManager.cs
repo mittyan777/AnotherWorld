@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private WeaponData []weaponData;
+    int index = -1;
 
     [SerializeField] Text []Weapon_status_text;
     [SerializeField] public GameObject []Player;
@@ -291,12 +292,19 @@ public class GameManager : MonoBehaviour
 
         if (Present_MP < MP) { Present_MP += 2 * Time.deltaTime; }
         if (Present_MP >= MP) { Present_MP = MAX_MP; }
-
-       
-        HP_slider.fillAmount = Present_HP / MAX_HP;
+        if (index > -1)
+        {
+            MAX_HP = HP + weaponData[index].plusHP;
+        }
+        else
+        {
+            MAX_HP = HP;
+        }
+            HP_slider.fillAmount = Present_HP / MAX_HP;
         MP_slider.fillAmount = Present_MP / MAX_HP;
+        Weapon_status_text[0].text = ($"{MAX_HP - HP}");
 
-        if(fade == false && fade_image_a >= 0)
+        if (fade == false && fade_image_a >= 0)
         {
             fade_image_a -= Time.deltaTime;
         }
@@ -473,7 +481,7 @@ public class GameManager : MonoBehaviour
         if (button_name.name == "Button3-4") { itemPrices_index = 3; }
         if (Coin >= GetComponent<Purchase_main>().scrollViewGroups[0].itemPrices[itemPrices_index])
         {
-            int index = -1;
+            
 
             switch (button_name.name)
             {
@@ -505,10 +513,10 @@ public class GameManager : MonoBehaviour
 
             Present_Attack = AttackStatus + weaponData[index].plusAttack;
             Present_Defense = DefenseStatus + weaponData[index].plusDifence;
-            MAX_HP = HP + weaponData[index].plusHP;
+            
             MAX_MP = MP + weaponData[index].plusMP;
 
-            Weapon_status_text[0].text = ($"{MAX_HP - HP}");
+            
             Weapon_status_text[1].text = ($"{MAX_MP - MP}");
             Weapon_status_text[2].text = ($"{Present_Attack - AttackStatus}");
             Weapon_status_text[3].text = ($"{Present_Defense - DefenseStatus}");

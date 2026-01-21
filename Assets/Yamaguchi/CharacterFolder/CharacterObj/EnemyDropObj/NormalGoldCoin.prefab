@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2801474401895174097}
   - component: {fileID: -939299082914229999}
   - component: {fileID: 6051810677651118020}
+  - component: {fileID: -965684503143455563}
   m_Layer: 0
   m_Name: NormalGoldCoin
   m_TagString: coin

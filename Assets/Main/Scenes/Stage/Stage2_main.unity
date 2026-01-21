@@ -6984,7 +6984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 8347550238792126041, guid: 9f0fac3c73f11864595cdcfdc047d26c, type: 3}
+  - {fileID: 8347550238792126041, guid: d2837efc29ca81847874f58c6236c96f, type: 3}
   maxAttempts: 10
   spawnInterval: 10
   maxSpawn: 2
@@ -15113,8 +15113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 746263171458399349, guid: f5038673333b3964a97d7fca68efb0ba, type: 3}
-  - {fileID: 2318509184685728293, guid: c7875631332fafe4389e6184e14ad458, type: 3}
+  - {fileID: 746263171458399349, guid: a4d03c91c0260684e8244aed5e4ac4a1, type: 3}
+  - {fileID: 2318509184685728293, guid: 9926092cc0b2e274ba609c3c81dba4c4, type: 3}
   maxAttempts: 10
   spawnInterval: 1
   maxSpawn: 20
@@ -47056,7 +47056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 8347550238792126041, guid: 9f0fac3c73f11864595cdcfdc047d26c, type: 3}
+  - {fileID: 8347550238792126041, guid: d2837efc29ca81847874f58c6236c96f, type: 3}
   maxAttempts: 10
   spawnInterval: 30
   maxSpawn: 2
@@ -83400,7 +83400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 746263171458399349, guid: f5038673333b3964a97d7fca68efb0ba, type: 3}
+  - {fileID: 746263171458399349, guid: a4d03c91c0260684e8244aed5e4ac4a1, type: 3}
   maxAttempts: 10
   spawnInterval: 3
   maxSpawn: 5
@@ -136467,8 +136467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 5711669388771541780, guid: 1cd7de00b9088854c9e3e079ec20a10f, type: 3}
-  - {fileID: 6574638428291751397, guid: 874f5928f2a05e04294bcf0ad27c6eb9, type: 3}
+  - {fileID: 5711669388771541780, guid: b69f2d49c9246d645a2ae7147d1e6baa, type: 3}
+  - {fileID: 6574638428291751397, guid: a89fd3fcdcea83a4eb880e6c2a02e9ae, type: 3}
   maxAttempts: 10
   spawnInterval: 3
   maxSpawn: 20
