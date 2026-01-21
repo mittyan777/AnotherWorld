@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackInterval: 2
+  attackInterval: 1.5
   animationlatency: 0
   animationRecoveryTime: 0
   isAttackSequenceRunning: 0

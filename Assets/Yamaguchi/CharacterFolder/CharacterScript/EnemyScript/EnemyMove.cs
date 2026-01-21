@@ -50,6 +50,19 @@ public class EnemyMove : MonoBehaviour
         SetRandomDestination();
     }
 
+    private bool IsPlayingAttackAnimation()
+    {
+        if (animationManager == null || 
+            animationManager.Animator == null) return false;
+
+        //GetComponentを使わず、managerが持っているanimatorを直接使う
+        AnimatorStateInfo stateInfo = animationManager.Animator.GetCurrentAnimatorStateInfo(0);
+
+        return stateInfo.IsName("Attack") ||
+               stateInfo.IsName("CloseAttack") ||
+               stateInfo.IsTag("Attack");
+    }
+
     private void Update()
     {
         EnemyState previousState = currentState;
@@ -62,6 +75,14 @@ public class EnemyMove : MonoBehaviour
             UpdateAnimationState(true);
             return;
         }
+
+        if (isStoppedByAttack || IsPlayingAttackAnimation())
+        {
+            // 攻撃中としての表示状態を維持
+            UpdateAnimationState(true);
+            return; // ここでUpdateを抜けるので、下の移動処理は走らない
+        }
+
         //ダメージ中、もしくは攻撃中なら移動などの処理をスキップする
         if (currentState == EnemyState.damage || isStoppedByAttack)
         {
