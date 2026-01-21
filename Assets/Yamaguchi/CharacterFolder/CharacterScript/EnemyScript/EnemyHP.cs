@@ -16,11 +16,13 @@ public class EnemyHP : MonoBehaviour
 
     private GameManager gameManager;
     private TestManerger testManerger;
+    private EnemyHitEffect enemyHitEffect;
 
     private void Start()
     {
         enemyCurrentHP = enemyMaxHP;
         dropManager = GetComponent<EnemyDropManager>();
+        enemyHitEffect = GetComponent<EnemyHitEffect>();
 
         enemyMove = GetComponentInParent<EnemyMove>();
         if (enemyMove == null)
@@ -150,6 +152,7 @@ public class EnemyHP : MonoBehaviour
         }
         if (other.gameObject.tag.Contains("Player"))
         {
+            enemyHitEffect.PlayerAttackHitEffect();
             GetDamege();
         }
     }
@@ -157,6 +160,7 @@ public class EnemyHP : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerFireMagic")
         {
+            enemyHitEffect.PlayerAttackHitEffect();
             GetDamege();
         }
     }
