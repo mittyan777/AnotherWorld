@@ -285,7 +285,7 @@ MonoBehaviour:
   stayDuration: 3
   patrolRandomRange: 10
   visibilityDistance: 15
-  stopDistance: 1.5
+  stopDistance: 2
 --- !u!114 &8224206091005491492
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAnimationManager : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    public Animator Animator=>animator;
 
     //現在のアニメーション状態を記憶し、SetBoolの重複呼び出しを防ぐための変数
     private EnemyMove.EnemyState currentAnimState;
