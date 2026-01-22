@@ -37,7 +37,7 @@ public class Roulette_Sound : MonoBehaviour
 
         int index = (int)rouletteSoundType;
 
-        if (index >= SoundClips.Length || SoundClips[index] != null) return;
+        if (index >= SoundClips.Length || SoundClips[index] == null) return;
 
         if (rouletteSoundType == RouletteSoundType.Spin)    //‰¹‚ÌŽí—Þ_1
         {
