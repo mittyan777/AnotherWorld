@@ -367,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &481845940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,8 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 746263171458399349, guid: f5038673333b3964a97d7fca68efb0ba, type: 3}
-  - {fileID: 8347550238792126041, guid: 9f0fac3c73f11864595cdcfdc047d26c, type: 3}
+  - {fileID: 3616799773042005967, guid: dad5dfbe351543743a52111a2bbf4d60, type: 3}
   maxAttempts: 10
   spawnInterval: 1
   maxSpawn: 1
@@ -1341,7 +1340,7 @@ GameObject:
   - component: {fileID: 821018776}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: PlayerFireMagic
+  m_TagString: PlayerArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1453,7 +1452,7 @@ Transform:
   m_GameObject: {fileID: 821018775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.8, y: 1.11, z: 10.467592}
+  m_LocalPosition: {x: -2.85, y: 1.11, z: -5.97}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1988,6 +1987,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
   m_PrefabInstance: {fileID: 4041072122941036569}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1276779627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276779625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189938c50a715e046bd64c8a917aee2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.2
+  colorPropertyName: _Color
 --- !u!1 &1291792505
 GameObject:
   m_ObjectHideFlags: 0
@@ -2790,7 +2804,7 @@ GameObject:
   - component: {fileID: 1778665747}
   m_Layer: 0
   m_Name: TestManerger
-  m_TagString: test
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2963,6 +2977,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1924504203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5141878262519408652, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+  m_PrefabInstance: {fileID: 4041072122941036569}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1932508279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,7 +3242,7 @@ Transform:
   m_GameObject: {fileID: 1973056559}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.19, y: 1.15, z: -8.52}
+  m_LocalPosition: {x: -9.51, y: 1.15, z: -1.84}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3653,7 +3672,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1276779627}
   m_SourcePrefab: {fileID: 100100000, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
 --- !u!1001 &7961181347669155493
 PrefabInstance:
@@ -3791,7 +3813,7 @@ PrefabInstance:
     - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
       propertyPath: activeCanvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1924504203}
     - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
       propertyPath: activeBossObj
       value: 

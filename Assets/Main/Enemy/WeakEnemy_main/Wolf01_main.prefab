@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 8330710913829000976}
   - component: {fileID: 3206198575711754374}
   - component: {fileID: -5168748693415455410}
+  - component: {fileID: 2411480533765519521}
   m_Layer: 0
   m_Name: Wolf01_main
   m_TagString: Untagged
@@ -594,6 +595,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunTime: 5
+--- !u!114 &2411480533765519521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121770041380104553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189938c50a715e046bd64c8a917aee2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.2
+  colorPropertyName: _Color
 --- !u!1 &2678941433797286118
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class BossHP : MonoBehaviour
 
     // BossManagerをAwake/Startで取得するため private に戻し、シングルトンから取得
     private BossMoveManager bossManager;
+    private EnemyHitEffect enemyHitEffect;
 
     [SerializeField] private float damageTime;
     [SerializeField] private float breakTime;
@@ -31,6 +32,8 @@ public class BossHP : MonoBehaviour
     {
         // シングルトンを参照
         bossManager = BossMoveManager.instance;
+        enemyHitEffect=GetComponent<EnemyHitEffect>();
+
         currentBossHP = maxBossHP;
 
         // --- Sliderの初期設定 ---
@@ -95,6 +98,8 @@ public class BossHP : MonoBehaviour
     {
         if (!isInvulnerabal)
         {
+            //enemyHitEffect.PlayerAttackHitEffect();
+
             isInvulnerabal = true;
             if (currentBossHP >= 0)
             {

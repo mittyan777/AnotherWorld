@@ -17,6 +17,7 @@ public class BossMoveManager : MonoBehaviour
     private bool isDeathSequenceStarted = false;
 
     private GameManager gameManager;
+    private EnemyHitEffect enemyHitEffect;
 
     private TestManerger testManerger;
 
@@ -43,6 +44,8 @@ public class BossMoveManager : MonoBehaviour
 
     private void Start()
     {
+        enemyHitEffect = GetComponent<EnemyHitEffect>();
+
         GameObject test = GameObject.FindWithTag("test");
         if (test != null)
         {
@@ -196,18 +199,31 @@ public class BossMoveManager : MonoBehaviour
         }
         if (hitTag.Contains("Player") && gameManager != null)
         {
+            if (enemyHitEffect != null)
+            {
+                enemyHitEffect.PlayerAttackHitEffect();
+            }
+
             //GameManager‚©‚çÅV‚ÌUŒ‚—Í‚ğæ“¾‚·‚éB
             int takeDamege = (int)gameManager.AttackStatus;
             //ƒvƒŒƒCƒ„[‚ÌUŒ‚—Í‚ğ“n‚·
             StartCoroutine(bossHP.TakeDamage(takeDamege));
         }
+    }
 
-        //if (hitTag.Contains("Player"))
-        //{
-        //    //GameManager‚©‚çÅV‚ÌUŒ‚—Í‚ğæ“¾‚·‚éB
-        //    int takeDamege = testManerger.HP;
-        //    //ƒvƒŒƒCƒ„[‚ÌUŒ‚—Í‚ğ“n‚·
-        //    StartCoroutine(bossHP.TakeDamage(takeDamege));
-        //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerFireMagic"))
+        {
+            if (enemyHitEffect != null)
+            {
+                enemyHitEffect.PlayerAttackHitEffect();
+            }
+
+            //GameManager‚©‚çÅV‚ÌUŒ‚—Í‚ğæ“¾‚·‚éB
+            int takeDamege = (int)gameManager.AttackStatus;
+            //ƒvƒŒƒCƒ„[‚ÌUŒ‚—Í‚ğ“n‚·
+            StartCoroutine(bossHP.TakeDamage(takeDamege));
+        }
     }
 }

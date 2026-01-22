@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2841765200058673541}
   - component: {fileID: -5321235051423233362}
   - component: {fileID: 8805957014292457950}
+  - component: {fileID: -868752572415266963}
   m_Layer: 0
   m_Name: Spider02
   m_TagString: Untagged
@@ -189,6 +190,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunTime: 5
+--- !u!114 &-868752572415266963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616799773042005967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189938c50a715e046bd64c8a917aee2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalColor: {r: 1, g: 1, b: 1, a: 0}
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.2
+  colorPropertyName: _EmissionColor
 --- !u!1 &5975737999590668711
 GameObject:
   m_ObjectHideFlags: 0
