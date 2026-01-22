@@ -37,6 +37,7 @@ public class Player_main : MonoBehaviour
     [SerializeField] AnimationFlagManagerSO _animflgSO;
     [SerializeField] PlayerAnimation_main playerAnim;
     [SerializeField] MoneyDrop _money;
+    
 
     [SerializeField] float a = 0.5f;
     // Start is called before the first frame update
@@ -47,6 +48,7 @@ public class Player_main : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager");
         _money = GetComponent<MoneyDrop>();
         if (PlayerAnimation_main.Instance != null) { playerAnim = PlayerAnimation_main.Instance; }
+
         // Cursor.lockState = CursorLockMode.Locked;   //’Ç‰Á
         //Cursor.visible = false;     //’Ç‰Á
     }
@@ -268,7 +270,10 @@ public class Player_main : MonoBehaviour
     //“¯‚¶‚­‚Ð‚«‚Ç’Ç‰Á•ª
     public void HandleStanderdMovement(Transform transform, Animator animator) 
     {
-        if (UnityEngine.Input.GetKey("w"))
+
+        bool isAttack = _animflgSO.AttackNormalflg || _animflgSO.MajicAttackNormalFlg;
+
+        if (UnityEngine.Input.GetKey("w") && !isAttack)
         {
             transform.position += transform.forward * 5 * Time.deltaTime;
             animator.SetBool("walk", true);
@@ -292,6 +297,8 @@ public class Player_main : MonoBehaviour
             animator.SetBool("right", true);
         }
         else { animator.SetBool("right", false); }
+      
+       
     }
 
 }

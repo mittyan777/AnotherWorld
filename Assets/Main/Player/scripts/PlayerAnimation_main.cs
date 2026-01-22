@@ -29,6 +29,7 @@ public class PlayerAnimation_main : MonoBehaviour
     private Transform _playerTransform;
     private bool _isCurrentlyAiming = false;
     private bool _shootInputConfirmed = false;
+    public bool _swordattackanimFlg = false;
 
     //初期ジョブNone
     public JobType jobType { get; private set; } = JobType.NONE;
@@ -330,7 +331,8 @@ public class PlayerAnimation_main : MonoBehaviour
     public void AttackAnimation_Swordman(int comboCount) 
     {
         if (_swordSkillCmd != null)
-        { 
+        {
+            _animFlgSO.swordAttackAnimFlg = true;
             _swordSkillCmd.ExecuteCombo(animator, comboCount);
             OnComboSlash();
         }

@@ -123,10 +123,11 @@ public class Player_Swoad : PlayerAtackBase
         if(_playerAnim != null) 
         {
             _playerAnim.AttackAnimation_Swordman(_comboCount);
+            _animflgSO.swordAttackAnimFlg = false;
         }
     }
 
-    /// <summary> /// OƒRƒ“ƒ{–Ú‚ÅaŒ‚”g‚ğ¶¬‚·‚é /// </summary>
+    /// <summary> /// 2ƒRƒ“ƒ{–Ú‚ÅaŒ‚”g‚ğ¶¬‚·‚é /// </summary>
     public void TryAttackCombo()
     {
         if(_comboCount != 2) { return; }
