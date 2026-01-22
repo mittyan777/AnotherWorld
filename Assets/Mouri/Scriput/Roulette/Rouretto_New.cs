@@ -116,6 +116,7 @@ public class Rouretto_New : MonoBehaviour
 
         jobtext();
     }
+
     void jobtext()
     {
         if(job == 0)
@@ -131,11 +132,7 @@ public class Rouretto_New : MonoBehaviour
             job_text.text = "魔法使い";
         }
     }
-    void UpdateCoinUI()
-    {
-    
-        
-    }
+
 
     void DisplayInitialRouletto()   //一番最初のステータスUIの表示
     {
@@ -151,6 +148,7 @@ public class Rouretto_New : MonoBehaviour
 
         job_text.gameObject.SetActive(true) ;
         job_text.text = "職業";
+
     }
 
     void DisplayStatusOnly()//二回目以降はステータスだけの表示
@@ -181,11 +179,13 @@ public class Rouretto_New : MonoBehaviour
         GameManager.GetComponent<GameManager>().job = job;
     }
 
-
     public void StartRoulette()
     {
-        if (!canOnce) return;   //追加
+
+        if (Spining) return;   //追加
+
         canOnce = false;    //追加
+
 
         if (FirstRoulette)
         {
@@ -201,33 +201,31 @@ public class Rouretto_New : MonoBehaviour
        
 
         }
-        else
+
+        if (GameManager.GetComponent<GameManager>().Coin < RouletteCost)
         {
-            if (GameManager.GetComponent<GameManager>().Coin >= RouletteCost)   //GameManegerの中にあるコインがルーレットを回すために必要なコインより多かった場合
-            {
-                Spining = true;
-                spinCoroutine = StartCoroutine(SpinRoulette());
-                GameManager.GetComponent<GameManager>().Coin -= RouletteCost;
+            canOnce = true;
+            return;
+        }
 
-                if (rouletteSound != null)
-                {
-                    rouletteSound.rouletteSoundType = RouletteSoundType.CoinUse;
-                    rouletteSound.PlaySound();
-                }
+        Spining = true;
+        spinCoroutine=StartCoroutine(SpinRoulette());
 
-             
-            }
+        if (rouletto_CG != null)
+        {
+            rouletto_CG.UseCoin(RouletteCost);
+        }
 
-            UpdateCoinUI();
+        GameManager.GetComponent<GameManager>().Coin -= RouletteCost;
 
-            if (rouletto_CG != null)
-            {
-                rouletto_CG.UseCoin(RouletteCost);  //Roulett_CGの中の二回目以降にコインを消費するフェードアウト部分
-            }
+
+        if (rouletteSound != null)
+        {
+            rouletteSound.rouletteSoundType = RouletteSoundType.CoinUse;
+            rouletteSound.PlaySound();
         }
 
 
-        canOnce = true; //追加
     }
     void Status_Boost()
     {
@@ -282,10 +280,7 @@ public class Rouretto_New : MonoBehaviour
         Defense += Status[3];
         FirstRoulette = false;
 
-       
-
     }
-
 
     IEnumerator SpinRoulette()
     {
