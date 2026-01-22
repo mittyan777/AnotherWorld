@@ -193,9 +193,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4273543537375398773, guid: 6918d6fd26121d64ba227ca8ff0693ce, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273543537375398773, guid: 6918d6fd26121d64ba227ca8ff0693ce, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5491891179673640804, guid: 6918d6fd26121d64ba227ca8ff0693ce, type: 3}
       propertyPath: m_Name
       value: Boss02HPCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623929273593501358, guid: 6918d6fd26121d64ba227ca8ff0693ce, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8623929273593501358, guid: 6918d6fd26121d64ba227ca8ff0693ce, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -283,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 71df3a8512b77cd40ac47106f4a690b2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 71df3a8512b77cd40ac47106f4a690b2, type: 3}
       propertyPath: m_Controller
@@ -315,6 +331,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 71df3a8512b77cd40ac47106f4a690b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4064147284812653236}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 71df3a8512b77cd40ac47106f4a690b2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 575382897659515689}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 71df3a8512b77cd40ac47106f4a690b2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6916295432390914273}
@@ -409,13 +428,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77c4f49b50e9b479f86733713e9d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBossHP: 2500
+  maxBossHP: 20000
   damageTime: 1
   breakTime: 8
   currentHPSlider: {fileID: 5914626569398125542}
   fadingHPSlider: {fileID: 5804585919904743467}
   fadeSpeed: 2
   damageInterval: 1
+--- !u!114 &575382897659515689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489308227747176965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189938c50a715e046bd64c8a917aee2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.2
+  colorPropertyName: _Color
 --- !u!136 &6916295432390914273
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -464,7 +498,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &7828538782796724415 stripped
 Transform:

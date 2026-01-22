@@ -1861,6 +1861,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3979759332852368278, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979759332852368278, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064147284812653236, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: maxBossHP
+      value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064147284812653236, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: damageTime
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
       propertyPath: m_Name
       value: Boss02_Ver1.1
@@ -1920,7 +1936,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074143155}
   m_SourcePrefab: {fileID: 100100000, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
 --- !u!1 &1074143153 stripped
 GameObject:
@@ -1932,6 +1951,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5141878262519408652, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
   m_PrefabInstance: {fileID: 1074143152}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1074143155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074143153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189938c50a715e046bd64c8a917aee2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.2
+  colorPropertyName: _Color
 --- !u!1001 &1219086839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2049,6 +2083,18 @@ PrefabInstance:
       propertyPath: activeBossObj
       value: 
       objectReference: {fileID: 1074143153}
+    - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
+      propertyPath: _attackDamage01
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
+      propertyPath: _attackDamage02
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
+      propertyPath: _attackDamage03
+      value: 400
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
