@@ -1861,6 +1861,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4064147284812653236, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: maxBossHP
+      value: 150000
+      objectReference: {fileID: 0}
     - target: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
       propertyPath: m_Name
       value: Boss02_Ver1.1

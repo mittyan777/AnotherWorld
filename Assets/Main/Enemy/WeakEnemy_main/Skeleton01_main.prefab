@@ -114,6 +114,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9368ceb790e71074f84c3a5303202df5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.539055
       objectReference: {fileID: 0}
@@ -299,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4f1b495192cbb4dafa013bfbcf671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHP: 500
+  enemyMaxHP: 20000
   damageTime: 1
   breakTime: 2
 --- !u!114 &3818931981815851374
