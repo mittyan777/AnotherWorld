@@ -94824,7 +94824,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1354466672154131081, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: maxBossHP
-      value: 90000
+      value: 60000
       objectReference: {fileID: 0}
     - target: {fileID: 1680175903583462956, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_AnchorMax.x
@@ -136994,7 +136994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: goblinAttackDamage03
-      value: 569
+      value: 469
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: spiderAttackDamage01
@@ -137014,7 +137014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: skeletonAttackDamage03
-      value: 620
+      value: 520
       objectReference: {fileID: 0}
     - target: {fileID: 7135923793661432197, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: m_Name

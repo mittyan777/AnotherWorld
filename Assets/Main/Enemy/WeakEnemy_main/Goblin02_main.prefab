@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4f1b495192cbb4dafa013bfbcf671e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHP: 500
+  enemyMaxHP: 525
   damageTime: 1
   breakTime: 2
 --- !u!114 &8590672181966631944
