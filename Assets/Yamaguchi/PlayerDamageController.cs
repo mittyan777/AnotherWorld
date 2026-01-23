@@ -8,6 +8,9 @@ public class PlayerDamageController : MonoBehaviour
     private EnemyDamageManager enemyDamageManager;
     private BossManager bossManager;
     private TestManerger testManerger;
+    
+    //回復追加
+    private RecoveryDrop recoveryDrop;
 
     //Playerが受ける無敵時間
     [SerializeField] private float invincibilityDuration = 0.5f;
@@ -27,6 +30,8 @@ public class PlayerDamageController : MonoBehaviour
     [SerializeField] private string bossAttackTag01 = "AttackArea01";
     [SerializeField] private string bossAttackTag02 = "AttackArea02";
     [SerializeField] private string bossAttackTag03 = "AttackArea03";
+    [Tooltip("回復タグ")]
+    [SerializeField] private string RecoveryObj     = "RecoveryDrop";
 
 
     private void Start()
@@ -75,10 +80,20 @@ public class PlayerDamageController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        int damage = 0;
+        int recovery = 0;
+
+        string tag = other.tag;
+
+        if (tag == RecoveryObj)
+        {
+            recoveryDrop =other.GetComponent<RecoveryDrop>();
+            recovery = recoveryDrop.recovereAmount;
+            gameManager.RecovereHP(recovery);
+        }
+
         if (invincibilityTimer > 0) return;
 
-        int damage = 0;
-        string tag = other.tag;
 
         // --- 雑魚敵の攻撃判定 ---
         if (tag == goblinAttack01)
@@ -126,6 +141,12 @@ public class PlayerDamageController : MonoBehaviour
         else if (tag == bossAttackTag03)
         {
             damage = bossManager.AttackDamage03;
+        }
+        else if (tag == RecoveryObj)
+        {
+            recoveryDrop=GetComponent<RecoveryDrop>();
+            recovery = recoveryDrop.recovereAmount;
+            gameManager.RecovereHP(recovery);
         }
 
         // --- ダメージ適用処理 ---

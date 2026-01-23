@@ -305,6 +305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyObj: {fileID: 8395968631224569226, guid: 3bb5896ea5cbc6f4f8a26a434b49e0b8, type: 3}
+  recoveryDrop: 50
+  recoveryObj: {fileID: 8997067479983780387, guid: 2712a6ed04261654e98bdbf66c044205, type: 3}
 --- !u!65 &876112125651084185
 BoxCollider:
   m_ObjectHideFlags: 0

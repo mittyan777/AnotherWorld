@@ -28,6 +28,8 @@ TagManager:
   - PlayerWindMagic
   - PlayerArrow
   - PlayerSword
+  - WeakEnemyAttack04
+  - RecoveryObj
   layers:
   - Default
   - TransparentFX
