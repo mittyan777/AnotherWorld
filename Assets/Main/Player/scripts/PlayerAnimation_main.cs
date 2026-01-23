@@ -26,9 +26,13 @@ public class PlayerAnimation_main : MonoBehaviour
     [SerializeField] private SwordSkillAnime _swordSkillCmd;
     [SerializeField] Player_Swoad_main _plSwardLogic;
 
+    private Transform _spineBorn;
+
     private Transform _playerTransform;
+    private int _atkLayerIndex = -1;
     private bool _isCurrentlyAiming = false;
     private bool _shootInputConfirmed = false;
+    public bool _swordattackanimFlg = false;
 
     //初期ジョブNone
     public JobType jobType { get; private set; } = JobType.NONE;
@@ -70,6 +74,12 @@ public class PlayerAnimation_main : MonoBehaviour
 
         _currentjobNum = (int)_gameManager.job;
         SetJobType((JobType)_currentjobNum);
+
+        if (animator != null)
+        {
+            _atkLayerIndex = animator.GetLayerIndex("UpperBodyLayer");
+        }
+
         UnityEngine.Debug.Log($"セット: {jobType}");
     }
 
@@ -117,54 +127,75 @@ public class PlayerAnimation_main : MonoBehaviour
         bool isAimingStartFrame = (isAiming && isArcher && !_isCurrentlyAiming);
         bool isShootRequested = _shootInputConfirmed;
         int adsLayerIndex = animator.GetLayerIndex("ADS Layer");
-        if (isAiming && isArcher)
+        int atkLayerIndex = animator.GetLayerIndex("UpperBodyLayer");
+
+        if (isArcher)
         {
-            _isCurrentlyAiming = true;
-            if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 1f); }
-
-            if (_playerTransform != null && _cameraTransform != null)
+            if (isAiming) 
             {
-                float targetYAngle = _cameraTransform.eulerAngles.y - 90f;
+                _isCurrentlyAiming = true;
+                if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 1f); }
 
-                Quaternion targetRotation = Quaternion.Euler(
-                    0f,
-                    targetYAngle,
-                    0f
-                );
-                _playerTransform.rotation = Quaternion.Slerp(
-                    _playerTransform.rotation,
-                    targetRotation,
-                    Time.fixedDeltaTime * 10f
-                );
-            }
-
-            if (CommandMap.TryGetValue(jobType, out var commandSet) && commandSet.archerAimCd != null)
-            {
-                if (commandSet.archerAimCd is ArcherAimWalkSO aimWalkBoolCmd)
+                if (_playerTransform != null && _cameraTransform != null)
                 {
-                    aimWalkBoolCmd.ExecuteMoveMent(
-                        animator,
-                        _playerTransform, 
-                        moveInput,
-                        isAimingStartFrame,
-                        isShootRequested);
+                    float targetYAngle = _cameraTransform.eulerAngles.y - 90f;
+
+                    Quaternion targetRotation = Quaternion.Euler(
+                        0f,
+                        targetYAngle,
+                        0f
+                    );
+                    _playerTransform.rotation = Quaternion.Slerp(
+                        _playerTransform.rotation,
+                        targetRotation,
+                        Time.fixedDeltaTime * 10f
+                    );
+                }
+
+                if (CommandMap.TryGetValue(jobType, out var commandSet) && commandSet.archerAimCd != null)
+                {
+                    if (commandSet.archerAimCd is ArcherAimWalkSO aimWalkBoolCmd)
+                    {
+                        aimWalkBoolCmd.ExecuteMoveMent(
+                            animator,
+                            _playerTransform,
+                            moveInput,
+                            isAimingStartFrame,
+                            isShootRequested
+                         );
+                    }
+                }
+
+                if (isShootRequested) { _shootInputConfirmed = false; }
+
+                UnityEngine.Debug.Log($"Input: X={moveInput.x}, Y={moveInput.y}");
+            }
+            else
+            {
+                _isCurrentlyAiming = false;
+                animator.ResetTrigger("StartADS");
+                animator.ResetTrigger("Recoil");
+                _player.HandleStanderdMovement(_playerTransform, animator);
+                if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 0f); }
+
+                if(atkLayerIndex != -1) 
+                {
+                    AnimatorStateInfo atkState = animator.GetCurrentAnimatorStateInfo(atkLayerIndex);
+                    float targetWeight = (atkState.IsTag("Attack") && atkState.normalizedTime < 1.0f) ? 1.0f : 0.0f;
+                    animator.SetLayerWeight(atkLayerIndex, targetWeight);
                 }
             }
-
-            if (isShootRequested) { _shootInputConfirmed = false; }
-
-            UnityEngine.Debug.Log($"Input: X={moveInput.x}, Y={moveInput.y}");
         }
-        else
+        else 
         {
             _isCurrentlyAiming = false;
-            animator.ResetTrigger("StartADS");
-            animator.ResetTrigger("Recoil");
-            _player.HandleStanderdMovement(_playerTransform, animator);
             if (adsLayerIndex != -1) { animator.SetLayerWeight(adsLayerIndex, 0f); }
+            if (atkLayerIndex != -1) { animator.SetLayerWeight(atkLayerIndex, 0f); }
+            _player.HandleStanderdMovement(_playerTransform, animator);
         }
 
     }
+
 
     private void OnEnable()
     {
@@ -222,6 +253,12 @@ public class PlayerAnimation_main : MonoBehaviour
             animator = _player.GetComponent<Animator>();
             Camera childCam = _player.GetComponentInChildren<Camera>();
             _cameraTransform = (childCam != null) ? childCam.transform : Camera.main?.transform;
+        }
+
+        _spineBorn = null;
+        if (animator != null)
+        {
+            _spineBorn = animator.GetBoneTransform(HumanBodyBones.Spine);
         }
 
         if (_gameManager != null)
@@ -330,9 +367,10 @@ public class PlayerAnimation_main : MonoBehaviour
     public void AttackAnimation_Swordman(int comboCount) 
     {
         if (_swordSkillCmd != null)
-        { 
+        {
+            _animFlgSO.swordAttackAnimFlg = true;
             _swordSkillCmd.ExecuteCombo(animator, comboCount);
-            OnComboSlash();
+            //OnComboSlash();
         }
         else { UnityEngine.Debug.LogWarning($"SwordSkillAnimSO 縺瑚ｨｭ螳壹＆繧後※縺�∪縺帙ｓ縲"); }
     }
@@ -348,6 +386,7 @@ public class PlayerAnimation_main : MonoBehaviour
         }
         else { UnityEngine.Debug.LogError("繧ｸ繝ｧ繝冶ｨｭ螳壹Α繧ｹ"); }
     }
+
 
     public void SetWizardSkillIndex(int skillIndex)
     {
@@ -382,6 +421,17 @@ public class PlayerAnimation_main : MonoBehaviour
         else
         {
             animator.SetLookAtWeight(0f);
+        }
+    }
+
+    public bool IsMovementRestricted 
+    {
+        get 
+        {
+            //アーチャーは常に自由に動けるように
+            if(jobType == JobType.ARCHER) { return false; }
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            return stateInfo.IsTag("Attack") && stateInfo.normalizedTime < 1.0f;
         }
     }
 }

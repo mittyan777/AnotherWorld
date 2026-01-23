@@ -523,11 +523,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
-
-
-
     public void TakeDamage(int damage)
     {
         Present_HP -= damage;

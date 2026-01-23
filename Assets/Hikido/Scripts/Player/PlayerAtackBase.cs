@@ -13,9 +13,11 @@ public class PlayerAtackBase : MonoBehaviour
     Transform _cameraTransform;
 
     [SerializeField] protected AnimationFlagManagerSO _animflgSO;
+    [SerializeField] private Collider playerCollider;
 
     void Start()
     {
+        if (playerCollider == null) playerCollider = GetComponent<Collider>();
         _animflgSO.Avoidflg = false;
     }
 
@@ -45,44 +47,50 @@ public class PlayerAtackBase : MonoBehaviour
 
     }
 
+    public void DisableCollider()
+    {
+        if (playerCollider != null)
+        {
+            playerCollider.isTrigger = true;
+            Debug.Log("コライダーOFF：無敵状態");
+        }
+    }
+
+    public void EnableCollider()
+    {
+        if (playerCollider != null)
+        {
+            playerCollider.isTrigger = false;
+            _animflgSO.Avoidflg = false;
+            Debug.Log("コライダーON：通常状態");
+        }
+    }
+
     //TODO:マウスで向いている方向に回避する。
     /// <summary> /// 全職種共通の回避 /// </summary>
     private void Avoidance()
     {
-        //入力数値取得
-        float _inputHorizontal = Input.GetAxisRaw("Horizontal");
-        float _inputVertical = Input.GetAxisRaw("Vertical");
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
 
-        //shiftキー入力判定
         bool _isShiftKey = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
         bool _isSpaceKey = Input.GetKeyDown(KeyCode.Space);
 
-        if(Camera.main != null) 
+        // 回避キーが押された瞬間だけ判定
+        if (_isShiftKey || _isSpaceKey)
         {
-            _cameraTransform = Camera.main.transform;
+            // 入力がある場合のみ実行
+            if (Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(h, v) * Mathf.Rad2Deg;
+                float materialOffset = 0f;
+
+                transform.rotation = UnityEngine.Quaternion.Euler(0, targetAngle + materialOffset, 0);
+
+                _animflgSO.Avoidflg = true;
+                Debug.Log($"入力方向 {targetAngle} 度へTransformを固定して回避開始");
+            }
         }
-        else 
-        {
-            return;
-        }
 
-        UnityEngine.Vector3 _cameraForward = UnityEngine.Vector3.Scale(_cameraTransform.forward, new UnityEngine.Vector3(1, 0, 1)).normalized;
-        UnityEngine.Vector3 _cameraRight = UnityEngine.Vector3.Scale(_cameraTransform.right, new UnityEngine.Vector3(1, 0, 1)).normalized;
-
-        UnityEngine.Vector3 _inputDirection = (_cameraForward * _inputVertical) + (_cameraRight * _inputHorizontal);
-        _inputDirection = _inputDirection.normalized;
-
-        //Shift + 方向キーでの回避
-        if (_isShiftKey && _inputDirection.magnitude > 0.1f || _isSpaceKey && _inputDirection.magnitude > 0.1f)
-        {
-            UnityEngine.Quaternion targetRotation = UnityEngine.Quaternion.LookRotation(_inputDirection);
-            transform.rotation = targetRotation;
-
-            //回避アニメーションフラグ
-            _animflgSO.Avoidflg = true;
-            Debug.Log("回避方向");
-        }
-        else { _animflgSO.Avoidflg = false; }
-     
     }
 }

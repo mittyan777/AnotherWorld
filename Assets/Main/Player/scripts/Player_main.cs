@@ -37,6 +37,7 @@ public class Player_main : MonoBehaviour
     [SerializeField] AnimationFlagManagerSO _animflgSO;
     [SerializeField] PlayerAnimation_main playerAnim;
     [SerializeField] MoneyDrop _money;
+    
 
     [SerializeField] float a = 0.5f;
     // Start is called before the first frame update
@@ -47,6 +48,7 @@ public class Player_main : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager");
         _money = GetComponent<MoneyDrop>();
         if (PlayerAnimation_main.Instance != null) { playerAnim = PlayerAnimation_main.Instance; }
+
         // Cursor.lockState = CursorLockMode.Locked;   //’Ç‰Á
         //Cursor.visible = false;     //’Ç‰Á
     }
@@ -79,12 +81,13 @@ public class Player_main : MonoBehaviour
         {
             if (manager.GetComponent<GameManager>().job == 2)
             {
-                manager.GetComponent<GameManager>().gage_image[1].fillAmount = 0;
-                GetComponent<Magician_Skills_main>().FireBall();
-                manager.GetComponent<GameManager>().Present_MP -= 10;
 
                 playerAnim.SetWizardSkillIndex(1);
                 _animflgSO.MajicSkilFlg = true;
+
+                manager.GetComponent<GameManager>().gage_image[1].fillAmount = 0;
+                GetComponent<Magician_Skills_main>().FireBall();
+                manager.GetComponent<GameManager>().Present_MP -= 10;
             }
 
 
@@ -93,12 +96,12 @@ public class Player_main : MonoBehaviour
         {
             if (manager.GetComponent<GameManager>().job == 2)
             {
+                playerAnim.SetWizardSkillIndex(2);
+                _animflgSO.MajicSkilFlg = true;
+
                 manager.GetComponent<GameManager>().gage_image[0].fillAmount = 0;
                 GetComponent<Magician_Skills_main>().ElectricBall();
                 manager.GetComponent<GameManager>().Present_MP -= 10;
-
-                playerAnim.SetWizardSkillIndex(2);
-                _animflgSO.MajicSkilFlg = true;
             }
 
 
@@ -107,13 +110,13 @@ public class Player_main : MonoBehaviour
         {
             if (manager.GetComponent<GameManager>().job == 2)
             {
+                playerAnim.SetWizardSkillIndex(3);
+                _animflgSO.MajicSkilFlg = true;
+
                 manager.GetComponent<GameManager>().gage_image[2].fillAmount = 0;
                 _animflgSO.MajicSkilFlg = true;
                 GetComponent<Magician_Skills_main>().TornadoAttack();
                 manager.GetComponent<GameManager>().Present_MP -= 10;
-
-                playerAnim.SetWizardSkillIndex(3);
-                _animflgSO.MajicSkilFlg = true;
             }
 
         }
@@ -128,7 +131,6 @@ public class Player_main : MonoBehaviour
             { _animflgSO.MajicAttackNormalFlg = false; }
            
         }
-
 
         if (manager.GetComponent<GameManager>().job == 1)
         {
@@ -268,30 +270,37 @@ public class Player_main : MonoBehaviour
     //“¯‚¶‚­‚Ð‚«‚Ç’Ç‰Á•ª
     public void HandleStanderdMovement(Transform transform, Animator animator) 
     {
-        if (UnityEngine.Input.GetKey("w"))
+        bool moveForbidden = playerAnim.IsMovementRestricted;
+
+        if (UnityEngine.Input.GetKey("w") && !moveForbidden)
         {
             transform.position += transform.forward * 5 * Time.deltaTime;
             animator.SetBool("walk", true);
         }
         else { animator.SetBool("walk", false); }
-        if (UnityEngine.Input.GetKey("s"))
+
+        if (UnityEngine.Input.GetKey("s") && !moveForbidden)
         {
             transform.position -= transform.forward * 5 * Time.deltaTime;
             animator.SetBool("back", true);
         }
         else { animator.SetBool("back", false); }
-        if (UnityEngine.Input.GetKey("a"))
+
+        if (UnityEngine.Input.GetKey("a") &&  !moveForbidden)
         {
             transform.position -= transform.right * 5 * Time.deltaTime;
             animator.SetBool("left", true);
         }
         else { animator.SetBool("left", false); }
-        if (UnityEngine.Input.GetKey("d"))
+
+        if (UnityEngine.Input.GetKey("d") && !moveForbidden)
         {
             transform.position += transform.right * 5 * Time.deltaTime;
             animator.SetBool("right", true);
         }
         else { animator.SetBool("right", false); }
+      
+       
     }
 
 }
