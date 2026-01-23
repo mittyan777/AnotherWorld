@@ -94828,7 +94828,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1354466672154131081, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: maxBossHP
-      value: 10000
+      value: 60000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354466672154131081, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: damageInterval
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1680175903583462956, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_AnchorMax.x
@@ -109189,15 +109193,15 @@ PrefabInstance:
       objectReference: {fileID: 1292077986}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage01
-      value: 35
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage02
-      value: 80
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage03
-      value: 300
+      value: 1500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -137022,11 +137026,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: goblinAttackDamage01
-      value: 10
+      value: 444
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: goblinAttackDamage03
-      value: 10
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: spiderAttackDamage01
@@ -137042,11 +137046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: skeletonAttackDamage01
-      value: 10
+      value: 222
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: skeletonAttackDamage03
-      value: 5
+      value: 511
       objectReference: {fileID: 0}
     - target: {fileID: 7135923793661432197, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: m_Name

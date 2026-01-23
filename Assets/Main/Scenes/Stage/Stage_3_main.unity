@@ -1871,10 +1871,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4064147284812653236, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
       propertyPath: maxBossHP
-      value: 20000
+      value: 90000
       objectReference: {fileID: 0}
     - target: {fileID: 4064147284812653236, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
       propertyPath: damageTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064147284812653236, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
+      propertyPath: damageInterval
       value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7489308227747176965, guid: acc6be562d8721e448367e23b28aae6b, type: 3}
@@ -2085,15 +2089,15 @@ PrefabInstance:
       objectReference: {fileID: 1074143153}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage01
-      value: 50
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage02
-      value: 100
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage03
-      value: 400
+      value: 2500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
