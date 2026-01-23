@@ -67,24 +67,7 @@ public class BossMoveManager : MonoBehaviour
 
     private void Update()
     {
-        //テスト用のダメージ
-        if (Input.GetKey(KeyCode.P))
-        {
-            //bossHP.TestDamage();
-            StartCoroutine(bossHP.TestDamege02(3000));
-            // HPが変更されたらcurrentBossHPを同期
-            if (bossHP != null)
-            {
-                currentBossHP = bossHP.currentBossHP;
-            }
-        }
-        if (Input.GetKey(KeyCode.L))
-        {
-            //GameManagerから最新の攻撃力を取得する。
-            int takeDamege = (int)gameManager.AttackStatus;
-            //プレイヤーの攻撃力を渡す
-            StartCoroutine(bossHP.TakeDamage(takeDamege));
-        }
+
     }
 
     // この関数を呼び出したScriptのリストにあるfloat型のデータをリストで取得
