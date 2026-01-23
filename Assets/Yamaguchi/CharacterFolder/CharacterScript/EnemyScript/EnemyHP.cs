@@ -49,12 +49,6 @@ public class EnemyHP : MonoBehaviour
     private void Update()
     {
 
-        //テスト用ダメージ
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GetDamege();
-            Debug.Log("Enemyに5のダメージ");
-        }
     }
 
     private void EnemyDied()
