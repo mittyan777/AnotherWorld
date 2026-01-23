@@ -68,10 +68,12 @@ public class Player_main : MonoBehaviour
         RaycastHit hit;
 
         Debug.DrawRay(ray.origin, ray.direction * Direction, Color.red);
+        /*
         if (UnityEngine.Input.GetKeyDown("p"))
         {
             manager.GetComponent<GameManager>().HP -= 10;
         }
+         */
         if (manager.GetComponent<GameManager>().HP <= 0)
         {
             //Destroy(gameObject);
