@@ -61,7 +61,7 @@ public class Player_Swoad : PlayerAtackBase
         if (_bisAttack ) 
         {
             if (_comboCount == 0) { StartCombo(); }
-            else if (_comboTime > 0.0f) { NextCombo(); }
+            else if (_comboTime > 1.0f) { NextCombo(); }
         }
       
     }
@@ -127,7 +127,7 @@ public class Player_Swoad : PlayerAtackBase
         }
     }
 
-    /// <summary> /// 2ƒRƒ“ƒ{–Ú‚ÅaŒ‚”g‚ğ¶¬‚·‚é /// </summary>
+    /// <summary> /// 3ƒRƒ“ƒ{–Ú‚ÅaŒ‚”g‚ğ¶¬‚·‚é /// </summary>
     public void TryAttackCombo()
     {
         if(_comboCount != 2) { return; }
