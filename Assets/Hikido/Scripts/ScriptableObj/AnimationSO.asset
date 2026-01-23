@@ -20,3 +20,4 @@ MonoBehaviour:
   archerRecoilFlg: 0
   majicSkilFlg: 0
   normalMagickFlg: 0
+  swordAttackAnimFlg: 1
