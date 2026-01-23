@@ -82,7 +82,7 @@ MonoBehaviour:
   - "\u9B54\u6CD5\u4F7F\u3044"
   - "\u5F13\u4F7F\u3044"
   rouletto_CG: {fileID: 594598848986464567}
-  rouletteSound: {fileID: 818039858640738190}
+  rouletteSound: {fileID: 4409068531919649676}
 --- !u!1001 &2449428461730450642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,9 +91,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 968008326793382631}
     m_Modifications:
+    - target: {fileID: 5315322930459102594, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5315322930459102594, guid: 036202908fa09164796ea1351b372156, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 29b0627df73f63b48a5363f55e505f12, type: 3}
     - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -66.157524
+      value: -65.2
       objectReference: {fileID: 0}
     - target: {fileID: 5918396654347557820, guid: 036202908fa09164796ea1351b372156, type: 3}
       propertyPath: m_LocalPosition.y
@@ -140,9 +148,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 036202908fa09164796ea1351b372156, type: 3}
---- !u!114 &818039858640738190 stripped
+--- !u!114 &4409068531919649676 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3072682960873888604, guid: 036202908fa09164796ea1351b372156, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2075656184337053534, guid: 036202908fa09164796ea1351b372156, type: 3}
   m_PrefabInstance: {fileID: 2449428461730450642}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
