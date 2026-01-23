@@ -109197,11 +109197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage02
-      value: 1000
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 7958346347111762020, guid: 6a3ce3ebbd5d71f42baa75d711170293, type: 3}
       propertyPath: _attackDamage03
-      value: 1500
+      value: 650
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
