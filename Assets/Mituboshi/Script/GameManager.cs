@@ -530,5 +530,17 @@ public class GameManager : MonoBehaviour
         Debug.Log(HP);
     }
 
+    public void RecovereHP(int recovere)
+    {
+        if (Present_HP + recovere >= MAX_HP)
+        {
+            Present_HP = MAX_HP;
+        }
+        else
+        { 
+            Present_HP += recovere;
+        }
+    }
+
 
 }
