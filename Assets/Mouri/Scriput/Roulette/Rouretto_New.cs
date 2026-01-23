@@ -80,7 +80,7 @@ public class Rouretto_New : MonoBehaviour
     private int[] FirstStatus = new int[4];
     private int[] UpdateStatus = new int[4];
 
-    [Header("職種ごとの画像設定")]
+    [Header("職種ごとの画像や演出設定")]
     [SerializeField] private Rouletto_CG rouletto_CG;
 
     [Header("ルーレットごとのサウンド")]
@@ -182,9 +182,26 @@ public class Rouretto_New : MonoBehaviour
     public void StartRoulette()
     {
 
-        if (Spining) return;   //追加
+        if (Spining) return;   //追加     //ルーレットを回し始める
 
-        canOnce = false;    //追加
+        if (!FirstRoulette && GameManager.GetComponent<GameManager>().Coin < RouletteCost)
+        {
+            if(rouletto_CG!= null)
+            {
+                rouletto_CG.Coin_lack();
+
+
+
+            }
+            return;
+
+
+        }
+        else
+        {
+            if (rouletto_CG != null && rouletto_CG.no_Coins != null)
+                rouletto_CG.no_Coins.SetActive(false);
+        }
 
 
         if (FirstRoulette)
@@ -198,12 +215,15 @@ public class Rouretto_New : MonoBehaviour
                 rouletteSound.rouletteSoundType = RouletteSoundType.Open;
                 rouletteSound.PlaySound();
             }
+        }
        
 
-        }
+   
 
         if (GameManager.GetComponent<GameManager>().Coin < RouletteCost)
         {
+
+
             canOnce = true;
             return;
         }
@@ -213,8 +233,11 @@ public class Rouretto_New : MonoBehaviour
 
         if (rouletto_CG != null)
         {
+           
             rouletto_CG.UseCoin(RouletteCost);
+            
         }
+      
 
         GameManager.GetComponent<GameManager>().Coin -= RouletteCost;
 

@@ -22,6 +22,15 @@ public class Rouletto_CG : MonoBehaviour
     [SerializeField] private Color startColor = Color.white;
     [SerializeField] private Color endColor = Color.white;
 
+    [Header("コイン不足時のUI")]
+    [SerializeField] public GameObject no_Coins;
+    [SerializeField] public Text no_CoinText;
+    [SerializeField] public float no_CoinTime = 1.0f;
+    [SerializeField] public float display_Time = 0.5f;
+
+
+    private bool islackPlaying;
+
     private GameManager gameManager;
 
     private void Start()
@@ -82,6 +91,7 @@ public class Rouletto_CG : MonoBehaviour
 
         if (gameManager.Coin < coin)
         {
+            Coin_lack();
             return;
         }
 
@@ -117,6 +127,50 @@ public class Rouletto_CG : MonoBehaviour
 
         //色を元に戻す
         CoinText.color = start;
+
+    }
+    public void Coin_lack()
+    {
+
+        if (islackPlaying) return;
+
+        if(no_Coins==null||no_CoinText==null)return;
+
+        StopAllCoroutines();
+        no_Coins.SetActive(true);
+        StartCoroutine(LackCoinFade());
+    }
+
+    //コインを不足したとき
+    private IEnumerator LackCoinFade()
+    {
+        islackPlaying = true;
+
+        //透過リセット
+        Color color = no_CoinText.color;
+        no_CoinText.color = new Color(color.r, color.g, color.b, 1f);
+
+        yield return new WaitForSeconds(display_Time);
+
+        float timer = 0f;
+
+        while(timer < no_CoinTime)
+        {
+            timer += Time.deltaTime;
+
+            float t=timer / no_CoinTime;
+
+            Color newColor = no_CoinText.color;
+            newColor.a = Mathf.Lerp(1f,0f,t);
+            no_CoinText.color=newColor;
+
+            yield return null;
+        }
+
+        //フェードが終わった後、非表示
+        no_Coins.SetActive(false);
+        islackPlaying=false;
+
 
     }
 }
