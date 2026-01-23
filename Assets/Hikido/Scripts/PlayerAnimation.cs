@@ -38,7 +38,6 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] private SwordSkillAnime _swordSkillCmd;
     [SerializeField] Player_Swoad _plSwardLogic;
-    public bool _SwardAttackFlg = false;
 
     //繧ｸ繝ｧ繝悶ち繧､繝
     public JobType jobType { get; private set; } = JobType.NONE;

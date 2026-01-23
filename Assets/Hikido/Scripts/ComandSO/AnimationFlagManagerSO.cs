@@ -16,8 +16,6 @@ public class AnimationFlagManagerSO : ScriptableObject
     [SerializeField] private bool archerRecoilFlg = false; //アーチャー発射フラグ
     [SerializeField] private bool majicSkilFlg = false;    //マジシャンスキルフラグ
     [SerializeField] private bool normalMagickFlg = false; //マジック通常攻撃
-    [SerializeField] public bool  swordAttackAnimFlg = false;
-    [SerializeField] private bool damageAnimFlg = false;
 
     [Header("各通知イベント")]
     public Action Attackevents;          //攻撃イベント
@@ -29,7 +27,6 @@ public class AnimationFlagManagerSO : ScriptableObject
     public Action ArcherRecoil;          //アーチャー発射イベント
     public Action MajicSkil;             //マジシャンイベント
     public Action NormalMajicAttack;     //マジシャン通常攻撃
-    public Action DamageEvent;
                                        
     //攻撃のイベント
     public bool AttackNormalflg 

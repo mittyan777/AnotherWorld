@@ -9,11 +9,11 @@ public class ArcherAimWalkSO : AnimationBaseSO
     [SerializeField] private float adsMoveSpeed = 2.5f;
 
     //各bool値のパラメータネーム
-    private const string PARAM_FWD           = "IsMovingFwd";
-    private const string PARAM_BACK          = "IsMovingBack";
-    private const string PARAM_RIGHT         = "IsMovingRight";
-    private const string PARAM_LEFT          = "IsMovingLeft";
-    private const string PARAM_DRAW_TRIGGER  = "StartADS";
+    private const string PARAM_FWD = "IsMovingFwd";
+    private const string PARAM_BACK = "IsMovingBack";
+    private const string PARAM_RIGHT = "IsMovingRight";
+    private const string PARAM_LEFT = "IsMovingLeft";
+    private const string PARAM_DRAW_TRIGGER = "StartADS";
     private const string PARAM_SHOOT_TRIGGER = "Recoil";
 
     private const float INPUT_THRESHOLD = 0.1f;
@@ -60,12 +60,12 @@ public class ArcherAimWalkSO : AnimationBaseSO
         Vector3 localInput = Quaternion.Inverse(transform.rotation) * inputVector;
 
         //前後移動
-        bool isMovingFwd  = localInput.z > INPUT_THRESHOLD;  
+        bool isMovingFwd = localInput.z > INPUT_THRESHOLD;  
         bool isMovingBack = localInput.z < -INPUT_THRESHOLD;
 
         //左右移動
         bool isMovingRight = localInput.x > INPUT_THRESHOLD;
-        bool isMovingLeft  = localInput.x < -INPUT_THRESHOLD;
+        bool isMovingLeft = localInput.x < -INPUT_THRESHOLD;
 
         //アニメーションフラグセット
         animator.SetBool(PARAM_FWD, isMovingFwd);
