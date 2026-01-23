@@ -5038,7 +5038,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 2870752869659365238, guid: 5a59f453aff8cc04f90e78709f2f3d3c, type: 3}
   maxAttempts: 10
-  spawnInterval: 30
+  spawnInterval: 60
   maxSpawn: 2
 --- !u!114 &413256694
 MonoBehaviour:
@@ -5849,6 +5849,18 @@ PrefabInstance:
       propertyPath: activeBossObj
       value: 
       objectReference: {fileID: 1622233992}
+    - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
+      propertyPath: _attackDamage01
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
+      propertyPath: _attackDamage02
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958346347111762020, guid: 311fc76c2e512e947b13052bf6709349, type: 3}
+      propertyPath: _attackDamage03
+      value: 375
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11151,23 +11163,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: wolfAttackDamage
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: goblinAttackDamage01
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: goblinAttackDamage03
-      value: 10
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: spiderAttackDamage01
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: spiderAttackDamage02
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6019024262522508257, guid: 3daebc77766d44c4baaec99897a1cda4, type: 3}
       propertyPath: throwanleAttackDamage
@@ -13156,7 +13168,7 @@ MonoBehaviour:
   - {fileID: 3616799773042005967, guid: 9d96028356df29c4485cce70f3741366, type: 3}
   - {fileID: 1018025056615703034, guid: b7196a836aa33644ea9075a6704199ac, type: 3}
   maxAttempts: 10
-  spawnInterval: 1
+  spawnInterval: 8
   maxSpawn: 5
 --- !u!114 &1251850004
 MonoBehaviour:
@@ -16223,7 +16235,7 @@ MonoBehaviour:
   - {fileID: 2121770041380104553, guid: 93a19c3754eafe847a40e92b632f33d0, type: 3}
   - {fileID: 5711669388771541780, guid: b69f2d49c9246d645a2ae7147d1e6baa, type: 3}
   maxAttempts: 10
-  spawnInterval: 3
+  spawnInterval: 8
   maxSpawn: 5
 --- !u!114 &1622744874
 MonoBehaviour:
@@ -17145,7 +17157,7 @@ MonoBehaviour:
   - {fileID: 2121770041380104553, guid: 93a19c3754eafe847a40e92b632f33d0, type: 3}
   - {fileID: 1018025056615703034, guid: b7196a836aa33644ea9075a6704199ac, type: 3}
   maxAttempts: 10
-  spawnInterval: 3
+  spawnInterval: 8
   maxSpawn: 5
 --- !u!114 &1729699129
 MonoBehaviour:
@@ -17469,7 +17481,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 2121770041380104553, guid: 93a19c3754eafe847a40e92b632f33d0, type: 3}
   maxAttempts: 10
-  spawnInterval: 1
+  spawnInterval: 7
   maxSpawn: 5
 --- !u!114 &1785668376
 MonoBehaviour:
@@ -20047,12 +20059,24 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1354466672154131081, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: maxBossHP
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354466672154131081, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: damageInterval
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1680175903583462956, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1680175903583462956, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2411309548187621937, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2601039363636921356, guid: b57dfe29f619b644b951065b23436613, type: 3}
@@ -20109,10 +20133,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8344512546709116026, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8344512546709116026, guid: b57dfe29f619b644b951065b23436613, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198592559946048780, guid: b57dfe29f619b644b951065b23436613, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
