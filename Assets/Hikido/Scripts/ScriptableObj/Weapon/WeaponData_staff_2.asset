@@ -16,7 +16,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 100102, guid: 989b7d5a4bf0c164cbed06da6fc4f397, type: 3}
   type: 1
   plusAttack: 1
-  plusMP: 30
+  plusMP: 50
   plusDifence: 1
   plusHP: 1
   attatchLocalPos: {x: 0.0474, y: -0.0214, z: -0.401}

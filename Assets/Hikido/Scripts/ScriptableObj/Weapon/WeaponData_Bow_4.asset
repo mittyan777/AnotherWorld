@@ -18,7 +18,7 @@ MonoBehaviour:
   plusAttack: 10
   plusMP: 1
   plusDifence: 1
-  plusHP: 0
+  plusHP: 200
   attatchLocalPos: {x: 0, y: 0, z: 0}
   attachLocalRotationEules: {x: 0, y: 0, z: 0}
   leftAttachLocalPos: {x: 0.11, y: 0.16, z: 0.02}

@@ -15,10 +15,10 @@ MonoBehaviour:
   itemKeyName: Scroll View1_2
   weaponPrefab: {fileID: 7676615874565401376, guid: aee29ca4814728040bdb4976c5135b43, type: 3}
   type: 0
-  plusAttack: 1
+  plusAttack: 100
   plusMP: 1
   plusDifence: -10
-  plusHP: 1
+  plusHP: 500
   attatchLocalPos: {x: 0.022, y: 0.017, z: -0.1}
   attachLocalRotationEules: {x: 90, y: 0, z: 0}
   leftAttachLocalPos: {x: 0, y: 0, z: 0}
